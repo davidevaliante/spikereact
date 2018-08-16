@@ -62,12 +62,6 @@ class AddSlot extends Component {
             errorList.push('name');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
-        const producer = document.getElementById('producerField').value.trim();
-        if (!producer) {
-            let errorList = this.state.emptyFields;
-            errorList.push('producer');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
-        }
         const linkYoutube = document.getElementById('linkYoutube').value.trim();
         if (!linkYoutube) {
             let errorList = this.state.emptyFields;
@@ -78,12 +72,6 @@ class AddSlot extends Component {
         if (!linkPlay) {
             let errorList = this.state.emptyFields;
             errorList.push('linkPlay');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
-        }
-        const BONUS = this.state.selectedBonus
-        if (!BONUS) {
-            let errorList = this.state.emptyFields;
-            errorList.push('bonus');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const description = document.getElementById('descriptionField').value.trim();
@@ -109,6 +97,18 @@ class AddSlot extends Component {
         if (!tecnicalsField) {
             let errorList = this.state.emptyFields;
             errorList.push('tecnicals');
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+        }
+        const BONUS = this.state.selectedBonus
+        if (!BONUS) {
+            let errorList = this.state.emptyFields;
+            errorList.push('bonus');
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+        }
+        const producer = this.state.selectedProducer
+        if (!producer) {
+            let errorList = this.state.emptyFields;
+            errorList.push('producer');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
 
@@ -171,6 +171,11 @@ class AddSlot extends Component {
 
     }
 
+    onProducerSelected = (selectedProducer) => {
+        this.setState({ selectedProducer: selectedProducer })
+
+    }
+
     resetErrorOn = (fieldName) => {
         const updated = _.filter(this.state.emptyFields, (field) => field !== fieldName);
         this.setState({ emptyFields: updated });
@@ -227,6 +232,7 @@ class AddSlot extends Component {
                     </h1>
 
                     <Form.Group widths='equal' >
+
                         <Form.Field
                             id='nameField'
                             error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('name')}
@@ -237,13 +243,15 @@ class AddSlot extends Component {
                             placeholder='Nome slot' >
                         </Form.Field>
 
-                        <Form.Field
-                            id='producerField'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('producer')}
-                            onChange={() => this.resetErrorOn('producer')}
-                            control={Input}
-                            label='Produttore'
-                            placeholder='Nome Produttore' />
+                        <Form.Field>
+                            <SearchField
+                                id='producerField'
+                                onSelected={this.onProducerSelected}
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('producer')}
+                                nodename='Produttore'
+                            />
+                        </Form.Field>
+
                     </Form.Group>
 
                     <Form.Group
@@ -316,6 +324,7 @@ class AddSlot extends Component {
 
                     <SearchField
                         onSelected={this.onBonusSelected}
+                        nodename='Bonus'
                     />
 
                     <Dropdown

@@ -2,7 +2,7 @@ import _ from 'lodash'
 import faker from 'faker'
 import React, { Component } from 'react'
 import { Search, Grid, Header, Segment } from 'semantic-ui-react'
-import { getBonusList } from '../firebase/firebase';
+import { getBonusList, getProducerList } from '../firebase/firebase';
 
 const Llist = _.times(5, () => ({
     name: faker.company.companyName(),
@@ -11,15 +11,16 @@ const Llist = _.times(5, () => ({
     price: faker.finance.amount(0, 100, 2, '$'),
 }))
 
-let list = []
+let producerList = [];
+let bonusList = [];
 
 export default class SearchField extends Component {
     componentWillMount() {
         this.resetComponent()
         // callback function
-        const trasformData = (bonusList) => {
-            for (const key in bonusList) {
-                const current = bonusList[key]
+        const transformData = (list) => {
+            for (const key in list) {
+                const current = list[key]
                 const formatted = {
                     title: current.name,
                     description: current.bonus,
@@ -30,13 +31,33 @@ export default class SearchField extends Component {
                         id: key
                     }
                 }
-                list.push(formatted)
+                switch (this.props.nodename) {
+                    case 'Bonus':
+                        bonusList.push(formatted);
+                        break;
+                    case 'Produttore':
+                        producerList.push(formatted);
+                        break;
+                    default:
+                    //
+                }
             }
-            console.log(list);
+            console.log(bonusList);
+            console.log(producerList);
+
         }
 
         // call a firebase
-        getBonusList(trasformData);
+        switch (this.props.nodename) {
+            case 'Bonus':
+                getBonusList(transformData);
+                break;
+            case 'Produttore':
+                getProducerList(transformData);
+                break;
+            default:
+            //
+        }
     }
 
     resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -55,6 +76,19 @@ export default class SearchField extends Component {
             const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
             const isMatch = result => re.test(result.title)
 
+            let list = [];
+
+            switch (this.props.nodename) {
+                case 'Bonus':
+                    list = bonusList
+                    break;
+                case 'Produttore':
+                    list = producerList
+                    break;
+                default:
+                //
+            }
+
             this.setState({
                 isLoading: false,
                 results: _.filter(list, isMatch),
@@ -67,11 +101,10 @@ export default class SearchField extends Component {
 
         return (
             <Grid style={{ marginBottom: '1rem' }}>
-                <Grid.Column width={6}>
-                    <h3>Bonus</h3>
+                <Grid.Column width={16}>
+                    <h3>{this.props.nodename}</h3>
                     <Search
                         label='Cerca'
-                        defaultValue='Cerca'
                         loading={isLoading}
                         onResultSelect={this.handleResultSelect}
                         onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}

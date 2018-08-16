@@ -1,9 +1,8 @@
 import firebase from 'firebase';
 import { setUserLoggedIn, setUserLoggedOut, setUserName, setUserId } from './../reducers/AuthReducer';
+import { configuration } from './firebaseConfig';
 
-const config = {
-    // COPIA E INCOLLA CONFIG
-};
+const config = configuration;
 const firebaseApp = firebase.initializeApp(config);
 
 export const firebaseDatabase = firebase.database();
@@ -17,15 +16,6 @@ export const pushNewProducer = (newProducer, callback) => {
         )
 }
 
-export const getBonusList = (callback) => {
-    firebaseDatabase.ref('Bonus').once('value')
-        .then(
-            (snapshot) => {
-                callback(snapshot.val());
-            }
-        )
-}
-
 export const pushNewSlot = (newSlot, onPushSlotSuccess) => {
     firebase.database().ref('Slots').push(newSlot)
         .then(
@@ -33,7 +23,7 @@ export const pushNewSlot = (newSlot, onPushSlotSuccess) => {
                 console.log(completed);
                 const key = completed.key;
 
-                firebase.database().ref(`Produttore/${newSlot.producer}/${key}`).set(true);
+                firebase.database().ref(`Producer-Slot/${newSlot.producer.id}/${key}`).set(true);
                 console.log(key);
                 onPushSlotSuccess();
             }
@@ -60,6 +50,24 @@ export const pushNewBonus = (newBonus, onBonusPushSuccess) => {
             }
         )
 }
+
+export const getBonusList = (callback) => {
+    firebaseDatabase.ref('Bonus').once('value')
+        .then(
+            (snapshot) => {
+                callback(snapshot.val());
+            }
+        )
+}
+
+export const getProducerList = (callback) => {
+    firebaseDatabase.ref('Producer').once('value')
+        .then(
+            (snapshot) => callback(snapshot.val())
+        )
+}
+
+
 
 export const getUserAuthStatus = (store) => {
     firebaseApp.auth().onAuthStateChanged((user) => {
