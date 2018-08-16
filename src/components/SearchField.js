@@ -42,9 +42,6 @@ export default class SearchField extends Component {
                     //
                 }
             }
-            console.log(bonusList);
-            console.log(producerList);
-
         }
 
         // call a firebase

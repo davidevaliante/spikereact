@@ -20,11 +20,11 @@ export const pushNewSlot = (newSlot, onPushSlotSuccess) => {
     firebase.database().ref('Slots').push(newSlot)
         .then(
             (completed) => {
-                console.log(completed);
                 const key = completed.key;
-
                 firebase.database().ref(`Producer-Slot/${newSlot.producer.id}/${key}`).set(true);
-                console.log(key);
+                for (const bonusId in newSlot.bonus) {
+                    firebase.database().ref(`Bonus-Slot/${bonusId}/${key}`).set(true);
+                }
                 onPushSlotSuccess();
             }
         )

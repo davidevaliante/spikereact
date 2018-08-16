@@ -15,6 +15,7 @@ import {
 
 import { pushNewSlot } from './../firebase/firebase.js'
 import SearchField from './SearchField';
+import SearchMultipleSelection from './SearchMultipleSelection';
 import _ from 'lodash';
 
 
@@ -168,6 +169,7 @@ class AddSlot extends Component {
 
     onBonusSelected = (selectedBonus) => {
         this.setState({ selectedBonus: selectedBonus })
+        console.log(selectedBonus);
 
     }
 
@@ -208,8 +210,6 @@ class AddSlot extends Component {
 
     render() {
         const { active } = this.state
-
-        console.log(this.state);
         return (
             <div
                 style={{ padding: '4rem' }}>
@@ -322,9 +322,8 @@ class AddSlot extends Component {
                         label='Descrizione'
                         placeholder='Inserisci descrizione...' />
 
-                    <SearchField
-                        onSelected={this.onBonusSelected}
-                        nodename='Bonus'
+                    <SearchMultipleSelection
+                        onListUpdate={this.onBonusSelected}
                     />
 
                     <Dropdown
