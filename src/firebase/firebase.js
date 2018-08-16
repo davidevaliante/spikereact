@@ -7,6 +7,14 @@ const firebaseApp = firebase.initializeApp(config);
 
 export const firebaseDatabase = firebase.database();
 
+export const pushNewImage = (image, bucket, callback) => {
+    const storageRef = firebase.storage().ref();
+    storageRef.child(`${bucket}/${image.name}`).put(image)
+        .then(
+            (snapshot) => console.log('success')
+        )
+}
+
 export const pushNewProducer = (newProducer, callback) => {
     firebase.database().ref('Producer').push(newProducer)
         .then(

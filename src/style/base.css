@@ -121,6 +121,35 @@ header {
 /*--------------------------END NAVBAR-------------------------------------*/
 
 
+/*-------------------------SearchComponent---------------------------------*/
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .btn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+  }
+  
+  .upload-btn-wrapper input[type=file] {
+    font-size: 60px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+/*-------------------------END SearchComponent---------------------------------*/
+
+
 h1 {
     font-weight: 700;
     font-size: 200%;

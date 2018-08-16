@@ -12,7 +12,8 @@ import {
     Dimmer,
     Header, Icon
 } from 'semantic-ui-react';
-import { pushNewBonus } from '../firebase/firebase';
+import ImagePicker from './ImagePicker';
+import { pushNewBonus, pushNewImage } from '../firebase/firebase';
 import SearchField from './SearchField';
 
 class AddBonus extends Component {
@@ -104,6 +105,13 @@ class AddBonus extends Component {
         }, 800)
     }
 
+    onImageSelected = (image) => {
+        this.setState({
+            pickedImage: image
+        })
+        pushNewImage(image, 'BonusImages')
+    }
+
     handleOpen = () => this.setState({ active: true })
     handleClose = () => this.setState({ active: false })
 
@@ -193,16 +201,27 @@ class AddBonus extends Component {
                         onChange={() => this.resetErrorOn('review')}
                         label='Recensione'
                         placeholder='Recensione' />
+                    <Form.Group
+                        widths='equal'>
+                        <Form.Field
+                            width='8'>
+                            <Dropdown
+                                id='ratingField'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
+                                style={{ marginBottom: '1rem' }}
+                                placeholder='Rating'
+                                onChange={(event, data) => this.onDropDownChange(data)}
+                                search
+                                selection
+                                options={this.state.ratingStateOptions} />
+                        </Form.Field>
 
-                    <Dropdown
-                        id='ratingField'
-                        error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
-                        style={{ marginBottom: '1rem' }}
-                        placeholder='Rating'
-                        onChange={(event, data) => this.onDropDownChange(data)}
-                        search
-                        selection
-                        options={this.state.ratingStateOptions} />
+                        <Form.Field>
+                            <ImagePicker
+                                onImageSelected={this.onImageSelected}
+                                style={{ marginLeft: '2rem' }} />
+                        </Form.Field>
+                    </Form.Group>
 
                     <Form.Field
                         onClick={this.buildFakeSlot}
