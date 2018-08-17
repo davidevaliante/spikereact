@@ -23,13 +23,12 @@ class Home extends Component {
         this.setState({ slotList: _.reverse(list) })
     }
 
-    slotListJsx = (slotList) => {
-        return slotList.map((element, index) => {
-            if (index < 3) {
-                return <SlotCard slot={element} listKey={index} key={index} />
-            }
-        })
-    }
+    slotListJsx = (slotList) => (
+        _.slice(slotList, 0, 4).map((element, index) =>
+            <SlotCard slot={element} listKey={index} key={index} />
+        )
+    )
+
 
     render() {
 

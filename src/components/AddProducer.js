@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import {
     Button,
-    Checkbox,
     Form,
     Input,
-    Radio,
-    Select,
-    TextArea,
-    Dropdown,
     Dimmer,
     Header, Icon
 } from 'semantic-ui-react';

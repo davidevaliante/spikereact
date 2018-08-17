@@ -1,15 +1,9 @@
 import _ from 'lodash'
-import faker from 'faker'
 import React, { Component } from 'react'
-import { Search, Grid, Header, Segment } from 'semantic-ui-react'
+import { Search, Grid } from 'semantic-ui-react'
 import { getBonusList, getProducerList } from '../firebase/firebase';
 
-const Llist = _.times(5, () => ({
-    name: faker.company.companyName(),
-    description: faker.company.catchPhrase(),
-    image: faker.internet.avatar(),
-    price: faker.finance.amount(0, 100, 2, '$'),
-}))
+
 
 let producerList = [];
 let bonusList = [];

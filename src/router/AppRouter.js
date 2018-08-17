@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Home from './../components/Home';
+import Home from '../components/Home'
+import HomePage from '../components/HomeComponents/HomePage'
 import AdminDashboard from './../components/AdminDashboard';
 import AddSlot from './../components/AddSlot';
 import AddBonus from '../components/AddBonus';
@@ -17,7 +18,7 @@ const AppRouter = () => {
       <BrowserRouter>
         <div className='matchParentHeight'>
           <Switch>
-            <Route path='/' component={Home} exact={true} />
+            <Route path='/' component={HomePage} exact={true} />
             <Route path='/admin' component={AdminDashboard} exact={true} />
             <Route path='/admin/addslot' component={AddSlot} />
             <Route path='/admin/addbonus' component={AddBonus} />

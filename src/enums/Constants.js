@@ -13,3 +13,10 @@ export const SLOT_TYPES = {
 export const DATABASE_REFERENCE = {
     SLOT: 'Slots'
 }
+
+export const PAGES = {
+    SLOT_BAR: 'SLOT_BAR',
+    SLOT_GRATIS: 'SLOT_GRATIS',
+    SLOT_ONLINE: 'SLOT_ONLINE',
+    HOME: 'HOME'
+}

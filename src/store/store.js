@@ -1,9 +1,11 @@
-import {createStore, combineReducers} from 'redux';
+import { createStore, combineReducers } from 'redux';
 import authReducer from './../reducers/AuthReducer';
+import currentPageReducer from './../reducers/CurrentPageReducer';
 
 const reducers = combineReducers(
     {
-        'auth':authReducer
+        'auth': authReducer,
+        'currentPage': currentPageReducer
     }
 );
 

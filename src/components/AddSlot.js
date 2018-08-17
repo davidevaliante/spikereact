@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import {
     Button,
-    Checkbox,
     Form,
     Input,
     Radio,
-    Select,
     TextArea,
     Dropdown,
-    Search,
     Dimmer,
     Header, Icon, FormField
 } from 'semantic-ui-react'
@@ -40,8 +37,8 @@ class AddSlot extends Component {
         })
 
 
-        const tipsField = document.getElementById('tipsField').value = '@sdfgsg @fhdhnfghjn @dfgdfghdfh'
-        const tecnicalsField = document.getElementById('tecnicalsField').value = '$dfsdfsfgb $dfgsgdfg $dfgsdfsfgbdfg';
+        document.getElementById('tipsField').value = '@sdfgsg @fhdhnfghjn @dfgdfghdfh'
+        document.getElementById('tecnicalsField').value = '$dfsdfsfgb $dfgsgdfg $dfgsdfsfgbdfg';
 
     }
 

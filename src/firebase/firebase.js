@@ -116,14 +116,10 @@ export const getUserAuthStatus = (store) => {
             store.dispatch(setUserLoggedOut());
             store.dispatch(setUserId(undefined));
             store.dispatch(setUserName(undefined));
-            console.log(`User IS NOT logged`);
-            console.log(store.getState())
         } else {
             store.dispatch(setUserLoggedIn());
             store.dispatch(setUserId("someuserid"));
             store.dispatch(setUserName("Need to fecth this"));
-            console.log(`User IS logged`);
-            console.log(store.getState());
         }
     });
 }
