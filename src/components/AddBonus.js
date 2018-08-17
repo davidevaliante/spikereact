@@ -13,7 +13,7 @@ import {
     Header, Icon
 } from 'semantic-ui-react';
 import ImagePicker from './ImagePicker';
-import { pushNewBonus, pushNewImage } from '../firebase/firebase';
+import { pushNewBonus } from '../firebase/firebase';
 import SearchField from './SearchField';
 
 class AddBonus extends Component {
@@ -27,7 +27,6 @@ class AddBonus extends Component {
 
     buildFakeSlot = () => {
         document.getElementById('nameField').value = `Bonus Esempio numero ${Math.floor(Math.random() * 100)}`;
-        document.getElementById('casinoField').value = "Fake casino";
         document.getElementById('welcomeBonusField').value = `${Math.floor(Math.random() * 4) * 10} SENZA DEPOSITO + 30 FREE SPIN + 300€`;
         document.getElementById('reviewField').value = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque ea tempora delectus rem omnis vero, tenetur quaerat numquam repellat architecto quas minus debitis deleniti? Eveniet accusantium quo amet deleniti tempora?";
         document.getElementById('linkField').value = "https://youtu.be/G4VAdWJXyFk?list=RDG4VAdWJXyFk";
@@ -48,12 +47,8 @@ class AddBonus extends Component {
             errorList.push('name');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
-        const producer = document.getElementById('casinoField').value.trim();
-        if (!producer) {
-            let errorList = this.state.emptyFields;
-            errorList.push('producer');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
-        }
+        const producer = this.state.producer
+
         const bonus = document.getElementById('welcomeBonusField').value.trim();
         if (!bonus) {
             let errorList = this.state.emptyFields;
@@ -79,15 +74,17 @@ class AddBonus extends Component {
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
 
-        const newBonus = {
-            name: name,
-            producer: producer,
-            bonus: bonus,
-            rating: rating,
-            review: review,
-            link: link
-        }
-        if (name && producer && bonus && review && link && rating) {
+
+        if (name && producer && bonus && review && link && rating && this.state.pickedImage) {
+            const newBonus = {
+                name: name,
+                producer: producer,
+                bonus: bonus,
+                rating: rating,
+                review: review,
+                link: link,
+                image: this.state.pickedImage
+            }
             pushNewBonus(newBonus, this.onBonusPushSuccess);
         }
 
@@ -105,11 +102,14 @@ class AddBonus extends Component {
         }, 800)
     }
 
+    onProducerSelected = (producer) => {
+        this.setState({ producer: producer })
+    }
+
     onImageSelected = (image) => {
         this.setState({
             pickedImage: image
         })
-        pushNewImage(image, 'BonusImages')
     }
 
     handleOpen = () => this.setState({ active: true })
@@ -136,7 +136,7 @@ class AddBonus extends Component {
         return (
             <div
                 style={{ padding: '4rem' }}>
-                <Dimmer blurring active={active} onClickOutside={this.handleClose} page>
+                <Dimmer active={active} onClickOutside={this.handleClose} page>
                     <Header as='h2' icon inverted>
                         <Icon name='check' />
                         Aggiunto con successo
@@ -163,14 +163,13 @@ class AddBonus extends Component {
                             label='Nome Bonus'
                             placeholder='Nome Bonus' >
                         </Form.Field>
+                        <Form.Field>
+                            <SearchField
+                                onSelected={this.onProducerSelected}
+                                nodename='Produttore' />
+                        </Form.Field>
 
-                        <Form.Field
-                            id='casinoField'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('producer')}
-                            control={Input}
-                            onChange={() => this.resetErrorOn('producer')}
-                            label='Erogatore'
-                            placeholder='Nome Casinò/Produttore/Erogatore del bonus' />
+
                     </Form.Group>
 
                     <Form.Group
@@ -221,6 +220,8 @@ class AddBonus extends Component {
                                 onImageSelected={this.onImageSelected}
                                 style={{ marginLeft: '2rem' }} />
                         </Form.Field>
+
+
                     </Form.Group>
 
                     <Form.Field

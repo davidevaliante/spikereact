@@ -39,7 +39,6 @@ class SearchMultipleSelection extends Component {
         this.props.onListUpdate(_.pick(this.state.firebaseBonusObject, data.value));
     }
 
-    stateOptions = [{ key: 'AL', value: 'AL', text: 'Alabama' },]
 
     state = {
         optionList: [],

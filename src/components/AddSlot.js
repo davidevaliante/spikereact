@@ -10,13 +10,15 @@ import {
     Dropdown,
     Search,
     Dimmer,
-    Header, Icon
+    Header, Icon, FormField
 } from 'semantic-ui-react'
 
 import { pushNewSlot } from './../firebase/firebase.js'
 import SearchField from './SearchField';
+import ImagePicker from './ImagePicker';
 import SearchMultipleSelection from './SearchMultipleSelection';
 import _ from 'lodash';
+import { SLOT_TYPES } from '../enums/Constants';
 
 
 class AddSlot extends Component {
@@ -127,10 +129,12 @@ class AddSlot extends Component {
             rating: rating,
             time: time,
             tips: tipsField,
-            tecnicals: tecnicalsField
+            tecnicals: tecnicalsField,
+            image: this.state.image,
+            type: this.state.type
         }
 
-        if (name && producer && linkYoutube && linkPlay && BONUS && description && rating && tipsField && tecnicalsField) {
+        if (name && producer && linkYoutube && linkPlay && BONUS && description && rating && tipsField && tecnicalsField && newSlot.type) {
             pushNewSlot(newSlot, this.onSlotPushSuccess)
         }
     }
@@ -190,11 +194,24 @@ class AddSlot extends Component {
         }, 800)
     }
 
+    onImageSelected = (image) => {
+        this.setState({ image: image })
+    }
+
+    onTypeSelected = (data) => {
+        this.setState({ type: data.value })
+    }
+
     handleOpen = () => this.setState({ active: true })
     handleClose = () => this.setState({ active: false })
 
 
     state = {
+        slotTypeOptions: [
+            { key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar' },
+            { key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis' },
+            { key: 'three', value: SLOT_TYPES.ONLINE, text: 'Slot online' }
+        ],
         shouldDisplayErrors: false,
         emptyFields: [],
         isInCopyPasteMode: true,
@@ -204,7 +221,6 @@ class AddSlot extends Component {
             { key: 'tre', value: '3', text: '3' },
             { key: 'quattro', value: '4', text: '4' },
             { key: 'cinque', value: '5', text: '5' },
-
         ]
     }
 
@@ -335,6 +351,21 @@ class AddSlot extends Component {
                         search
                         selection
                         options={this.state.ratingStateOptions} />
+                    <Form.Group>
+                        <Form.Field>
+                            <ImagePicker
+                                onImageSelected={this.onImageSelected}
+                            />
+                        </Form.Field>
+                        <FormField>
+                            <Dropdown
+                                onChange={(event, data) => this.onTypeSelected(data)}
+                                placeholder='State'
+                                search
+                                selection
+                                options={this.state.slotTypeOptions} />
+                        </FormField>
+                    </Form.Group>
 
 
                     <Form.Field

@@ -1,12 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './Header';
-const Home = (props) => {
- return(
-     <div>
-        <Header />
-     </div>
- );
+import { getSlotList } from '../firebase/firebase';
+import SlotCard from './SlotCard';
+import _ from 'lodash'
 
-};
+class Home extends Component {
+
+    state = {
+
+    }
+
+    componentDidMount() {
+        getSlotList(this.onSlotListFetched)
+    }
+
+    onSlotListFetched = (slotList) => {
+        let list = []
+        for (const key in slotList) {
+            const slot = slotList[key];
+            list.push(slot)
+        }
+        this.setState({ slotList: _.reverse(list) })
+    }
+
+    slotListJsx = (slotList) => {
+        return slotList.map((element, index) => {
+            if (index < 3) {
+                return <SlotCard slot={element} listKey={index} key={index} />
+            }
+        })
+    }
+
+    render() {
+
+        const { slotList } = this.state
+        return (
+            <div>
+                <Header />
+                <div style={{ display: 'flex', padding: '2rem' }}>
+                    {slotList ? this.slotListJsx(slotList) : <h1>LOL</h1>}
+                </div>
+
+            </div>
+        )
+    }
+}
+
 
 export default Home;

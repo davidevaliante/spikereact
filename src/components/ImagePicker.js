@@ -6,6 +6,7 @@ const ImagePicker = (props) => {
     const handleNewImage = () => {
         const selectedFile = document.getElementById('imagePicker').files[0];
         console.log(selectedFile.type);
+
         if (_.split(selectedFile.type, '/')[0] === 'image') {
             props.onImageSelected(selectedFile)
         } else {

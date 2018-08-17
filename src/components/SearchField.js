@@ -25,7 +25,6 @@ export default class SearchField extends Component {
                     title: current.name,
                     description: current.bonus,
                     image: current.image,
-                    price: '30',
                     original: {
                         ...current,
                         id: key

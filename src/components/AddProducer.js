@@ -12,6 +12,7 @@ import {
     Dimmer,
     Header, Icon
 } from 'semantic-ui-react';
+import ImagePicker from './ImagePicker';
 import { pushNewProducer } from '../firebase/firebase';
 
 class AddProducer extends Component {
@@ -28,10 +29,15 @@ class AddProducer extends Component {
         if (name && link) {
             const newProducer = {
                 name: name,
-                link: link
+                link: link,
+                image: this.state.image
             }
             pushNewProducer(newProducer, this.onProducerPushSuccess)
         }
+    }
+
+    onImageSelected = (image) => {
+        this.setState({ image: image })
     }
 
     onProducerPushSuccess = () => {
@@ -86,6 +92,10 @@ class AddProducer extends Component {
                         >
                         </Form.Field>
                     </Form.Group>
+
+                    <ImagePicker
+                        onImageSelected={this.onImageSelected}
+                    />
 
                     <Form.Field
                         onClick={this.buildFakeProducer}
