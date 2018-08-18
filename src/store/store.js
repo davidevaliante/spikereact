@@ -1,11 +1,13 @@
 import { createStore, combineReducers } from 'redux';
 import authReducer from './../reducers/AuthReducer';
 import currentPageReducer from './../reducers/CurrentPageReducer';
+import navbarVisibilityReducer from './../reducers/NavbarVisibilityReducer';
 
 const reducers = combineReducers(
     {
         'auth': authReducer,
-        'currentPage': currentPageReducer
+        'currentPage': currentPageReducer,
+        'navbarIsShowing':navbarVisibilityReducer
     }
 );
 

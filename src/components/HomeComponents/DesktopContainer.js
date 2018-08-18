@@ -5,8 +5,11 @@ import {
     Segment,
     Visibility,
 } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import HomepageHeading from './HomepageHeading'
 import Navbar from './Navbar'
+import { makeNavBarVisible, makeNavBarInvisible } from '../../reducers/NavbarVisibilityReducer'
+
 
 class DesktopContainer extends Component {
     state = {}
@@ -15,11 +18,12 @@ class DesktopContainer extends Component {
     showFixedMenu = () => this.setState({ fixed: true })
 
     render() {
+        console.log(this.state)
         const { children } = this.props
         const { fixed } = this.state
-
         return (
-            <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+            <Responsive
+                minWidth={Responsive.onlyTablet.minWidth}>
                 <Visibility
                     once={false}
                     onBottomPassed={this.showFixedMenu}
@@ -30,12 +34,12 @@ class DesktopContainer extends Component {
                         style={{ minHeight: 700, padding: '1em 0em' }}
                         vertical>
                         <header>
-
                             <Navbar fixed={fixed} />
                         </header>
-                        <HomepageHeading />
+                        {
+                            //<HomepageHeading />
+                        }
                     </Segment>
-
                 </Visibility>
 
                 {children}
@@ -49,4 +53,8 @@ DesktopContainer.propTypes = {
     children: PropTypes.node,
 }
 
-export default DesktopContainer
+const mapStateToProps = (state) => ({
+    dispatch: state.dispatch,
+})
+
+export default connect(mapStateToProps)(DesktopContainer)

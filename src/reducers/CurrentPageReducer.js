@@ -1,6 +1,6 @@
 import { PAGES } from '../enums/Constants';
 
-const defaultCurrentPageState = 'home'
+const defaultCurrentPageState = PAGES.HOME
 
 
 const currentPageReducer = (state = defaultCurrentPageState, action) => {
@@ -14,7 +14,7 @@ const currentPageReducer = (state = defaultCurrentPageState, action) => {
         case PAGES.SLOT_GRATIS:
             return PAGES.SLOT_GRATIS
         default:
-            return PAGES.HOME
+            return state
     }
 }
 

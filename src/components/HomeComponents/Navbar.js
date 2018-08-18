@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-    Button,
     Container,
     Menu
 } from 'semantic-ui-react'
@@ -43,7 +42,7 @@ const Navbar = (props) => {
             <Container>
 
                 <Menu.Item style={{ visibility: props.fixed ? 'visible' : 'hidden' }} >
-                    <img src='https://react.semantic-ui.com/logo.png' />
+                    <img src='https://react.semantic-ui.com/logo.png' alt='spike-logo' />
                 </Menu.Item>
 
                 <Menu.Item
@@ -89,6 +88,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
-    currentPage: state.currentPage
+    currentPage: state.currentPage,
+    // fixed: state.navbarIsShowing
 })
 export default connect(mapStateToProps)(Navbar);
