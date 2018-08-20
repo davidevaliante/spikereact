@@ -33,7 +33,8 @@ class AddSlot extends Component {
 
         this.setState({
             ...this.state,
-            rating: 5
+            rating: 5,
+            isFake: true
         })
 
 
@@ -128,7 +129,8 @@ class AddSlot extends Component {
             tips: tipsField,
             tecnicals: tecnicalsField,
             image: this.state.image,
-            type: this.state.type
+            type: this.state.type,
+            isFake: this.state.isFake
         }
 
         if (name && producer && linkYoutube && linkPlay && BONUS && description && rating && tipsField && tecnicalsField && newSlot.type) {

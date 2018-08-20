@@ -51,6 +51,41 @@ table {
 }
 /*----------------------------BASE------------------------------*/
 
+/*-----------ANIMATIONS-------------------------------------------*/
+@keyframes moveInLeft {
+  0% {
+      opacity: 0;
+      transform: translateX(-10rem);
+  }
+
+  80% {
+      transform: translateX(1rem);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+      opacity: 0;
+      transform: translateX(10rem);
+  }
+
+  80% {
+      transform: translateX(-1rem);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translate(0);
+  }
+}
+
+/*--------------------------ANIMATION END-------------------------*/
+
 /*----------------------------HEADER------------------------------*/
 header {
     background-image:
@@ -59,6 +94,27 @@ header {
     background-size: cover;
     background-position: center;
 }
+
+.headerSpikeText{
+  margin-bottom: 4rem;
+  font-size: 500%;
+  line-height: 5rem;
+  color:#e23d3d;
+  letter-spacing: 2rem;
+  font-family: 'Lato', 'Raleway', sans-serif;
+  font-weight: 900;
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+
+.slideRight{
+  animation-name: moveInRight;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+
+
 
 /*----------------------------END HEADER------------------------------*/
 
@@ -100,6 +156,7 @@ header {
 
 .hero-text-box{
     position:absolute;
+    line-height: 3rem;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
@@ -254,10 +311,31 @@ header {
 
 h1 {
     font-weight: 700;
-    font-size: 200%;
+    font-size: 150%;
     letter-spacing: .5px;
     word-spacing: 4px;
     text-transform: uppercase;
     color: #fff;
     margin-bottom: 20px;
+}
+
+.flex-vertical {
+  
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+  
+}
+
+.flex-horizontal {
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+  
+}
+
+.slot-card {
+  margin: 0rem 4rem 4rem 0rem;
 }

@@ -34,6 +34,7 @@ const Navbar = (props) => {
 
     return (
         <Menu
+            color={props.fixed ? 'red' : undefined}
             fixed={props.fixed ? 'top' : null}
             inverted={!props.fixed}
             pointing={!props.fixed}
@@ -47,6 +48,7 @@ const Navbar = (props) => {
 
                 <Menu.Item
                     as='a'
+                    className='navbarItemOne'
                     onClick={(event, data) => updateCurrentPage(PAGES.HOME)}
                     active={props.currentPage === PAGES.HOME}>
                     Home

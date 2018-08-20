@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Home from '../components/Home'
 import HomePage from '../components/HomeComponents/HomePage'
 import AdminDashboard from './../admin/AdminDashboard';
 import AddSlot from './../admin/AddSlot';

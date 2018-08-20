@@ -7,14 +7,14 @@ const SlotCard = (props) => {
 
 
     return (
-        <Card key={props.listKey} style={props.listKey % 2 === 0 ? { marginBottom: '3rem', marginTop: '0', marginRight: '2rem' } : { marginTop: '3rem', marginBottom: '0', marginRight: '2rem' }}>
+        <Card key={props.listKey} style={{ margin: '0rem 4rem 4rem 0rem' }}>
             <Image src={props.slot.image} />
             <Card.Content>
                 <Card.Header>{props.slot.name}</Card.Header>
                 <Card.Meta>
                     <span className='date'>{props.slot.producer.name}</span>
                 </Card.Meta>
-                <Card.Description>{_.truncate(props.slot.description, { 'length': 40 })}</Card.Description>
+                <Card.Description>{_.truncate(props.slot.description, { 'length': 150 })}</Card.Description>
             </Card.Content>
             <Card.Content extra>
                 <a>

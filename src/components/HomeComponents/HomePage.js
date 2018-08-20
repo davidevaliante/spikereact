@@ -9,40 +9,29 @@ import {
 } from 'semantic-ui-react'
 import React from 'react'
 import ResponsiveContainer from './ResponsiveContainer'
+import SlotList from './SlotList'
 
 const HomepageLayout = () => (
     <ResponsiveContainer>
 
         <Segment style={{ padding: '8em 0em' }} vertical>
 
-            <Grid container stackable verticalAlign='middle'>
+            <Grid style={{ margin: '0rem 3rem' }} celled='internally' stackable>
 
                 <Grid.Row>
 
-                    <Grid.Column width={8}>
+                    <Grid.Column width={12}>
 
                         <Header as='h3' style={{ fontSize: '2em' }}>
-                            We Help Companies and Companions
+                            Le Slot del giorno
                         </Header>
-
-                        <p style={{ fontSize: '1.33em' }}>
-                            We can give your company superpowers to do things that they never thought possible.
-                            Let us delight your customers and empower your needs... through pure data analytics.
-                        </p>
-
-                        <Header as='h3' style={{ fontSize: '2em' }}>
-                            We Make Bananas That Can Dance
-                        </Header>
-
-                        <p style={{ fontSize: '1.33em' }}>
-                            Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-                            bioengineered.
-                        </p>
-
+                        <SlotList />
                     </Grid.Column>
 
-                    <Grid.Column floated='right' width={6}>
-                        <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+                    <Grid.Column floated='right' width={4}>
+                        <Header as='h3' style={{ fontSize: '2em' }}>
+                            I migliori bonus
+                        </Header>
                     </Grid.Column>
 
                 </Grid.Row>

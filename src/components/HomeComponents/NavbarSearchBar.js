@@ -66,6 +66,7 @@ class NavbarSearchBar extends Component {
 
         return (
             <Search
+                color='red'
                 size='mini'
                 category
                 noResultsMessage='Nessun risultato'

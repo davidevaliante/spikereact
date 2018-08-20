@@ -100,7 +100,7 @@ export const getProducerList = (callback) => {
 
 export const getSlotList = (callback) => {
     const slotPath = firebaseDatabase.ref(DATABASE_REFERENCE.SLOT)
-    slotPath.orderByChild('time').limitToFirst(3).once('value')
+    slotPath.orderByChild('time').once('value')
         .then(
             (snapshot) => {
                 callback(snapshot.val())

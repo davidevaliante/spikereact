@@ -8,7 +8,6 @@ const Header = () => {
             <div className='hero-text-box'>
                 <h1>Vinci soldi veri.<br></br>I migliori consigli per vincere con le slot machine.</h1>
             </div>
-
         </header>
     );
 }
