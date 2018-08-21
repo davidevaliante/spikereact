@@ -20,7 +20,7 @@ export const BonusList = (props) => {
 
         const column = _.slice(_.shuffle(listOfBonus), 0, props.maxNumber)
 
-        return column.map(bonus => <BonusCard bonus={bonus} key={bonus.id} />)
+        return _.slice(_.shuffle(column), 0, 4).map(bonus => <BonusCard bonus={bonus} key={bonus.id} />)
     }
 
     return (
@@ -36,7 +36,7 @@ BonusList.propTypes = {
 
 const mapStateToProps = (state) => ({
     bonusList: state.bonusList,
-    contextRef:state.contextRef
+    contextRef: state.contextRef
 
 })
 

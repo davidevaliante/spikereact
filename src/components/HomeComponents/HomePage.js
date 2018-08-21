@@ -21,47 +21,36 @@ class HomepageLayout extends Component {
     handleContextRef = contextRef => this.setState({ contextRef })
     render() {
         const { contextRef } = this.state
+        console.log(this.state);
 
         // a quale component mettere  ref={this.handleContextRef} ????
 
         return (
             <ResponsiveContainer>
-
-                <Segment style={{ padding: '8em 0em' }} vertical >
-
-                    <Grid style={{ margin: '0rem' }} celled='internally' stackable >
-
-                        <Grid.Row >
-
+                <Segment style={{ padding: '8em 0em' }} vertical>
+                    <Grid style={{ margin: '0rem' }} celled='internally' stackable>
+                        <Grid.Row style={{ paddingBottom: '4rem' }}>
                             <div ref={this.handleContextRef}>
-                                <Grid.Column width={12} >
-
-                                    <Header as='h3' style={{ fontSize: '2em' }} >
+                                <Grid.Column width={12}>
+                                    <Header as='h3' style={{ fontSize: '2em' }}>
                                         Le Slot del giorno
-                            </Header>
-
+                                    </Header>
                                     <SlotList cardPerRow={3} maxSlot={9} />
                                 </Grid.Column>
                             </div>
 
-
-
                             <Grid.Column
-
                                 floated='right'
                                 width={4}>
-
-                                <Sticky context={contextRef}>
-                                    <Header as='h3' style={{ fontSize: '2em' }}>
-                                        I migliori bonus
+                                <Header as='h3' style={{ fontSize: '2em' }}>
+                                    I migliori bonus
                                 </Header>
+                                <Sticky context={contextRef} offset={80}>
                                     <BonusList maxNumber={15} />
                                 </Sticky>
-
                             </Grid.Column>
-
-
                         </Grid.Row>
+
 
                         <Grid.Row>
                             <Grid.Column textAlign='center'>

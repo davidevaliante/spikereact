@@ -34,6 +34,7 @@ const Navbar = (props) => {
 
     return (
         <Menu
+            style={{ zIndex: 999 }}
             color={props.fixed ? 'red' : undefined}
             fixed={props.fixed ? 'top' : null}
             inverted={!props.fixed}
