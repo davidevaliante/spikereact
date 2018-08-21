@@ -1,8 +1,9 @@
 import _ from 'lodash'
 import faker from 'faker'
 import React, { Component } from 'react'
-import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react'
+import { Search } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 const getResults = () =>
     _.times(5, () => ({
@@ -25,6 +26,13 @@ const source = _.range(0, 3).reduce((memo) => {
 }, {})
 
 class NavbarSearchBar extends Component {
+
+    state = {
+        redirect: {
+            shouldRedirect: false,
+            path: undefined
+        }
+    }
 
     componentWillMount() {
         this.resetComponent()
@@ -101,7 +109,10 @@ class NavbarSearchBar extends Component {
 
     handleResultSelect = (e, { result }) => {
         this.setState({ value: result.title })
+        // solo bonus e produttori hanno la proprietà "link"
         if (result.original.link) window.open(result.original.link)
+        // se non esiste link allora è una slot
+        else this.setState({ redirect: { shouldRedirect: true, path: `slot/${result.original.id}` } })
     }
 
     handleSearchChange = (e, { value }) => {
@@ -126,14 +137,15 @@ class NavbarSearchBar extends Component {
                 isLoading: false,
                 results: filteredResults,
             })
-        }, 300)
+        }, 100)
     }
 
 
     render() {
         const { isLoading, value, results } = this.state
-        const { bonusList, slotList, producerList } = this.props
-        console.log(bonusList)
+        const { shouldRedirect, path } = this.state.redirect
+
+        if (shouldRedirect) return <Redirect push to={path} />
 
         return (
             <Search

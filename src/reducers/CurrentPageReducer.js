@@ -24,6 +24,7 @@ export const setHomePage = () => {
     }
 }
 
+
 export const setBarPage = () => {
     return {
         type: PAGES.SLOT_BAR,
@@ -41,5 +42,7 @@ export const setGratisPage = () => {
         type: PAGES.SLOT_GRATIS,
     }
 }
+
+
 
 export default currentPageReducer

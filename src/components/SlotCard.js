@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Card, Icon, Image } from 'semantic-ui-react'
 
 

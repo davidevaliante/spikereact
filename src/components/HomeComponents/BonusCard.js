@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Feed, Image, Button } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
 
 const BonusCard = (props) => {

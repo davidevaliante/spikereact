@@ -13,7 +13,7 @@ import ResponsiveContainer from './ResponsiveContainer'
 import SlotList from './SlotList'
 import BonusList from './BonusList'
 import { connect } from 'react-redux';
-import { setContextRef } from '../../reducers/StickyBonusListReducer';
+
 
 class HomepageLayout extends Component {
     state = {}

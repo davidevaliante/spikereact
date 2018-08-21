@@ -3,7 +3,7 @@ import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import BonusCard from './BonusCard'
-import { Card, Feed } from 'semantic-ui-react'
+import { Feed } from 'semantic-ui-react'
 
 
 export const BonusList = (props) => {

@@ -1,13 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import HomePage from '../components/HomeComponents/HomePage'
 import AdminDashboard from './../admin/AdminDashboard';
 import AddSlot from './../admin/AddSlot';
 import AddBonus from '../admin/AddBonus';
 import AddProducer from '../admin/AddProducer';
-import Navbar from '../components/HomeComponents/Navbar';
 import Test from './Test'
 import SlotPage from '../components/SlotPageComponents/SlotPage';
 

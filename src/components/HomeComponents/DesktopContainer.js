@@ -61,6 +61,7 @@ class DesktopContainer extends Component {
         console.log(this.state)
         const { children } = this.props
         const { fixed } = this.state
+
         return (
             <Responsive
                 minWidth={Responsive.onlyTablet.minWidth}>
