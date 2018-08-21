@@ -108,6 +108,13 @@ export const getSlotList = (callback) => {
         )
 }
 
+export const getSlotWithId = (id, callback) => {
+    firebaseDatabase.ref(`Slots/${id}`).once('value')
+        .then(
+            (snapshot) => callback(snapshot.val())
+        )
+}
+
 
 
 export const getUserAuthStatus = (store) => {

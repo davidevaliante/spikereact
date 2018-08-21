@@ -20,10 +20,14 @@ class DesktopContainer extends Component {
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
 
-    componentDidMount() {
+    componentWillMount() {
         getSlotList(this.onSlotListFetched)
         getBonusList(this.onBonusListFetched)
         getProducerList(this.onProducerListFetched)
+    }
+
+    componentDidMount() {
+
     }
 
     onSlotListFetched = (slotList) => {

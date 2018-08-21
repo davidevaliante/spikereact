@@ -3,8 +3,13 @@ import { Card, Feed, Image, Button } from 'semantic-ui-react'
 
 
 const BonusCard = (props) => {
+
+    const handleClick = () => {
+        window.open(props.bonus.link)
+    }
+
     return (
-        <Card href='#' color='red'>
+        <Card color='red' onClick={(event) => handleClick()}>
             <Card.Content>
                 <Card.Header>{props.bonus.producer.name}</Card.Header>
                 <Card.Meta></Card.Meta>
