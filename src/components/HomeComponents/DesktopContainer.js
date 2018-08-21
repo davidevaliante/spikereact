@@ -6,9 +6,7 @@ import {
     Visibility,
 } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import HomepageHeading from './HomepageHeading'
 import Navbar from './Navbar'
-import { makeNavBarVisible, makeNavBarInvisible } from '../../reducers/NavbarVisibilityReducer'
 import { getSlotList, getBonusList, getProducerList } from '../../firebase/firebase';
 import _ from 'lodash';
 import { addSlotList } from '../../reducers/SlotListReducer';

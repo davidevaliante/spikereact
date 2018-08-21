@@ -33,6 +33,7 @@ body {
     color : #555;
     text-rendering: optimizeLegibility;
     font-size: 20px;
+    overflow-y: auto;
 }
 ol, ul {
 	list-style: none;
@@ -319,7 +320,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-.flex-vertical {
+.vertical-center {
   
     display: flex;
     flex-direction: column;
@@ -327,7 +328,7 @@ h1 {
   
 }
 
-.flex-horizontal {
+.horizontal-center {
   
     display: flex;
     flex-direction: row;
@@ -338,4 +339,9 @@ h1 {
 
 .slot-card {
   margin: 0rem 4rem 4rem 0rem;
+}
+
+.round-image{
+  -webkit-clip-path: circle(50% at 50% 50%);
+clip-path: circle(50% at 50% 50%);
 }

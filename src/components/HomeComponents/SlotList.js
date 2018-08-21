@@ -1,43 +1,47 @@
 import React from 'react'
 import SlotCard from '../SlotCard';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 const SlotList = (props) => {
-    const slotListJsx = (slotList) => {
-        const jsx = []
-        for (const key in slotList) {
-            const element = slotList[key]
-            //jsx.push(<SlotCard slot={element} listKey={key} key={key} />)
-            jsx.push(element)
-        }
-
-        return jsx
-    }
 
     const slotListToRows = slotList => {
-        const rows = _.chunk(slotList, 3)
 
-        return rows.map(row => (
+        const listOfSlots = []
 
-            <div className='flex-horizontal'>
-                {console.log(row)}
-                {row[0] && <SlotCard slot={row[0]} />}
-                {row[1] && <SlotCard slot={row[1]} />}
-                {row[2] && <SlotCard slot={row[2]} />}
+        for (const key in slotList) {
+            const element = slotList[key]
+            element['id'] = key
+            listOfSlots.push(element)
+        }
+
+        const rows = _.chunk(_.slice(listOfSlots, 0, props.maxSlot), props.cardPerRow)
+
+        return rows.map((row, index) => (
+            <div className='horizontal-center' key={`slot_row_${index}`}>
+                {row.map((element) =>
+                    (element && <SlotCard slot={element} key={element.id} />))
+                }
             </div>
 
         ))
     }
 
     return (
-        <div className='flex-vertical'>
-            {props.slotList ? slotListToRows(slotListJsx(props.slotList)) : <h1>LOL</h1>}
+        <div className='vertical-center'>
+            {props.slotList && slotListToRows(props.slotList)}
         </div>
     )
 }
 
+SlotList.propTypes = {
+    cardPerRow: PropTypes.number,
+    maxSlot: PropTypes.number
+}
+
 const mapStateToProps = (state) => ({
-    slotList: state.slotList
+    slotList: state.slotList,
 })
+
 export default connect(mapStateToProps)(SlotList)

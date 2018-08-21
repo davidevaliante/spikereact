@@ -5,10 +5,12 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 const SlotCard = (props) => {
 
+    const onCardClick = () => console.log(props.slot.id);
+
 
     return (
-        <Card key={props.listKey} style={{ margin: '0rem 4rem 4rem 0rem' }}>
-            <Image src={props.slot.image} />
+        <Card key={props.slot.id} style={{ margin: '1rem 1rem 1rem 1rem' }} onClick={() => onCardClick()}>
+            <Image src={props.slot.image} style={{ height: '14rem' }} />
             <Card.Content>
                 <Card.Header>{props.slot.name}</Card.Header>
                 <Card.Meta>

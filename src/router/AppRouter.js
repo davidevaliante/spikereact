@@ -7,6 +7,7 @@ import AddSlot from './../admin/AddSlot';
 import AddBonus from '../admin/AddBonus';
 import AddProducer from '../admin/AddProducer';
 import Navbar from '../components/HomeComponents/Navbar';
+import Test from './Test'
 
 
 
@@ -23,6 +24,7 @@ const AppRouter = () => {
             <Route path='/admin/addslot' component={AddSlot} />
             <Route path='/admin/addbonus' component={AddBonus} />
             <Route path='/admin/addproducer' component={AddProducer} />
+            <Test path='/test' component={Test} />
           </Switch>
         </div>
       </BrowserRouter>
