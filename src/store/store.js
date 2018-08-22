@@ -9,7 +9,7 @@ import stickyBonusListReducer from './../reducers/StickyBonusListReducer';
 const reducers = combineReducers(
     {
         'auth': authReducer,
-        'currentPage': currentPageReducer,
+        'displaying': currentPageReducer,
         'navbarIsShowing': navbarVisibilityReducer,
         'slotList': slotListReducer,
         'bonusList': bonusListReducer,

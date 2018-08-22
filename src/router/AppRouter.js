@@ -19,13 +19,13 @@ const AppRouter = () => {
       <BrowserRouter>
 
         <Switch>
-          <Route path='/' component={HomePage} exact={true} />
+          <Route path='/' component={HomePage} exact={true} page='HOME' />
           <Route path='/admin' component={AdminDashboard} exact={true} />
           <Route path='/admin/addslot' component={AddSlot} />
           <Route path='/admin/addbonus' component={AddBonus} />
           <Route path='/admin/addproducer' component={AddProducer} />
-          <Route path='/slot/:id' component={SlotPage} />} />
-                <Test path='/test' component={Test} />
+          <Route path='/slot/:id' component={SlotPage} />
+          <Test path='/test' component={Test} />
         </Switch>
 
       </BrowserRouter>

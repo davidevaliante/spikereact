@@ -80,7 +80,7 @@ class NavbarSearchBar extends Component {
         for (const bonus in bonusList) {
             const current = bonusList[bonus]
             formattedBonus.push({
-                title: current.name,
+                title: `Bonus ${current.name}`,
                 description: current.bonus,
                 image: current.image,
                 original: current
@@ -158,7 +158,6 @@ class NavbarSearchBar extends Component {
                 onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
                 results={results}
                 value={value}
-                {...this.props}
             />
         )
     }

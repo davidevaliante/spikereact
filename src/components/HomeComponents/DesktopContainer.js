@@ -12,6 +12,7 @@ import _ from 'lodash';
 import { addSlotList } from '../../reducers/SlotListReducer';
 import { addBonusList } from '../../reducers/BonusListReducer';
 import { addProducerList } from '../../reducers/ProducerListReducer';
+import Header from '../Header'
 
 
 class DesktopContainer extends Component {
@@ -65,24 +66,7 @@ class DesktopContainer extends Component {
         return (
             <Responsive
                 minWidth={Responsive.onlyTablet.minWidth}>
-                <Visibility
-                    once={false}
-                    onBottomPassed={this.showFixedMenu}
-                    onBottomPassedReverse={this.hideFixedMenu}>
-                    <Segment
-                        inverted
-                        textAlign='center'
-                        style={{ minHeight: 700, padding: 0 }}
-                        vertical>
-                        <header>
-                            <Navbar fixed={fixed} />
-                            <div className='hero-text-box'>
-                                <h1 className='headerSpikeText'>Spike Slot</h1>
-                                <h1 className='slideRight'>Vinci soldi veri<br></br>I migliori consigli per vincere con le slot machine sul web.</h1>
-                            </div>
-                        </header>
-                    </Segment>
-                </Visibility>
+                <Header displaying='HOME' />
 
                 {children}
 
