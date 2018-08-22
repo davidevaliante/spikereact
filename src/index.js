@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { getUserAuthStatus } from './firebase/firebase';
 import 'semantic-ui-css/semantic.min.css';
 import '../src/style/base.css';
+import '../src/style/sass.scss';
 
 
 const mystore = store();

@@ -6,6 +6,7 @@ import {
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { getSlotWithId } from './../firebase/firebase'
+import { updateCurrentSlot, resetCurrentSlot } from '../reducers/SlotPageReducer'
 
 import Navbar from './HomeComponents/Navbar'
 import LazyLoad from 'react-lazyload';
@@ -42,6 +43,7 @@ class Header extends Component {
             // se redux è accessibile
             if (_.get(this.props.slotList, id)) {
                 this.setState({ slot: _.get(this.props.slotList, id) })
+                this.props.dispatch(updateCurrentSlot(_.get(this.props.slotList, id)))
                 console.log(_.get(this.props.slotList, id));
             }
             // altrimenti carica da firebase
@@ -50,11 +52,16 @@ class Header extends Component {
                    argomento (callback). Di solito le metto fuori per chiarezza ma stavolta deve solo chiamare
                    setState con i dati scaricati e quindi è inutile
                 */
-                getSlotWithId(id, (slot) => this.setState({ slot: slot }))
+                getSlotWithId(id, (slot) => {
+                    this.setState({ slot: slot })
+                    this.props.dispatch(updateCurrentSlot(slot))
+                })
             }
         }
 
     }
+
+
 
     homePageHeader = (fixed) => (
         <Visibility

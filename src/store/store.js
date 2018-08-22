@@ -5,7 +5,8 @@ import navbarVisibilityReducer from './../reducers/NavbarVisibilityReducer';
 import slotListReducer from './../reducers/SlotListReducer';
 import bonusListReducer from './../reducers/BonusListReducer';
 import producerListReducer from './../reducers/ProducerListReducer';
-import stickyBonusListReducer from './../reducers/StickyBonusListReducer';
+import slotPageReducer from './../reducers/SlotPageReducer';
+
 const reducers = combineReducers(
     {
         'auth': authReducer,
@@ -14,7 +15,7 @@ const reducers = combineReducers(
         'slotList': slotListReducer,
         'bonusList': bonusListReducer,
         'producerList': producerListReducer,
-        'contextRef': stickyBonusListReducer
+        'currentSlot': slotPageReducer
     }
 );
 
