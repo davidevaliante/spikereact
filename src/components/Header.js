@@ -7,7 +7,10 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { getSlotWithId } from './../firebase/firebase'
 import { updateCurrentSlot, resetCurrentSlot } from '../reducers/SlotPageReducer'
-
+import { getSlotList, getBonusList, getProducerList } from './../firebase/firebase';
+import { addSlotList } from './../reducers/SlotListReducer';
+import { addBonusList } from './../reducers/BonusListReducer';
+import { addProducerList } from './../reducers/ProducerListReducer';
 import Navbar from './HomeComponents/Navbar'
 import LazyLoad from 'react-lazyload';
 
@@ -26,6 +29,40 @@ class Header extends Component {
 
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
+
+    componentWillMount() {
+        getSlotList(this.onSlotListFetched)
+        getBonusList(this.onBonusListFetched)
+        getProducerList(this.onProducerListFetched)
+    }
+
+    onSlotListFetched = (slotList) => {
+        let list = {}
+        for (const key in slotList) {
+            const slot = slotList[key];
+            list[key] = slot
+        }
+        this.props.dispatch(addSlotList(list))
+    }
+
+    onBonusListFetched = (bonusList) => {
+        let list = {}
+        for (const key in bonusList) {
+            const bonus = bonusList[key];
+            list[key] = bonus
+        }
+        this.props.dispatch(addBonusList(list))
+    }
+
+    onProducerListFetched = (producerList) => {
+        let list = {}
+        for (const key in producerList) {
+            const producer = producerList[key];
+            list[key] = producer;
+        }
+        this.props.dispatch(addProducerList(list))
+    }
+
 
     componentDidMount() {
         // aggiunto per il LazyLoading dell'immagine
@@ -137,6 +174,8 @@ class Header extends Component {
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
     slotList: state.slotList,
+    bonusList: state.bonusList,
+    producerList: state.producerList
 })
 
 export default connect(mapStateToProps)(Header)

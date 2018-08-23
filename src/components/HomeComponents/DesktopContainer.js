@@ -22,16 +22,17 @@ class DesktopContainer extends Component {
     showFixedMenu = () => this.setState({ fixed: true })
 
     componentWillMount() {
-        getSlotList(this.onSlotListFetched)
-        getBonusList(this.onBonusListFetched)
-        getProducerList(this.onProducerListFetched)
+        /* getSlotList(this.onSlotListFetched)
+         getBonusList(this.onBonusListFetched)
+         getProducerList(this.onProducerListFetched)
+         */
     }
 
     componentDidMount() {
 
     }
 
-    onSlotListFetched = (slotList) => {
+    /*onSlotListFetched = (slotList) => {
         let list = {}
         for (const key in slotList) {
             const slot = slotList[key];
@@ -57,6 +58,7 @@ class DesktopContainer extends Component {
         }
         this.props.dispatch(addProducerList(list))
     }
+    */
 
     render() {
         console.log(this.state)

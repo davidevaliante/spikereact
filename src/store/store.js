@@ -6,6 +6,7 @@ import slotListReducer from './../reducers/SlotListReducer';
 import bonusListReducer from './../reducers/BonusListReducer';
 import producerListReducer from './../reducers/ProducerListReducer';
 import slotPageReducer from './../reducers/SlotPageReducer';
+import playModeReducer from './../reducers/PlayModeReducer';
 
 const reducers = combineReducers(
     {
@@ -15,7 +16,8 @@ const reducers = combineReducers(
         'slotList': slotListReducer,
         'bonusList': bonusListReducer,
         'producerList': producerListReducer,
-        'currentSlot': slotPageReducer
+        'currentSlot': slotPageReducer,
+        'isPlaying':playModeReducer
     }
 );
 

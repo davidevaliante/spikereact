@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
     Container,
-    Menu
+    Menu,
+    Visibility
 } from 'semantic-ui-react'
 import NavbarSearchBar from './NavbarSearchBar';
 import { PAGES } from '../../enums/Constants';
@@ -11,78 +12,89 @@ import { setHomePage, setBarPage, setOnlinePage, setGratisPage } from '../../red
 
 
 
-const Navbar = (props) => {
+class Navbar extends Component {
+    state ={}
+    hideFixedMenu = () => this.setState({ fixed: false })
+    showFixedMenu = () => this.setState({ fixed: true })
 
-    const updateCurrentPage = (page) => {
+    updateCurrentPage = (page) => {
         switch (page) {
             case PAGES.HOME:
-                props.dispatch(setHomePage())
+                this.props.dispatch(setHomePage())
                 break;
             case PAGES.SLOT_BAR:
-                props.dispatch(setBarPage())
+                this.props.dispatch(setBarPage())
                 break;
             case PAGES.SLOT_ONLINE:
-                props.dispatch(setOnlinePage())
+                this.props.dispatch(setOnlinePage())
                 break;
             case PAGES.SLOT_GRATIS:
-                props.dispatch(setGratisPage())
+                this.props.dispatch(setGratisPage())
                 break;
             default:
-                props.dispatch(setHomePage())
+                this.props.dispatch(setHomePage())
         }
     }
+    render(){
+        return (
+            <Visibility
+            once={false}
+            onBottomPassed={this.showFixedMenu}
+            onBottomPassedReverse={this.hideFixedMenu}
+            >
+            <Menu
+                style={{ zIndex: 999 }}
+                color={this.state.fixed ? 'red' : undefined}
+                fixed={this.state.fixed ? 'top' : null}
+                inverted={!this.state.fixed}
+                pointing={!this.state.fixed}
+                secondary={!this.state.fixed}
+                size='large'>
+                <Container>
 
-    return (
-        <Menu
-            style={{ zIndex: 999 }}
-            color={props.fixed ? 'red' : undefined}
-            fixed={props.fixed ? 'top' : null}
-            inverted={!props.fixed}
-            pointing={!props.fixed}
-            secondary={!props.fixed}
-            size='large'>
-            <Container>
+                    <Menu.Item style={{ visibility: this.state.fixed ? 'visible' : 'hidden' }} >
+                        <img src='https://react.semantic-ui.com/logo.png' alt='spike-logo' />
+                    </Menu.Item>
 
-                <Menu.Item style={{ visibility: props.fixed ? 'visible' : 'hidden' }} >
-                    <img src='https://react.semantic-ui.com/logo.png' alt='spike-logo' />
-                </Menu.Item>
+                    <Menu.Item
+                        as='a'
+                        className='navbarItemOne'
+                        onClick={(event, data) => this.updateCurrentPage(PAGES.HOME)}
+                        active={this.props.currentPage === PAGES.HOME}>
+                        Home
+                    </Menu.Item>
 
-                <Menu.Item
-                    as='a'
-                    className='navbarItemOne'
-                    onClick={(event, data) => updateCurrentPage(PAGES.HOME)}
-                    active={props.currentPage === PAGES.HOME}>
-                    Home
-                </Menu.Item>
+                    <Menu.Item
+                        as='a'
+                        onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_ONLINE)}
+                        active={this.props.currentPage === PAGES.SLOT_ONLINE}>
+                        Slot Online
+                    </Menu.Item>
 
-                <Menu.Item
-                    as='a'
-                    onClick={(event, data) => updateCurrentPage(PAGES.SLOT_ONLINE)}
-                    active={props.currentPage === PAGES.SLOT_ONLINE}>
-                    Slot Online
-                </Menu.Item>
+                    <Menu.Item
+                        as='a'
+                        onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_GRATIS)}
+                        active={this.props.currentPage === PAGES.SLOT_GRATIS}>
+                        Slot Gratis
+                    </Menu.Item>
 
-                <Menu.Item
-                    as='a'
-                    onClick={(event, data) => updateCurrentPage(PAGES.SLOT_GRATIS)}
-                    active={props.currentPage === PAGES.SLOT_GRATIS}>
-                    Slot Gratis
-                </Menu.Item>
+                    <Menu.Item
+                        as='a'
+                        onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_BAR)}
+                        active={this.props.currentPage === PAGES.SLOT_BAR}>
+                        Slot da bar
+                    </Menu.Item>
 
-                <Menu.Item
-                    as='a'
-                    onClick={(event, data) => updateCurrentPage(PAGES.SLOT_BAR)}
-                    active={props.currentPage === PAGES.SLOT_BAR}>
-                    Slot da bar
-                </Menu.Item>
+                    <Menu.Item position='right' style={{ marginRight: '4rem' }}>
+                        <NavbarSearchBar />
+                    </Menu.Item>
 
-                <Menu.Item position='right' style={{ marginRight: '4rem' }}>
-                    <NavbarSearchBar />
-                </Menu.Item>
-
-            </Container>
-        </Menu>
-    )
+                </Container> 
+            </Menu>
+            <div style={{height:'100vh'}}></div>
+        </Visibility>
+        )
+    }
 }
 
 Navbar.propTypes = {

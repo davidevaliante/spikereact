@@ -1,1 +1,6 @@
-@import './slotpage';
+@import 'slotpage';
+
+.columns {
+    display: flex;
+    justify-content: space-around;
+}
