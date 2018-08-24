@@ -24,17 +24,14 @@ class NavbarSearchBar extends Component {
 
     // ----------------------- FIREBASE ------------------------------------------------
     componentWillMount() {
-        // this.resetComponent()
+        this.resetComponent()
 
         getSlotList(this.onSlotListFetched)
         getBonusList(this.onBonusListFetched)
         getProducerList(this.onProducerListFetched)
 
-        // aggiunto per il LazyLoading dell'immagine
-        window.scrollTo(0, 0)
 
         const { displaying } = this.props
-
 
         if (displaying === 'SLOT') {
             /* id viene passato dinamicamente da react router e passato nelle props all'interno
@@ -47,7 +44,6 @@ class NavbarSearchBar extends Component {
                 this.setState({ slot: _.get(this.props.slotList, id) })
                 this.props.dispatch(updateCurrentSlot(_.get(this.props.slotList, id)))
                 // console.log(_.get(this.props.slotList, id));
-                console.log('fetching redux');
 
             }
             // altrimenti carica da firebase
@@ -56,16 +52,12 @@ class NavbarSearchBar extends Component {
                    argomento (callback). Di solito le metto fuori per chiarezza ma stavolta deve solo chiamare
                    setState con i dati scaricati e quindi è inutile
                 */
-                console.log('fetching fb');
 
                 getSlotWithId(id, (slot) => {
                     this.setState({ slot: slot })
                     this.props.dispatch(updateCurrentSlot(slot))
                 })
             }
-        } else {
-            console.log(this.props);
-
         }
     }
 
@@ -134,7 +126,8 @@ class NavbarSearchBar extends Component {
                 title: current.name,
                 description: `${_.truncate(current.description, truncateOptions)}`,
                 image: current.image,
-                original: current
+                original: current,
+                id: slot
             })
         }
 
@@ -145,7 +138,8 @@ class NavbarSearchBar extends Component {
                 title: `Bonus ${current.name}`,
                 description: current.bonus,
                 image: current.image,
-                original: current
+                id: bonus,
+                link: current.link
             })
         }
 
@@ -155,7 +149,8 @@ class NavbarSearchBar extends Component {
             formattedProducer.push({
                 title: current.name,
                 image: current.image,
-                original: current
+                id: producer,
+                link: current.link
             })
         }
         list['slot']['results'] = formattedSlot
@@ -173,9 +168,12 @@ class NavbarSearchBar extends Component {
 
         this.setState({ value: result.title })
         // solo bonus e produttori hanno la proprietà "link"
-        if (result.original.link) window.open(result.original.link)
+        if (result.link) window.open(result.link)
         // se non esiste link allora è una slot
-        else this.setState({ redirect: { shouldRedirect: true, path: `/slot/${result.original.id}` } })
+        else {
+            this.props.dispatch(updateCurrentSlot(result.original))
+            this.setState({ redirect: { shouldRedirect: true, path: `/slot/${result.id}` } })
+        }
     }
 
     handleSearchChange = (e, { value }) => {
@@ -210,21 +208,38 @@ class NavbarSearchBar extends Component {
     render() {
         const { isLoading, value, results } = this.state
         const { shouldRedirect, path } = this.state.redirect
+        console.log(this.state.redirect.shouldRedirect);
 
-        if (shouldRedirect) return <Redirect push to={path} />
+        let finale;
 
-        return (
-            <Search
+        if (shouldRedirect) {
+            finale = <Search
                 color='red'
                 size='mini'
                 category
                 noResultsMessage='Nessun risultato'
                 loading={isLoading}
                 onResultSelect={this.handleResultSelect}
-                onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
+                onSearchChange={_.debounce(this.handleSearchChange, 400, { leading: true })}
                 results={results}
-                value={value}
-            />
+                value={value} ><Redirect push to={path} /></Search>
+        } else {
+            finale =
+                <Search
+                    color='red'
+                    size='mini'
+                    category
+                    noResultsMessage='Nessun risultato'
+                    loading={isLoading}
+                    onResultSelect={this.handleResultSelect}
+                    onSearchChange={_.debounce(this.handleSearchChange, 400, { leading: true })}
+                    results={results}
+                    value={value} ></Search>
+        }
+
+
+        return (
+            finale
         )
     }
 }

@@ -10,11 +10,14 @@ import { Segment, Grid, Image, Header as SemanticHeader, Dimmer } from 'semantic
 
 
 const SlotPage = (props) => {
+    console.log('carica')
 
 
     return (
         <div>
             <Dimmer.Dimmable dimmed={props.isPlaying}>
+                {window.scrollTo(0, 0)}
+
                 <PlayDimmer url={props.currentSlot.linkPlay} />
                 <Header displaying='SLOT' slotId={props.match.params.id} />
                 <Description slotName={props.currentSlot.name} text={props.currentSlot.description} />

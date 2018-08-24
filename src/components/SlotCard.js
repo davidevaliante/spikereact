@@ -6,11 +6,10 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 
 const SlotCard = (props) => {
 
-
     return (
+
         <NavLink
-            to={`slot/${props.slot.id}`}
-        >
+            to={`slot/${props.slot.id}`}>
             <Card key={props.slot.id} style={{ margin: '1rem 1rem 1rem 1rem' }} >
                 <Image src={props.slot.image} style={{ height: '14rem' }} />
                 <Card.Content>

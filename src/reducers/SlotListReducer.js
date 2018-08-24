@@ -17,7 +17,7 @@ const slotListReducer = (state = defaultListState, action) => {
 
 export const addSingleSlot = (slot) => {
     return {
-        type: 'ADD_SINLGE_SLOT',
+        type: 'ADD_SINGLE_SLOT',
         slotToAdd: slot
     }
 }
