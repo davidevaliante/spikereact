@@ -4,7 +4,6 @@ import { Dimmer, Embed } from 'semantic-ui-react'
 import { setUserNotPlaying } from '../../reducers/PlayModeReducer'
 
 const PlayDimmer = (props) => {
-    console.log(props.url);
 
     // src da cambiare in {props.url}
 

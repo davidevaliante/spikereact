@@ -1,7 +1,6 @@
 import { createStore, combineReducers } from 'redux';
 import authReducer from './../reducers/AuthReducer';
 import currentPageReducer from './../reducers/CurrentPageReducer';
-import navbarVisibilityReducer from './../reducers/NavbarVisibilityReducer';
 import slotListReducer from './../reducers/SlotListReducer';
 import bonusListReducer from './../reducers/BonusListReducer';
 import producerListReducer from './../reducers/ProducerListReducer';
@@ -12,12 +11,11 @@ const reducers = combineReducers(
     {
         'auth': authReducer,
         'displaying': currentPageReducer,
-        'navbarIsShowing': navbarVisibilityReducer,
         'slotList': slotListReducer,
         'bonusList': bonusListReducer,
         'producerList': producerListReducer,
         'currentSlot': slotPageReducer,
-        'isPlaying':playModeReducer
+        'isPlaying': playModeReducer
     }
 );
 

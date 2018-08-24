@@ -4,26 +4,14 @@ import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { getSlotList, getBonusList, getProducerList } from '../../firebase/firebase';
+import { addSlotList } from '../../reducers/SlotListReducer';
+import { addBonusList } from '../../reducers/BonusListReducer';
+import { addProducerList } from '../../reducers/ProducerListReducer';
+import { getSlotWithId } from '../../firebase/firebase'
+import { updateCurrentSlot } from '../../reducers/SlotPageReducer'
 
-const getResults = () =>
-    _.times(5, () => ({
-        title: faker.company.companyName(),
-        description: faker.company.catchPhrase(),
-        image: faker.internet.avatar(),
-        price: faker.finance.amount(0, 100, 2, '$'),
-    }))
 
-const source = _.range(0, 3).reduce((memo) => {
-    const name = faker.hacker.noun()
-
-    // eslint-disable-next-line no-param-reassign
-    memo[name] = {
-        name,
-        results: getResults(),
-    }
-
-    return memo
-}, {})
 
 class NavbarSearchBar extends Component {
 
@@ -34,11 +22,85 @@ class NavbarSearchBar extends Component {
         }
     }
 
+    // ----------------------- FIREBASE ------------------------------------------------
     componentWillMount() {
-        this.resetComponent()
+        // this.resetComponent()
+
+        getSlotList(this.onSlotListFetched)
+        getBonusList(this.onBonusListFetched)
+        getProducerList(this.onProducerListFetched)
+
+        // aggiunto per il LazyLoading dell'immagine
+        window.scrollTo(0, 0)
+
+        const { displaying } = this.props
+
+
+        if (displaying === 'SLOT') {
+            /* id viene passato dinamicamente da react router e passato nelle props all'interno
+               DOCS : https://reacttraining.com/react-router/web/api/Route/route-props
+            */
+            const id = this.props.slotId
+
+            // se redux è accessibile
+            if (_.get(this.props.slotList, id)) {
+                this.setState({ slot: _.get(this.props.slotList, id) })
+                this.props.dispatch(updateCurrentSlot(_.get(this.props.slotList, id)))
+                // console.log(_.get(this.props.slotList, id));
+                console.log('fetching redux');
+
+            }
+            // altrimenti carica da firebase
+            else {
+                /* questa funzione prende l'id della slot come primo argomento ed una funzione come secondo
+                   argomento (callback). Di solito le metto fuori per chiarezza ma stavolta deve solo chiamare
+                   setState con i dati scaricati e quindi è inutile
+                */
+                console.log('fetching fb');
+
+                getSlotWithId(id, (slot) => {
+                    this.setState({ slot: slot })
+                    this.props.dispatch(updateCurrentSlot(slot))
+                })
+            }
+        } else {
+            console.log(this.props);
+
+        }
     }
 
+    onSlotListFetched = (slotList) => {
+        let list = {}
+        for (const key in slotList) {
+            const slot = slotList[key];
+            slot['id'] = key
+            list[key] = slot
+        }
+        this.props.dispatch(addSlotList(list))
+    }
+
+    onBonusListFetched = (bonusList) => {
+        let list = {}
+        for (const key in bonusList) {
+            const bonus = bonusList[key];
+            list[key] = bonus
+        }
+        this.props.dispatch(addBonusList(list))
+    }
+
+    onProducerListFetched = (producerList) => {
+        let list = {}
+        for (const key in producerList) {
+            const producer = producerList[key];
+            list[key] = producer;
+        }
+        this.props.dispatch(addProducerList(list))
+    }
+
+
+    // ----------------------- SEARCHBAR -------------------------------------------------
     formatList = (slotList, bonusList, producerList) => {
+
         // oggetto di base, 
         // results deve contenere una lista di oggetti con questa struttura :
         /*
@@ -100,23 +162,25 @@ class NavbarSearchBar extends Component {
         list['bonus']['results'] = formattedBonus
         list['producer']['results'] = formattedProducer
 
-        console.log(list);
 
         return list
     }
 
     resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
+    // ------------------------ HANDLERS --------------------------------------------------
     handleResultSelect = (e, { result }) => {
+
         this.setState({ value: result.title })
         // solo bonus e produttori hanno la proprietà "link"
         if (result.original.link) window.open(result.original.link)
         // se non esiste link allora è una slot
-        else this.setState({ redirect: { shouldRedirect: true, path: `slot/${result.original.id}` } })
+        else this.setState({ redirect: { shouldRedirect: true, path: `/slot/${result.original.id}` } })
     }
 
     handleSearchChange = (e, { value }) => {
         this.setState({ isLoading: true, value })
+
         setTimeout(() => {
             if (this.state.value.length < 1) return this.resetComponent()
 
@@ -139,6 +203,8 @@ class NavbarSearchBar extends Component {
             })
         }, 100)
     }
+
+
 
 
     render() {

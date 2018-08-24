@@ -5,12 +5,8 @@ import {
 } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { getSlotWithId } from './../firebase/firebase'
-import { updateCurrentSlot, resetCurrentSlot } from '../reducers/SlotPageReducer'
-import { getSlotList, getBonusList, getProducerList } from './../firebase/firebase';
-import { addSlotList } from './../reducers/SlotListReducer';
-import { addBonusList } from './../reducers/BonusListReducer';
-import { addProducerList } from './../reducers/ProducerListReducer';
+
+
 import Navbar from './HomeComponents/Navbar'
 import LazyLoad from 'react-lazyload';
 
@@ -30,74 +26,6 @@ class Header extends Component {
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
 
-    componentWillMount() {
-        getSlotList(this.onSlotListFetched)
-        getBonusList(this.onBonusListFetched)
-        getProducerList(this.onProducerListFetched)
-    }
-
-    onSlotListFetched = (slotList) => {
-        let list = {}
-        for (const key in slotList) {
-            const slot = slotList[key];
-            list[key] = slot
-        }
-        this.props.dispatch(addSlotList(list))
-    }
-
-    onBonusListFetched = (bonusList) => {
-        let list = {}
-        for (const key in bonusList) {
-            const bonus = bonusList[key];
-            list[key] = bonus
-        }
-        this.props.dispatch(addBonusList(list))
-    }
-
-    onProducerListFetched = (producerList) => {
-        let list = {}
-        for (const key in producerList) {
-            const producer = producerList[key];
-            list[key] = producer;
-        }
-        this.props.dispatch(addProducerList(list))
-    }
-
-
-    componentDidMount() {
-        // aggiunto per il LazyLoading dell'immagine
-        window.scrollTo(0, 0)
-
-        const { displaying } = this.props
-
-
-        if (displaying === 'SLOT') {
-            /* id viene passato dinamicamente da react router e passato nelle props all'interno
-               DOCS : https://reacttraining.com/react-router/web/api/Route/route-props
-            */
-            const id = this.props.slotId
-
-            // se redux è accessibile
-            if (_.get(this.props.slotList, id)) {
-                this.setState({ slot: _.get(this.props.slotList, id) })
-                this.props.dispatch(updateCurrentSlot(_.get(this.props.slotList, id)))
-                console.log(_.get(this.props.slotList, id));
-            }
-            // altrimenti carica da firebase
-            else {
-                /* questa funzione prende l'id della slot come primo argomento ed una funzione come secondo
-                   argomento (callback). Di solito le metto fuori per chiarezza ma stavolta deve solo chiamare
-                   setState con i dati scaricati e quindi è inutile
-                */
-                getSlotWithId(id, (slot) => {
-                    this.setState({ slot: slot })
-                    this.props.dispatch(updateCurrentSlot(slot))
-                })
-            }
-        }
-
-    }
-
 
 
     homePageHeader = (fixed) => (
@@ -115,7 +43,7 @@ class Header extends Component {
                         style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
                         <div
                             style={this.styles.overlay}>
-                            <Navbar fixed={fixed} />
+                            <Navbar fixed={fixed} displaying={this.props.displaying} />
                             <div className='hero-text-box'>
                                 <h1 className='headerSpikeText'>Spike Slot</h1>
                                 <h1 className='slideRight'>Vinci soldi veri<br></br>I migliori consigli per vincere con le slot machine sul web.</h1>
@@ -127,7 +55,7 @@ class Header extends Component {
         </Visibility>
     )
 
-    slotPageHeader = (fixed, header, subheader, image) => (
+    slotPageHeader = (fixed, header, subheader, image, displaying, slotId) => (
         <Visibility
             once={false}
             onBottomPassed={this.showFixedMenu}
@@ -142,7 +70,7 @@ class Header extends Component {
                         style={this.state.slot && { backgroundImage: `url(${image})` }}>
                         <div
                             style={this.styles.overlay}>
-                            <Navbar fixed={fixed} />
+                            <Navbar fixed={fixed} displaying={this.props.displaying} slotId={this.props.slotId} />
                             <div className='hero-text-box'>
                                 <h1 className='headerSpikeText'>{header}</h1>
                                 <h1 className='slideRight'>{subheader}</h1>
