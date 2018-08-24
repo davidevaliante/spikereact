@@ -207,24 +207,14 @@ class NavbarSearchBar extends Component {
 
     render() {
         const { isLoading, value, results } = this.state
-        const { shouldRedirect, path } = this.state.redirect
-        console.log(this.state.redirect.shouldRedirect);
+        // const { shouldRedirect, path } = this.state.redirect
+        const shouldRedirect = this.state.redirect.shouldRedirect
+        const path = this.state.redirect.path
+        console.log(this.state);
 
-        let finale;
 
-        if (shouldRedirect) {
-            finale = <Search
-                color='red'
-                size='mini'
-                category
-                noResultsMessage='Nessun risultato'
-                loading={isLoading}
-                onResultSelect={this.handleResultSelect}
-                onSearchChange={_.debounce(this.handleSearchChange, 400, { leading: true })}
-                results={results}
-                value={value} ><Redirect push to={path} /></Search>
-        } else {
-            finale =
+        return (
+            <div>
                 <Search
                     color='red'
                     size='mini'
@@ -234,12 +224,10 @@ class NavbarSearchBar extends Component {
                     onResultSelect={this.handleResultSelect}
                     onSearchChange={_.debounce(this.handleSearchChange, 400, { leading: true })}
                     results={results}
-                    value={value} ></Search>
-        }
+                    value={value} />
+                <Redirect to={path} push={path ? true : false} />
+            </div>
 
-
-        return (
-            finale
         )
     }
 }
