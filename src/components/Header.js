@@ -100,6 +100,7 @@ class Header extends Component {
         const producer = this.props.producer
 
         const slotId = this.props.slotId
+        console.log('header', slot.name);
 
 
 

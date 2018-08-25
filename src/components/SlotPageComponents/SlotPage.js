@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Header from '../Header'
@@ -6,11 +6,10 @@ import TipsList from './TipsList'
 import TecnicalsList from './TecnicalsList'
 import Description from './Description'
 import PlayDimmer from './PlayDimmer'
-import { Segment, Grid, Image, Header as SemanticHeader, Dimmer } from 'semantic-ui-react'
+import { Segment, Grid, Dimmer } from 'semantic-ui-react'
 
 
 const SlotPage = (props) => {
-    console.log('carica')
 
 
     return (
@@ -19,8 +18,15 @@ const SlotPage = (props) => {
                 {window.scrollTo(0, 0)}
 
                 <PlayDimmer url={props.currentSlot.linkPlay} />
-                <Header displaying='SLOT' slotId={props.match.params.id} />
-                <Description slotName={props.currentSlot.name} text={props.currentSlot.description} />
+
+                <Header
+                    displaying='SLOT'
+                    slotId={props.match.params.id} />
+
+                <Description
+                    slotName={props.currentSlot.name}
+                    text={props.currentSlot.description} />
+
                 <Segment vertical>
                     <Grid celled='internally' columns='equal' stackable>
                         <Grid.Row textAlign='center'>
@@ -29,6 +35,7 @@ const SlotPage = (props) => {
                         </Grid.Row>
                     </Grid>
                 </Segment>
+
             </Dimmer.Dimmable>
         </div>
     )
