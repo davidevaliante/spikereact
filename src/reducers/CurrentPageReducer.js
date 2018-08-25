@@ -4,6 +4,8 @@ const defaultCurrentPageState = PAGES.HOME
 
 
 const currentPageReducer = (state = defaultCurrentPageState, action) => {
+    console.log('dispatching', action.type);
+
     switch (action.type) {
         case PAGES.HOME:
             return PAGES.HOME

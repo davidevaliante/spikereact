@@ -8,7 +8,7 @@ import {
 } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 import NavbarSearchBar from './NavbarSearchBar';
-import {PAGES, ROUTE} from '../../enums/Constants';
+import { PAGES, ROUTE } from '../../enums/Constants';
 import { setHomePage, setBarPage, setOnlinePage, setGratisPage } from '../../reducers/CurrentPageReducer';
 
 
@@ -36,10 +36,9 @@ class Navbar extends Component {
                 this.props.dispatch(setHomePage())
         }
     }
+
     render() {
 
-        console.log("DISPLAYING", this.props.displaying);
-        console.log("CURRENTPAGE", this.props.currentPage);
         return (
             <Visibility
                 once={false}
@@ -69,21 +68,21 @@ class Navbar extends Component {
                         <Menu.Item
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_ONLINE)}
-                            active={this.props.currentPage === PAGES.SLOT_ONLINE}>
+                            active={this.props.displaying === PAGES.SLOT_ONLINE}>
                             <NavLink to={ROUTE.SLOT_ONLINE}>Slot Online</NavLink>
                         </Menu.Item>
 
                         <Menu.Item
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_GRATIS)}
-                            active={this.props.currentPage === PAGES.SLOT_GRATIS}>
+                            active={this.props.displaying === PAGES.SLOT_GRATIS}>
                             <NavLink to={ROUTE.SLOT_GRATIS}>Slot Gratis</NavLink>
                         </Menu.Item>
 
                         <Menu.Item
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_BAR)}
-                            active={this.props.currentPage === PAGES.SLOT_BAR}>
+                            active={this.props.displaying === PAGES.SLOT_BAR}>
                             <NavLink to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
 
                         </Menu.Item>
@@ -94,8 +93,8 @@ class Navbar extends Component {
 
                     </Container>
                 </Menu>
-                <div style={{ height: '100vh' }}></div>
             </Visibility>
+
         )
     }
 }
@@ -106,5 +105,6 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
+    displaying: state.displaying
 })
 export default connect(mapStateToProps)(Navbar);

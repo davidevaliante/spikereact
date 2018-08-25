@@ -24,7 +24,6 @@ class DesktopContainer extends Component {
 
 
     render() {
-        console.log(this.state)
         const { children } = this.props
         const { fixed } = this.state
 

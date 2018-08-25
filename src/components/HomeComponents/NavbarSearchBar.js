@@ -26,10 +26,6 @@ class NavbarSearchBar extends Component {
 
     componentDidMount() {
 
-        window.onpopstate = (e) => {
-            console.log('backpressed');
-            this.forceUpdate()
-        }
 
         // solo se gli oggetti sono vuoti
         _.keys(this.props.slotList).length === 0 && getSlotList(onSlotListFetched)

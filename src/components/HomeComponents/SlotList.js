@@ -15,7 +15,6 @@ const SlotList = (props) => {
                 continue
             element['id'] = key
             listOfSlots.push(element)
-            console.log("adding in slot list", element.type)
         }
 
         const rows = _.chunk(_.slice(listOfSlots, 0, props.maxSlot), props.cardPerRow)
