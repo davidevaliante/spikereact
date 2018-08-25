@@ -1,30 +1,5 @@
-export const onSlotListFetched = (slotList) => {
-    let list = {}
-    for (const key in slotList) {
-        const slot = slotList[key];
-        slot['id'] = key
-        list[key] = slot
-    }
-    this.props.dispatch(addSlotList(list))
-}
+import _ from 'lodash'
 
-export const onBonusListFetched = (bonusList) => {
-    let list = {}
-    for (const key in bonusList) {
-        const bonus = bonusList[key];
-        list[key] = bonus
-    }
-    this.props.dispatch(addBonusList(list))
-}
-
-export const onProducerListFetched = (producerList) => {
-    let list = {}
-    for (const key in producerList) {
-        const producer = producerList[key];
-        list[key] = producer;
-    }
-    this.props.dispatch(addProducerList(list))
-}
 
 export const formatList = (slotList, bonusList, producerList) => {
 

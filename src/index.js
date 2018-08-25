@@ -11,16 +11,12 @@ import '../src/style/base.css';
 import '../src/style/sass.scss';
 
 
-const mystore = store();
-const storeState = () => { console.log(mystore.getState()) }
-
-storeState();
-getUserAuthStatus(mystore);
+getUserAuthStatus(store);
 
 
 // store Provider
 const jsx = (
-    <Provider store={mystore}>
+    <Provider store={store}>
         <AppRouter />
     </Provider>
 )

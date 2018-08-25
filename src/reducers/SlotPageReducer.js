@@ -15,6 +15,8 @@ const slotPageReducer = (state = defaultState, action) => {
 }
 
 export const updateCurrentSlot = (slot) => {
+    console.log('updating current slot');
+
     return {
         type: 'UPDATE_CURRENT_SLOT',
         currentSlot: slot

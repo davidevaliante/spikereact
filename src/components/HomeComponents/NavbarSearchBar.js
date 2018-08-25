@@ -1,14 +1,12 @@
 import _ from 'lodash'
-import { formatList, onSlotListFetched, onBonusListFetched, onProducerListFetched } from '../../utils/Utils'
+import { formatList } from '../../utils/Utils'
+import { onSlotListFetched, onBonusListFetched, onProducerListFetched } from '../../utils/Callbacks'
 
 import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getSlotList, getBonusList, getProducerList } from '../../firebase/firebase';
-import { addSlotList } from '../../reducers/SlotListReducer';
-import { addBonusList } from '../../reducers/BonusListReducer';
-import { addProducerList } from '../../reducers/ProducerListReducer';
 import { getSlotWithId } from '../../firebase/firebase'
 import { updateCurrentSlot } from '../../reducers/SlotPageReducer'
 
@@ -25,25 +23,20 @@ class NavbarSearchBar extends Component {
         }
     }
 
-    componentWillMount() {
-        this.resetComponent()
-    }
 
     componentDidMount() {
-        console.log('componentdidmount');
 
         window.onpopstate = (e) => {
             console.log('backpressed');
             this.forceUpdate()
         }
 
-
         // solo se gli oggetti sono vuoti
-        _.keys(this.props.slotList).length === 0 && getSlotList(this.onSlotListFetched)
-        _.keys(this.props.bonusList).length === 0 && getBonusList(this.onBonusListFetched)
-        _.keys(this.props.producerList).length === 0 && getProducerList(this.onProducerListFetched)
+        _.keys(this.props.slotList).length === 0 && getSlotList(onSlotListFetched)
+        _.keys(this.props.bonusList).length === 0 && getBonusList(onBonusListFetched)
+        _.keys(this.props.producerList).length === 0 && getProducerList(onProducerListFetched)
 
-
+        this.resetComponent()
         const { displaying } = this.props
 
         if (displaying === 'SLOT') {
@@ -63,7 +56,6 @@ class NavbarSearchBar extends Component {
                 // console.log(_.get(this.props.slotList, id));
             }
         }
-
     }
 
     resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -73,12 +65,9 @@ class NavbarSearchBar extends Component {
 
         this.setState({ value: result.title })
         // solo bonus e produttori hanno la proprietà "link"
-        if (result.link) window.open(result.link)
+        if (result.link) { window.open(result.link) }
         // se non esiste link allora è una slot
         else {
-            /*  console.log('dispatching from select');
-             this.props.dispatch(updateCurrentSlot(result.original)) */
-
             this.setState({
                 slot: result.original, slotId: result.id,
                 redirect: { shouldRedirect: true, path: `/slot/${result.id}` }
@@ -118,10 +107,13 @@ class NavbarSearchBar extends Component {
         const shouldRedirect = this.state.redirect.shouldRedirect
         const path = this.state.redirect.path
 
-
+        if (_.get(this.props.slotList, this.props.slotId)) {
+            this.props.dispatch(updateCurrentSlot(_.get(this.props.slotList, this.props.slotId)))
+        }
 
         return (
             <div>
+                <Redirect to={path} push={path ? true : undefined} />
                 <Search
                     color='red'
                     size='mini'
@@ -131,8 +123,10 @@ class NavbarSearchBar extends Component {
                     onResultSelect={this.handleResultSelect}
                     onSearchChange={_.debounce(this.handleSearchChange, 400, { leading: true })}
                     results={results}
-                    value={value} ></Search>
-                <Redirect to={path} push={path ? true : undefined} />
+                    value={value} >
+
+                </Search>
+
             </div>
 
         )
