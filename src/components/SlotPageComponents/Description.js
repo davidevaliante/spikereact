@@ -8,7 +8,7 @@ const Description = (props) => {
 
 
     return (
-        <Segment style={{ padding: '6em 0em' }} vertical>
+        <Segment style={{ padding: '6em 0em' }} vertical id='slot-page-description'>
             <Container text>
 
                 <Header as='h3' style={{ fontSize: '2em' }}>

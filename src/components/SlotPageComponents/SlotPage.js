@@ -6,6 +6,7 @@ import TipsList from './TipsList'
 import TecnicalsList from './TecnicalsList'
 import Description from './Description'
 import PlayDimmer from './PlayDimmer'
+import SlotPageBonusList from './SlotPageBonusList'
 import { Segment, Grid, Dimmer } from 'semantic-ui-react'
 import {Footer} from "../Footer";
 
@@ -30,12 +31,13 @@ const SlotPage = (props) => {
 
                 <Segment vertical>
                     <Grid celled='internally' columns='equal' stackable>
-                        <Grid.Row textAlign='center'>
+                        <Grid.Row textAlign='center' id='slot-page-lists'>
                             <TipsList tipList={props.currentSlot.tips} />
                             <TecnicalsList tecList={props.currentSlot.tecnicals} />
                         </Grid.Row>
                     </Grid>
                 </Segment>
+                <SlotPageBonusList />
             <Footer/>
             </Dimmer.Dimmable>
         </div>

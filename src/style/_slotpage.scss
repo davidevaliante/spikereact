@@ -14,4 +14,28 @@
     justify-content: center;
     align-items: center;
     align-content: center;
-  }
+}
+
+.fast-buttons-layout {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.fast-button{
+    margin-right: 1.6rem;
+}
+
+.align-center-fullpage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.description-alignment{
+    display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;     /* center items horizontally, in this case */
+    height:80vh;
+}
