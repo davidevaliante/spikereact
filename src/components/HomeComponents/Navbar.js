@@ -8,7 +8,7 @@ import {
 } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 import NavbarSearchBar from './NavbarSearchBar';
-import { PAGES } from '../../enums/Constants';
+import {PAGES, ROUTE} from '../../enums/Constants';
 import { setHomePage, setBarPage, setOnlinePage, setGratisPage } from '../../reducers/CurrentPageReducer';
 
 
@@ -38,8 +38,8 @@ class Navbar extends Component {
     }
     render() {
 
-        console.log(this.props.displaying);
-        console.log(this.props.slotId);
+        console.log("DISPLAYING", this.props.displaying);
+        console.log("CURRENTPAGE", this.props.currentPage);
         return (
             <Visibility
                 once={false}
@@ -70,21 +70,22 @@ class Navbar extends Component {
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_ONLINE)}
                             active={this.props.currentPage === PAGES.SLOT_ONLINE}>
-                            Slot Online
+                            <NavLink to={ROUTE.SLOT_ONLINE}>Slot Online</NavLink>
                         </Menu.Item>
 
                         <Menu.Item
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_GRATIS)}
                             active={this.props.currentPage === PAGES.SLOT_GRATIS}>
-                            Slot Gratis
+                            <NavLink to={ROUTE.SLOT_GRATIS}>Slot Gratis</NavLink>
                         </Menu.Item>
 
                         <Menu.Item
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_BAR)}
                             active={this.props.currentPage === PAGES.SLOT_BAR}>
-                            Slot da bar
+                            <NavLink to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
+
                         </Menu.Item>
 
                         <Menu.Item position='right' style={{ marginRight: '4rem' }}>

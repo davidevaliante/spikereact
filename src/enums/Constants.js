@@ -20,3 +20,15 @@ export const PAGES = {
     SLOT_ONLINE: 'SLOT_ONLINE',
     HOME: 'HOME'
 }
+
+export const ROUTE = {
+    ROOT: '/',
+    SLOT: '/slot/:id',
+    SLOT_ONLINE: '/slot-online',
+    SLOT_GRATIS: '/slot-gratis',
+    SLOT_BAR: '/slot-bar',
+    ADMIN: '/admin',
+    ADDSLOT: '/admin/addslot',
+    ADDBONUS: '/admin/addbonus',
+    ADDPRODUCER: '/admin/addproducer',
+}

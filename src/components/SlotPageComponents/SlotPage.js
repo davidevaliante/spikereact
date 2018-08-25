@@ -7,6 +7,7 @@ import TecnicalsList from './TecnicalsList'
 import Description from './Description'
 import PlayDimmer from './PlayDimmer'
 import { Segment, Grid, Dimmer } from 'semantic-ui-react'
+import {Footer} from "../Footer";
 
 
 const SlotPage = (props) => {
@@ -35,7 +36,7 @@ const SlotPage = (props) => {
                         </Grid.Row>
                     </Grid>
                 </Segment>
-
+            <Footer/>
             </Dimmer.Dimmable>
         </div>
     )
