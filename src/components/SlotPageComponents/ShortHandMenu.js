@@ -1,56 +1,51 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import { Button, Segment } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Button, Segment, Icon } from 'semantic-ui-react'
+import { setUserPlaying } from '../../reducers/PlayModeReducer'
 
 const ShortHandMenu = (props) => {
 
-    const scrollToDescription = () => {
+    const smoothScrollTo = (elementId) => {
         // Scroll to a certain element
-        document.getElementById('slot-page-description').scrollIntoView({ 
+        document.getElementById(elementId).scrollIntoView({
             behavior: 'smooth',
-            block:'start'
+            block: 'start'
         });
     }
 
-    const scrollToLists = () => {
-        document.getElementById('slot-page-lists').scrollIntoView({
-            behavior: 'smooth',
-            block:'start'
-        })
-    }
 
-    const scrollToBonus = () => {
-        document.getElementById('slot-page-bonus').scrollIntoView({
-            behavior: 'smooth',
-            block:'start'
-        })
-    }
 
-    return(
+    return (
         <div className='fast-buttons-layout'>
 
-            <Button inverted color='red' style={{marginRight:'1.6rem'}} onClick={()=>scrollToDescription()}>
+            <Button inverted color='red' style={{ marginRight: '1.6rem' }} onClick={() => smoothScrollTo('slot-page-description')}>
                 Descrizione
             </Button>
 
-            <Button inverted color='red' style={{marginRight:'1.6rem'}} onClick={()=>scrollToLists()}>
+            <Button inverted color='red' style={{ marginRight: '1.6rem' }} onClick={() => smoothScrollTo('slot-page-lists')}>
                 Consigli di gioco
             </Button>
 
-            <Button inverted color='red' style={{marginRight:'1.6rem'}} onClick={()=>scrollToLists()}>
+            <Button inverted color='red' style={{ marginRight: '1.6rem' }} onClick={() => smoothScrollTo('slot-page-lists')}>
                 Scheda tecnica
             </Button>
 
-            <Button inverted color='red' style={{marginRight:'1.6rem'}} onClick={()=>scrollToBonus()}>
-                Bonus
+            <Button inverted color='red' style={{ marginRight: '1.6rem' }} onClick={() => smoothScrollTo('slot-page-bonus')}>
+                Bonus Offerti
             </Button>
-            
+
+            <Button animated inverted color='white' onClick={() => props.dispatch(setUserPlaying())}>
+                <Button.Content visible>Provala Subito !</Button.Content>
+                <Button.Content hidden>
+                    <Icon name='gamepad' />
+                </Button.Content>
+            </Button>
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-    dispatch:state.dispatch
+    dispatch: state.dispatch
 })
 
 export default connect(mapStateToProps)(ShortHandMenu)

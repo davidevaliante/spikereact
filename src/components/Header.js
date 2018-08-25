@@ -19,7 +19,7 @@ class Header extends Component {
 
     styles = {
         overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            backgroundColor: 'rgba(0, 0, 0, 0.85)',
             height: '100vh',
         }
     }
@@ -43,8 +43,8 @@ class Header extends Component {
                     <header style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
                         <div style={this.styles.overlay}>
                             <Navbar fixed={fixed} displaying={this.props.displaying} />
-                            <div className='hero-text-box'>                                 
-                                <h1 className='header-spike-text' style={{fontSize:'600%'}}>Spike Slot</h1>
+                            <div className='hero-text-box'>
+                                <h1 className='header-spike-text' style={{ fontSize: '600%' }}>Spike Slot</h1>
                                 <h1 className='slideRight'>Vinci soldi veri<br></br>I migliori consigli per vincere con le slot machine sul web.</h1>
                             </div>
                         </div>
@@ -84,7 +84,7 @@ class Header extends Component {
                                         <h1 className='slideRight'>{producer}</h1>
                                         <ShortHandMenu />
                                     </div>
-                                </div>                                
+                                </div>
                             </div>
                         </header>
                     </LazyLoad>
