@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Segment, Icon } from 'semantic-ui-react'
-import { setUserPlaying } from '../../reducers/PlayModeReducer'
 
 const ShortHandMenu = (props) => {
 
@@ -34,12 +33,7 @@ const ShortHandMenu = (props) => {
                 Bonus Offerti
             </Button>
 
-            <Button animated inverted color='white' onClick={() => props.dispatch(setUserPlaying())}>
-                <Button.Content visible>Provala Subito !</Button.Content>
-                <Button.Content hidden>
-                    <Icon name='gamepad' />
-                </Button.Content>
-            </Button>
+           
         </div>
     )
 }

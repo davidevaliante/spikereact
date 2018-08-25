@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import {
     Segment,
     Visibility,
+    Button, Icon
 } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import { getSlotWithId } from '../firebase/firebase'
+import { setUserPlaying } from '.././reducers/PlayModeReducer'
 
 
 import Navbar from './HomeComponents/Navbar'
@@ -60,7 +62,6 @@ class Header extends Component {
         const producer = (slot && slot.producer) && slot.producer.name
         const image = slot ? slot.image : undefined
 
-
         return (
 
             <Visibility
@@ -83,6 +84,14 @@ class Header extends Component {
                                         <h1 className='header-spike-text'>{name}</h1>
                                         <h1 className='slideRight'>{producer}</h1>
                                         <ShortHandMenu />
+                                        <div style={{marginTop:'3rem'}}>
+                                            <Button animated size= 'huge' color='white' onClick={() => this.props.dispatch(setUserPlaying())}>
+                                                <Button.Content visible>Provala Subito !</Button.Content>
+                                                <Button.Content hidden>
+                                                    <Icon name='gamepad' />
+                                                </Button.Content>
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

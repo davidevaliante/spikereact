@@ -8,7 +8,8 @@ import Description from './Description'
 import PlayDimmer from './PlayDimmer'
 import SlotPageBonusList from './SlotPageBonusList'
 import { Segment, Grid, Dimmer } from 'semantic-ui-react'
-import {Footer} from "../Footer";
+import { Footer } from "../Footer";
+import YouTubeEmbed from './YouTubeEmbed'
 
 
 const SlotPage = (props) => {
@@ -29,16 +30,15 @@ const SlotPage = (props) => {
                     slotName={props.currentSlot.name}
                     text={props.currentSlot.description} />
 
-                <Segment vertical>
-                    <Grid celled='internally' columns='equal' stackable>
-                        <Grid.Row textAlign='center' id='slot-page-lists'>
-                            <TipsList tipList={props.currentSlot.tips} />
-                            <TecnicalsList tecList={props.currentSlot.tecnicals} />
-                        </Grid.Row>
-                    </Grid>
-                </Segment>
-                <SlotPageBonusList />
-            <Footer/>
+                <Grid celled='internally' columns='equal' stackable style={{ paddingTop: '0rem', paddingBottom: '0rem' }}>
+                    <Grid.Row textAlign='center' id='slot-page-lists'>
+                        <TipsList tipList={props.currentSlot.tips} />
+                        <TecnicalsList tecList={props.currentSlot.tecnicals} />
+                    </Grid.Row>
+                </Grid>
+                <SlotPageBonusList bonusList={props.currentSlot.bonus} />
+                <YouTubeEmbed />
+                <Footer />
             </Dimmer.Dimmable>
         </div>
     )

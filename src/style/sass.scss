@@ -12,3 +12,14 @@
     align-content: center;
     text-align: center;
 }
+
+.column-align-start-center{
+    display: flex;
+  align-items: center;
+}
+
+.row-centered-spaced{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

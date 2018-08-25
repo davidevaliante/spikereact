@@ -39,3 +39,17 @@
     align-items: center;     /* center items horizontally, in this case */
     height:80vh;
 }
+
+.tip-tec-card{
+    padding:0.8rem;
+    text-align: start;
+    display: flex;
+    font-size: 80%;
+    flex-direction: column;
+    align-content: center;
+    line-height: 1.5rem;
+}
+
+.tip-tec-row{
+    display: flex;
+}
