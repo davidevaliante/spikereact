@@ -12,6 +12,7 @@ import { setUserPlaying } from '.././reducers/PlayModeReducer'
 import Navbar from './HomeComponents/Navbar'
 import LazyLoad from 'react-lazyload';
 import ShortHandMenu from './SlotPageComponents/ShortHandMenu'
+import Responsability from "./Resposability";
 
 class Header extends Component {
 
@@ -53,6 +54,7 @@ class Header extends Component {
                     </header>
                 </LazyLoad>
             </Segment>
+            <Responsability />
         </Visibility>
     )
 
@@ -98,6 +100,7 @@ class Header extends Component {
                         </header>
                     </LazyLoad>
                 </Segment>
+                <Responsability />
             </Visibility>
         )
     }

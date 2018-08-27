@@ -12,6 +12,7 @@ import React, { Component } from 'react'
 import ResponsiveContainer from './ResponsiveContainer'
 import SlotList from './SlotList'
 import BonusList from './BonusList'
+import YouTubeEmbed from '../SlotPageComponents/YouTubeEmbed'
 import { connect } from 'react-redux';
 import { Footer } from "../Footer";
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
@@ -48,25 +49,37 @@ class HomepageLayout extends Component {
 
         return (
             <ResponsiveContainer>
-                <Segment style={{ padding: '8em 0em' }} vertical>
-                    <Grid style={{ margin: '0rem' }} celled='internally' stackable>
+                <div className='home-page-intro-container'>
+                    <div className='home-page-intro-outer'>
+                        <div className='home-page-intro-bg'>
+                            <div className='home-page-intro'>
+                                <h2>Sono giochi di fortuna o anche di abilità?</h2>
+                                <p>La <a href='https://www.adm.gov.it/portale/documents/20182/1103856/art110TULPS.pdf/e205cb30-2a0f-41b1-8578-b66d6103a38b'>legge</a> che regolamenta le <strong>awp</strong> stabilisce che oltre al fattore aleatorio, in minima parte l’esito di una partità può dover dipendere anche dall’abilità del giocatore.</p>
+                                <p>Ovviamente ci sono slot machine in cui questa componente di abilità <strong>conta in misura maggiore</strong>, altre dove è irrilevante.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <Segment style={{ padding: '5em 0em' }} vertical>
+                    <Grid style={{ margin: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
                         <Grid.Row style={{ paddingBottom: '4rem' }}>
-                            <div ref={this.handleContextRef}>
-                                <Grid.Column width={12}>
+                            <Grid.Column width={12} >
+                                <div ref={this.handleContextRef}>
                                     <Header as='h2' style={{ fontSize: '3em', textAlign: 'center' }}>
                                         {this.title}
                                     </Header>
                                     <SlotList cardPerRow={3} maxSlot={9} type={type} />
-                                </Grid.Column>
-                            </div>
+                                </div>
+
+                            </Grid.Column>
 
                             <Grid.Column
                                 style={{ paddingTop: '0' }}
-                                floated='right'
                                 width={4}>
-                                <Header as='h2' style={{ fontSize: '2em' }}>
-                                    I migliori bonus
-                                </Header>
                                 <Sticky context={contextRef} offset={80}>
                                     <BonusList maxNumber={15} />
                                 </Sticky>
@@ -75,7 +88,7 @@ class HomepageLayout extends Component {
                     </Grid>
                 </Segment>
                 <Footer />
-            </ResponsiveContainer>
+            </ResponsiveContainer >
         )
     }
 }

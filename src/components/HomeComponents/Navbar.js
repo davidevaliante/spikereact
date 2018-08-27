@@ -10,10 +10,13 @@ import { NavLink } from 'react-router-dom'
 import NavbarSearchBar from './NavbarSearchBar';
 import { PAGES, ROUTE } from '../../enums/Constants';
 import { setHomePage, setBarPage, setOnlinePage, setGratisPage } from '../../reducers/CurrentPageReducer';
+import logo from '../../static/slot-icon.svg';
 
 
 
 class Navbar extends Component {
+    t = 0;
+
     state = {}
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
@@ -21,18 +24,23 @@ class Navbar extends Component {
     updateCurrentPage = (page) => {
         switch (page) {
             case PAGES.HOME:
+                document.getElementById('home-nav-link').click()
                 this.props.dispatch(setHomePage())
                 break;
             case PAGES.SLOT_BAR:
+                document.getElementById('slot-nav-link').click()
                 this.props.dispatch(setBarPage())
                 break;
             case PAGES.SLOT_ONLINE:
+                document.getElementById('slot-nav-link').click()
                 this.props.dispatch(setOnlinePage())
                 break;
             case PAGES.SLOT_GRATIS:
+                document.getElementById('slot-nav-link').click()
                 this.props.dispatch(setGratisPage())
                 break;
             default:
+                document.getElementById('home-nav-link').click()
                 this.props.dispatch(setHomePage())
         }
     }
@@ -54,7 +62,7 @@ class Navbar extends Component {
                     size='large'>
                     <Container>
                         <Menu.Item style={{ visibility: this.state.fixed ? 'visible' : 'hidden' }} >
-                            <img src='https://react.semantic-ui.com/logo.png' alt='spike-logo' />
+                            <img src={logo} alt='spike-logo' />
                         </Menu.Item>
 
                         <Menu.Item
@@ -62,28 +70,28 @@ class Navbar extends Component {
                             className='navbarItemOne'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.HOME)}
                             active={this.props.displaying === PAGES.HOME}>
-                            <NavLink to='/'>Home</NavLink>
+                            <NavLink id='home-nav-link' to='/'>Home</NavLink>
                         </Menu.Item>
 
                         <Menu.Item
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_ONLINE)}
                             active={this.props.displaying === PAGES.SLOT_ONLINE}>
-                            <NavLink to={ROUTE.SLOT_ONLINE}>Slot Online</NavLink>
+                            <NavLink id='slot-nav-link' to={ROUTE.SLOT_ONLINE}>Slot Online</NavLink>
                         </Menu.Item>
 
                         <Menu.Item
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_GRATIS)}
                             active={this.props.displaying === PAGES.SLOT_GRATIS}>
-                            <NavLink to={ROUTE.SLOT_GRATIS}>Slot Gratis</NavLink>
+                            <NavLink id='gratis-nav-link' to={ROUTE.SLOT_GRATIS}>Slot Gratis</NavLink>
                         </Menu.Item>
 
                         <Menu.Item
                             as='a'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_BAR)}
                             active={this.props.displaying === PAGES.SLOT_BAR}>
-                            <NavLink to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
+                            <NavLink id='bar-nav-link' to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
 
                         </Menu.Item>
 
@@ -105,6 +113,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
-    displaying: state.displaying
+    displaying: state.displaying,
+    fixed: state.menuFixed
 })
 export default connect(mapStateToProps)(Navbar);

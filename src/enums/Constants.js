@@ -1,3 +1,4 @@
+
 export const STORAGE_FOLDERS = {
     BONUS_IMAGES: 'BonusImages',
     SLOT_IMAGES: 'SlotImages',
@@ -21,14 +22,17 @@ export const PAGES = {
     HOME: 'HOME'
 }
 
+const admin = '/admin'
+
 export const ROUTE = {
     ROOT: '/',
     SLOT: '/slot/:id',
     SLOT_ONLINE: '/slot-online',
     SLOT_GRATIS: '/slot-gratis',
     SLOT_BAR: '/slot-bar',
-    ADMIN: '/admin',
-    ADDSLOT: '/admin/addslot',
-    ADDBONUS: '/admin/addbonus',
-    ADDPRODUCER: '/admin/addproducer',
+    ADMIN: `${admin}`,
+    ADDSLOT: `${admin}/addslot`,
+    ADDBONUS: `${admin}/addbonus`,
+    ADDPRODUCER: `${admin}/addproducer`,
+    ADDARTICLE: `${admin}/addarticle`
 }

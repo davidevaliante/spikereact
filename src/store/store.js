@@ -15,7 +15,7 @@ const reducers = combineReducers(
         'bonusList': bonusListReducer,
         'producerList': producerListReducer,
         'currentSlot': slotPageReducer,
-        'isPlaying': playModeReducer
+        'isPlaying': playModeReducer,
     }
 );
 

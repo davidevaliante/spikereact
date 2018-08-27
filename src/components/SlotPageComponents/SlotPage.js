@@ -13,6 +13,7 @@ import YouTubeEmbed from './YouTubeEmbed'
 
 
 const SlotPage = (props) => {
+    console.log(props.valoreAggiunto);
 
 
     return (
@@ -37,7 +38,7 @@ const SlotPage = (props) => {
                     </Grid.Row>
                 </Grid>
                 <SlotPageBonusList bonusList={props.currentSlot.bonus} />
-                <YouTubeEmbed />
+                <YouTubeEmbed width='900' height='450' />
                 <Footer />
             </Dimmer.Dimmable>
         </div>
