@@ -53,7 +53,7 @@ class HomepageLayout extends Component {
                         <Grid.Row style={{ paddingBottom: '4rem' }}>
                             <div ref={this.handleContextRef}>
                                 <Grid.Column width={12}>
-                                    <Header as='h3' style={{ fontSize: '2em' }}>
+                                    <Header as='h2' style={{ fontSize: '3em', textAlign: 'center' }}>
                                         {this.title}
                                     </Header>
                                     <SlotList cardPerRow={3} maxSlot={9} type={type} />
@@ -61,9 +61,10 @@ class HomepageLayout extends Component {
                             </div>
 
                             <Grid.Column
+                                style={{ paddingTop: '0' }}
                                 floated='right'
                                 width={4}>
-                                <Header as='h3' style={{ fontSize: '2em' }}>
+                                <Header as='h2' style={{ fontSize: '2em' }}>
                                     I migliori bonus
                                 </Header>
                                 <Sticky context={contextRef} offset={80}>

@@ -9,10 +9,10 @@ import _ from 'lodash'
 import { getSlotWithId } from '../firebase/firebase'
 import { setUserPlaying } from '.././reducers/PlayModeReducer'
 
-
 import Navbar from './HomeComponents/Navbar'
 import LazyLoad from 'react-lazyload';
 import ShortHandMenu from './SlotPageComponents/ShortHandMenu'
+
 class Header extends Component {
 
     state = {
@@ -84,8 +84,8 @@ class Header extends Component {
                                         <h1 className='header-spike-text'>{name}</h1>
                                         <h1 className='slideRight'>{producer}</h1>
                                         <ShortHandMenu />
-                                        <div style={{marginTop:'3rem'}}>
-                                            <Button animated size= 'huge' color='white' onClick={() => this.props.dispatch(setUserPlaying())}>
+                                        <div style={{ marginTop: '3rem' }}>
+                                            <Button animated size='huge' color='white' onClick={() => this.props.dispatch(setUserPlaying())}>
                                                 <Button.Content visible>Provala Subito !</Button.Content>
                                                 <Button.Content hidden>
                                                     <Icon name='gamepad' />
