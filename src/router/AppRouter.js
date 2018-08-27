@@ -30,7 +30,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADDSLOT} component={AddSlot} />
                     <Route path={ROUTE.ADDBONUS} component={AddBonus} />
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
-                    <Route path={ROUTE.ADDARTICLE} component={AddArticle} />
+                    <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
                     <Test path='/test' component={Test} />
                 </Switch>
 
