@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'semantic-ui-react'
 
-export const Responsability = (props) => {
+export const AamsBanner = (props) => {
     return (
         <div style={{ marginTop: '2rem', marginBottom: '1.6rem' }} className='ams-box' >
             <div className='row-centered-spaced'>
@@ -18,4 +18,4 @@ export const Responsability = (props) => {
     )
 }
 
-export default Responsability
+export default AamsBanner
