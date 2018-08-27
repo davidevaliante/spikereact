@@ -28,7 +28,7 @@ class Navbar extends Component {
                 this.props.dispatch(setHomePage())
                 break;
             case PAGES.SLOT_BAR:
-                document.getElementById('slot-nav-link').click()
+                document.getElementById('bar-nav-link').click()
                 this.props.dispatch(setBarPage())
                 break;
             case PAGES.SLOT_ONLINE:
@@ -36,7 +36,7 @@ class Navbar extends Component {
                 this.props.dispatch(setOnlinePage())
                 break;
             case PAGES.SLOT_GRATIS:
-                document.getElementById('slot-nav-link').click()
+                document.getElementById('gratis-nav-link').click()
                 this.props.dispatch(setGratisPage())
                 break;
             default:

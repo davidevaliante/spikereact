@@ -1,18 +1,12 @@
-import React, { Component } from 'react'
-import {
-    Segment,
-    Visibility,
-    Button, Icon
-} from 'semantic-ui-react'
-import { connect } from 'react-redux'
-import _ from 'lodash'
-import { getSlotWithId } from '../firebase/firebase'
-import { setUserPlaying } from '.././reducers/PlayModeReducer'
+import React, {Component} from 'react'
+import {Button, Icon, Segment, Visibility} from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import {setUserPlaying} from '.././reducers/PlayModeReducer'
 
 import Navbar from './HomeComponents/Navbar'
 import LazyLoad from 'react-lazyload';
 import ShortHandMenu from './SlotPageComponents/ShortHandMenu'
-import Responsability from "./Resposability";
+import AamsBanner from "./AamsBanner";
 
 class Header extends Component {
 
@@ -54,7 +48,7 @@ class Header extends Component {
                     </header>
                 </LazyLoad>
             </Segment>
-            <Responsability />
+            <AamsBanner />
         </Visibility>
     )
 
@@ -100,7 +94,7 @@ class Header extends Component {
                         </header>
                     </LazyLoad>
                 </Segment>
-                <Responsability />
+                <AamsBanner />
             </Visibility>
         )
     }
