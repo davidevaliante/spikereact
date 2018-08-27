@@ -19,13 +19,26 @@ const SlotPageBonusList = (props) => {
     }
 
     return (
-        <div id='slot-page-bonus' style={{ marginTop: '4rem', marginBottom:'6rem', textAlign:'center'}}>
-            <Header as='h3' style={{ fontSize: '2em', marginBottom:'4rem' }}>I migliori bonus disponibili</Header>
-            <div className='row-centered-spaced' style={{paddingLeft:'4rem', paddingRight:'4rem'}} >                
+        <div id='slot-page-bonus' style={{ paddingTop: '8rem', marginBottom: '8rem', textAlign: 'center' }}>
+
+            <div className='home-page-intro-container' style={{ width: '100%', marginBottom: '8rem' }}>
+                <div className='home-page-intro-outer' style={{ width: '100%' }}>
+                    <div className='home-page-intro-bg' style={{ width: '100%' }}>
+                        <div className='home-page-intro' style={{ width: '100%' }}>
+                            <h1>I migliori Bonus</h1>
+                            <p>Passa dalla teoria alla pratica</p>
+                            <p>Utilizza questi bonus ed inizia a vincere soldi veri su siti certificati e sicuri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className='row-centered-spaced' style={{ paddingLeft: '4rem', paddingRight: '4rem' }} >
                 {bonusList()}
             </div>
         </div>
-        
+
     )
 }
 
