@@ -19,7 +19,8 @@ export const PAGES = {
     SLOT_BAR: 'SLOT_BAR',
     SLOT_GRATIS: 'SLOT_GRATIS',
     SLOT_ONLINE: 'SLOT_ONLINE',
-    HOME: 'HOME'
+    HOME: 'HOME',
+    ABOUT: 'ABOUT'
 };
 
 const admin = '/admin';

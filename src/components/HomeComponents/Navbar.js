@@ -15,11 +15,12 @@ import logo from '../../static/slot-icon.svg';
 
 
 class Navbar extends Component {
-    t = 0;
 
     state = {}
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
+
+    
 
     updateCurrentPage = (page) => {
         switch (page) {

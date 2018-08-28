@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { formatList } from '../../utils/Utils'
 import { onSlotListFetched, onBonusListFetched, onProducerListFetched } from '../../utils/Callbacks'
-
+import { PAGES } from '../../enums/Constants'
 import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react'
 import { connect } from 'react-redux'
@@ -9,8 +9,7 @@ import { Redirect } from 'react-router-dom'
 import { getSlotList, getBonusList, getProducerList } from '../../firebase/firebase';
 import { getSlotWithId } from '../../firebase/firebase'
 import { updateCurrentSlot } from '../../reducers/SlotPageReducer'
-
-
+import { smoothScrollTo } from '../../utils/Utils'
 
 class NavbarSearchBar extends Component {
 
@@ -35,7 +34,7 @@ class NavbarSearchBar extends Component {
         this.resetComponent()
         const { displaying } = this.props
 
-        if (displaying === 'SLOT') {
+        if (displaying === PAGES.SLOT) {
             const id = this.props.slotId
             console.log('firebase call for', id);
 
@@ -51,6 +50,10 @@ class NavbarSearchBar extends Component {
                 //console.log('dispatching from redux');
                 // console.log(_.get(this.props.slotList, id));
             }
+        }
+
+        if (displaying === PAGES.ABOUT) {
+            smoothScrollTo('about-page')
         }
     }
 

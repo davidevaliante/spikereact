@@ -8,17 +8,21 @@ import { setUserPlaying } from "./reducers/PlayModeReducer";
 import SlotPageBonusList from "./components/SlotPageComponents/SlotPageBonusList";
 import { Link } from 'react-router-dom';
 import { Image } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { ROUTE } from './enums/Constants'
+import { setAboutPage } from './reducers/CurrentPageReducer'
+import { smoothScrollTo } from './utils/Utils'
 
-export const AboutPage = () => {
+const AboutPage = (props) => {
+
+
     return (
         <div>
             <Responsive
                 minWidth={Responsive.onlyTablet.minWidth}>
-                <SpikeHeader displaying='HOME' />
-
+                <SpikeHeader displaying='ABOUT' />
                 <Segment style={{ padding: '6em 0em' }} vertical id='about-page'>
                     <Container text>
-
                         <Header as='h3' style={{ fontSize: '2em' }}>
                             Chi è SPIKE:
                         </Header>
@@ -45,14 +49,14 @@ export const AboutPage = () => {
                                 iniziano ad essere seguiti. Solo nel 2014 inizio a dedicarmici seriamente, e
                                 nasce la mitica serie <strong>&#8220;Giorni di Ordinaria
                                     Follia&#8221;</strong> in cui vi mostro una giornata tipo: insieme ai miei
-                        Soci andiamo in giro a giocare alle Slot, con varie gag divertenti tra una
+                Soci andiamo in giro a giocare alle Slot, con varie gag divertenti tra una
                                 partita e l&#8217;altra.</p>
                             <p>Poi per la passione che da sempre ho per l&#8217;informatica e il mondo
                                 digitale, <strong>SPIKE</strong> si è trasformato in qualcosa di più.</p>
                             <p>Appoggiandosi a <Link to="/"> spikeslot </Link>  e al
                                 forum <a href="http://www.Professioneslot.it"
                                     target="_blank"> Professioneslot </a>, è diventato il principale
-                        (e forse unico) strumento informativo e di dialogo veramente competente in
+                (e forse unico) strumento informativo e di dialogo veramente competente in
                                 materia, <strong>per tutti i giocatori di Slot Machine d&#8217;Italia.</strong>
                             </p>
                             <p>&nbsp;</p>
@@ -88,6 +92,8 @@ export const AboutPage = () => {
                     {/*<SlotPageBonusList bonusList={props.currentSlot.bonus} />*/}
                 </Segment>
 
+                {/*MA CHE CAZZO E' STA ROBA?*/}
+
                 {/*<Segment style={{padding: '5em 0em'}} vertical>*/}
                 {/*<Grid style={{margin: '0rem'}} celled='internally' stackable className='row-centered-spaced'>*/}
                 {/*<Grid.Row style={{paddingBottom: '4rem'}}>*/}
@@ -112,7 +118,14 @@ export const AboutPage = () => {
                 {/*</Grid>*/}
                 {/*</Segment>*/}
                 <Footer />
+
             </Responsive>
         </div>
     );
 };
+
+const mapStateToProps = (state) => ({
+    displaying: state.dispatch
+})
+
+export default connect(mapStateToProps)(AboutPage)

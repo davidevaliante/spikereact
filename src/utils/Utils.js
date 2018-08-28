@@ -70,3 +70,10 @@ export const formatList = (slotList, bonusList, producerList) => {
 
     return list
 }
+
+export const smoothScrollTo = (elementId) => {
+    document.getElementById(elementId).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+}

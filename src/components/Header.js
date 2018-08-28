@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
-import {Button, Icon, Segment, Visibility} from 'semantic-ui-react'
-import {connect} from 'react-redux'
-import {setUserPlaying} from '.././reducers/PlayModeReducer'
+import React, { Component } from 'react'
+import { Button, Icon, Segment, Visibility } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { setUserPlaying } from '.././reducers/PlayModeReducer'
+import { setAboutPage } from '../reducers/CurrentPageReducer'
 
 import Navbar from './HomeComponents/Navbar'
 import LazyLoad from 'react-lazyload';
@@ -24,6 +25,34 @@ class Header extends Component {
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
 
+    aboutPageHeader = (fixed) => {
+        this.props.dispatch(setAboutPage())
+        return (
+            <Visibility
+                once={false}
+                onBottomPassed={this.showFixedMenu}
+                onBottomPassedReverse={this.hideFixedMenu}>
+                <Segment
+                    inverted
+                    textAlign='center'
+                    style={{ minHeight: 700, padding: 0 }}
+                    vertical>
+                    <LazyLoad height={'100vh'}>
+                        <header style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
+                            <div style={this.styles.overlay}>
+                                <Navbar fixed={fixed} displaying={this.props.displaying} />
+                                <div className='hero-text-box'>
+                                    <h1 className='header-spike-text' style={{ fontSize: '600%' }}>Spike Slot</h1>
+                                    <h1 className='slideRight'>Vinci soldi veri<br></br>I migliori consigli per vincere con le slot machine sul web.</h1>
+                                </div>
+                            </div>
+                        </header>
+                    </LazyLoad>
+                </Segment>
+                <AamsBanner />
+            </Visibility>
+        )
+    }
 
 
     homePageHeader = (fixed) => (
@@ -115,6 +144,8 @@ class Header extends Component {
                 return this.homePageHeader(fixed)
             case 'SLOT':
                 return this.slotPageHeader(fixed, slot)
+            case 'ABOUT':
+                return this.aboutPageHeader(fixed)
             default:
                 return this.homePageHeader(fixed)
         }
