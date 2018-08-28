@@ -74,7 +74,7 @@ class HomepageLayout extends Component {
 
 
 
-                <Segment style={this.segmentStyle} vertical>
+                <Segment  vertical>
                     <Grid style={{ margin: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
                         <Grid.Row style={{ paddingBottom: '4rem' }}>
                             <Grid.Column width={12} >

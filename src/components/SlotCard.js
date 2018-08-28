@@ -8,11 +8,11 @@ import Radium from 'radium'
 const SlotCard = (props) => {
 
     const cardShadow = {
-        // boxShadow: '7px 7px 35px -15px rgba(255,255,255,1)',
+        boxShadow: '10px 10px 34px -7px rgba(46,46,46,1)',
         margin: '1rem 1rem 1rem 1rem',
         transition: "all ease .5s",
         ":hover": {
-            boxShadow: '0px 0px 28px 7px rgba(255,255,255,1)'
+            boxShadow: '0px 0px 28px 7px rgba(230,39,39,1)'
         }
     }
 

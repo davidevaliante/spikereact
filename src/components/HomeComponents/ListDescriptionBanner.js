@@ -40,7 +40,7 @@ class ListDescriptionBanner extends Component {
                 <Header
                     as='p'
                     className="tracking-in-contract"
-                    style={{ color: '#ffff', fontSize: '2em', textAlign: 'center', marginTop: '2rem', marginBottom: '2rem' }}>
+                    style={{ color: '#424242', fontSize: '2em', textAlign: 'center', marginTop: '2rem', marginBottom: '2rem' }}>
                     {text}
                 </Header>
                 <div className='black-line scale-in-hor-right'>
