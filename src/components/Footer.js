@@ -1,6 +1,8 @@
 import {Container, Grid, Header, Image, Item, List, Segment, Icon} from 'semantic-ui-react'
 import "../style/base.css"
 import React from "react";
+import {ROUTE} from "../enums/Constants";
+import {NavLink} from 'react-router-dom'
 
 
 export const Footer = (props) => {
@@ -14,9 +16,12 @@ export const Footer = (props) => {
                             <Grid.Column width={4}>
                                 <Header inverted as='h4' content='Spike'/>
                                 <List link inverted>
-                                    <Image circular
-                                           src="https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/FooterImage%2FKarloSpike.jpg?alt=media&token=a6e240b0-4a52-4525-9c9b-c3ecd6df77e2"
-                                           size="tiny"/>
+                                    <NavLink to={ROUTE.ABOUT}>
+                                        {window.scrollTo(0,0)}
+                                        <Image circular
+                                               src="https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/FooterImage%2FKarloSpike.jpg?alt=media&token=a6e240b0-4a52-4525-9c9b-c3ecd6df77e2"
+                                               size="tiny"/>
+                                    </NavLink>
                                 </List>
                             </Grid.Column>
 
@@ -64,7 +69,8 @@ export const Footer = (props) => {
                         <Grid.Row style={{paddingTop: '2rem'}}>
                             <Grid.Column textAlign='center'>
                                 <List link inverted>
-                                    <List.Item>Copyright &copy; 2018. All rights Reserved</List.Item>
+                                    <List.Item>Copyright &copy; 2018 <a href={ROUTE.ROOT}>Spike</a>. All rights
+                                        Reserved</List.Item>
                                 </List>
                             </Grid.Column>
                         </Grid.Row>
