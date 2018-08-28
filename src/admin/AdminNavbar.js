@@ -20,7 +20,7 @@ class AdminNavbar extends Component {
         const activeItem = this.props.activeItem;
         return (
             <div>
-                <Menu>
+                <Menu stackable>
                     <Menu.Item>
                         <NavLink to={ROUTE.ADMIN}><Icon name='cog'/></NavLink>
                     </Menu.Item>
