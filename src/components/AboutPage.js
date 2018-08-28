@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Responsive, Segment, Sticky, Grid, Header, Container, Icon } from "semantic-ui-react";
-import SpikeHeader from "./components/Header";
-import BonusList from "./components/HomeComponents/BonusList";
-import Footer from "./components/Footer";
+import SpikeHeader from "./Header";
+import BonusList from "./HomeComponents/BonusList";
+import Footer from "./Footer";
 import { Button } from "semantic-ui-react/dist/commonjs/elements/Button/Button";
-import { setUserPlaying } from "./reducers/PlayModeReducer";
-import SlotPageBonusList from "./components/SlotPageComponents/SlotPageBonusList";
+import { setUserPlaying } from "../reducers/PlayModeReducer";
+import SlotPageBonusList from "./SlotPageComponents/SlotPageBonusList";
 import { Link } from 'react-router-dom';
 import { Image } from 'semantic-ui-react'
 

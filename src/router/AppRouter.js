@@ -10,7 +10,7 @@ import AddArticle from '../admin/AddArticle';
 import Test from './Test'
 import SlotPage from '../components/SlotPageComponents/SlotPage';
 import { PAGES, ROUTE, SLOT_TYPES } from "../enums/Constants";
-import {AboutPage} from "../AboutPage";
+import {AboutPage} from "../components/AboutPage";
 
 
 const AppRouter = () => {
