@@ -18,7 +18,7 @@ import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
 import _ from 'lodash'
-
+import {setOnlinePage, setHomePage, setGratisPage, setBarPage, setAboutPage} from '../../reducers/CurrentPageReducer'
 
 class HomepageLayout extends Component {
     state = {};
@@ -26,26 +26,28 @@ class HomepageLayout extends Component {
 
     handleContextRef = contextRef => this.setState({ contextRef })
 
-    segmentStyle = {
-
-        background: 'linear-gradient(177deg, #e13333, #453c3c)',
-        animation: 'AnimationName 11s ease infinite',
-        padding: '5em 0em'
-    }
+    
 
     getType(path) {
         switch (path) {
             case ROUTE.SLOT_ONLINE:
                 this.title = 'Slot Online'
+                this.props.dispatch(setOnlinePage())
                 return SLOT_TYPES.ONLINE;
             case ROUTE.SLOT_BAR:
                 this.title = 'Slot da Bar'
+                this.props.dispatch(setBarPage())
                 return SLOT_TYPES.BAR;
             case ROUTE.SLOT_GRATIS:
                 this.title = 'Slot Gratis'
+                this.props.dispatch(setGratisPage())
                 return SLOT_TYPES.GRATIS;
+            case ROUTE.ABOUT:
+                this.props.dispatch(setAboutPage())
+                return undefined
             default:
                 this.title = 'Le Slot del giorno'
+                this.props.dispatch(setHomePage())
                 return undefined
         }
     }
@@ -53,7 +55,7 @@ class HomepageLayout extends Component {
     render() {
         const { contextRef } = this.state
         const type = this.getType(this.props.match.path)
-        console.log(this.state);
+        console.log(type);
 
         // a quale component mettere  ref={this.handleContextRef} ????
 

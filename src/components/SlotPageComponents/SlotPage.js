@@ -13,8 +13,6 @@ import YouTubeEmbed from './YouTubeEmbed'
 
 
 const SlotPage = (props) => {
-    console.log(props.valoreAggiunto);
-
 
     return (
         <div>

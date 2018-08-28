@@ -4,7 +4,7 @@ import React from "react";
 import { ROUTE } from "../enums/Constants";
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-
+import { PAGES } from '../enums/Constants'
 const Footer = (props) => {
 
     return (
@@ -17,7 +17,7 @@ const Footer = (props) => {
                                 <Header inverted as='h4' content='Spike' />
                                 <List link inverted>
                                     <NavLink to={ROUTE.ABOUT}>
-
+                                        {props.displaying === PAGES.ABOUT && window.scrollTo(0, 0)}
                                         <Image circular
                                             src="https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/FooterImage%2FKarloSpike.jpg?alt=media&token=a6e240b0-4a52-4525-9c9b-c3ecd6df77e2"
                                             size="tiny" />
