@@ -154,7 +154,6 @@ class AddBonus extends Component {
                     </h1>
 
                     <Form>
-
                         <Form.Group widths='equal'>
                             <Form.Field
                                 id='nameField'
@@ -165,12 +164,11 @@ class AddBonus extends Component {
                                 placeholder='Nome Bonus'>
                             </Form.Field>
                             <Form.Field>
+                                <label>Produttore</label>
                                 <SearchField
                                     onSelected={this.onProducerSelected}
                                     nodename='Produttore'/>
                             </Form.Field>
-
-
                         </Form.Group>
 
                         <Form.Group
@@ -203,8 +201,7 @@ class AddBonus extends Component {
                             placeholder='Recensione'/>
                         <Form.Group
                             widths='equal'>
-                            <Form.Field
-                                width='8'>
+                            <Form.Field>
                                 <Dropdown
                                     id='ratingField'
                                     error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
@@ -216,29 +213,27 @@ class AddBonus extends Component {
                                     options={this.state.ratingStateOptions}/>
                             </Form.Field>
 
-                            <Form.Field>
+                            <Form.Field style={{width: '100%'}}>
                                 <ImagePicker
                                     onImageSelected={this.onImageSelected}
-                                    style={{marginLeft: '2rem'}}/>
+                                    style={{width: '100%', marginLeft: '2rem'}}/>
                             </Form.Field>
 
 
                         </Form.Group>
+                        <Form.Field
+                            style={{width: '100%'}}
+                            onClick={this.submitNewBonus}
+                            control={Button}>
+                            Aggiungi
+                        </Form.Field>
 
                         <Form.Field
                             onClick={this.buildFakeSlot}
                             control={Button}>
                             Aggiungi Bonus Finto
                         </Form.Field>
-
-                        <Form.Field
-                            onClick={this.submitNewBonus}
-                            control={Button}>
-                            Aggiungi
-                        </Form.Field>
-
                     </Form>
-
                 </div>
             </div>
         )

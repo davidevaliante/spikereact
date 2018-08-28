@@ -1,10 +1,9 @@
 import React from 'react';
-import { Responsive, Segment, Sticky, Grid, Header, Container, Icon } from "semantic-ui-react";
+import {Container, Header, Image, Responsive, Segment} from "semantic-ui-react";
 import SpikeHeader from "./Header";
 import Footer from "./Footer";
-import { Link } from 'react-router-dom';
-import { Image } from 'semantic-ui-react'
-import { connect } from 'react-redux'
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux'
 
 const AboutPage = (props) => {
 
@@ -13,16 +12,18 @@ const AboutPage = (props) => {
         <div>
             <Responsive
                 minWidth={Responsive.onlyTablet.minWidth}>
-                <SpikeHeader displaying='ABOUT' />
-                <Segment style={{ padding: '6em 0em' }} vertical id='about-page'>
+                <SpikeHeader displaying='ABOUT'/>
+                <Segment style={{padding: '6em 0em'}} vertical id='about-page'>
                     <Container text>
-                        <Header as='h3' style={{ fontSize: '2em' }}>
+                        <Header as='h3' style={{fontSize: '2em'}}>
                             Chi è SPIKE:
                         </Header>
 
-                        <p style={{ fontSize: '1.33em' }}>
+                        <p style={{fontSize: '1.33em'}}>
 
-                            <Image floated='left' src='https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fspike-slot.jpg?alt=media&token=965c3785-1b53-47b9-a50f-a5c757c00269' size='medium' />
+                            <Image floated='left'
+                                   src='https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fspike-slot.jpg?alt=media&token=965c3785-1b53-47b9-a50f-a5c757c00269'
+                                   size='medium'/>
 
 
                             <p>
@@ -36,20 +37,23 @@ const AboutPage = (props) => {
                                 difficili da realizzare. Difficili ma non impossibili!</p>
 
 
-                            <p>Il <Image floated="right" src="https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fgiorni-follia-6.jpg?alt=media&token=ec325483-fd4c-458b-b20f-82dcf388e4ea" size="medium"></Image> <a href="http://youtube.com/spikeslot"><strong>Canale YouTube</strong></a>
+                            <p>Il <Image floated="right"
+                                         src="https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fgiorni-follia-6.jpg?alt=media&token=ec325483-fd4c-458b-b20f-82dcf388e4ea"
+                                         size="medium"></Image> <a href="http://youtube.com/spikeslot"><strong>Canale
+                                YouTube</strong></a>
                                 <strong> di SPIKE</strong> nacque nel 2010 per caso, quando
                                 unicamente per hobby, caricavo le vincite che ottenevo alle Slot da bar. I video
                                 iniziano ad essere seguiti. Solo nel 2014 inizio a dedicarmici seriamente, e
                                 nasce la mitica serie <strong>&#8220;Giorni di Ordinaria
                                     Follia&#8221;</strong> in cui vi mostro una giornata tipo: insieme ai miei
-            Soci andiamo in giro a giocare alle Slot, con varie gag divertenti tra una
+                                Soci andiamo in giro a giocare alle Slot, con varie gag divertenti tra una
                                 partita e l&#8217;altra.</p>
                             <p>Poi per la passione che da sempre ho per l&#8217;informatica e il mondo
                                 digitale, <strong>SPIKE</strong> si è trasformato in qualcosa di più.</p>
-                            <p>Appoggiandosi a <Link to="/"> spikeslot </Link>  e al
+                            <p>Appoggiandosi a <Link to="/"> spikeslot </Link> e al
                                 forum <a href="http://www.Professioneslot.it"
-                                    target="_blank"> Professioneslot </a>, è diventato il principale
-            (e forse unico) strumento informativo e di dialogo veramente competente in
+                                         target="_blank"> Professioneslot </a>, è diventato il principale
+                                (e forse unico) strumento informativo e di dialogo veramente competente in
                                 materia, <strong>per tutti i giocatori di Slot Machine d&#8217;Italia.</strong>
                             </p>
                             <p>&nbsp;</p>
@@ -78,40 +82,12 @@ const AboutPage = (props) => {
                                 Diverso sarebbe invece approcciarsi ad altri tipi di slot machine, ad esempio
                                 la <strong>Fowl Play Gold</strong>.</p>
                             <p><strong>Visita il sito e cerca i consigli
-                            <Link to="/"> qui </Link> per la tua slot preferita! E
+                                <Link to="/"> qui </Link> per la tua slot preferita! E
                                 gioca sempre responsabilmente!</strong></p>
                         </p>
                     </Container>
-                    {/*<SlotPageBonusList bonusList={props.currentSlot.bonus} />*/}
                 </Segment>
-
-                {/*MA CHE CAZZO E' STA ROBA?*/}
-
-                {/*<Segment style={{padding: '5em 0em'}} vertical>*/}
-                {/*<Grid style={{margin: '0rem'}} celled='internally' stackable className='row-centered-spaced'>*/}
-                {/*<Grid.Row style={{paddingBottom: '4rem'}}>*/}
-                {/*<Grid.Column width={12} style={{ padding: '6em 4em' }}>*/}
-                {/*<div>*/}
-                {/*<Header id='about-header' style={{fontSize: '3em', textAlign: 'center'}}>*/}
-                {/*Chi è SPIKE – About me (SPIKE slot)*/}
-                {/*</Header>*/}
-                {/**/}
-                {/*</div>*/}
-
-                {/*</Grid.Column>*/}
-
-                {/*<Grid.Column*/}
-                {/*style={{paddingTop: '0'}}*/}
-                {/*width={4}>*/}
-                {/*<Sticky offset={80}>*/}
-                {/*<BonusList maxNumber={15}/>*/}
-                {/*</Sticky>*/}
-                {/*</Grid.Column>*/}
-                {/*</Grid.Row>*/}
-                {/*</Grid>*/}
-                {/*</Segment>*/}
-                <Footer />
-
+                <Footer/>
             </Responsive>
         </div>
     );

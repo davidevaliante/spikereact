@@ -263,6 +263,7 @@ class AddSlot extends Component {
                             </Form.Field>
 
                             <Form.Field>
+                                <label>Produttore</label>
                                 <SearchField
                                     id='producerField'
                                     onSelected={this.onProducerSelected}
@@ -281,15 +282,15 @@ class AddSlot extends Component {
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkYoutube')}
                                 onChange={() => this.resetErrorOn('linkYoutube')}
                                 control={Input}
-                                label='LinkYoutube'
-                                placeholder='LinkYoutube'/>
+                                label='YouTube Link'
+                                placeholder='YouTube Link'/>
                             <Form.Field
                                 id='linkPlay'
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkPlay')}
                                 onChange={() => this.resetErrorOn('linkPlay')}
                                 control={Input}
-                                label='LinkPlay'
-                                placeholder='LinkPlay'/>
+                                label='Slot Link'
+                                placeholder='Slot Link'/>
 
                         </Form.Group>
 
@@ -318,7 +319,7 @@ class AddSlot extends Component {
                                 control={TextArea}
                                 onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tecnicals')}
                                 label='Descrizione Tecnica'
-                                placeholder='Tecnica'/>
+                                placeholder='Descrizione Tecnica'/>
 
                         </Form.Group>
 
@@ -341,37 +342,39 @@ class AddSlot extends Component {
                             label='Descrizione'
                             placeholder='Inserisci descrizione...'/>
 
-                        <SearchMultipleSelection
-                            onListUpdate={this.onBonusSelected}
-                        />
+                        <Form.Group widths='equal'>
 
-                        <Dropdown
-                            id='ratingField'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
-                            style={{marginBottom: '1rem'}}
-                            placeholder='Rating'
-                            onChange={(event, data) => data ? this.onDropDownChange(data) : this.resetErrorOn('rating')}
-                            search
-                            selection
-                            options={this.state.ratingStateOptions}/>
-                        <Form.Group>
-                            <Form.Field>
-                                <ImagePicker
-                                    onImageSelected={this.onImageSelected}
-                                />
-                            </Form.Field>
                             <FormField>
                                 <Dropdown
                                     onChange={(event, data) => this.onTypeSelected(data)}
-                                    placeholder='State'
+                                    placeholder='Tipo di slot'
                                     search
                                     selection
                                     options={this.state.slotTypeOptions}/>
                             </FormField>
+
+                            <FormField>
+                                <Dropdown
+                                    id='ratingField'
+                                    error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
+                                    style={{marginBottom: '1rem'}}
+                                    placeholder='Rating'
+                                    onChange={(event, data) => data ? this.onDropDownChange(data) : this.resetErrorOn('rating')}
+                                    search
+                                    selection
+                                    options={this.state.ratingStateOptions}/>
+                            </FormField>
+                            <FormField>
+                                <SearchMultipleSelection
+                                    onListUpdate={this.onBonusSelected}/>
+                            </FormField>
+                            <Form.Field>
+                                <ImagePicker onImageSelected={this.onImageSelected}/>
+                            </Form.Field>
                         </Form.Group>
 
-
                         <Form.Field
+                            style={{width: '100%'}}
                             onClick={this.submitNewSlot}
                             control={Button}>
                             Aggiungi

@@ -71,7 +71,7 @@ class AddProducer extends Component {
                             marginBottom: '2rem',
                             textAlign: 'center'
                         }}>
-                        Nuovo Produttore/Casinò
+                        Nuovo Produttore / Casinò
                     </h1>
 
                     <Form>
@@ -79,7 +79,7 @@ class AddProducer extends Component {
                             <Form.Field
                                 id='nameField'
                                 control={Input}
-                                label='Nome Casinò/Produttore'
+                                label='Nome Casinò / Produttore'
                                 placeholder='Inserisci nome'
                             >
                             </Form.Field>
@@ -93,20 +93,19 @@ class AddProducer extends Component {
                             </Form.Field>
                         </Form.Group>
 
-                        <ImagePicker
-                            onImageSelected={this.onImageSelected}
-                        />
+                        <ImagePicker onImageSelected={this.onImageSelected}/>
+
+                        <Form.Field
+                            style={{width: '100%'}}
+                            onClick={this.submitNewProducer}
+                            control={Button}>
+                            Aggiungi
+                        </Form.Field>
 
                         <Form.Field
                             onClick={this.buildFakeProducer}
                             control={Button}>
                             Aggiungi Produttore Finto
-                        </Form.Field>
-
-                        <Form.Field
-                            onClick={this.submitNewProducer}
-                            control={Button}>
-                            Aggiungi
                         </Form.Field>
                     </Form>
                 </div>

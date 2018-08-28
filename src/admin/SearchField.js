@@ -1,8 +1,7 @@
 import _ from 'lodash'
-import React, { Component } from 'react'
-import { Search, Grid } from 'semantic-ui-react'
-import { getBonusList, getProducerList } from '../firebase/firebase';
-
+import React, {Component} from 'react'
+import {Search, Grid} from 'semantic-ui-react'
+import {getBonusList, getProducerList} from '../firebase/firebase';
 
 
 let producerList = [];
@@ -50,15 +49,15 @@ export default class SearchField extends Component {
         }
     }
 
-    resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
+    resetComponent = () => this.setState({isLoading: false, results: [], value: ''})
 
-    handleResultSelect = (e, { result }) => {
-        this.setState({ value: result.title });
+    handleResultSelect = (e, {result}) => {
+        this.setState({value: result.title});
         this.props.onSelected(result.original);
     }
 
-    handleSearchChange = (e, { value }) => {
-        this.setState({ isLoading: true, value })
+    handleSearchChange = (e, {value}) => {
+        this.setState({isLoading: true, value})
 
         setTimeout(() => {
             if (this.state.value.length < 1) return this.resetComponent()
@@ -87,24 +86,18 @@ export default class SearchField extends Component {
     }
 
     render() {
-        const { isLoading, value, results } = this.state
+        const {isLoading, value, results} = this.state
 
         return (
-            <Grid style={{ marginBottom: '1rem' }}>
-                <Grid.Column width={16}>
-                    <h3>{this.props.nodename}</h3>
-                    <Search
-                        label='Cerca'
-                        loading={isLoading}
-                        onResultSelect={this.handleResultSelect}
-                        onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-                        results={results}
-                        size='large'
-                        value={value}
-                        {...this.props}
-                    />
-                </Grid.Column>
-            </Grid>
+            <Search
+                loading={isLoading}
+                onResultSelect={this.handleResultSelect}
+                onSearchChange={_.debounce(this.handleSearchChange, 500, {leading: true})}
+                results={results}
+                size='small'
+                value={value}
+                {...this.props}
+            />
         )
     }
 }

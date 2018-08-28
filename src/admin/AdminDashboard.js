@@ -4,6 +4,8 @@ import AddSlot from "./AddSlot";
 import AdminNavbar from "./AdminNavbar";
 import AddArticle from "./AddArticle";
 import {ADMINPAGES} from "../enums/Constants";
+import {Responsive} from "semantic-ui-react";
+import Header from "../components/Header";
 
 
 class AdminDashboard extends Component {
@@ -17,11 +19,12 @@ class AdminDashboard extends Component {
     render() {
         console.log(this.props.match.path);
         return (
-            <div>
+            <Responsive>
                 <AdminNavbar activeItem={ADMINPAGES.ADMIN}/>
                 <AddArticle style={{display: 'hidden'}}/>
                 "Im Admin DashBoard component"
-            </div>
+
+            </Responsive>
         );
     }
 }
