@@ -14,7 +14,7 @@ import SlotList from './SlotList'
 import BonusList from './BonusList'
 import YouTubeEmbed from '../SlotPageComponents/YouTubeEmbed'
 import { connect } from 'react-redux';
-import { Footer } from "../Footer";
+import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
 import _ from 'lodash'
@@ -74,7 +74,7 @@ class HomepageLayout extends Component {
 
 
 
-                <Segment  vertical>
+                <Segment vertical>
                     <Grid style={{ margin: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
                         <Grid.Row style={{ paddingBottom: '4rem' }}>
                             <Grid.Column width={12} >

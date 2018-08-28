@@ -1,48 +1,48 @@
-import {Container, Grid, Header, Image, Item, List, Segment, Icon} from 'semantic-ui-react'
+import { Container, Grid, Header, Image, Item, List, Segment, Icon } from 'semantic-ui-react'
 import "../style/base.css"
 import React from "react";
-import {ROUTE} from "../enums/Constants";
-import {NavLink} from 'react-router-dom'
+import { ROUTE } from "../enums/Constants";
+import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-
-export const Footer = (props) => {
+const Footer = (props) => {
 
     return (
         <div>
-            <Segment inverted vertical style={{padding: '5em 0em'}}>
+            <Segment inverted vertical style={{ padding: '5em 0em' }}>
                 <Container>
                     <Grid divided inverted stackable>
                         <Grid.Row>
                             <Grid.Column width={4}>
-                                <Header inverted as='h4' content='Spike'/>
+                                <Header inverted as='h4' content='Spike' />
                                 <List link inverted>
                                     <NavLink to={ROUTE.ABOUT}>
-                                        {window.scrollTo(0,0)}
+
                                         <Image circular
-                                               src="https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/FooterImage%2FKarloSpike.jpg?alt=media&token=a6e240b0-4a52-4525-9c9b-c3ecd6df77e2"
-                                               size="tiny"/>
+                                            src="https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/FooterImage%2FKarloSpike.jpg?alt=media&token=a6e240b0-4a52-4525-9c9b-c3ecd6df77e2"
+                                            size="tiny" />
                                     </NavLink>
                                 </List>
                             </Grid.Column>
 
                             <Grid.Column width={6}>
-                                <Header inverted as='h4' content='Social'/>
+                                <Header inverted as='h4' content='Social' />
                                 <List link inverted>
                                     <List.Item>
                                         <a href="https://www.facebook.com/spikeslot/">
-                                            <Icon name="facebook official" size="large" inverted color='grey'/>
+                                            <Icon name="facebook official" size="large" inverted color='grey' />
                                             Facebook
                                         </a>
                                     </List.Item>
                                     <List.Item>
                                         <a href="https://youtube.com/spikeslot">
-                                            <Icon name="youtube icon" size="large" inverted color='grey'/>
+                                            <Icon name="youtube icon" size="large" inverted color='grey' />
                                             Youtube
                                         </a>
                                     </List.Item>
                                     <List.Item>
                                         <a href="https://www.instagram.com/spikeslot/">
-                                            <Icon name="instagram icon" size="large" inverted color='grey'/>
+                                            <Icon name="instagram icon" size="large" inverted color='grey' />
                                             Instagram
                                         </a>
                                     </List.Item>
@@ -54,7 +54,7 @@ export const Footer = (props) => {
                                 <p>Numero verde di aiuto alla ludopatia</p>
 
                                 <List.Item>
-                                    <Icon name="phone" size="large"/>
+                                    <Icon name="phone" size="large" />
                                     800 135 903
                                 </List.Item>
                             </Grid.Column>
@@ -63,10 +63,10 @@ export const Footer = (props) => {
                 </Container>
             </Segment>
             <Segment inverted vertical
-                     style={{backgroundColor: '#3b3c3d', marginTop: '0', paddingTop: '1rem', paddingBottom: '1.5rem'}}>
+                style={{ backgroundColor: '#3b3c3d', marginTop: '0', paddingTop: '1rem', paddingBottom: '1.5rem' }}>
                 <Container>
                     <Grid divided inverted stackable>
-                        <Grid.Row style={{paddingTop: '2rem'}}>
+                        <Grid.Row style={{ paddingTop: '2rem' }}>
                             <Grid.Column textAlign='center'>
                                 <List link inverted>
                                     <List.Item>Copyright &copy; 2018 <a href={ROUTE.ROOT}>Spike</a>. All rights
@@ -81,4 +81,8 @@ export const Footer = (props) => {
     )
 }
 
-export default Footer()
+const mapStateToProps = (state) => ({
+    displaying: state.displaying
+})
+
+export default connect(mapStateToProps)(Footer)

@@ -8,7 +8,7 @@ import Description from './Description'
 import PlayDimmer from './PlayDimmer'
 import SlotPageBonusList from './SlotPageBonusList'
 import { Segment, Grid, Dimmer } from 'semantic-ui-react'
-import { Footer } from "../Footer";
+import Footer from "../Footer";
 import YouTubeEmbed from './YouTubeEmbed'
 
 
