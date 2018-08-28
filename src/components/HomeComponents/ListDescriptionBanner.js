@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Header, Visibility} from 'semantic-ui-react'
-import {PAGES} from '../../enums/Constants'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Header, Visibility } from 'semantic-ui-react'
+import { PAGES } from '../../enums/Constants'
 
 class ListDescriptionBanner extends Component {
 
@@ -33,9 +33,21 @@ class ListDescriptionBanner extends Component {
                 text = 'Slot del giorno'
         }
         return (
-            <div style={{ marginBottom: '3rem' }}>
-                <div className='black-line scale-in-hor-left'>
+            <div className='description-banner-container'>
+                <div className='description-banner-red'>
+                    <div className='white-line scale-in-hor-right'>
+                    </div>
+                    <h2 className="tracking-in-contract"
+                        style={{ fontFamily: 'Montserrat, sans-serif' }}>I migliori bonus</h2>
                 </div>
+                <div className='description-banner-black'>
+                    <h2 className="tracking-in-contract"
+                        style={{ fontFamily: 'Montserrat, sans-serif' }}>{text}</h2>
+                    <div className='white-line scale-in-hor-left'>
+                    </div>
+
+                    {/* <div style={{ marginBottom: '3rem' }}>
+                
                 <Header
                     as='p'
                     className="tracking-in-contract"
@@ -43,6 +55,8 @@ class ListDescriptionBanner extends Component {
                     {text}
                 </Header>
                 <div className='black-line scale-in-hor-right'>
+                </div>
+            </div> */}
                 </div>
             </div>
         )

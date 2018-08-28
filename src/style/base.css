@@ -335,13 +335,13 @@ header {
 
 
 h1 {
-    font-weight: 700;
     font-size: 150%;
     letter-spacing: .5px;
     word-spacing: 4px;
     text-transform: uppercase;
     color: #fff;
     margin-bottom: 20px;
+    font-family: 'Montserrat','Lato', sans-serif;
 }
 
 .vertical-center {
