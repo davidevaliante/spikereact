@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {
     Button,
     Form,
@@ -10,12 +10,14 @@ import {
     Header, Icon, FormField
 } from 'semantic-ui-react'
 
-import { pushNewSlot } from '../firebase/firebase.js'
+import {pushNewSlot} from '../firebase/firebase.js'
 import SearchField from './SearchField.js';
 import ImagePicker from './ImagePicker.js';
 import SearchMultipleSelection from './SearchMultipleSelection.js';
 import _ from 'lodash';
-import { SLOT_TYPES } from '../enums/Constants.js';
+import {SLOT_TYPES} from '../enums/Constants.js';
+import AdminNavbar from "./AdminNavbar";
+import {ADMINPAGES} from "../enums/Constants";
 
 
 class AddSlot extends Component {
@@ -55,62 +57,62 @@ class AddSlot extends Component {
 
     submitNewSlot = () => {
         // resetta quali sono i field vuoti errori
-        this.setState({ shouldDisplayErrors: false, emptyFields: [] });
+        this.setState({shouldDisplayErrors: false, emptyFields: []});
 
         const name = document.getElementById('nameField').value.trim();
         if (!name) {
             let errorList = this.state.emptyFields;
             errorList.push('name');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
         const linkYoutube = document.getElementById('linkYoutube').value.trim();
         if (!linkYoutube) {
             let errorList = this.state.emptyFields;
             errorList.push('linkYoutube');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
         const linkPlay = document.getElementById('linkPlay').value.trim();
         if (!linkPlay) {
             let errorList = this.state.emptyFields;
             errorList.push('linkPlay');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
         const description = document.getElementById('descriptionField').value.trim();
         if (!description) {
             let errorList = this.state.emptyFields;
             errorList.push('description');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
         const rating = this.state.rating;
         if (!rating) {
             let errorList = this.state.emptyFields;
             errorList.push('rating');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
 
         const tipsField = document.getElementById('tipsField').value.trim();
         if (!tipsField) {
             let errorList = this.state.emptyFields;
             errorList.push('tips');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
         const tecnicalsField = document.getElementById('tecnicalsField').value.trim();
         if (!tecnicalsField) {
             let errorList = this.state.emptyFields;
             errorList.push('tecnicals');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
         const BONUS = this.state.selectedBonus
         if (!BONUS) {
             let errorList = this.state.emptyFields;
             errorList.push('bonus');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
         const producer = this.state.selectedProducer
         if (!producer) {
             let errorList = this.state.emptyFields;
             errorList.push('producer');
-            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
         }
 
 
@@ -171,219 +173,221 @@ class AddSlot extends Component {
     }
 
     onBonusSelected = (selectedBonus) => {
-        this.setState({ selectedBonus: selectedBonus })
+        this.setState({selectedBonus: selectedBonus})
         console.log(selectedBonus);
 
     }
 
     onProducerSelected = (selectedProducer) => {
-        this.setState({ selectedProducer: selectedProducer })
+        this.setState({selectedProducer: selectedProducer})
 
     }
 
     resetErrorOn = (fieldName) => {
         const updated = _.filter(this.state.emptyFields, (field) => field !== fieldName);
-        this.setState({ emptyFields: updated });
+        this.setState({emptyFields: updated});
     }
 
     onSlotPushSuccess = () => {
-        this.setState({ active: true })
+        this.setState({active: true})
         _.delay(() => {
-            this.setState({ active: false })
+            this.setState({active: false})
         }, 800)
     }
 
     onImageSelected = (image) => {
-        this.setState({ image: image })
+        this.setState({image: image})
     }
 
     onTypeSelected = (data) => {
-        this.setState({ type: data.value })
+        this.setState({type: data.value})
     }
 
-    handleOpen = () => this.setState({ active: true })
-    handleClose = () => this.setState({ active: false })
+    handleOpen = () => this.setState({active: true})
+    handleClose = () => this.setState({active: false})
 
 
     state = {
         slotTypeOptions: [
-            { key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar' },
-            { key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis' },
-            { key: 'three', value: SLOT_TYPES.ONLINE, text: 'Slot online' }
+            {key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar'},
+            {key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis'},
+            {key: 'three', value: SLOT_TYPES.ONLINE, text: 'Slot online'}
         ],
         shouldDisplayErrors: false,
         emptyFields: [],
         isInCopyPasteMode: true,
         ratingStateOptions: [
-            { key: 'uno', value: '1', text: '1' },
-            { key: 'due', value: '2', text: '2' },
-            { key: 'tre', value: '3', text: '3' },
-            { key: 'quattro', value: '4', text: '4' },
-            { key: 'cinque', value: '5', text: '5' },
+            {key: 'uno', value: '1', text: '1'},
+            {key: 'due', value: '2', text: '2'},
+            {key: 'tre', value: '3', text: '3'},
+            {key: 'quattro', value: '4', text: '4'},
+            {key: 'cinque', value: '5', text: '5'},
         ]
     }
 
     render() {
-        const { active } = this.state
+        const {active} = this.state
         return (
-            <div
-                style={{ padding: '4rem' }}>
-                <Form>
+            <div>
+                <AdminNavbar activeItem={ADMINPAGES.SLOT}/>
+                <div
+                    style={{padding: '4rem'}}>
+                    <Form>
 
-                    <Dimmer blurring active={active} onClickOutside={this.handleClose} page>
-                        <Header as='h2' icon inverted>
-                            <Icon name='check' />
-                            Aggiunto con successo
-                        </Header>
-                    </Dimmer>
+                        <Dimmer blurring active={active} onClickOutside={this.handleClose} page>
+                            <Header as='h2' icon inverted>
+                                <Icon name='check'/>
+                                Aggiunto con successo
+                            </Header>
+                        </Dimmer>
 
-                    <h1
-                        style={{
-                            color: 'black',
-                            marginBottom: '2rem',
-                            textAlign: 'center'
-                        }}>
-                        Nuova Slot
-                    </h1>
+                        <h1
+                            style={{
+                                color: 'black',
+                                marginBottom: '2rem',
+                                textAlign: 'center'
+                            }}>
+                            Nuova Slot
+                        </h1>
 
-                    <Form.Group widths='equal' >
+                        <Form.Group widths='equal'>
+
+                            <Form.Field
+                                id='nameField'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('name')}
+                                onChange={() => this.resetErrorOn('name')}
+                                control={Input}
+                                label='Nome'
+                                content='Nome prova'
+                                placeholder='Nome slot'>
+                            </Form.Field>
+
+                            <Form.Field>
+                                <SearchField
+                                    id='producerField'
+                                    onSelected={this.onProducerSelected}
+                                    error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('producer')}
+                                    nodename='Produttore'
+                                />
+                            </Form.Field>
+
+                        </Form.Group>
+
+                        <Form.Group
+                            widths='equal'>
+
+                            <Form.Field
+                                id='linkYoutube'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkYoutube')}
+                                onChange={() => this.resetErrorOn('linkYoutube')}
+                                control={Input}
+                                label='LinkYoutube'
+                                placeholder='LinkYoutube'/>
+                            <Form.Field
+                                id='linkPlay'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkPlay')}
+                                onChange={() => this.resetErrorOn('linkPlay')}
+                                control={Input}
+                                label='LinkPlay'
+                                placeholder='LinkPlay'/>
+
+                        </Form.Group>
+
+                        <h1
+                            style={{
+                                color: 'black',
+                                marginBottom: '2rem',
+                                textAlign: 'center'
+                            }}>
+                            Liste
+                        </h1>
+
+                        <Form.Group
+                            widths='equal'>
+
+                            <Form.Field
+                                id='tipsField'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('tips')}
+                                onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tips')}
+                                control={TextArea}
+                                label='Consigli'
+                                placeholder='Consigli'/>
+                            <Form.Field
+                                id='tecnicalsField'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('tecnicals')}
+                                control={TextArea}
+                                onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tecnicals')}
+                                label='Descrizione Tecnica'
+                                placeholder='Tecnica'/>
+
+                        </Form.Group>
+
+                        <Form.Group
+                            widths='equal'>
+
+                            <Radio
+                                id='copyPasteMode'
+                                onChange={this.switchCopyPasteMode}
+                                style={{marginLeft: '1rem'}}
+                                toggle/>
+
+                        </Form.Group>
 
                         <Form.Field
-                            id='nameField'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('name')}
-                            onChange={() => this.resetErrorOn('name')}
-                            control={Input}
-                            label='Nome'
-                            content='Nome prova'
-                            placeholder='Nome slot' >
-                        </Form.Field>
-
-                        <Form.Field>
-                            <SearchField
-                                id='producerField'
-                                onSelected={this.onProducerSelected}
-                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('producer')}
-                                nodename='Produttore'
-                            />
-                        </Form.Field>
-
-                    </Form.Group>
-
-                    <Form.Group
-                        widths='equal' >
-
-                        <Form.Field
-                            id='linkYoutube'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkYoutube')}
-                            onChange={() => this.resetErrorOn('linkYoutube')}
-                            control={Input}
-                            label='LinkYoutube'
-                            placeholder='LinkYoutube' />
-                        <Form.Field
-                            id='linkPlay'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkPlay')}
-                            onChange={() => this.resetErrorOn('linkPlay')}
-                            control={Input}
-                            label='LinkPlay'
-                            placeholder='LinkPlay' />
-
-                    </Form.Group>
-
-                    <h1
-                        style={{
-                            color: 'black',
-                            marginBottom: '2rem',
-                            textAlign: 'center'
-                        }}>
-                        Liste
-                    </h1>
-
-                    <Form.Group
-                        widths='equal' >
-
-                        <Form.Field
-                            id='tipsField'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('tips')}
-                            onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tips')}
+                            id='descriptionField'
+                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('description')}
+                            onChange={() => this.resetErrorOn('description')}
                             control={TextArea}
-                            label='Consigli'
-                            placeholder='Consigli' />
+                            label='Descrizione'
+                            placeholder='Inserisci descrizione...'/>
+
+                        <SearchMultipleSelection
+                            onListUpdate={this.onBonusSelected}
+                        />
+
+                        <Dropdown
+                            id='ratingField'
+                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
+                            style={{marginBottom: '1rem'}}
+                            placeholder='Rating'
+                            onChange={(event, data) => data ? this.onDropDownChange(data) : this.resetErrorOn('rating')}
+                            search
+                            selection
+                            options={this.state.ratingStateOptions}/>
+                        <Form.Group>
+                            <Form.Field>
+                                <ImagePicker
+                                    onImageSelected={this.onImageSelected}
+                                />
+                            </Form.Field>
+                            <FormField>
+                                <Dropdown
+                                    onChange={(event, data) => this.onTypeSelected(data)}
+                                    placeholder='State'
+                                    search
+                                    selection
+                                    options={this.state.slotTypeOptions}/>
+                            </FormField>
+                        </Form.Group>
+
+
                         <Form.Field
-                            id='tecnicalsField'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('tecnicals')}
-                            control={TextArea}
-                            onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tecnicals')}
-                            label='Descrizione Tecnica'
-                            placeholder='Tecnica' />
-
-                    </Form.Group>
-
-                    <Form.Group
-                        widths='equal' >
-
-                        <Radio
-                            id='copyPasteMode'
-                            onChange={this.switchCopyPasteMode}
-                            style={{ marginLeft: '1rem' }}
-                            toggle />
-
-                    </Form.Group>
-
-                    <Form.Field
-                        id='descriptionField'
-                        error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('description')}
-                        onChange={() => this.resetErrorOn('description')}
-                        control={TextArea}
-                        label='Descrizione'
-                        placeholder='Inserisci descrizione...' />
-
-                    <SearchMultipleSelection
-                        onListUpdate={this.onBonusSelected}
-                    />
-
-                    <Dropdown
-                        id='ratingField'
-                        error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
-                        style={{ marginBottom: '1rem' }}
-                        placeholder='Rating'
-                        onChange={(event, data) => data ? this.onDropDownChange(data) : this.resetErrorOn('rating')}
-                        search
-                        selection
-                        options={this.state.ratingStateOptions} />
-                    <Form.Group>
-                        <Form.Field>
-                            <ImagePicker
-                                onImageSelected={this.onImageSelected}
-                            />
-                        </Form.Field>
-                        <FormField>
-                            <Dropdown
-                                onChange={(event, data) => this.onTypeSelected(data)}
-                                placeholder='State'
-                                search
-                                selection
-                                options={this.state.slotTypeOptions} />
-                        </FormField>
-                    </Form.Group>
-
-
-                    <Form.Field
-                        onClick={this.submitNewSlot}
-                        control={Button} >
-                        Aggiungi
+                            onClick={this.submitNewSlot}
+                            control={Button}>
+                            Aggiungi
                         </Form.Field>
 
-                    <Form.Field
-                        onClick={this.fakeObject}
-                        control={Button} >
-                        Aggiungi Fake
+                        <Form.Field
+                            onClick={this.fakeObject}
+                            control={Button}>
+                            Aggiungi Fake
                         </Form.Field>
-                </Form>
+                    </Form>
+                </div>
             </div>
         );
     }
 }
-
 
 
 export default AddSlot;
