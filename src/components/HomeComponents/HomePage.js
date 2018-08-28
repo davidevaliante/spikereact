@@ -61,6 +61,7 @@ class HomepageLayout extends Component {
 
         return (
             <ResponsiveContainer>
+
                 <div className='home-page-intro-container'>
                     <div className='home-page-intro-outer'>
                         <div className='home-page-intro-bg'>

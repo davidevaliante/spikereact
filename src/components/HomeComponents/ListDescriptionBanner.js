@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Header, Visibility } from 'semantic-ui-react'
-import { PAGES } from '../../enums/Constants'
-import _ from 'lodash'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Header, Visibility} from 'semantic-ui-react'
+import {PAGES} from '../../enums/Constants'
 
 class ListDescriptionBanner extends Component {
 
@@ -25,13 +24,13 @@ class ListDescriptionBanner extends Component {
                 text = 'Le Slot del giorno'
                 break
             case PAGES.SLOT_GRATIS:
-                text = 'Slot Gratuite'
+                text = 'Slot Gratis'
                 break
             case PAGES.SLOT_ONLINE:
                 text = 'Slot OnLine'
                 break
             default:
-                text = 'Slot del giorno.'
+                text = 'Slot del giorno'
         }
         return (
             <div style={{ marginBottom: '3rem' }}>

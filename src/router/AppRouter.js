@@ -26,7 +26,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.SLOT_GRATIS} component={HomePage} exact={true} page={PAGES.SLOT_GRATIS} />
                     <Route path={ROUTE.SLOT_BAR} component={HomePage} exact={true} page={PAGES.SLOT_BAR} />
                     <Route path={ROUTE.SLOT} component={SlotPage} />
-                    <Route path={ROUTE.ABOUT} component={AboutPage} page={PAGES.ABOUT}/>
+                    <Route path={ROUTE.ABOUT} component={AboutPage} page={PAGES.ABOUT} />
 
                     <Route path={ROUTE.ADMIN} component={AdminDashboard} exact={true} />
                     <Route path={ROUTE.ADDSLOT} component={AddSlot} />
