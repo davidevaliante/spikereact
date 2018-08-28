@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Grid, Header, Image, Rail, Segment, Sticky } from 'semantic-ui-react'
 import _ from 'lodash'
+import Radium from 'radium'
 
-export default class Test extends Component {
+class Test extends Component {
 
 
     state = {}
@@ -12,34 +13,22 @@ export default class Test extends Component {
     render() {
         const { contextRef } = this.state
 
+        const cardShadow = {
+            boxShadow: '10px 10px 33px -8px rgba(122, 122, 122, 0.75)',
+            margin: '1rem 1rem 1rem 1rem',
+            transition: "all ease .5s",
+            ":hover": {
+                boxShadow: '10px 10px 33px -8px rgba(243, 109, 109, 0.75)'
+            }
+        }
+
         return (
             <div>
-                <Grid centered columns={3}>
-                    <Grid.Column>
-                        <div ref={this.handleContextRef}>
-                            <Segment>
-                                {_.times(60, i => <h1>Hello</h1>)}
+            <h2 className="tracking-in-contract-bck">Le Slot del giorno</h2>
 
-                                <Rail position='left'>
-                                    {_.times(15, i => <h1>Hello</h1>)}
-
-                                    <Sticky context={contextRef}>
-                                        <Header as='h3'>Stuck Content</Header>
-                                        <Image src='../static/slot-header-img.jpg' size='large' />
-                                    </Sticky>
-                                </Rail>
-
-                                <Rail position='right'>
-                                    <Sticky context={contextRef}>
-                                        <Header as='h3'>Stuck Content</Header>
-                                        <Image src='../static/slot-header-img.jpg' size='large' />
-                                    </Sticky>
-                                </Rail>
-                            </Segment>
-                        </div>
-                    </Grid.Column>
-                </Grid>
             </div>
         )
     }
 }
+
+export default Radium(Test)

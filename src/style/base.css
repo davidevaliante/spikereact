@@ -28,12 +28,33 @@ footer, header, hgroup, menu, nav, section {
 
 /*----------------------------BASE------------------------------*/
 body {
+ 
+
+
 	line-height: 1;
     font-family: 'Raleway', 'Arial', sans-serif;
     color : #555;
     text-rendering: optimizeLegibility;
     font-size: 20px;
     overflow-y: auto;
+}
+
+
+
+@-webkit-keyframes AnimationName {
+  0%{background-position:0% 94%}
+  50%{background-position:100% 7%}
+  100%{background-position:0% 94%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:0% 94%}
+  50%{background-position:100% 7%}
+  100%{background-position:0% 94%}
+}
+@keyframes AnimationName { 
+  0%{background-position:0% 94%}
+  50%{background-position:100% 7%}
+  100%{background-position:0% 94%}
 }
 ol, ul {
 	list-style: none;

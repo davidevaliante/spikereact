@@ -6,7 +6,7 @@ import {
     Image,
     List,
     Segment,
-    Sticky
+    Sticky, Transition, Visibility
 } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import ResponsiveContainer from './ResponsiveContainer'
@@ -15,7 +15,9 @@ import BonusList from './BonusList'
 import YouTubeEmbed from '../SlotPageComponents/YouTubeEmbed'
 import { connect } from 'react-redux';
 import { Footer } from "../Footer";
+import ListDescriptionBanner from './ListDescriptionBanner'
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
+import _ from 'lodash'
 
 
 class HomepageLayout extends Component {
@@ -23,6 +25,13 @@ class HomepageLayout extends Component {
     title = '';
 
     handleContextRef = contextRef => this.setState({ contextRef })
+
+    segmentStyle = {
+
+        background: 'linear-gradient(177deg, #e13333, #453c3c)',
+        animation: 'AnimationName 11s ease infinite',
+        padding: '5em 0em'
+    }
 
     getType(path) {
         switch (path) {
@@ -44,6 +53,8 @@ class HomepageLayout extends Component {
     render() {
         const { contextRef } = this.state
         const type = this.getType(this.props.match.path)
+        _.delay(() => this.setState({ slotListVisible: true }), 5000)
+        console.log(this.state);
 
         // a quale component mettere  ref={this.handleContextRef} ????
 
@@ -64,14 +75,12 @@ class HomepageLayout extends Component {
 
 
 
-                <Segment style={{ padding: '5em 0em' }} vertical>
+                <Segment style={this.segmentStyle} vertical>
                     <Grid style={{ margin: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
                         <Grid.Row style={{ paddingBottom: '4rem' }}>
                             <Grid.Column width={12} >
                                 <div ref={this.handleContextRef}>
-                                    <Header as='h2' style={{ fontSize: '3em', textAlign: 'center' }}>
-                                        {this.title}
-                                    </Header>
+                                    <ListDescriptionBanner />
                                     <SlotList cardPerRow={3} maxSlot={9} type={type} />
                                 </div>
 
