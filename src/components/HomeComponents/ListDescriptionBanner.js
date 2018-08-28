@@ -27,7 +27,10 @@ class ListDescriptionBanner extends Component {
                 text = 'Slot Gratis'
                 break
             case PAGES.SLOT_ONLINE:
-                text = 'Slot OnLine'
+                text = 'Slot Online'
+                break
+            case PAGES.SLOT_BAR:
+                text = 'Slot da Bar'
                 break
             default:
                 text = 'Slot del giorno'
