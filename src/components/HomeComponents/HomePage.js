@@ -53,7 +53,6 @@ class HomepageLayout extends Component {
     render() {
         const { contextRef } = this.state
         const type = this.getType(this.props.match.path)
-        _.delay(() => this.setState({ slotListVisible: true }), 5000)
         console.log(this.state);
 
         // a quale component mettere  ref={this.handleContextRef} ????
@@ -83,7 +82,6 @@ class HomepageLayout extends Component {
                                     <ListDescriptionBanner />
                                     <SlotList cardPerRow={3} maxSlot={9} type={type} />
                                 </div>
-
                             </Grid.Column>
 
                             <Grid.Column
