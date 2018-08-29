@@ -1,0 +1,48 @@
+import React, { Component } from 'react'
+import AddArticle from '../AddArticle'
+import TipsList from '../../components/SlotPageComponents/TipsList'
+import _ from 'lodash'
+
+class AddTipsList extends Component {
+
+    state = {
+        listToPreview: '@'
+    }
+
+    onRowsUpdate = (rowsList) => {
+
+        let s = '@'
+        _.forEach(rowsList, (value, index, collection) => {
+            if (index !== rowsList.length - 1) {
+                s += value.content + '@'
+            } else {
+                s += value.content
+            }
+        })
+        console.log(s);
+
+        this.setState(prevState => {
+            if (prevState.listToPreview !== s)
+                return { listToPreview: s }
+        })
+    }
+
+    render() {
+        console.log(this.state);
+
+        return (
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginTop: '3rem',
+                padding: '4rem'
+            }}>
+                <AddArticle style={{ marginRight: '3rem', marginTop: '4rem' }} onRowsUpdate={(list) => this.onRowsUpdate(list)} />
+                <div style={{ width: '3px', background: 'grey', height: '100vh' }}></div>
+                <TipsList title='Preview' noStyle={true} style={{ width: '100%', paddingLeft: '3rem' }} tipList={this.state.listToPreview} />
+            </div>
+        )
+    }
+}
+
+export default AddTipsList;

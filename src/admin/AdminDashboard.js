@@ -5,8 +5,7 @@ import AdminNavbar from "./AdminNavbar";
 import AddArticle from "./AddArticle";
 import { ADMINPAGES } from "../enums/Constants";
 import { Responsive } from "semantic-ui-react";
-import Header from "../components/Header";
-import SlotDashboard from "./AdminSlots/SlotDashboard";
+import AddTipsList from './AdminSlots/AddTipsList'
 
 
 class AdminDashboard extends Component {
@@ -22,7 +21,8 @@ class AdminDashboard extends Component {
         return (
             <Responsive>
                 <AdminNavbar activeItem={ADMINPAGES.ADMIN} />
-                "Im Admin DashBoard component"
+                ESEMPIO SU COME UTILIZZARE NUOVO COMPONENT
+                <AddTipsList />
             </Responsive>
         );
     }

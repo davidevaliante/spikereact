@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import AddRow from './AddRow'
-import { Divider, Icon, Dropdown, Input } from 'semantic-ui-react'
+import { Divider, Icon, Button, Input, Label } from 'semantic-ui-react'
 import _ from 'lodash'
 
 
@@ -33,16 +32,22 @@ class AddArticle extends Component {
     */
     TextComponentRenderer = ({ position, content }) => {
         return (
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '100%', marginBottom: '2rem' }}>
                 <div className='row-container'>
-                    <h2
-                        style={{ width: '100%' }}
+                    <h3
+                        style={{ width: '100%', margin: '0rem' }}
                         fluid
                         action='Elimina'
                         onClick={() => this.editItemOnPosition(position, { content })}>
                         {content}
-                    </h2>
-                    <Icon color='red' name='delete' onClick={(event) => this.handleDelete(position)} />
+                    </h3>
+                    <Button onClick={(event) => this.handleDelete(position)} animated='vertical' color='red' size='mini'>
+                        <Button.Content hidden>Cancellla</Button.Content>
+                        <Button.Content visible>
+                            <Icon name='delete' />
+                        </Button.Content>
+                    </Button>
+
                 </div>
             </div>
         );
@@ -129,8 +134,6 @@ class AddArticle extends Component {
 
         // solo per invio, altrimenti intercetta tutti i tasti e solo con contenuto valido
         if (event.key === 'Enter' && document.getElementById('input').value.trim()) {
-
-            console.log(currentInputPosition);
 
             // rappresentazione in JSON di una nuova riga
             const objectToAdd = {
@@ -230,11 +233,11 @@ class AddArticle extends Component {
     }
 
     render() {
-        console.log(this.state);
         const { inputPosition, editValue } = this.state
         if (editValue) document.getElementById('input').value = editValue
+        this.props.onRowsUpdate(this.state.rows)
         return (
-            <div className='main-column'>
+            <div className='main-column' {...this.props}>
                 {this.rowsRenderer(inputPosition, editValue)}
                 {(inputPosition === 0 && editValue === undefined) && <this.InputComponentRenderer position={0} />}
             </div>

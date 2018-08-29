@@ -6,6 +6,8 @@ const TipsList = (props) => {
 
     const splittedArray = _.split(props.tipList, '@')
 
+
+
     const tipList = () =>
         <ul>
             {_.slice(splittedArray, 1, splittedArray.length).map(
@@ -28,9 +30,9 @@ const TipsList = (props) => {
         </ul>
 
     return (
-        <Grid.Column style={{ paddingTop: '5em', paddingBottom: '0rem', paddingLeft:'4rem' }}>
+        <Grid.Column style={!props.noStyle ? { paddingTop: '5em', paddingBottom: '0rem', paddingLeft: '4rem' } : { width: '100%' }} {...props}>
             <SemanticHeader as='h3' style={{ fontSize: '2em' }}>
-                Consigli di gioco
+                {props.title ? props.title : 'Consigli di gioco'}
             </SemanticHeader>
             {tipList()}
         </Grid.Column>
