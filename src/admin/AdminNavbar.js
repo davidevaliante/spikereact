@@ -10,9 +10,9 @@ class AdminNavbar extends Component {
     state = {};
     activeItem = ADMINPAGES.ADMIN;
 
-    handleClick = (e, {name}) => {
-        console.log("handleClick", e, name);
-
+    handleClick = (id) => {
+        console.log('ID', id)
+        document.getElementById(id).click()
     };
 
 
@@ -28,12 +28,16 @@ class AdminNavbar extends Component {
                     <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.ARTICLE}>
                         <Dropdown item simple text='Articoli'>
                             <Dropdown.Menu simple>
-                                <Dropdown.Item name={ROUTE.ADDARTICLE} onClick={this.handleClick}>
-                                    <NavLink to={ROUTE.ADDARTICLE}><Icon name='add'/> Aggiungi Articolo</NavLink>
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-article')}>
+                                    <NavLink id='admin-nav-add-article' to={ROUTE.ADDARTICLE}>
+                                        <Icon name='add'/> Aggiungi Articolo
+                                    </NavLink>
                                 </Dropdown.Item>
 
-                                <Dropdown.Item>
-                                    <Icon name='archive'/> Gestione Articoli
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-article')}>
+                                    <NavLink id='admin-nav-article' to='#'>
+                                        <Icon name='archive'/> Gestione Articoli
+                                    </NavLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -42,11 +46,15 @@ class AdminNavbar extends Component {
                     <Menu.Item style={{padding: '0', margin: '0'}} active={activeItem === ADMINPAGES.SLOT}>
                         <Dropdown item simple text='Slot'>
                             <Dropdown.Menu simple>
-                                <Dropdown.Item>
-                                    <NavLink to={ROUTE.ADDSLOT}><Icon name='add'/> Aggiungi Slot</NavLink>
+                                <Dropdown.Item  onClick={() => this.handleClick('admin-nav-add-slot')}>
+                                    <NavLink id='admin-nav-add-slot' to={ROUTE.ADDSLOT}>
+                                        <Icon name='add'/> Aggiungi Slot
+                                    </NavLink>
                                 </Dropdown.Item>
-                                <Dropdown.Item>
-                                    <Icon name='game'/> Gestione Slot
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-slot')}>
+                                    <NavLink id='admin-nav-slot' to='#'>
+                                        <Icon name='game'/> Gestione Slot
+                                    </NavLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -55,11 +63,13 @@ class AdminNavbar extends Component {
                     <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.BONUS}>
                         <Dropdown item simple text='Bonus'>
                             <Dropdown.Menu simple>
-                                <Dropdown.Item>
-                                    <NavLink to={ROUTE.ADDBONUS}><Icon name='add'/> Aggiungi Bonus</NavLink>
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-bonus')}>
+                                    <NavLink id='admin-nav-add-bonus' to={ROUTE.ADDBONUS}><Icon name='add'/> Aggiungi Bonus</NavLink>
                                 </Dropdown.Item>
-                                <Dropdown.Item>
-                                    <Icon name='plus circle'/> Gestione Bonus
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-bonus')}>
+                                    <NavLink id='admin-nav-bonus' to='#'>
+                                        <Icon name='plus circle'/> Gestione Bonus
+                                    </NavLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -68,11 +78,13 @@ class AdminNavbar extends Component {
                     <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.PRODUCER}>
                         <Dropdown item simple text='Produttori'>
                             <Dropdown.Menu simple>
-                                <Dropdown.Item>
-                                    <NavLink to={ROUTE.ADDPRODUCER}><Icon name='add'/> Aggiungi Produttore</NavLink>
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-producer')}>
+                                    <NavLink id='admin-nav-add-producer' to={ROUTE.ADDPRODUCER}><Icon name='add'/> Aggiungi Produttore</NavLink>
                                 </Dropdown.Item>
-                                <Dropdown.Item>
-                                    <Icon name='lab'/> Gestione Produttori
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-producer')}>
+                                    <NavLink id='admin-nav-producer' to='#'>
+                                        <Icon name='lab'/> Gestione Produttori
+                                    </NavLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
