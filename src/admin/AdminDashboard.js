@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import AddSlot from "./AddSlot";
+import AddSlot from "./AdminSlots/AddSlot";
 import AdminNavbar from "./AdminNavbar";
 import AddArticle from "./AddArticle";
 import {ADMINPAGES} from "../enums/Constants";
 import {Responsive} from "semantic-ui-react";
 import Header from "../components/Header";
+import SlotDashboard from "./AdminSlots/SlotDashboard";
 
 
 class AdminDashboard extends Component {
@@ -21,9 +22,7 @@ class AdminDashboard extends Component {
         return (
             <Responsive>
                 <AdminNavbar activeItem={ADMINPAGES.ADMIN}/>
-                <AddArticle style={{display: 'hidden'}}/>
                 "Im Admin DashBoard component"
-
             </Responsive>
         );
     }

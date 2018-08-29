@@ -52,7 +52,7 @@ class AdminNavbar extends Component {
                                     </NavLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item onClick={() => this.handleClick('admin-nav-slot')}>
-                                    <NavLink id='admin-nav-slot' to='#'>
+                                    <NavLink id='admin-nav-slot' to={ROUTE.ADMINSLOT}>
                                         <Icon name='game'/> Gestione Slot
                                     </NavLink>
                                 </Dropdown.Item>

@@ -10,14 +10,14 @@ import {
     Header, Icon, FormField
 } from 'semantic-ui-react'
 
-import {pushNewSlot} from '../firebase/firebase.js'
-import SearchField from './SearchField.js';
-import ImagePicker from './ImagePicker.js';
-import SearchMultipleSelection from './SearchMultipleSelection.js';
+import {pushNewSlot} from '../../firebase/firebase.js'
+import SearchField from '../SearchField.js';
+import ImagePicker from '../ImagePicker.js';
+import SearchMultipleSelection from '../SearchMultipleSelection.js';
 import _ from 'lodash';
-import {SLOT_TYPES} from '../enums/Constants.js';
-import AdminNavbar from "./AdminNavbar";
-import {ADMINPAGES} from "../enums/Constants";
+import {SLOT_TYPES} from '../../enums/Constants.js';
+import AdminNavbar from "../AdminNavbar";
+import {ADMINPAGES} from "../../enums/Constants";
 
 
 class AddSlot extends Component {

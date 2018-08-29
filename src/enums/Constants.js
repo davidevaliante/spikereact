@@ -34,6 +34,7 @@ export const ROUTE = {
     ABOUT: '/about',
 
     ADMIN: `${admin}`,
+    ADMINSLOT: `${admin}/slots`,
     ADDSLOT: `${admin}/addslot`,
     ADDBONUS: `${admin}/addbonus`,
     ADDPRODUCER: `${admin}/addproducer`,
