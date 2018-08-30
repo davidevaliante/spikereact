@@ -12,7 +12,10 @@ export const SLOT_TYPES = {
 };
 
 export const DATABASE_REFERENCE = {
-    SLOT: 'Slots'
+    SLOT: 'Slots',
+    BONUS: 'Bonus',
+    PRODUCER: 'Producer',
+    ARTICLE: 'Article'
 };
 
 export const PAGES = {
