@@ -5,9 +5,12 @@ import {getSlotList} from "../../firebase/firebase";
 import AdminSlotCard from "./AdminSlotCard";
 import AdminNavbar from "../AdminNavbar";
 import {ADMINPAGES} from "../../enums/Constants";
+import {setToUpdate} from "../../reducers/ToUpdateReducer";
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        toUpdate: state.toUpdate
+    };
 }
 
 class SlotDashboard extends Component {
@@ -21,7 +24,11 @@ class SlotDashboard extends Component {
         getSlotList(this.onSlotListFetched);
     }
 
+    componentWillMount() {
+    }
+
     onSlotListFetched = (slotList) => {
+        this.list = []
         for (const key in slotList) {
             const slot = slotList[key];
             slot['id'] = key
@@ -30,23 +37,31 @@ class SlotDashboard extends Component {
         }
 
         this.setState({
-            ...this.state,
+            // ...this.state,
             slotList: this.list
         })
+        // console.log('onSlotListFetched', this.list)
         // store.dispatch(addSlotList(this.list))
     }
 
-    componentWillMount(){
+    updateSlotList = () => {
+        if (this.props.toUpdate){
+            //do shit
+            console.log('Aggiornare slot list', this.state.slotList, this.list)
+            getSlotList(this.onSlotListFetched);
+            this.props.dispatch(setToUpdate())
+        }
     }
 
-    renderSlot() {
-        return this.list.map((slot) => (slot && <Grid.Column><AdminSlotCard slot={slot} key={slot.id} /></Grid.Column>))
-    }
+    renderSlot = () => {
+        return this.list.map((slot) => (slot &&
+            <Grid.Column><AdminSlotCard slot={slot} key={slot.id}/></Grid.Column>))
+    };
 
     render() {
-        console.log(this.r++);
-        console.log(this.state.slotList, this.list);
-        console.log('renderSlot()', this.renderSlot())
+        console.log('rendered #', this.r++);
+        console.log('render::', this.state.slotList, this.list);
+        this.updateSlotList();
         return (
             <Responsive>
                 <AdminNavbar activeItem={ADMINPAGES.ADMIN}/>
@@ -58,6 +73,4 @@ class SlotDashboard extends Component {
     }
 }
 
-export default connect(
-    mapStateToProps,
-)(SlotDashboard);
+export default connect(mapStateToProps,)(SlotDashboard);
