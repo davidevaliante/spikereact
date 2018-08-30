@@ -18,7 +18,13 @@ export const pushNewImage = (image, folderName, callback) => {
                 .then(
                     (url) => callback(url)
                 )
+                .catch(
+                    (error) => {console.log(error)}
+                )
         )
+        .catch(
+        (error) => {console.log(error)}
+    )
 }
 
 
@@ -39,8 +45,7 @@ export const pushNewSlot = (newSlot, onPushSlotSuccess) => {
             )
             .catch(
                 (fail) => {
-                    console.log('New slot push failed');
-                    console.log(fail);
+                    console.log('New slot push failed', fail);
                 }
             )
     })

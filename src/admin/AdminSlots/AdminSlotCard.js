@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Button, Divider, Grid, Icon, List} from "semantic-ui-react";
+import {Button, Divider, Grid, Icon, List, Image} from "semantic-ui-react";
 import _ from "lodash";
 import {deleteSlotWithId} from "../../firebase/firebase";
 import {setToUpdate} from "../../reducers/ToUpdateReducer";
@@ -31,14 +31,18 @@ class AdminSlotCard extends Component {
                         borderRadius: '0.3rem',
                         padding: '0.3rem'
                     }}>
-                        {/*<Image className='ui list item middle aligned' src={this.props.slot.image} size='mini'/>*/}
+                        {/*<Image className='icon slot-card-image' src={this.props.slot.image} size='mini'/>*/}
                         <List.Icon name='github' size='large' verticalAlign='middle'/>
                         <List.Content>
                             <List.Header as='p'>{this.props.slot.name}</List.Header>
                             <List.Description as='p'>
                                 {this.props.slot.producer.name}
                                 <Divider/>
-                                {_.truncate(this.props.slot.description, {'length': 100})}
+                                {_.truncate(this.props.slot.description, {'length': 175})}
+                                <Divider/>
+                                <div className='crop' >
+                                    <Image src={this.props.slot.image} />
+                                </div>
                                 <Divider/>
                                 <Icon name='star'/>
                                 {this.props.slot.rating}

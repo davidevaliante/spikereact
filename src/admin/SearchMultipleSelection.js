@@ -48,7 +48,9 @@ class SearchMultipleSelection extends Component {
 
     render() {
         return (
-            <Dropdown placeholder='Bonus'
+            <Dropdown
+                id='bonusField'
+                placeholder='Bonus'
                 fluid
                 multiple
                 search
