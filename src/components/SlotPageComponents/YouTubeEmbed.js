@@ -12,7 +12,7 @@ const YouTubeEmbed = (props) => {
 
     return (
         <div className='column-centered' style={{ marginBottom: '4rem' }} >
-            <Header color='red' style={{ marginBottom: '2rem', cursor: 'pointer' }} onClick={() => handleClick()}>Rimani sempre aggiornato, iscriviti al mio canale YouTube</Header>
+            <Header color='red' style={{ fontSize: '2rem', marginBottom: '2rem', cursor: 'pointer', fontFamily: 'Raleway' }} onClick={() => handleClick()}>Rimani sempre aggiornato, iscriviti al mio canale YouTube</Header>
             <iframe
 
                 title='ytcontent'
