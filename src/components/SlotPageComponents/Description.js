@@ -11,11 +11,11 @@ const Description = (props) => {
         <Segment style={{ padding: '6em 0em' }} vertical id='slot-page-description'>
             <Container text>
 
-                <Header as='h3' style={{ fontSize: '2em' }}>
+                <Header as='h3' style={{ fontSize: '2em', fontFamily: 'Raleway' }}>
                     {props.slotName}
                 </Header>
 
-                <p style={{ fontSize: '1.33em' }}>
+                <p style={{ fontSize: '1.33em', fontFamily: 'Raleway' }}>
                     {props.text}
                 </p>
                 <div className='slot-playbutton'>

@@ -29,7 +29,7 @@ const Footer = (props) => {
                                 <Header inverted as='h4' content='Social' />
                                 <List link inverted>
                                     <List.Item>
-                                        <a href="https://www.facebook.com/spikeslot/">
+                                        <a href="https://www.facebook.com/spikeslot/" >
                                             <Icon name="facebook official" size="large" inverted color='grey' />
                                             Facebook
                                         </a>

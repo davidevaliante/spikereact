@@ -19,7 +19,7 @@ const TecnicalsList = (props) => {
                                     style={{ marginRight: '2rem' }}
                                     circular inverted color='red' name='angle right' />
                             </div>
-                            {t}
+                            <p style={{ fontFamily: 'Raleway' }}>{t}</p>
                         </div>
                         <Divider />
                     </div>
@@ -28,8 +28,8 @@ const TecnicalsList = (props) => {
         </ul>
 
     return (
-        <Grid.Column style={{ paddingTop: '5em', paddingBottom: '0rem', paddingRight:'4rem' }}>
-            <SemanticHeader as='h3' style={{ fontSize: '2em' }}>
+        <Grid.Column style={{ paddingTop: '5em', paddingBottom: '0rem', paddingRight: '4rem' }}>
+            <SemanticHeader as='h3' style={{ fontSize: '2em', fontFamily: 'Raleway', marginBottom: '4rem' }}>
                 Scheda tecnica
             </SemanticHeader>
             {tecnicalList()}
