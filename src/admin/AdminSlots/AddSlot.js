@@ -22,14 +22,35 @@ import {ADMINPAGES} from "../../enums/Constants";
 
 class AddSlot extends Component {
 
+    state = {
+        slotTypeOptions: [
+            {key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar'},
+            {key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis'},
+            {key: 'three', value: SLOT_TYPES.ONLINE, text: 'Slot online'}
+        ],
+        shouldDisplayErrors: false,
+        emptyFields: [],
+        isInCopyPasteMode: true,
+        isFake: false,
+        ratingStateOptions: [
+            {key: 'uno', value: '1', text: '1'},
+            {key: 'due', value: '2', text: '2'},
+            {key: 'tre', value: '3', text: '3'},
+            {key: 'quattro', value: '4', text: '4'},
+            {key: 'cinque', value: '5', text: '5'},
+        ]
+    }
+
     fakeObject = () => {
 
         const produttoriFinti = ['Ntent', 'SlotOnline', 'Pyramid', 'Haunted House Inc']
 
         document.getElementById('nameField').value = `Slot Esempio numero ${Math.floor(Math.random() * 100)}`;
-        document.getElementById('producerField').value = `${produttoriFinti[Math.floor(Math.random() * produttoriFinti.length)]}`;
+        document.getElementById('producerField').placeholder = 'Produttore di esempio';
         document.getElementById('linkYoutube').value = 'https://www.youtube.com/watch?v=G4VAdWJXyFk';
         document.getElementById('linkPlay').value = 'https://www.youtube.com/watch?v=G4VAdWJXyFk';
+        document.getElementById('tipsField').value = '@sdfgsg @fhdhnfghjn @dfgdfghdfh'
+        document.getElementById('tecnicalsField').value = '$dfsdfsfgb $dfgsgdfg $dfgsdfsfgbdfg';
         document.getElementById('descriptionField').value = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
         // document.getElementById('ratingField').value;
 
@@ -39,9 +60,13 @@ class AddSlot extends Component {
             isFake: true
         })
 
-
-        document.getElementById('tipsField').value = '@sdfgsg @fhdhnfghjn @dfgdfghdfh'
-        document.getElementById('tecnicalsField').value = '$dfsdfsfgb $dfgsgdfg $dfgsdfsfgbdfg';
+        document.getElementById('typeField').childNodes[0].placeholder = 'Slot da Bar';
+        document.getElementById('typeField').childNodes[1].innerHTML = '';
+        document.getElementById('ratingField').childNodes[0].placeholder = '5';
+        document.getElementById('ratingField').childNodes[1].innerHTML = '';
+        document.getElementById('bonusField').childNodes[0].placeholder = 'Pippo giuseppe Franco';
+        document.getElementById('bonusField').childNodes[2].innerHTML = '';
+        console.log(document.getElementById('bonusField').childNodes)
 
     }
 
@@ -134,7 +159,7 @@ class AddSlot extends Component {
             type: this.state.type,
             isFake: this.state.isFake
         }
-
+        console.log(newSlot);
         if (name && producer && linkYoutube && linkPlay && BONUS && description && rating && tipsField && tecnicalsField && newSlot.type) {
             pushNewSlot(newSlot, this.onSlotPushSuccess)
         }
@@ -180,7 +205,7 @@ class AddSlot extends Component {
 
     onProducerSelected = (selectedProducer) => {
         this.setState({selectedProducer: selectedProducer})
-
+        console.log(selectedProducer);
     }
 
     resetErrorOn = (fieldName) => {
@@ -197,33 +222,16 @@ class AddSlot extends Component {
 
     onImageSelected = (image) => {
         this.setState({image: image})
+        console.log(image);
     }
 
     onTypeSelected = (data) => {
         this.setState({type: data.value})
+        console.log(data);
     }
 
     handleOpen = () => this.setState({active: true})
     handleClose = () => this.setState({active: false})
-
-
-    state = {
-        slotTypeOptions: [
-            {key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar'},
-            {key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis'},
-            {key: 'three', value: SLOT_TYPES.ONLINE, text: 'Slot online'}
-        ],
-        shouldDisplayErrors: false,
-        emptyFields: [],
-        isInCopyPasteMode: true,
-        ratingStateOptions: [
-            {key: 'uno', value: '1', text: '1'},
-            {key: 'due', value: '2', text: '2'},
-            {key: 'tre', value: '3', text: '3'},
-            {key: 'quattro', value: '4', text: '4'},
-            {key: 'cinque', value: '5', text: '5'},
-        ]
-    }
 
     render() {
         const {active} = this.state
@@ -258,8 +266,7 @@ class AddSlot extends Component {
                                 onChange={() => this.resetErrorOn('name')}
                                 control={Input}
                                 label='Nome'
-                                content='Nome prova'
-                                placeholder='Nome slot'>
+                                placeholder='Nome slot...'>
                             </Form.Field>
 
                             <Form.Field>
@@ -269,6 +276,7 @@ class AddSlot extends Component {
                                     onSelected={this.onProducerSelected}
                                     error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('producer')}
                                     nodename='Produttore'
+                                    placeholder='Nome produttore...'
                                 />
                             </Form.Field>
 
@@ -283,14 +291,14 @@ class AddSlot extends Component {
                                 onChange={() => this.resetErrorOn('linkYoutube')}
                                 control={Input}
                                 label='YouTube Link'
-                                placeholder='YouTube Link'/>
+                                placeholder='YouTube Link...'/>
                             <Form.Field
                                 id='linkPlay'
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkPlay')}
                                 onChange={() => this.resetErrorOn('linkPlay')}
                                 control={Input}
                                 label='Slot Link'
-                                placeholder='Slot Link'/>
+                                placeholder='Slot Play Link...'/>
 
                         </Form.Group>
 
@@ -312,14 +320,14 @@ class AddSlot extends Component {
                                 onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tips')}
                                 control={TextArea}
                                 label='Consigli'
-                                placeholder='Consigli'/>
+                                placeholder='Consigli...'/>
                             <Form.Field
                                 id='tecnicalsField'
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('tecnicals')}
                                 control={TextArea}
                                 onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tecnicals')}
-                                label='Descrizione Tecnica'
-                                placeholder='Descrizione Tecnica'/>
+                                label='Scheda Tecnica'
+                                placeholder='Scheda Tecnica...'/>
 
                         </Form.Group>
 
@@ -340,12 +348,13 @@ class AddSlot extends Component {
                             onChange={() => this.resetErrorOn('description')}
                             control={TextArea}
                             label='Descrizione'
-                            placeholder='Inserisci descrizione...'/>
+                            placeholder='Descrizione slot...'/>
 
                         <Form.Group widths='equal'>
 
                             <FormField>
                                 <Dropdown
+                                    id='typeField'
                                     onChange={(event, data) => this.onTypeSelected(data)}
                                     placeholder='Tipo di slot'
                                     search

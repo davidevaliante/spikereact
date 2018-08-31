@@ -12,7 +12,10 @@ export const SLOT_TYPES = {
 };
 
 export const DATABASE_REFERENCE = {
-    SLOT: 'Slots'
+    SLOT: 'Slots',
+    BONUS: 'Bonus',
+    PRODUCER: 'Producer',
+    ARTICLE: 'Article'
 };
 
 export const PAGES = {
@@ -20,7 +23,8 @@ export const PAGES = {
     SLOT_GRATIS: 'SLOT_GRATIS',
     SLOT_ONLINE: 'SLOT_ONLINE',
     HOME: 'HOME',
-    ABOUT: 'ABOUT'
+    ABOUT: 'ABOUT',
+    PAGE_NOT_FOUND: '*'
 };
 
 const admin = '/admin';
