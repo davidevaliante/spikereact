@@ -38,17 +38,19 @@ class NavbarSearchBar extends Component {
             const id = this.props.slotId
             console.log('firebase call for', id);
 
-            getSlotWithId(id, (slot) => {
-                this.props.dispatch(updateCurrentSlot(slot))
-                this.setState({ slot: slot, slotId: id })
-            })
-            // se redux è accessibile
-            if (!_.get(this.props.slotList, id)) {
 
-                // console.log('dispatching from firebase');
-                //this.props.dispatch(updateCurrentSlot(_.get(this.props.slotList, id)))
-                //console.log('dispatching from redux');
-                // console.log(_.get(this.props.slotList, id));
+            // se redux è accessibile
+            if (_.get(this.props.slotList, id)) {
+                console.log('from redux');
+
+                this.props.dispatch(updateCurrentSlot(_.get(this.props.slotList, id)))
+            } else {
+                getSlotWithId(id, (slot) => {
+                    console.log('from firebase');
+
+                    this.props.dispatch(updateCurrentSlot(slot))
+                    this.setState({ slot: slot, slotId: id })
+                })
             }
         }
 

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import AppRouter from './router/AppRouter'
 import store from './store/store.js';
-import './firebase/firebase';
 import { Provider } from 'react-redux';
 import { getUserAuthStatus } from './firebase/firebase';
 import 'semantic-ui-css/semantic.min.css';
