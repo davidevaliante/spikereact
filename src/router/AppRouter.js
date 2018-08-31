@@ -12,6 +12,7 @@ import SlotPage from '../components/SlotPageComponents/SlotPage';
 import { PAGES, ROUTE, SLOT_TYPES } from "../enums/Constants";
 import AboutPage from '../components/AboutPage'
 import SlotDashboard from "../admin/AdminSlots/SlotDashboard";
+import NotFound from "../components/SlotPageComponents/NotFound"
 
 
 const AppRouter = () => {
@@ -35,6 +36,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADDBONUS} component={AddBonus} />
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
+                    <Route path={ROUTE.PAGE_NOT_FOUND} component={NotFound} />
                     <Test path='/test' component={Test} />
                 </Switch>
 
