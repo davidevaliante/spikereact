@@ -1,11 +1,6 @@
 {
   "rules": {
     ".read": true,
-    ".write": true,
-    "Slots": {
-      ".indexOn": [
-        "time"
-      ]
-    }
+    ".write": true
   }
 }

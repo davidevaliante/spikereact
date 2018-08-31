@@ -1,4 +1,7 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database'
+import 'firebase/auth'
+import 'firebase/storage'
 import { setUserLoggedIn, setUserLoggedOut, setUserName, setUserId } from './../reducers/AuthReducer';
 import { configuration } from './firebaseConfig';
 import { STORAGE_FOLDERS, DATABASE_REFERENCE } from '../enums/Constants';
