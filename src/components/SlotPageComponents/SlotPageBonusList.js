@@ -1,6 +1,4 @@
 import React from 'react'
-import { Header } from 'semantic-ui-react'
-
 import SlotPageSlotCard from './SlotPageBonusCard'
 
 const SlotPageBonusList = (props) => {

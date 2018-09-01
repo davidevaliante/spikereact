@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Header, Visibility } from 'semantic-ui-react'
+import { Visibility } from 'semantic-ui-react'
 import { PAGES } from '../../enums/Constants'
 
 class ListDescriptionBanner extends Component {

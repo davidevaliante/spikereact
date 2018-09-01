@@ -1,6 +1,6 @@
 import React from 'react'
-import { Embed, Header } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Header } from 'semantic-ui-react'
+
 
 const YouTubeEmbed = (props) => {
 

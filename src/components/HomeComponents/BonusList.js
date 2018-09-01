@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react'
-import _ from 'lodash'
+import slice from 'lodash/slice'
+import shuffle from 'lodash/shuffle'
 import { connect } from 'react-redux'
 import BonusCard from './BonusCard'
 import { Feed } from 'semantic-ui-react'
@@ -18,9 +19,9 @@ export const BonusList = (props) => {
             listOfBonus.push(element)
         }
 
-        const column = _.slice(_.shuffle(listOfBonus), 0, props.maxNumber)
+        const column = slice(shuffle(listOfBonus), 0, props.maxNumber)
 
-        return _.slice(_.shuffle(column), 0, 4).map(bonus => <BonusCard bonus={bonus} key={bonus.id} />)
+        return slice(shuffle(column), 0, 4).map(bonus => <BonusCard bonus={bonus} key={bonus.id} />)
     }
 
     return (

@@ -1,4 +1,4 @@
-import { Container, Grid, Header, Image, Item, List, Segment, Icon } from 'semantic-ui-react'
+import { Container, Grid, Header, Image, List, Segment, Icon } from 'semantic-ui-react'
 import "../style/base.css"
 import React from "react";
 import { ROUTE } from "../enums/Constants";

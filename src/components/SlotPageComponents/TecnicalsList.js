@@ -1,14 +1,16 @@
 import React from 'react'
 import { Header as SemanticHeader, Grid, Icon, Divider } from 'semantic-ui-react'
-import _ from 'lodash'
+import slice from 'lodash/slice'
+import split from 'lodash/split'
+
 
 const TecnicalsList = (props) => {
 
-    const splittedArray = _.split(props.tecList, '$')
+    const splittedArray = split(props.tecList, '$')
 
     const tecnicalList = () =>
         <ul>
-            {_.slice(splittedArray, 1, splittedArray.length).map(
+            {slice(splittedArray, 1, splittedArray.length).map(
                 t =>
                     <div className='tip-tec-card'>
                         <div className='tip-tec-row'>

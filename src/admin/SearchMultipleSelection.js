@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react'
 import { getBonusList } from '../firebase/firebase';
-import _ from 'lodash';
+import pick from 'lodash/pick';
 
 
 
@@ -36,7 +36,7 @@ class SearchMultipleSelection extends Component {
 
     handleItemAdded = (event, data) => {
         this.setState({ pickedList: data.value })
-        this.props.onListUpdate(_.pick(this.state.firebaseBonusObject, data.value));
+        this.props.onListUpdate(pick(this.state.firebaseBonusObject, data.value));
     }
 
 

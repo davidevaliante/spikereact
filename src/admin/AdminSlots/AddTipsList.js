@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AddArticle from '../AddArticle'
 import TipsList from '../../components/SlotPageComponents/TipsList'
-import _ from 'lodash'
+import forEach from 'lodash/forEach'
 
 class AddTipsList extends Component {
 
@@ -12,7 +12,7 @@ class AddTipsList extends Component {
     onRowsUpdate = (rowsList) => {
 
         let s = '@'
-        _.forEach(rowsList, (value, index, collection) => {
+        forEach(rowsList, (value, index, collection) => {
             if (index !== rowsList.length - 1) {
                 s += value.content + '@'
             } else {

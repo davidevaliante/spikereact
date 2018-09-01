@@ -1,8 +1,6 @@
 import React, { Component, ReactDOM } from 'react';
 import { connect } from 'react-redux';
-import AddSlot from "./AdminSlots/AddSlot";
 import AdminNavbar from "./AdminNavbar";
-import AddArticle from "./AddArticle";
 import { ADMINPAGES } from "../enums/Constants";
 import { Responsive } from "semantic-ui-react";
 import AddTipsList from './AdminSlots/AddTipsList'

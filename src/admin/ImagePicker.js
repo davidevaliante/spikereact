@@ -1,5 +1,5 @@
 import React from 'react'
-import _ from 'lodash'
+import split from 'lodash/split'
 
 const ImagePicker = (props) => {
 
@@ -7,7 +7,7 @@ const ImagePicker = (props) => {
         const selectedFile = document.getElementById('imagePicker').files[0];
         console.log(selectedFile.type);
 
-        if (_.split(selectedFile.type, '/')[0] === 'image') {
+        if (split(selectedFile.type, '/')[0] === 'image') {
             props.onImageSelected(selectedFile)
         } else {
             console.log('unsupported file type');

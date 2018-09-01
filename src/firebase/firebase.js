@@ -5,7 +5,7 @@ import 'firebase/storage'
 import { setUserLoggedIn, setUserLoggedOut, setUserName, setUserId } from './../reducers/AuthReducer';
 import { configuration } from './firebaseConfig';
 import { STORAGE_FOLDERS, DATABASE_REFERENCE } from '../enums/Constants';
-import _ from 'lodash';
+import  now  from 'lodash/now';
 
 const config = configuration;
 const firebaseApp = firebase.initializeApp(config);
@@ -34,7 +34,7 @@ export const pushNewImage = (image, folderName, callback) => {
 export const pushNewSlot = (newSlot, onPushSlotSuccess) => {
     pushNewImage(newSlot.image, STORAGE_FOLDERS.SLOT_IMAGES, (url) => {
         newSlot['image'] = url
-        newSlot['time'] = _.now();
+        newSlot['time'] = now();
         firebase.database().ref(DATABASE_REFERENCE.SLOT).push(newSlot)
             .then(
                 (completed) => {

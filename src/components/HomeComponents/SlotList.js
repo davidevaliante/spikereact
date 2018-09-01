@@ -2,7 +2,8 @@ import React from 'react'
 import SlotCard from '../SlotCard';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import chunk from 'lodash/chunk'
+import slice from 'lodash/slice'
 
 const SlotList = (props) => {
 
@@ -17,7 +18,7 @@ const SlotList = (props) => {
             listOfSlots.push(element)
         }
 
-        const rows = _.chunk(_.slice(listOfSlots, 0, props.maxSlot), props.cardPerRow)
+        const rows = chunk(slice(listOfSlots, 0, props.maxSlot), props.cardPerRow)
 
         return rows.map((row, index) => (
             <div className='horizontal-center' key={`slot_row_${index}`}>

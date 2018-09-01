@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import _ from 'lodash';
+import React, { Component } from 'react';
+import filter from 'lodash/filter';
+import delay from 'lodash/delay'
 import {
     Button,
     Form,
@@ -10,9 +11,9 @@ import {
     Header, Icon
 } from 'semantic-ui-react';
 import ImagePicker from './ImagePicker';
-import {pushNewBonus} from '../firebase/firebase';
+import { pushNewBonus } from '../firebase/firebase';
 import SearchField from './SearchField';
-import {ADMINPAGES} from "../enums/Constants";
+import { ADMINPAGES } from "../enums/Constants";
 import AdminNavbar from "./AdminNavbar";
 
 class AddBonus extends Component {
@@ -38,13 +39,13 @@ class AddBonus extends Component {
 
     submitNewBonus = () => {
         // resetta quali sono i field vuoti errori
-        this.setState({shouldDisplayErrors: false, emptyFields: []});
+        this.setState({ shouldDisplayErrors: false, emptyFields: [] });
 
         const name = document.getElementById('nameField').value.trim();
         if (!name) {
             let errorList = this.state.emptyFields;
             errorList.push('name');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const producer = this.state.producer
 
@@ -52,25 +53,25 @@ class AddBonus extends Component {
         if (!bonus) {
             let errorList = this.state.emptyFields;
             errorList.push('bonus');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const review = document.getElementById('reviewField').value.trim();
         if (!review) {
             let errorList = this.state.emptyFields;
             errorList.push('review');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const link = document.getElementById('linkField').value.trim();
         if (!link) {
             let errorList = this.state.emptyFields;
             errorList.push('link');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const rating = this.state.rating;
         if (!rating) {
             let errorList = this.state.emptyFields;
             errorList.push('rating');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
 
 
@@ -90,19 +91,19 @@ class AddBonus extends Component {
     }
 
     resetErrorOn = (fieldName) => {
-        const updated = _.filter(this.state.emptyFields, (field) => field !== fieldName);
-        this.setState({emptyFields: updated});
+        const updated = filter(this.state.emptyFields, (field) => field !== fieldName);
+        this.setState({ emptyFields: updated });
     }
 
     onBonusPushSuccess = () => {
-        this.setState({active: true})
-        _.delay(() => {
-            this.setState({active: false})
+        this.setState({ active: true })
+        delay(() => {
+            this.setState({ active: false })
         }, 800)
     }
 
     onProducerSelected = (producer) => {
-        this.setState({producer: producer})
+        this.setState({ producer: producer })
     }
 
     onImageSelected = (image) => {
@@ -111,35 +112,35 @@ class AddBonus extends Component {
         })
     }
 
-    handleOpen = () => this.setState({active: true})
-    handleClose = () => this.setState({active: false})
+    handleOpen = () => this.setState({ active: true })
+    handleClose = () => this.setState({ active: false })
 
 
     state = {
         shouldDisplayErrors: false,
         emptyFields: [],
         ratingStateOptions: [
-            {key: 'uno', value: '1', text: '1'},
-            {key: 'due', value: '2', text: '2'},
-            {key: 'tre', value: '3', text: '3'},
-            {key: 'quattro', value: '4', text: '4'},
-            {key: 'cinque', value: '5', text: '5'},
+            { key: 'uno', value: '1', text: '1' },
+            { key: 'due', value: '2', text: '2' },
+            { key: 'tre', value: '3', text: '3' },
+            { key: 'quattro', value: '4', text: '4' },
+            { key: 'cinque', value: '5', text: '5' },
 
         ]
     }
 
     render() {
-        const {active} = this.state
+        const { active } = this.state
         console.log(this.state);
 
         return (
             <div>
-                <AdminNavbar activeItem={ADMINPAGES.BONUS}/>
+                <AdminNavbar activeItem={ADMINPAGES.BONUS} />
                 <div
-                    style={{padding: '4rem'}}>
+                    style={{ padding: '4rem' }}>
                     <Dimmer active={active} onClickOutside={this.handleClose} page>
                         <Header as='h2' icon inverted>
-                            <Icon name='check'/>
+                            <Icon name='check' />
                             Aggiunto con successo
                         </Header>
                     </Dimmer>
@@ -167,7 +168,7 @@ class AddBonus extends Component {
                                 <label>Produttore</label>
                                 <SearchField
                                     onSelected={this.onProducerSelected}
-                                    nodename='Produttore'/>
+                                    nodename='Produttore' />
                             </Form.Field>
                         </Form.Group>
 
@@ -180,7 +181,7 @@ class AddBonus extends Component {
                                 control={Input}
                                 onChange={() => this.resetErrorOn('bonus')}
                                 label='Bonus di benvenuto'
-                                placeholder='Bonus di benvenuto'/>
+                                placeholder='Bonus di benvenuto' />
 
                             <Form.Field
                                 id='linkField'
@@ -188,7 +189,7 @@ class AddBonus extends Component {
                                 control={Input}
                                 onChange={() => this.resetErrorOn('link')}
                                 label='Link del bonus'
-                                placeholder='Copia ed incolla qui'/>
+                                placeholder='Copia ed incolla qui' />
 
                         </Form.Group>
 
@@ -198,31 +199,31 @@ class AddBonus extends Component {
                             control={TextArea}
                             onChange={() => this.resetErrorOn('review')}
                             label='Recensione'
-                            placeholder='Recensione'/>
+                            placeholder='Recensione' />
                         <Form.Group
                             widths='equal'>
                             <Form.Field>
                                 <Dropdown
                                     id='ratingField'
                                     error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
-                                    style={{marginBottom: '1rem'}}
+                                    style={{ marginBottom: '1rem' }}
                                     placeholder='Rating'
                                     onChange={(event, data) => this.onDropDownChange(data)}
                                     search
                                     selection
-                                    options={this.state.ratingStateOptions}/>
+                                    options={this.state.ratingStateOptions} />
                             </Form.Field>
 
-                            <Form.Field style={{width: '100%'}}>
+                            <Form.Field style={{ width: '100%' }}>
                                 <ImagePicker
                                     onImageSelected={this.onImageSelected}
-                                    style={{width: '100%', marginLeft: '2rem'}}/>
+                                    style={{ width: '100%', marginLeft: '2rem' }} />
                             </Form.Field>
 
 
                         </Form.Group>
                         <Form.Field
-                            style={{width: '100%'}}
+                            style={{ width: '100%' }}
                             onClick={this.submitNewBonus}
                             control={Button}>
                             Aggiungi

@@ -1,7 +1,9 @@
-import _ from 'lodash'
-import React, {Component} from 'react'
-import {Search, Grid} from 'semantic-ui-react'
-import {getBonusList, getProducerList} from '../firebase/firebase';
+import  filter from 'lodash/filter'
+import debounce from 'lodash/debounce'
+import escapeRegExp from  'lodash/escapeRegExp'
+import React, { Component } from 'react'
+import { Search } from 'semantic-ui-react'
+import { getBonusList, getProducerList } from '../firebase/firebase';
 
 
 let producerList = [];
@@ -49,20 +51,20 @@ export default class SearchField extends Component {
         }
     }
 
-    resetComponent = () => this.setState({isLoading: false, results: [], value: ''})
+    resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-    handleResultSelect = (e, {result}) => {
-        this.setState({value: result.title});
+    handleResultSelect = (e, { result }) => {
+        this.setState({ value: result.title });
         this.props.onSelected(result.original);
     }
 
-    handleSearchChange = (e, {value}) => {
-        this.setState({isLoading: true, value})
+    handleSearchChange = (e, { value }) => {
+        this.setState({ isLoading: true, value })
 
         setTimeout(() => {
             if (this.state.value.length < 1) return this.resetComponent()
 
-            const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
+            const re = new RegExp(escapeRegExp(this.state.value), 'i')
             const isMatch = result => re.test(result.title)
 
             let list = [];
@@ -80,19 +82,19 @@ export default class SearchField extends Component {
 
             this.setState({
                 isLoading: false,
-                results: _.filter(list, isMatch),
+                results: filter(list, isMatch),
             })
         }, 300)
     }
 
     render() {
-        const {isLoading, value, results} = this.state
+        const { isLoading, value, results } = this.state
 
         return (
             <Search
                 loading={isLoading}
                 onResultSelect={this.handleResultSelect}
-                onSearchChange={_.debounce(this.handleSearchChange, 500, {leading: true})}
+                onSearchChange={debounce(this.handleSearchChange, 500, { leading: true })}
                 results={results}
                 size='small'
                 value={value}

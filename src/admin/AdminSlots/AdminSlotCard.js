@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Button, Divider, Grid, Icon, List, Image} from "semantic-ui-react";
-import _ from "lodash";
-import {deleteSlotWithId} from "../../firebase/firebase";
-import {setToUpdate} from "../../reducers/ToUpdateReducer";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Button, Divider, Grid, Icon, List, Image } from "semantic-ui-react";
+import truncate from "lodash/truncate";
+import { deleteSlotWithId } from "../../firebase/firebase";
+import { setToUpdate } from "../../reducers/ToUpdateReducer";
 
 function mapStateToProps(state) {
     return {
@@ -32,30 +32,30 @@ class AdminSlotCard extends Component {
                         padding: '0.3rem'
                     }}>
                         {/*<Image className='icon slot-card-image' src={this.props.slot.image} size='mini'/>*/}
-                        <List.Icon name='github' size='large' verticalAlign='middle'/>
+                        <List.Icon name='github' size='large' verticalAlign='middle' />
                         <List.Content>
                             <List.Header as='p'>{this.props.slot.name}</List.Header>
                             <List.Description as='p'>
                                 {this.props.slot.producer.name}
-                                <Divider/>
-                                {_.truncate(this.props.slot.description, {'length': 175})}
-                                <Divider/>
+                                <Divider />
+                                {truncate(this.props.slot.description, { 'length': 175 })}
+                                <Divider />
                                 <div className='crop' >
                                     <Image src={this.props.slot.image} />
                                 </div>
-                                <Divider/>
-                                <Icon name='star'/>
+                                <Divider />
+                                <Icon name='star' />
                                 {this.props.slot.rating}
                             </List.Description>
-                            <Divider/>
+                            <Divider />
                             <Grid stackable columns={1}>
                                 <Grid.Column>
                                     <Button icon labelPosition='left' size='mini'>
-                                        <Icon name='edit outline'/>Modifica
+                                        <Icon name='edit outline' />Modifica
                                     </Button>
                                     <Button icon labelPosition='left' size='mini' floated='right' negative
-                                            onClick={() => this.deleteSlot(this.props.slot.id)}>
-                                        <Icon name='delete'/>Cancella
+                                        onClick={() => this.deleteSlot(this.props.slot.id)}>
+                                        <Icon name='delete' />Cancella
                                     </Button>
                                 </Grid.Column>
                             </Grid>
@@ -68,4 +68,4 @@ class AdminSlotCard extends Component {
     };
 }
 
-export default connect(mapStateToProps,)(AdminSlotCard);
+export default connect(mapStateToProps)(AdminSlotCard);

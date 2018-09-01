@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Divider, Icon, Button, Input, Label } from 'semantic-ui-react'
-import _ from 'lodash'
+import filter from 'lodash/filter'
 
 
 // -------PROPS---------------------
@@ -82,7 +82,7 @@ class AddArticle extends Component {
     handleDelete = (positionToRemove) => {
         console.log(`removing ${positionToRemove}`);
         this.setState(prevState => {
-            const updatedRowList = _.filter(prevState.rows, (value, index, collection) => index !== positionToRemove)
+            const updatedRowList = filter(prevState.rows, (value, index, collection) => index !== positionToRemove)
             return {
                 rows: updatedRowList,
                 inputPosition: updatedRowList.length

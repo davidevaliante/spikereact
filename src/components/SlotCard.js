@@ -1,5 +1,5 @@
 import React from 'react'
-import _ from 'lodash'
+import  truncate  from 'lodash/truncate'
 import { NavLink } from 'react-router-dom'
 import { Card, Icon, Image } from 'semantic-ui-react'
 import Radium from 'radium'
@@ -27,7 +27,7 @@ const SlotCard = (props) => {
                         <Card.Meta >
                             <span className='date'>{props.slot.producer.name}</span>
                         </Card.Meta>
-                        <Card.Description>{_.truncate(props.slot.description, { 'length': 150 })}</Card.Description>
+                        <Card.Description>{truncate(props.slot.description, { 'length': 150 })}</Card.Description>
                     </Card.Content>
                     <Card.Content extra>
                         <a>

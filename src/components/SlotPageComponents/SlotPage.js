@@ -1,13 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import Header from '../Header'
 import TipsList from './TipsList'
 import TecnicalsList from './TecnicalsList'
 import Description from './Description'
 import PlayDimmer from './PlayDimmer'
 import SlotPageBonusList from './SlotPageBonusList'
-import { Segment, Grid, Dimmer } from 'semantic-ui-react'
+import { Grid, Dimmer } from 'semantic-ui-react'
 import Footer from "../Footer";
 import YouTubeEmbed from './YouTubeEmbed'
 

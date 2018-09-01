@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import  truncate  from 'lodash/truncate'
 
 
 export const formatList = (slotList, bonusList, producerList) => {
@@ -34,7 +34,7 @@ export const formatList = (slotList, bonusList, producerList) => {
         const truncateOptions = { length: '60', omission: '...' }
         formattedSlot.push({
             title: current.name,
-            description: `${_.truncate(current.description, truncateOptions)}`,
+            description: `${truncate(current.description, truncateOptions)}`,
             image: current.image,
             original: current,
             id: slot

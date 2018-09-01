@@ -1,23 +1,16 @@
 import {
-    Button,
-    Container,
     Grid,
-    Header,
-    Image,
-    List,
     Segment,
-    Sticky, Transition, Visibility
+    Sticky
 } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import ResponsiveContainer from './ResponsiveContainer'
 import SlotList from './SlotList'
 import BonusList from './BonusList'
-import YouTubeEmbed from '../SlotPageComponents/YouTubeEmbed'
 import { connect } from 'react-redux';
 import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
-import _ from 'lodash'
 import { setOnlinePage, setHomePage, setGratisPage, setBarPage, setAboutPage } from '../../reducers/CurrentPageReducer'
 
 class HomepageLayout extends Component {

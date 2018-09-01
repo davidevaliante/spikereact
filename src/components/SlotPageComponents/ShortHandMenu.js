@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, Segment, Icon } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 const ShortHandMenu = (props) => {
 
@@ -33,7 +33,7 @@ const ShortHandMenu = (props) => {
                 Bonus Offerti
             </Button>
 
-           
+
         </div>
     )
 }

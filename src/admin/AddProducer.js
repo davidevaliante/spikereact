@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import _ from 'lodash';
+import React, { Component } from 'react';
+import delay from 'lodash/delay';
 import {
     Button,
     Form,
@@ -8,9 +8,9 @@ import {
     Header, Icon
 } from 'semantic-ui-react';
 import ImagePicker from './ImagePicker';
-import {pushNewProducer} from '../firebase/firebase';
+import { pushNewProducer } from '../firebase/firebase';
 import AdminNavbar from "./AdminNavbar";
-import {ADMINPAGES} from "../enums/Constants";
+import { ADMINPAGES } from "../enums/Constants";
 
 class AddProducer extends Component {
 
@@ -34,34 +34,34 @@ class AddProducer extends Component {
     }
 
     onImageSelected = (image) => {
-        this.setState({image: image})
+        this.setState({ image: image })
     }
 
     onProducerPushSuccess = () => {
-        this.setState({active: true})
-        _.delay(() => {
-            this.setState({active: false})
+        this.setState({ active: true })
+        delay(() => {
+            this.setState({ active: false })
         }, 800)
     }
 
-    handleOpen = () => this.setState({active: true})
-    handleClose = () => this.setState({active: false})
+    handleOpen = () => this.setState({ active: true })
+    handleClose = () => this.setState({ active: false })
 
     state = {}
 
     render() {
 
-        const {active} = this.state
+        const { active } = this.state
 
         return (
             <div>
-                <AdminNavbar activeItem={ADMINPAGES.PRODUCER}/>
+                <AdminNavbar activeItem={ADMINPAGES.PRODUCER} />
 
                 <div
-                    style={{padding: '4rem'}}>
+                    style={{ padding: '4rem' }}>
                     <Dimmer blurring active={active} onClickOutside={this.handleClose} page>
                         <Header as='h2' icon inverted>
-                            <Icon name='check'/>
+                            <Icon name='check' />
                             Aggiunto con successo
                         </Header>
                     </Dimmer>
@@ -93,10 +93,10 @@ class AddProducer extends Component {
                             </Form.Field>
                         </Form.Group>
 
-                        <ImagePicker onImageSelected={this.onImageSelected}/>
+                        <ImagePicker onImageSelected={this.onImageSelected} />
 
                         <Form.Field
-                            style={{width: '100%'}}
+                            style={{ width: '100%' }}
                             onClick={this.submitNewProducer}
                             control={Button}>
                             Aggiungi

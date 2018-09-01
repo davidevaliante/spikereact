@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import { Grid, Header, Image, Rail, Segment, Sticky } from 'semantic-ui-react'
-import _ from 'lodash'
-import Radium from 'radium'
 
 class Test extends Component {
 
@@ -24,11 +21,11 @@ class Test extends Component {
 
         return (
             <div>
-            <h2 className="tracking-in-contract-bck">Le Slot del giorno</h2>
+                <h2 className="tracking-in-contract-bck">Le Slot del giorno</h2>
 
             </div>
         )
     }
 }
 
-export default Radium(Test)
+export default Test
