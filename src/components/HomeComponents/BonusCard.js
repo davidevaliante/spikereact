@@ -24,6 +24,7 @@ const BonusCard = (props) => {
                     <Image circular src={props.bonus.image} />
                 </div>
             </Card.Content>
+
         </Card>
     )
 }

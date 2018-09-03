@@ -172,7 +172,7 @@ class AddSlot extends Component {
             time: time,
             tips: tipsField,
             tecnicals: tecnicalsField,
-            image: compressImage(this.state.image),
+            image: this.state.image,
             type: this.state.type,
             isFake: this.state.isFake
         }
