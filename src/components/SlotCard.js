@@ -4,8 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { Image } from 'semantic-ui-react-single/Image'
 import { Card } from 'semantic-ui-react-single/Card'
-
-
+import { removeHtmlFrom } from '../utils/Utils'
 const SlotCard = (props) => {
 
 
@@ -17,11 +16,11 @@ const SlotCard = (props) => {
                 <Card key={props.slot.id}>
                     <Image src={props.slot.image} style={{ height: '14rem' }} />
                     <Card.Content >
-                        <Card.Header>{props.slot.name}</Card.Header>
+                        <Card.Header>{truncate(props.slot.name, { length: 28, omission: '...' })}</Card.Header>
                         <Card.Meta >
                             <span className='date'>{props.slot.producer.name}</span>
                         </Card.Meta>
-                        <Card.Description>{truncate(props.slot.description, { 'length': 150 })}</Card.Description>
+                        <Card.Description>{truncate(removeHtmlFrom(props.slot.description), { 'length': 150 })}</Card.Description>
                     </Card.Content>
                     <Card.Content extra>
                         <a>

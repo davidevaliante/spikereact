@@ -6,6 +6,7 @@ import { Divider } from 'semantic-ui-react-single/Divider'
 
 import slice from 'lodash/slice'
 import split from 'lodash/split'
+import Parser from 'html-react-parser';
 
 
 const TecnicalsList = (props) => {
@@ -25,7 +26,7 @@ const TecnicalsList = (props) => {
                                     style={{ marginRight: '2rem' }}
                                     circular inverted color='red' name='angle right' />
                             </div>
-                            <p style={{ fontFamily: 'Raleway' }}>{t}</p>
+                            <p style={{ fontFamily: 'Raleway' }}>{Parser(`${t}`)}</p>
                         </div>
                         <Divider />
                     </div>

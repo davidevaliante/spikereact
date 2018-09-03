@@ -8,7 +8,6 @@ import PlayDimmer from './PlayDimmer'
 import SlotPageBonusList from './SlotPageBonusList'
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Dimmer } from 'semantic-ui-react-single/Dimmer'
-
 import Footer from "../Footer";
 import YouTubeEmbed from './YouTubeEmbed'
 

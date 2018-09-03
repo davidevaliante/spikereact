@@ -6,6 +6,7 @@ import { Container } from 'semantic-ui-react-single/Container'
 import { Header } from 'semantic-ui-react-single/Header'
 import { Button } from 'semantic-ui-react-single/Button'
 import { Icon } from 'semantic-ui-react-single/Icon'
+import Parser from 'html-react-parser';
 
 const Description = (props) => {
 
@@ -20,8 +21,9 @@ const Description = (props) => {
                 </Header>
 
                 <p style={{ fontSize: '1.33em', fontFamily: 'Raleway' }}>
-                    {props.text}
+                    {Parser(`${props.text}`)}
                 </p>
+
                 <div className='slot-playbutton'>
                     <Button animated color='red' size='huge' onClick={() => props.dispatch(setUserPlaying())}>
                         <Button.Content visible>Provala Subito !</Button.Content>
