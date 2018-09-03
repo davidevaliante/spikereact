@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from 'semantic-ui-react/dist/commonjs/elements/Header'
+import { Header } from 'semantic-ui-react-single/Header'
 
 
 const YouTubeEmbed = (props) => {

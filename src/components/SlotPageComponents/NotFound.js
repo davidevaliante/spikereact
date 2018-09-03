@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Container from 'semantic-ui-react/dist/commonjs/elements/Container'
-import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment'
-import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
+import { Container } from 'semantic-ui-react-single/Container'
+import { Segment } from 'semantic-ui-react/dist/commonjs/elements/Segment'
+import { Image } from 'semantic-ui-react-single/Image'
 
 
 

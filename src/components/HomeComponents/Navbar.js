@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu'
-import Visibility from 'semantic-ui-react/dist/commonjs/behaviors/Visibility'
-import Container from 'semantic-ui-react/dist/commonjs/elements/Container'
+import { Menu } from 'semantic-ui-react-single/Menu'
+import { Visibility } from 'semantic-ui-react-single/Visibility'
+import { Container } from 'semantic-ui-react-single/Container'
 
 import { NavLink } from 'react-router-dom'
 import NavbarSearchBar from './NavbarSearchBar';

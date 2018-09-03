@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
-import Responsive from 'semantic-ui-react/dist/commonjs/addons/Responsive'
+import { Grid } from 'semantic-ui-react-single/Grid'
+import { Responsive } from 'semantic-ui-react-single/Responsive'
 import { getSlotList } from "../../firebase/firebase";
 import AdminSlotCard from "./AdminSlotCard";
 import AdminNavbar from "../AdminNavbar";

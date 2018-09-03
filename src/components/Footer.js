@@ -1,12 +1,11 @@
-import Container from 'semantic-ui-react/dist/commonjs/elements/Container'
-import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
-import Header from 'semantic-ui-react/dist/commonjs/elements/Header'
-import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
-import List from 'semantic-ui-react/dist/commonjs/elements/List'
-import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment'
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+import { Container } from 'semantic-ui-react-single/Container'
+import { Grid } from 'semantic-ui-react-single/Grid'
+import { Header } from 'semantic-ui-react-single/Header'
+import { Image } from 'semantic-ui-react-single/Image'
+import { List } from 'semantic-ui-react-single/List'
+import { Segment } from 'semantic-ui-react-single/Segment'
+import { Icon } from 'semantic-ui-react-single/Icon'
 
-import "../style/base.css"
 import React from "react";
 import { ROUTE } from "../enums/Constants";
 import { NavLink } from 'react-router-dom'

@@ -1,27 +1,19 @@
 import React from 'react'
 import truncate from 'lodash/truncate'
 import { NavLink } from 'react-router-dom'
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
-import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
-import Card from 'semantic-ui-react/dist/commonjs/views/Card'
-import Radium from 'radium'
+import { Icon } from 'semantic-ui-react-single/Icon'
+import { Image } from 'semantic-ui-react-single/Image'
+import { Card } from 'semantic-ui-react-single/Card'
 
 
 const SlotCard = (props) => {
 
-    const cardShadow = {
-        boxShadow: '10px 10px 34px -7px rgba(46,46,46,1)',
-        margin: '1rem 1rem 1rem 1rem',
-        transition: "all ease .5s",
-        ":hover": {
-            boxShadow: '0px 0px 28px 7px rgba(230,39,39,1)'
-        }
-    }
+
 
     return (
 
         <NavLink to={`slot/${props.slot.id}`}>
-            <div style={cardShadow}>
+            <div className='slot-card-shadow-animation'>
                 <Card key={props.slot.id}>
                     <Image src={props.slot.image} style={{ height: '14rem' }} />
                     <Card.Content >
@@ -43,4 +35,4 @@ const SlotCard = (props) => {
     );
 }
 
-export default Radium(SlotCard);
+export default SlotCard;

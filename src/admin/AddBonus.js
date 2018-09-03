@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import filter from 'lodash/filter';
 import delay from 'lodash/delay'
-import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
-import Form from 'semantic-ui-react/dist/commonjs/collections/Form'
-import Input from 'semantic-ui-react/dist/commonjs/elements/Input'
-import TextArea from 'semantic-ui-react/dist/commonjs/addons/TextArea'
-import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown'
-import Dimmer from 'semantic-ui-react/dist/commonjs/modules/Dimmer'
-import Header from 'semantic-ui-react/dist/commonjs/elements/Header'
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+import { Button } from 'semantic-ui-react-single/Button'
+import { Form } from 'semantic-ui-react-single/Form'
+import { Input } from 'semantic-ui-react-single/Input'
+import { TextArea } from 'semantic-ui-react-single/TextArea'
+import { Dropdown } from 'semantic-ui-react-single/Dropdown'
+import { Dimmer } from 'semantic-ui-react-single/Dimmer'
+import { Header } from 'semantic-ui-react-single/Header'
+import { Icon } from 'semantic-ui-react-single/Icon'
 
 
 import ImagePicker from './ImagePicker';

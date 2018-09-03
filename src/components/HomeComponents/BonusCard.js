@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from 'semantic-ui-react/dist/commonjs/views/Card'
-import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
+import { Card } from 'semantic-ui-react-single/Card'
+import { Image } from 'semantic-ui-react-single/Image'
 
 
 

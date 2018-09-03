@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from 'semantic-ui-react/dist/commonjs/elements/Header'
-import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
-import Divider from 'semantic-ui-react/dist/commonjs/elements/Divider'
+import { Header } from 'semantic-ui-react-single/Header'
+import { Grid } from 'semantic-ui-react-single/Grid'
+import { Icon } from 'semantic-ui-react-single/Icon'
+import { Divider } from 'semantic-ui-react-single/Divider'
 
 import slice from 'lodash/slice'
 import split from 'lodash/split'

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { getUserAuthStatus } from './firebase/firebase';
 import '../src/style/base.css';
 import '../src/style/sass.scss';
-import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-react-single/css'
 
 
 

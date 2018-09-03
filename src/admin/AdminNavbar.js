@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
-import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu'
-import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown'
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
-import Search from 'semantic-ui-react/dist/commonjs/modules/Search'
+import { Menu } from 'semantic-ui-react-single/Menu'
+import { Dropdown } from 'semantic-ui-react-single/Dropdown'
+import { Icon } from 'semantic-ui-react-single/Icon'
+import { Search } from 'semantic-ui-react-single/Search'
 import { ADMINPAGES, ROUTE, SLOT_TYPES } from "../enums/Constants";
 
 class AdminNavbar extends Component {

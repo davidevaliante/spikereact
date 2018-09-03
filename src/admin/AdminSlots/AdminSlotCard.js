@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
-import Divider from 'semantic-ui-react/dist/commonjs/elements/Divider'
-import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
-import List from 'semantic-ui-react/dist/commonjs/elements/List'
-import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
+import { Button } from 'semantic-ui-react-single/Button'
+import { Icon } from 'semantic-ui-react-single/Icon'
+import { Divider } from 'semantic-ui-react-single/Divider'
+import { Grid } from 'semantic-ui-react-single/Grid'
+import { List } from 'semantic-ui-react-single/List'
+import { Image } from 'semantic-ui-react-single/Image'
 
 import truncate from "lodash/truncate";
 import { deleteSlotWithId } from "../../firebase/firebase";

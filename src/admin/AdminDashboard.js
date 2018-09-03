@@ -2,7 +2,7 @@ import React, { Component, ReactDOM } from 'react';
 import { connect } from 'react-redux';
 import AdminNavbar from "./AdminNavbar";
 import { ADMINPAGES } from "../enums/Constants";
-import Responsive from 'semantic-ui-react/dist/commonjs/addons/Responsive';
+import { Responsive } from 'semantic-ui-react-single/Responsive';
 import AddTipsList from './AdminSlots/AddTipsList'
 
 

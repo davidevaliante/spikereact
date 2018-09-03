@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment'
-import Visibility from 'semantic-ui-react/dist/commonjs/behaviors/Visibility'
+import { Segment } from 'semantic-ui-react-single/Segment'
+import { Visibility } from 'semantic-ui-react-single/Visibility'
 
 import { connect } from 'react-redux'
 import { setAboutPage } from '../reducers/CurrentPageReducer'

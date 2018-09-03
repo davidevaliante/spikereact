@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
+import { Button } from 'semantic-ui-react-single/Button'
 import { setUserPlaying } from '../../reducers/PlayModeReducer'
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+import { Icon } from 'semantic-ui-react-single/Icon'
 
 
 const ShortHandMenu = (props) => {
