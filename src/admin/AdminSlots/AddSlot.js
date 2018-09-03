@@ -36,7 +36,7 @@ import delay from 'lodash/delay';
 import { SLOT_TYPES } from '../../enums/Constants.js';
 import AdminNavbar from "../AdminNavbar";
 import { ADMINPAGES } from "../../enums/Constants";
-
+import { compressImage } from '../../utils/Utils'
 
 class AddSlot extends Component {
 
@@ -172,7 +172,7 @@ class AddSlot extends Component {
             time: time,
             tips: tipsField,
             tecnicals: tecnicalsField,
-            image: this.state.image,
+            image: compressImage(this.state.image),
             type: this.state.type,
             isFake: this.state.isFake
         }

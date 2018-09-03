@@ -37,7 +37,7 @@ const SlotPage = (props) => {
                     </Grid.Row>
                 </Grid>
                 <SlotPageBonusList bonusList={props.currentSlot.bonus} />
-                <YouTubeEmbed width='900' height='450' />
+                <YouTubeEmbed width='900' height='450' linkYoutube={props.currentSlot.linkYoutube} />
                 <Footer />
             </Dimmer.Dimmable>
         </div>

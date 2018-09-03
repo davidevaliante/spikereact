@@ -1,5 +1,20 @@
-import  truncate  from 'lodash/truncate'
+import truncate from 'lodash/truncate'
+import ImageCompressor from 'image-compressor.js';
 
+export const compressImage = (file) => {
+    let iresult;
+    new ImageCompressor(file, {
+        quality: .6,
+        success(result) {
+            const formData = new FormData();
+
+            formData.append('file', result, result.name);
+            iresult = result
+
+        }
+    })
+    return iresult;
+}
 
 export const formatList = (slotList, bonusList, producerList) => {
 

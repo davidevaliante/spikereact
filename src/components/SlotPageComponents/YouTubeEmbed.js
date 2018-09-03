@@ -1,5 +1,6 @@
 import React from 'react'
 import { Header } from 'semantic-ui-react-single/Header'
+import split from 'lodash/split'
 
 
 const YouTubeEmbed = (props) => {
@@ -8,6 +9,11 @@ const YouTubeEmbed = (props) => {
         window.open('https://www.youtube.com/user/SpikeTuscani')
     }
 
+    const getYouTubeEmbedLink = () => {
+        const splitted = split(props.linkYoutube, '=')
+        const id = splitted[splitted.length - 1]
+        return `https://www.youtube.com/embed/${id}`
+    }
     // https://www.youtube.com/embed/ + id del video
 
     return (
@@ -18,7 +24,7 @@ const YouTubeEmbed = (props) => {
                 title='ytcontent'
                 width={props.width}
                 height={props.height}
-                src='https://www.youtube.com/embed/EiazMhG7ZM8'
+                src={getYouTubeEmbedLink()}
 
             ></iframe>
         </div>
