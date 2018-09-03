@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import delay from 'lodash/delay';
-import {
-    Button,
-    Form,
-    Input,
-    Dimmer,
-    Header, Icon
-} from 'semantic-ui-react';
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
+import Form from 'semantic-ui-react/dist/commonjs/collections/Form'
+import Input from 'semantic-ui-react/dist/commonjs/elements/Input'
+import Dimmer from 'semantic-ui-react/dist/commonjs/modules/Dimmer'
+import Header from 'semantic-ui-react/dist/commonjs/elements/Header'
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+
+
 import ImagePicker from './ImagePicker';
 import { pushNewProducer } from '../firebase/firebase';
 import AdminNavbar from "./AdminNavbar";

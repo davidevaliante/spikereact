@@ -36,7 +36,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADDBONUS} component={AddBonus} />
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
-                    <Route path={ROUTE.PAGE_NOT_FOUND} component={NotFound} />
+                    <Route path={ROUTE.ERROR404} component={NotFound} />
                     <Test path='/test' component={Test} />
                 </Switch>
 

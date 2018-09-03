@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'semantic-ui-react'
+import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
 
 export const AamsBanner = (props) => {
     return (

@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Grid, Responsive} from 'semantic-ui-react'
-import {getSlotList} from "../../firebase/firebase";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
+import Responsive from 'semantic-ui-react/dist/commonjs/addons/Responsive'
+import { getSlotList } from "../../firebase/firebase";
 import AdminSlotCard from "./AdminSlotCard";
 import AdminNavbar from "../AdminNavbar";
-import {ADMINPAGES} from "../../enums/Constants";
-import {setToUpdate} from "../../reducers/ToUpdateReducer";
+import { ADMINPAGES } from "../../enums/Constants";
+import { setToUpdate } from "../../reducers/ToUpdateReducer";
 
 function mapStateToProps(state) {
     return {
@@ -45,7 +46,7 @@ class SlotDashboard extends Component {
     }
 
     updateSlotList = () => {
-        if (this.props.toUpdate){
+        if (this.props.toUpdate) {
             //do shit
             console.log('Aggiornare slot list', this.state.slotList, this.list)
             getSlotList(this.onSlotListFetched);
@@ -55,7 +56,7 @@ class SlotDashboard extends Component {
 
     renderSlot = () => {
         return this.list.map((slot) => (slot &&
-            <Grid.Column><AdminSlotCard slot={slot} key={slot.id}/></Grid.Column>))
+            <Grid.Column><AdminSlotCard slot={slot} key={slot.id} /></Grid.Column>))
     };
 
     render() {
@@ -64,8 +65,8 @@ class SlotDashboard extends Component {
         this.updateSlotList();
         return (
             <Responsive>
-                <AdminNavbar activeItem={ADMINPAGES.ADMIN}/>
-                <Grid stackable columns={4} style={{padding: '2rem'}}>
+                <AdminNavbar activeItem={ADMINPAGES.ADMIN} />
+                <Grid stackable columns={4} style={{ padding: '2rem' }}>
                     {this.renderSlot()}
                 </Grid>
             </Responsive>
@@ -73,4 +74,4 @@ class SlotDashboard extends Component {
     }
 }
 
-export default connect(mapStateToProps,)(SlotDashboard);
+export default connect(mapStateToProps)(SlotDashboard);

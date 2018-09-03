@@ -1,7 +1,9 @@
 import React from 'react'
-import  truncate  from 'lodash/truncate'
+import truncate from 'lodash/truncate'
 import { NavLink } from 'react-router-dom'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
+import Card from 'semantic-ui-react/dist/commonjs/views/Card'
 import Radium from 'radium'
 
 

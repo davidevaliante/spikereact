@@ -1,6 +1,6 @@
 import React from 'react'
-import {Card, Image} from 'semantic-ui-react'
-
+import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
+import Card from 'semantic-ui-react/dist/commonjs/views/Card'
 const SlotPageBonusCard = (props) => {
 
     const handleClick = () => {
@@ -13,12 +13,12 @@ const SlotPageBonusCard = (props) => {
         <div>
             <Card color='red' onClick={(event) => handleClick()}>
                 <Card.Content>
-                    <Card.Header style={{marginBottom:'0.8rem'}}> <Image src={image} size='small' circular /></Card.Header>                        
-                    <Card.Meta style={{marginBottom:'0.8rem'}}>Voto {rating}</Card.Meta>
+                    <Card.Header style={{ marginBottom: '0.8rem' }}> <Image src={image} size='small' circular /></Card.Header>
+                    <Card.Meta style={{ marginBottom: '0.8rem' }}>Voto {rating}</Card.Meta>
                     <Card.Description>{bonus}</Card.Description>
                 </Card.Content>
             </Card>
-  
+
         </div>
     )
 }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { Divider, Icon, Button, Input, Label } from 'semantic-ui-react'
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
+import Input from 'semantic-ui-react/dist/commonjs/elements/Input'
+
 import filter from 'lodash/filter'
 
 

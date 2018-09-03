@@ -6,7 +6,9 @@ import TecnicalsList from './TecnicalsList'
 import Description from './Description'
 import PlayDimmer from './PlayDimmer'
 import SlotPageBonusList from './SlotPageBonusList'
-import { Grid, Dimmer } from 'semantic-ui-react'
+import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
+import Dimmer from 'semantic-ui-react/dist/commonjs/modules/Dimmer'
+
 import Footer from "../Footer";
 import YouTubeEmbed from './YouTubeEmbed'
 

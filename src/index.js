@@ -9,8 +9,10 @@ import 'semantic-ui-css/semantic.min.css';
 import '../src/style/base.css';
 import '../src/style/sass.scss';
 
+import { fromOnlineToGratis } from './firebase/firebase'
 
-getUserAuthStatus(store);
+
+// fromOnlineToGratis()
 
 
 // store Provider

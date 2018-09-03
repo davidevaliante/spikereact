@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Icon, Segment, Visibility } from 'semantic-ui-react'
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment'
+import Visibility from 'semantic-ui-react/dist/commonjs/behaviors/Visibility'
+
 import { connect } from 'react-redux'
-import { setUserPlaying } from '.././reducers/PlayModeReducer'
 import { setAboutPage } from '../reducers/CurrentPageReducer'
 
 import Navbar from './HomeComponents/Navbar'
@@ -108,14 +109,8 @@ class Header extends Component {
                                     <div className='align-center'>
                                         <h1 className='header-spike-text'>{name}</h1>
                                         <h1 className='slideRight'>{producer}</h1>
-                                        <ShortHandMenu />
-                                        <div style={{ marginTop: '3rem' }}>
-                                            <Button animated size='huge' color='white' onClick={() => this.props.dispatch(setUserPlaying())}>
-                                                <Button.Content visible>Provala Subito !</Button.Content>
-                                                <Button.Content hidden>
-                                                    <Icon name='gamepad' />
-                                                </Button.Content>
-                                            </Button>
+                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                            <ShortHandMenu />
                                         </div>
                                     </div>
                                 </div>

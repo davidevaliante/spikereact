@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { setUserPlaying } from '../../reducers/PlayModeReducer'
-import { Segment, Container, Header, Button, Icon } from 'semantic-ui-react'
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment'
+import Container from 'semantic-ui-react/dist/commonjs/elements/Container'
+import Header from 'semantic-ui-react/dist/commonjs/elements/Header'
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
 
 const Description = (props) => {
 

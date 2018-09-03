@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button } from 'semantic-ui-react'
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
+import { setUserPlaying } from '../../reducers/PlayModeReducer'
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+
 
 const ShortHandMenu = (props) => {
 
@@ -14,24 +17,52 @@ const ShortHandMenu = (props) => {
 
 
 
+
+
+
     return (
-        <div className='fast-buttons-layout'>
+        <div className='shorthand-container-style'>
 
-            <Button inverted color='red' style={{ marginRight: '1.6rem' }} onClick={() => smoothScrollTo('slot-page-description')}>
-                Descrizione
-            </Button>
+            <div className='small-buttons-container'>
+                <Button
+                    style={{ width: '30%', height: '100%', marginRight: '1.6rem' }}
+                    inverted
+                    color='red'
+                    onClick={() => smoothScrollTo('slot-page-description')}>
+                    Descrizione e strategia
+                </Button>
 
-            <Button inverted color='red' style={{ marginRight: '1.6rem' }} onClick={() => smoothScrollTo('slot-page-lists')}>
-                Consigli di gioco
-            </Button>
+                <Button
+                    style={{ width: '30%', marginRight: '1.6rem' }}
+                    inverted
+                    color='red'
+                    onClick={() => smoothScrollTo('slot-page-lists')}>
+                    Consigli di gioco
+                </Button>
 
-            <Button inverted color='red' style={{ marginRight: '1.6rem' }} onClick={() => smoothScrollTo('slot-page-lists')}>
-                Scheda tecnica
-            </Button>
+                <Button
+                    style={{ width: '30%' }}
+                    inverted
+                    color='red'
+                    onClick={() => smoothScrollTo('slot-page-lists')}>
+                    Scheda tecnica
+                </Button>
+            </div>
 
-            <Button inverted color='red' style={{ marginRight: '1.6rem' }} onClick={() => smoothScrollTo('slot-page-bonus')}>
-                Bonus Offerti
-            </Button>
+            <div className='big-buttons-container'>
+                <Button style={{ width: '45%' }} animated size='huge' color='white' onClick={() => props.dispatch(setUserPlaying())}>
+                    <Button.Content visible>Provala Subito</Button.Content>
+                    <Button.Content hidden>
+                        <Icon name='gamepad' />
+                    </Button.Content>
+                </Button>
+
+                <Button style={{ width: '45%' }} size='huge' color='red' onClick={() => smoothScrollTo('slot-page-bonus')}>
+                    Bonus Offerti
+                </Button>
+
+            </div>
+
 
 
         </div>

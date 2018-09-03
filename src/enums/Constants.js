@@ -36,6 +36,7 @@ export const ROUTE = {
     SLOT_GRATIS: '/slot-gratis',
     SLOT_BAR: '/slot-bar',
     ABOUT: '/about',
+    ERROR404: '*',
 
     ADMIN: `${admin}`,
     ADMINSLOT: `${admin}/slots`,

@@ -1,16 +1,61 @@
 import firebase from 'firebase/app';
 import 'firebase/database'
-import 'firebase/auth'
 import 'firebase/storage'
 import { setUserLoggedIn, setUserLoggedOut, setUserName, setUserId } from './../reducers/AuthReducer';
 import { configuration } from './firebaseConfig';
 import { STORAGE_FOLDERS, DATABASE_REFERENCE } from '../enums/Constants';
-import  now  from 'lodash/now';
+import now from 'lodash/now';
+import axios from 'axios'
 
 const config = configuration;
 const firebaseApp = firebase.initializeApp(config);
 
 export const firebaseDatabase = firebase.database();
+
+export const fromOnlineToGratis = () => {
+    axios.get('https://spike-2481d.firebaseio.com/Slots.json')
+        .then(
+            // success
+            (response) => {
+                const list = response.data
+                for (const key in list) {
+                    let current = list[key]
+                    if (current.type === 'ONLINE') {
+                        current['type'] = 'GRATIS'
+                        onlineToGratis(key, current)
+                    }
+                }
+            }
+        )
+        .catch(
+            (error) => { console.log(error) }
+        )
+        .then(
+            // sempre eseguita
+            () => { }
+        )
+}
+
+export const onlineToGratis = (id, obj) => {
+    axios.patch(`https://spike-2481d.firebaseio.com/Slots/${id}/.json`, obj)
+        .then(
+            (success) => console.log('PATCH_SUCCESS', success)
+        )
+        .catch(
+            (error) => console.log('PATCH_ERROR', error)
+        )
+}
+
+export const pushNewSlotToRest = (id, obj) => {
+    axios.put(`https://spike-2481d.firebaseio.com/TestSlot/${id}/.json`, obj)
+        .then(
+            // fa automaticamente PUSH, l'id del push è contenuto in success.data.name
+            (success) => console.log('POST_SUCCESS', success.data.name)
+        )
+        .catch(
+            (error) => console.log('POST_ERROR', error)
+        )
+}
 
 
 export const pushNewImage = (image, folderName, callback) => {
@@ -137,16 +182,4 @@ export const deleteSlotWithId = (id, callback) => {
 }
 
 
-export const getUserAuthStatus = (store) => {
-    firebaseApp.auth().onAuthStateChanged((user) => {
-        if (!user) {
-            store.dispatch(setUserLoggedOut());
-            store.dispatch(setUserId(undefined));
-            store.dispatch(setUserName(undefined));
-        } else {
-            store.dispatch(setUserLoggedIn());
-            store.dispatch(setUserId("someuserid"));
-            store.dispatch(setUserName("Need to fecth this"));
-        }
-    });
-}
+

@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {
-    Container,
-    Menu,
-    Visibility,
-} from 'semantic-ui-react'
+import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu'
+import Visibility from 'semantic-ui-react/dist/commonjs/behaviors/Visibility'
+import Container from 'semantic-ui-react/dist/commonjs/elements/Container'
+
 import { NavLink } from 'react-router-dom'
 import NavbarSearchBar from './NavbarSearchBar';
 import { PAGES, ROUTE } from '../../enums/Constants';
-import { setHomePage, setBarPage, setOnlinePage, setGratisPage } from '../../reducers/CurrentPageReducer';
+import { setHomePage, setBarPage, setGratisPage } from '../../reducers/CurrentPageReducer';
 import logo from '../../static/slot-icon.svg';
 
 
@@ -20,7 +19,7 @@ class Navbar extends Component {
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
 
-    
+
 
     updateCurrentPage = (page) => {
         switch (page) {
@@ -31,10 +30,6 @@ class Navbar extends Component {
             case PAGES.SLOT_BAR:
                 document.getElementById('bar-nav-link').click()
                 this.props.dispatch(setBarPage())
-                break;
-            case PAGES.SLOT_ONLINE:
-                document.getElementById('slot-nav-link').click()
-                this.props.dispatch(setOnlinePage())
                 break;
             case PAGES.SLOT_GRATIS:
                 document.getElementById('gratis-nav-link').click()
@@ -74,12 +69,7 @@ class Navbar extends Component {
                             <NavLink id='home-nav-link' to='/'>Home</NavLink>
                         </Menu.Item>
 
-                        <Menu.Item
-                            as='a'
-                            onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_ONLINE)}
-                            active={this.props.displaying === PAGES.SLOT_ONLINE}>
-                            <NavLink id='slot-nav-link' to={ROUTE.SLOT_ONLINE}>Slot Online</NavLink>
-                        </Menu.Item>
+
 
                         <Menu.Item
                             as='a'

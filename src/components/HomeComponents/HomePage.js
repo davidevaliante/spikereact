@@ -1,8 +1,7 @@
-import {
-    Grid,
-    Segment,
-    Sticky
-} from 'semantic-ui-react'
+import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment'
+import Sticky from 'semantic-ui-react/dist/commonjs/modules/Sticky'
+import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown'
 import React, { Component } from 'react'
 import ResponsiveContainer from './ResponsiveContainer'
 import SlotList from './SlotList'
@@ -11,22 +10,24 @@ import { connect } from 'react-redux';
 import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
-import { setOnlinePage, setHomePage, setGratisPage, setBarPage, setAboutPage } from '../../reducers/CurrentPageReducer'
+import { setHomePage, setGratisPage, setBarPage, setAboutPage } from '../../reducers/CurrentPageReducer'
 
 class HomepageLayout extends Component {
     state = {};
     title = '';
 
     handleContextRef = contextRef => this.setState({ contextRef })
+    handleChange = (e, { value }) => this.setState({ order: value })
 
-
+    options = [
+        { key: 1, text: 'Rating', value: 'rating' },
+        { key: 2, text: 'Data', value: 'time' },
+        { key: 3, text: 'Nome', value: 'name' }
+    ]
 
     getType(path) {
         switch (path) {
-            case ROUTE.SLOT_ONLINE:
-                this.title = 'Slot Online'
-                this.props.dispatch(setOnlinePage())
-                return SLOT_TYPES.ONLINE;
+
             case ROUTE.SLOT_BAR:
                 this.title = 'Slot da Bar'
                 this.props.dispatch(setBarPage())
@@ -48,9 +49,7 @@ class HomepageLayout extends Component {
     render() {
         const { contextRef } = this.state
         const type = this.getType(this.props.match.path)
-        console.log(type);
-
-        // a quale component mettere  ref={this.handleContextRef} ????
+        const { order } = this.state
 
         return (
             <ResponsiveContainer>
@@ -76,9 +75,16 @@ class HomepageLayout extends Component {
                     <Grid style={{ marginTop: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
                         <Grid.Row style={{ paddingBottom: '4rem' }}>
                             <Grid.Column width={12} style={{ paddingLeft: '0' }}>
-
+                                <Dropdown
+                                    style={{ marginBottom: '2rem' }}
+                                    onChange={this.handleChange}
+                                    options={this.options}
+                                    placeholder='Ordina per'
+                                    selection
+                                    value={order}
+                                />
                                 <div ref={this.handleContextRef}>
-                                    <SlotList cardPerRow={3} maxSlot={9} type={type} />
+                                    <SlotList cardPerRow={3} maxSlot={27} type={type} order={order} />
                                 </div>
                             </Grid.Column>
 

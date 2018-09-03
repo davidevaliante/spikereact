@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import {
-    Responsive,
-} from 'semantic-ui-react'
+import Responsive from 'semantic-ui-react/dist/commonjs/addons/Responsive'
 import { connect } from 'react-redux'
 import Header from '../Header'
 

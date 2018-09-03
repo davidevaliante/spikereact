@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import filter from 'lodash/filter';
 import delay from 'lodash/delay'
-import {
-    Button,
-    Form,
-    Input,
-    TextArea,
-    Dropdown,
-    Dimmer,
-    Header, Icon
-} from 'semantic-ui-react';
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
+import Form from 'semantic-ui-react/dist/commonjs/collections/Form'
+import Input from 'semantic-ui-react/dist/commonjs/elements/Input'
+import TextArea from 'semantic-ui-react/dist/commonjs/addons/TextArea'
+import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown'
+import Dimmer from 'semantic-ui-react/dist/commonjs/modules/Dimmer'
+import Header from 'semantic-ui-react/dist/commonjs/elements/Header'
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+
+
 import ImagePicker from './ImagePicker';
 import { pushNewBonus } from '../firebase/firebase';
 import SearchField from './SearchField';

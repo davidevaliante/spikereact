@@ -4,18 +4,33 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import chunk from 'lodash/chunk'
 import slice from 'lodash/slice'
+import orderBy from 'lodash/orderBy'
 
 const SlotList = (props) => {
 
-    const slotListToRows = slotList => {
+    const slotListToRows = (slotList, ordering) => {
 
-        const listOfSlots = []
+        let listOfSlots = []
         for (const key in slotList) {
             const element = slotList[key]
             if (props.type && element.type !== props.type)
                 continue
             element['id'] = key
             listOfSlots.push(element)
+        }
+
+        switch(ordering){
+            case 'time':
+                listOfSlots=orderBy(listOfSlots,['time'],['desc'])
+                break
+            case 'rating':
+                listOfSlots=orderBy(listOfSlots,['rating'],['desc'])
+                break
+            case 'name':
+                listOfSlots=orderBy(listOfSlots,['name'],['asc'])
+                break
+            default:
+                // pass
         }
 
         const rows = chunk(slice(listOfSlots, 0, props.maxSlot), props.cardPerRow)
@@ -32,7 +47,7 @@ const SlotList = (props) => {
 
     return (
         <div className='vertical-center'>
-            {props.slotList && slotListToRows(props.slotList)}
+            {props.slotList && slotListToRows(props.slotList, props.order)}
         </div>
     )
 }

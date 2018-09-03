@@ -8,7 +8,7 @@ import { formatList } from '../../utils/Utils'
 import { onSlotListFetched, onBonusListFetched, onProducerListFetched } from '../../utils/Callbacks'
 import { PAGES } from '../../enums/Constants'
 import React, { Component } from 'react'
-import { Search } from 'semantic-ui-react'
+import Search from 'semantic-ui-react/dist/commonjs/modules/Search'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getSlotList, getBonusList, getProducerList } from '../../firebase/firebase';

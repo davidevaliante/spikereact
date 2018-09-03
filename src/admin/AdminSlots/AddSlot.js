@@ -1,14 +1,31 @@
 import React, { Component } from 'react'
-import {
-    Button,
-    Form,
-    Input,
-    Radio,
-    TextArea,
-    Dropdown,
-    Dimmer,
-    Header, Icon, FormField
-} from 'semantic-ui-react'
+
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
+import Form from 'semantic-ui-react/dist/commonjs/collections/Form'
+import Input from 'semantic-ui-react/dist/commonjs/elements/Input'
+import Radio from 'semantic-ui-react/dist/commonjs/addons/Radio'
+import TextArea from 'semantic-ui-react/dist/commonjs/addons/TextArea'
+import Dropdown from 'semantic-ui-react/dist/commonjs/modules/Dropdown'
+import Dimmer from 'semantic-ui-react/dist/commonjs/modules/Dimmer'
+import Header from 'semantic-ui-react/dist/commonjs/elements/Header'
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+import FormField from 'semantic-ui-react/dist/commonjs/collections/Form'
+
+// NON CANCELLARE QUESTO BLOCCO COMMENTI - Davide
+/* import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
+import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
+import Divider from 'semantic-ui-react/dist/commonjs/elements/Divider'
+import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
+import List from 'semantic-ui-react/dist/commonjs/elements/List'
+import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
+import Search from 'semantic-ui-react/dist/commonjs/modules/Search'
+import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu'
+import Responsive from 'semantic-ui-react/dist/commonjs/addons/Responsive'
+import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
+import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment'
+import Sticky from 'semantic-ui-react/dist/commonjs/modules/Sticky'
+import  Visibility  from'semantic-ui-react/dist/commonjs/behaviors/Visibility'
+import Container from 'semantic-ui-react/dist/commonjs/elements/Container' */
 
 import { pushNewSlot } from '../../firebase/firebase.js'
 import SearchField from '../SearchField.js';
@@ -27,7 +44,6 @@ class AddSlot extends Component {
         slotTypeOptions: [
             { key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar' },
             { key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis' },
-            { key: 'three', value: SLOT_TYPES.ONLINE, text: 'Slot online' }
         ],
         shouldDisplayErrors: false,
         emptyFields: [],

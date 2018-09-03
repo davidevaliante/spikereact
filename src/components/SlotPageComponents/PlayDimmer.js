@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Dimmer } from 'semantic-ui-react'
+import Dimmer from 'semantic-ui-react/dist/commonjs/modules/Dimmer'
 import { setUserNotPlaying } from '../../reducers/PlayModeReducer'
 
 const PlayDimmer = (props) => {

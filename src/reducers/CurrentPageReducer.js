@@ -10,8 +10,6 @@ const currentPageReducer = (state = defaultCurrentPageState, action) => {
             return PAGES.HOME
         case PAGES.SLOT_BAR:
             return PAGES.SLOT_BAR
-        case PAGES.SLOT_ONLINE:
-            return PAGES.SLOT_ONLINE
         case PAGES.SLOT_GRATIS:
             return PAGES.SLOT_GRATIS
         case PAGES.ABOUT:
@@ -40,11 +38,6 @@ export const setBarPage = () => {
     }
 }
 
-export const setOnlinePage = () => {
-    return {
-        type: PAGES.SLOT_ONLINE,
-    }
-}
 
 export const setGratisPage = () => {
     return {

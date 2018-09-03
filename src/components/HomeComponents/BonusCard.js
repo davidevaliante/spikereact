@@ -1,5 +1,7 @@
 import React from 'react'
-import { Card, Image } from 'semantic-ui-react'
+import Card from 'semantic-ui-react/dist/commonjs/views/Card'
+import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
+
 
 
 const BonusCard = (props) => {

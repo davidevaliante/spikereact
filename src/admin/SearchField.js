@@ -1,8 +1,8 @@
-import  filter from 'lodash/filter'
+import filter from 'lodash/filter'
 import debounce from 'lodash/debounce'
-import escapeRegExp from  'lodash/escapeRegExp'
+import escapeRegExp from 'lodash/escapeRegExp'
 import React, { Component } from 'react'
-import { Search } from 'semantic-ui-react'
+import Search from 'semantic-ui-react/dist/commonjs/modules/Search'
 import { getBonusList, getProducerList } from '../firebase/firebase';
 
 
