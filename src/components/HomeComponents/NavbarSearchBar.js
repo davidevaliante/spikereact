@@ -87,7 +87,7 @@ class NavbarSearchBar extends Component {
         setTimeout(() => {
             if (this.state.value.length < 1) return this.resetComponent()
 
-            const re = new RegExp(escapeRegExp(this.state.value), 'i')
+            const re = new RegExp(escapeRegExp(this.state.value.trim()), 'i')
             const isMatch = result => re.test(result.title)
 
             const filteredResults = reduce(

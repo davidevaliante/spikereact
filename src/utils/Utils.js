@@ -1,5 +1,4 @@
 import truncate from 'lodash/truncate'
-import ImageCompressor from 'image-compressor.js';
 
 export const removeHtmlFrom = (str) => {
     if ((str === null) || (str === ''))
@@ -9,20 +8,7 @@ export const removeHtmlFrom = (str) => {
     return str.replace(/<[^>]*>/g, '');
 }
 
-export const compressImage = (file) => {
-    let iresult;
-    new ImageCompressor(file, {
-        quality: .6,
-        success(result) {
-            const formData = new FormData();
 
-            formData.append('file', result, result.name);
-            iresult = result
-
-        }
-    })
-    return iresult;
-}
 
 export const formatList = (slotList, bonusList, producerList) => {
 
@@ -56,7 +42,7 @@ export const formatList = (slotList, bonusList, producerList) => {
         const current = slotList[slot]
         const truncateOptions = { length: '60', omission: '...' }
         formattedSlot.push({
-            title: `${truncate(current.name, { length: 18, omission: '...' })}`,
+            title: current.name,
             description: `${truncate(removeHtmlFrom(current.description), truncateOptions)}`,
             image: current.image,
             original: current,
