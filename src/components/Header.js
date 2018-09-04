@@ -8,6 +8,7 @@ import Navbar from './HomeComponents/Navbar'
 import LazyLoad from 'react-lazyload';
 import ShortHandMenu from './SlotPageComponents/ShortHandMenu'
 import AamsBanner from "./AamsBanner";
+import CrossfadeImage from 'react-crossfade-image'
 
 class Header extends Component {
 
@@ -40,7 +41,9 @@ class Header extends Component {
                     style={{ minHeight: 700, padding: 0 }}
                     vertical>
                     <LazyLoad height={'100vh'}>
-                        <header style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
+                        <header
+                            className='fade-in-header'
+                            style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
                             <div style={this.styles.overlay}>
                                 <Navbar fixed={fixed} displaying={this.props.displaying} />
                                 <div className='hero-text-box'>
@@ -70,7 +73,9 @@ class Header extends Component {
                     style={{ minHeight: 700, padding: 0 }}
                     vertical>
                     <LazyLoad height={'100vh'}>
-                        <header style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
+                        <header
+                            className='fade-in-header'
+                            style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
                             <div style={this.styles.overlay}>
                                 <Navbar fixed={fixed} displaying={this.props.displaying} />
                                 <div className='hero-text-box'>
@@ -86,7 +91,7 @@ class Header extends Component {
         )
     }
 
-    slotPageHeader = (fixed, slot) => {
+    slotPageHeader(fixed, slot) {
         this.props.dispatch(setSlotPage())
         const name = slot ? slot.name : undefined
         const producer = (slot && slot.producer) && slot.producer.name
@@ -105,6 +110,7 @@ class Header extends Component {
                     vertical>
                     <LazyLoad height={'100vh'}>
                         <header
+                            className='fade-in-header'
                             style={{ backgroundImage: `url(${image})` }}>
                             <div
                                 style={this.styles.overlay}>
@@ -130,19 +136,13 @@ class Header extends Component {
 
     render() {
         const { fixed } = this.state
-        const { displaying } = this.props
-        const slot = this.props.currentSlot
-        const producer = this.props.producer
-
-        const slotId = this.props.slotId
-
-
+        const { displaying, currentSlot } = this.props
 
         switch (displaying) {
             case 'HOME':
                 return this.homePageHeader(fixed)
             case 'SLOT':
-                return this.slotPageHeader(fixed, slot)
+                return this.slotPageHeader(fixed, currentSlot)
             case 'ABOUT':
                 return this.aboutPageHeader(fixed)
             default:
