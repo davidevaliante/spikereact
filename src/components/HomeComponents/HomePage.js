@@ -84,7 +84,7 @@ class HomepageLayout extends Component {
                                     value={order}
                                 />
                                 <div ref={this.handleContextRef}>
-                                    <SlotList cardPerRow={3} maxSlot={27} type={type} order={order} />
+                                    <SlotList cardPerRow={3} maxSlot={12} type={type} order={order} />
                                 </div>
                             </Grid.Column>
 
