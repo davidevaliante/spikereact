@@ -10,6 +10,8 @@ export const removeHtmlFrom = (str) => {
 
 
 
+
+
 export const formatList = (slotList, bonusList, producerList) => {
 
     // oggetto di base, 

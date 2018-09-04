@@ -14,6 +14,8 @@ const currentPageReducer = (state = defaultCurrentPageState, action) => {
             return PAGES.SLOT_GRATIS
         case PAGES.ABOUT:
             return PAGES.ABOUT
+        case PAGES.SLOT:
+            return PAGES.SLOT
         default:
             return state
     }
@@ -28,6 +30,12 @@ export const setAboutPage = () => {
 export const setHomePage = () => {
     return {
         type: PAGES.HOME,
+    }
+}
+
+export const setSlotPage = () => {
+    return {
+        type: PAGES.SLOT
     }
 }
 

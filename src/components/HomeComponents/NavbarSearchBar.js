@@ -37,31 +37,7 @@ class NavbarSearchBar extends Component {
         keys(this.props.producerList).length === 0 && getProducerList(onProducerListFetched)
 
         this.resetComponent()
-        const { displaying } = this.props
-
-        if (displaying === PAGES.SLOT) {
-            const id = this.props.slotId
-            console.log('firebase call for', id);
-
-
-            // se redux è accessibile
-            if (get(this.props.slotList, id)) {
-                console.log('from redux');
-
-                this.props.dispatch(updateCurrentSlot(get(this.props.slotList, id)))
-            } else {
-                getSlotWithId(id, (slot) => {
-                    console.log('from firebase');
-
-                    this.props.dispatch(updateCurrentSlot(slot))
-                    this.setState({ slot: slot, slotId: id })
-                })
-            }
-        }
-
-        if (displaying === PAGES.ABOUT) {
-            smoothScrollTo('about-page')
-        }
+       
     }
 
     resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -112,9 +88,23 @@ class NavbarSearchBar extends Component {
         const { isLoading, value, results } = this.state
         const shouldRedirect = this.state.redirect.shouldRedirect
         const path = this.state.redirect.path
+        const { displaying } = this.props
 
-        if (get(this.props.slotList, this.props.slotId)) {
-            this.props.dispatch(updateCurrentSlot(get(this.props.slotList, this.props.slotId)))
+        if (displaying === PAGES.SLOT) {
+            const id = this.props.slotId
+            if(this.props.slotId !== this.state.slotId){
+                getSlotWithId(id, (slot) => {
+                    console.log('from firebase');
+    
+                    this.props.dispatch(updateCurrentSlot(slot))
+                    this.setState({ slot: slot, slotId: id })
+                })
+            }          
+
+        }
+
+        if (displaying === PAGES.ABOUT) {
+            smoothScrollTo('about-page')
         }
 
         return (
@@ -143,7 +133,8 @@ const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
     bonusList: state.bonusList,
     slotList: state.slotList,
-    producerList: state.producerList
+    producerList: state.producerList,
+    currentSlot: state.currentSlot
 })
 
 export default connect(mapStateToProps)(NavbarSearchBar);

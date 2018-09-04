@@ -11,7 +11,6 @@ import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import Footer from "../Footer";
 import YouTubeEmbed from './YouTubeEmbed'
 
-
 const SlotPage = (props) => {
 
     return (

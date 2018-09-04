@@ -10,6 +10,9 @@ import axios from 'axios'
 const config = configuration;
 const firebaseApp = firebase.initializeApp(config);
 
+export const getFirebase = () => firebase
+
+
 // export const firebaseDatabase = firebase.database();
 const databaseRoot = 'https://spike-2481d.firebaseio.com';
 // per trasformare da online a gratis
@@ -200,7 +203,7 @@ export const getProducerList = (callback) => {
 // }
 
 export const getSlotList = (callback) => {
-    axios.get(`${databaseRoot}/Slots.json`)
+    axios.get(`${databaseRoot}/SlotsCard.json`)
         .then(
             success => callback(success.data)
         )

@@ -10,7 +10,6 @@ const SlotCard = (props) => {
 
 
     return (
-
         <NavLink to={`slot/${props.slot.id}`}>
             <div className='slot-card-shadow-animation'>
                 <Card key={props.slot.id}>

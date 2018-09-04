@@ -22,6 +22,7 @@ export const PAGES = {
     SLOT_BAR: 'SLOT_BAR',
     SLOT_GRATIS: 'SLOT_GRATIS',
     SLOT_ONLINE: 'SLOT_ONLINE',
+    SLOT: 'SLOT',
     HOME: 'HOME',
     ABOUT: 'ABOUT',
     PAGE_NOT_FOUND: '*'

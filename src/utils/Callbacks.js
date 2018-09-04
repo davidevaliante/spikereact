@@ -2,6 +2,7 @@ import store from '../store/store'
 import { addSlotList } from '../reducers/SlotListReducer'
 import { addBonusList } from '../reducers/BonusListReducer'
 import { addProducerList } from '../reducers/ProducerListReducer'
+import keys from 'lodash/keys'
 
 
 export const onSlotListFetched = (slotList) => {
@@ -11,6 +12,7 @@ export const onSlotListFetched = (slotList) => {
         slot['id'] = key
         list[key] = slot
     }
+    console.log(keys(list).length)
     store.dispatch(addSlotList(list))
 
 }

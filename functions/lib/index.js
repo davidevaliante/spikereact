@@ -14,6 +14,7 @@ const os_1 = require("os");
 const path_1 = require("path");
 const sharp = require("sharp");
 const fileSystem = require("fs-extra");
+const lodash_1 = require("lodash");
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
@@ -21,6 +22,36 @@ const fileSystem = require("fs-extra");
 //  response.send("Hello from Firebase!");
 // });
 const gcs = new Storage();
+// Creiamo un array di promises
+const sizes = [64, 250];
+const removeHtmlFrom = (s) => {
+    let str = s;
+    if ((str === null) || (str === ''))
+        return false;
+    return str.replace(/<[^>]*>/g, '');
+};
+exports.onSlotAdded = functions.database.ref('/Slots/{pushId}/')
+    .onCreate((snapshot, context) => {
+    // Grab the current value of what was written to the Realtime Database.
+    const newSlot = snapshot.val();
+    const baseImageUrl = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F';
+    const baseName = newSlot.image.split('&token')[0].split('%2F')[1].split('?')[0];
+    const slotCard = {
+        name: newSlot.name,
+        image: `${baseImageUrl}thumb_${sizes[1]}_${baseName}?alt=media`,
+        producer: newSlot.producer.name,
+        rating: newSlot.rating,
+        time: newSlot.time,
+        type: newSlot.type,
+        description: lodash_1.truncate(removeHtmlFrom(newSlot.description), { 'length': 150 })
+    };
+    const slotMenu = {
+        name: newSlot.name,
+        image: `${baseImageUrl}thumb_${sizes[0]}_${baseName}?alt=media`,
+        description: `${lodash_1.truncate(removeHtmlFrom(newSlot.description), { 'length': 60 })}`
+    };
+    return snapshot.ref.parent.parent.child(`/SlotsCard/${context.params.pushId}`).set(slotCard).then(() => snapshot.ref.parent.parent.child(`/SlotsMenu/${context.params.pushId}`).set(slotMenu));
+});
 exports.generateThumbs = functions.storage.object().onFinalize((object) => __awaiter(this, void 0, void 0, function* () {
     const bucket = gcs.bucket(object.bucket);
     // dove si trova il file nello storage
@@ -36,7 +67,7 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
     // break point per evitare che la funzione trigegri all'infinito
     // di base questa funzione va ogni volta che viene aggiunta un immagine
     // quindi riscrivendo nello storage l'immagine ridimensionata il loop sarebbe infito
-    if (fileName.includes('thumb@') || !object.contentType.includes('image')) {
+    if (fileName.includes('thumb_') || !object.contentType.includes('image')) {
         return false;
     }
     // la creazione della directory temporanea può richeiedere tempo quindi
@@ -46,10 +77,8 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
     yield bucket.file(filePath).download({
         destination: temporaryFilePath
     });
-    // Creiamo un array di promises
-    const sizes = [64, 128, 256];
     const uploadPromises = sizes.map((size) => __awaiter(this, void 0, void 0, function* () {
-        const thumbName = `thumb@${size}_${fileName}`;
+        const thumbName = `thumb_${size}_${fileName}`;
         const thumbPath = path_1.join(temporaryDirectory, thumbName);
         yield sharp(temporaryFilePath).resize(size, size).toFile(thumbPath);
         // upload della nuova immagine nello storage
