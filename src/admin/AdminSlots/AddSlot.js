@@ -172,7 +172,8 @@ class AddSlot extends Component {
             time: time,
             tips: tipsField,
             tecnicals: tecnicalsField,
-            image: this.state.image,
+            imageFile: this.state.image,
+            imageName: this.state.imageName,
             type: this.state.type,
             isFake: this.state.isFake
         }
@@ -238,7 +239,7 @@ class AddSlot extends Component {
     }
 
     onImageSelected = (image) => {
-        this.setState({ image: image })
+        this.setState({ image: image, imageName: image.name })
         console.log(image);
     }
 

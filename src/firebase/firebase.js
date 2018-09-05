@@ -6,7 +6,7 @@ import { configuration } from './firebaseConfig';
 import { STORAGE_FOLDERS, DATABASE_REFERENCE } from '../enums/Constants';
 import now from 'lodash/now';
 import axios from 'axios'
-
+import snakeCase from 'lodash/snakeCase'
 const config = configuration;
 const firebaseApp = firebase.initializeApp(config);
 
@@ -105,29 +105,34 @@ export const pushNewImage = (image, folderName, callback) => {
 
 } */
 
-export const pushNewSlot = (newSlot, onPushSlotSuccess) => {
+export const pushNewSlot = (newSlot, onPushSlotSuccess, language) => {
+    const baseUrl = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F'
+    newSlot['image'] = `${baseUrl}${snakeCase(newSlot.name)}%2F${newSlot.imageName}?alt=media`
+    newSlot['time'] = now()
+    let l = 'it'
+    if (language && language !== 'it') l = language
+    axios.post(`${databaseRoot}/Slots/${l}.json`, newSlot)
+        .then(
+            (success) => {
+                const key = success.data.name;
 
-    pushNewImage(newSlot.image, STORAGE_FOLDERS.SLOT_IMAGES, (url) => {
-        newSlot['image'] = url
-        newSlot['time'] = now()
-        axios.post(`${databaseRoot}/Slots.json`, newSlot)
-            .then(
-                (success) => {
-                    const key = success.data.name;
-                    axios.put(`${databaseRoot}/Producer-Slot/${newSlot.producer.id}/${key}.json`, true)
-                    for (const bonusId in newSlot.bonus) {
-                        axios.put(`${databaseRoot}/Bonus-Slot/${bonusId}/${key}.json`, true)
-                    }
-                    onPushSlotSuccess();
+                axios.put(`${databaseRoot}/Producer-Slot/${newSlot.producer.id}/${key}.json`, true)
+                for (const bonusId in newSlot.bonus) {
+                    axios.put(`${databaseRoot}/Bonus-Slot/${bonusId}/${key}.json`, true)
                 }
-            )
-            .catch(
-                (error) => console.log(error)
-            )
-            .then(
+                pushNewImage(newSlot.imageFile, `${STORAGE_FOLDERS.SLOT_IMAGES}/${snakeCase(newSlot.name)}`, (url) => {
 
-            )
-    })
+                })
+                onPushSlotSuccess();
+            }
+        )
+        .catch(
+            (error) => console.log(error)
+        )
+        .then(
+
+        )
+
 
 }
 
