@@ -5,7 +5,7 @@ import { join, dirname } from 'path';
 import * as sharp from 'sharp';
 import * as fileSystem from 'fs-extra';
 import { fstat } from 'fs';
-import { truncate } from 'lodash';
+import { truncate, snakeCase } from 'lodash';
 import { database } from 'firebase-admin';
 
 // // Start writing Firebase Functions
@@ -26,15 +26,15 @@ const removeHtmlFrom = (s) => {
     return str.replace(/<[^>]*>/g, '');
 }
 
-export const onSlotAdded = functions.database.ref('/Slots/{pushId}/')
+export const onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     .onCreate((snapshot, context) => {
         // Grab the current value of what was written to the Realtime Database.
         const newSlot = snapshot.val();
         const baseImageUrl = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F';
-        const baseName = newSlot.image.split('&token')[0].split('%2F')[1].split('?')[0]
+        const baseName = newSlot.imageName
         const slotCard = {
             name: newSlot.name,
-            image: `${baseImageUrl}thumb_${sizes[1]}_${baseName}?alt=media`,
+            image: `${baseImageUrl}${snakeCase(newSlot.name)}%2Fthumb_${sizes[1]}_${baseName}?alt=media`,
             producer: newSlot.producer.name,
             rating: newSlot.rating,
             time: newSlot.time,
@@ -44,12 +44,12 @@ export const onSlotAdded = functions.database.ref('/Slots/{pushId}/')
 
         const slotMenu = {
             name: newSlot.name,
-            image: `${baseImageUrl}thumb_${sizes[0]}_${baseName}?alt=media`,
+            image: `${baseImageUrl}${snakeCase(newSlot.name)}%2Fthumb_${sizes[0]}_${baseName}?alt=media`,
             description: `${truncate(removeHtmlFrom(newSlot.description), { 'length': 60 })}`
         }
 
-        return snapshot.ref.parent.parent.child(`/SlotsCard/${context.params.pushId}`).set(slotCard).then(() =>
-            snapshot.ref.parent.parent.child(`/SlotsMenu/${context.params.pushId}`).set(slotMenu)
+        return snapshot.ref.parent.parent.parent.child(`/SlotsCard/${context.params.language}/${context.params.pushId}`).set(slotCard).then(() =>
+            snapshot.ref.parent.parent.parent.child(`/SlotsMenu/${context.params.language}/${context.params.pushId}`).set(slotMenu)
         )
     });
 
@@ -89,7 +89,7 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
         const thumbName = `thumb_${size}_${fileName}`;
         const thumbPath = join(temporaryDirectory, thumbName);
 
-        await sharp(temporaryFilePath).resize(size, size).toFile(thumbPath);
+        await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
 
         // upload della nuova immagine nello storage
         return bucket.upload(thumbPath, {
