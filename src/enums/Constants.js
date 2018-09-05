@@ -39,11 +39,14 @@ export const ROUTE = {
     ERROR404: '*',
 
     ADMIN: `${admin}`,
+    ADMINARTICLE: `${admin}/article`,
+    ADDARTICLE: `${admin}/addarticle`,
     ADMINSLOT: `${admin}/slots`,
     ADDSLOT: `${admin}/addslot`,
+    ADMINBONUS: `${admin}/bonus`,
     ADDBONUS: `${admin}/addbonus`,
-    ADDPRODUCER: `${admin}/addproducer`,
-    ADDARTICLE: `${admin}/addarticle`
+    ADMINPRODUCER: `${admin}/producer`,
+    ADDPRODUCER: `${admin}/addproducer`
 };
 
 export const ADMINPAGES = {
