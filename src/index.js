@@ -8,6 +8,14 @@ import { getUserAuthStatus } from './firebase/firebase';
 import '../src/style/base.css';
 import '../src/style/sass.scss';
 import 'semantic-ui-react-single/css'
+import { onSlotListFetched, onBonusListFetched, onProducerListFetched } from './utils/Callbacks'
+import { getSlotList, getBonusList, getProducerList } from './firebase/firebase';
+import keys from 'lodash/keys'
+
+// fetch dati iniziali
+keys(store.slotList).length === 0 && getSlotList(onSlotListFetched)
+keys(store.bonusList).length === 0 && getBonusList(onBonusListFetched)
+keys(store.producerList).length === 0 && getProducerList(onProducerListFetched)
 
 
 

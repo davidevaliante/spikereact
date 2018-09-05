@@ -1,4 +1,4 @@
-const defaultState = {}
+const defaultState = { isLoading: true }
 
 const slotPageReducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -9,16 +9,28 @@ const slotPageReducer = (state = defaultState, action) => {
             return {
                 currentSlot: undefined
             }
-        case 'SWITCH':
+        case 'SLOT_IS_LOADING':
             return {
-                currentSlot: {
-                    ...state,
-                    image: ''
-                }
+                ...state,
+                isLoading: true
+            }
+
+        case 'SLOT_IS_LOADED':
+            return {
+                ...state,
+                isLoading: false
             }
         default:
             return state
     }
+}
+
+export const slotIsLoading = () => {
+    return { type: 'SLOT_IS_LOADING' }
+}
+
+export const slotIsLoaded = () => {
+    return { type: 'SLOT_IS_LOADED' }
 }
 
 export const resetSlotImage = () => {

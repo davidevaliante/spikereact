@@ -28,6 +28,7 @@ const HomePageHeader = ({ fixmenu, hideFixedMenu, showFixedMenu, displaying }) =
                 vertical>
                 <LazyLoad height={'100vh'}>
                     <header
+                        className='fade-in-header'
                         style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
                         <div style={styles.overlay}>
                             <Navbar fixed={fixmenu} displaying={displaying} />

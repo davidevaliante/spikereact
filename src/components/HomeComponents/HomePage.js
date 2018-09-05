@@ -5,7 +5,7 @@ import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
 import { setHomePage, setGratisPage, setBarPage, setAboutPage } from '../../reducers/CurrentPageReducer'
-import Header from '../Header/Header'
+import HomePageHeader from '../Header/HomePageHeader'
 import SiteDescription from './HomeBody/SiteDescription'
 import HomeBody from './HomeBody/HomeBody'
 
@@ -19,6 +19,7 @@ class HomePage extends Component {
 
     handleContextRef = contextRef => this.setState({ contextRef })
     handleChange = (e, { value }) => this.setState({ order: value })
+
 
     getType(path) {
         switch (path) {
@@ -41,13 +42,14 @@ class HomePage extends Component {
     }
 
     render() {
-        const { contextRef, order } = this.state
+        const { contextRef, order, fixed } = this.state
         const type = this.getType(this.props.match.path)
-        console.log(this.state);
 
         return (
             <div>
-                <Header displaying='HOME' />
+                <HomePageHeader
+                    fixmenu={fixed}
+                />
                 <SiteDescription />
                 <Segment vertical>
                     <ListDescriptionBanner />

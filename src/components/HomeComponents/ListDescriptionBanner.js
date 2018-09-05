@@ -11,7 +11,6 @@ class ListDescriptionBanner extends Component {
     }
 
     fireAnimation = () => {
-        console.log('firing');
         !this.state.bottomPassed && this.setState({ bottomPassed: true })
     }
 
@@ -41,11 +40,11 @@ class ListDescriptionBanner extends Component {
                     <div className='white-line scale-in-hor-right'>
                     </div>
                     <h2 className="tracking-in-contract"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}>I migliori bonus</h2>
+                        style={{ fontFamily: 'Raleway, sans-serif' }}>I migliori bonus</h2>
                 </div>
                 <div className='description-banner-black'>
                     <h2 className="tracking-in-contract"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}>{text}</h2>
+                        style={{ fontFamily: 'Raleway, sans-serif' }}>{text}</h2>
                     <div className='white-line scale-in-hor-left'>
                     </div>
 
