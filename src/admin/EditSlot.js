@@ -14,15 +14,66 @@ import SearchMultipleSelection from "../admin/SearchMultipleSelection";
 import ImagePicker from "../admin/ImagePicker";
 
 
-class EditSlot extends React.Component {
-
-    render() {
-        return (
-            <div>
+const EditSlot = (props) => {
 
 
 
+    console.log(props.match.params.id);
+    return (
+        <div>
 
+
+
+
+
+            <h1
+                style={{
+                    color: 'black',
+                    marginBottom: '2rem',
+                    textAlign: 'center'
+                }}>
+                Modifica Slot
+                    </h1>
+            <Form>
+                <Form.Group widths='equal'>
+
+                    <Form.Field
+                        id='nameField'
+
+                        control={Input}
+                        label='Nome'
+                        placeholder='Nome slot...'>
+                    </Form.Field>
+
+                    <Form.Field>
+                        <label>Produttore</label>
+                        <SearchField
+                            id='producerField'
+
+                            nodename='Produttore'
+                            placeholder='Nome produttore...'
+                        />
+                    </Form.Field>
+
+                </Form.Group>
+
+                <Form.Group
+                    widths='equal'>
+
+                    <Form.Field
+                        id='linkYoutube'
+
+                        control={Input}
+                        label='YouTube Link'
+                        placeholder='YouTube Link...' />
+                    <Form.Field
+                        id='linkPlay'
+
+                        control={Input}
+                        label='Slot Link'
+                        placeholder='Slot Play Link...' />
+
+                </Form.Group>
 
                 <h1
                     style={{
@@ -30,130 +81,81 @@ class EditSlot extends React.Component {
                         marginBottom: '2rem',
                         textAlign: 'center'
                     }}>
-                    Modifica Slot
-                    </h1>
-                <Form>
-                    <Form.Group widths='equal'>
-
-                        <Form.Field
-                            id='nameField'
-
-                            control={Input}
-                            label='Nome'
-                            placeholder='Nome slot...'>
-                        </Form.Field>
-
-                        <Form.Field>
-                            <label>Produttore</label>
-                            <SearchField
-                                id='producerField'
-
-                                nodename='Produttore'
-                                placeholder='Nome produttore...'
-                            />
-                        </Form.Field>
-
-                    </Form.Group>
-
-                    <Form.Group
-                        widths='equal'>
-
-                        <Form.Field
-                            id='linkYoutube'
-
-                            control={Input}
-                            label='YouTube Link'
-                            placeholder='YouTube Link...' />
-                        <Form.Field
-                            id='linkPlay'
-
-                            control={Input}
-                            label='Slot Link'
-                            placeholder='Slot Play Link...' />
-
-                    </Form.Group>
-
-                    <h1
-                        style={{
-                            color: 'black',
-                            marginBottom: '2rem',
-                            textAlign: 'center'
-                        }}>
-                        Liste
+                    Liste
                     </h1>
 
-                    <Form.Group
-                        widths='equal'>
-
-                        <Form.Field
-                            id='tipsField'
-
-                            control={TextArea}
-                            label='Consigli'
-                            placeholder='Consigli...' />
-                        <Form.Field
-                            id='tecnicalsField'
-                            control={TextArea}
-                            label='Scheda Tecnica'
-                            placeholder='Scheda Tecnica...' />
-
-                    </Form.Group>
-
-
+                <Form.Group
+                    widths='equal'>
 
                     <Form.Field
-                        id='descriptionField'
+                        id='tipsField'
 
                         control={TextArea}
-                        label='Descrizione'
-                        placeholder='Descrizione slot...' />
-
-                    <Form.Group widths='equal'>
-
-                        <FormField>
-                            <Dropdown
-                                id='typeField'
-
-                                placeholder='Tipo di slot'
-                                search
-                                selection
-                            />
-                        </FormField>
-
-                        <FormField>
-                            <Dropdown
-                                id='ratingField'
-
-                                style={{ marginBottom: '1rem' }}
-                                placeholder='Rating'
-
-                                search
-                                selection
-                            />
-                        </FormField>
-                        <FormField>
-                            <SearchMultipleSelection
-                                onListUpdate={this.onBonusSelected} />
-                        </FormField>
-                        <Form.Field>
-                            <ImagePicker onImageSelected={this.onImageSelected} />
-                        </Form.Field>
-                    </Form.Group>
-
+                        label='Consigli'
+                        placeholder='Consigli...' />
                     <Form.Field
-                        style={{ width: '100%' }}
-                        onClick={this.submitNewSlot}
-                        control={Button}>
-                        Modifica
+                        id='tecnicalsField'
+                        control={TextArea}
+                        label='Scheda Tecnica'
+                        placeholder='Scheda Tecnica...' />
+
+                </Form.Group>
+
+
+
+                <Form.Field
+                    id='descriptionField'
+
+                    control={TextArea}
+                    label='Descrizione'
+                    placeholder='Descrizione slot...' />
+
+                <Form.Group widths='equal'>
+
+                    <FormField>
+                        <Dropdown
+                            id='typeField'
+
+                            placeholder='Tipo di slot'
+                            search
+                            selection
+                        />
+                    </FormField>
+
+                    <FormField>
+                        <Dropdown
+                            id='ratingField'
+
+                            style={{ marginBottom: '1rem' }}
+                            placeholder='Rating'
+
+                            search
+                            selection
+                        />
+                    </FormField>
+                    <FormField>
+                        <SearchMultipleSelection
+                            onListUpdate={this.onBonusSelected} />
+                    </FormField>
+                    <Form.Field>
+                        <ImagePicker onImageSelected={this.onImageSelected} />
+                    </Form.Field>
+                </Form.Group>
+
+                <Form.Field
+                    style={{ width: '100%' }}
+                    onClick={this.submitNewSlot}
+                    control={Button}>
+                    Modifica
                     </Form.Field>
 
 
-                </Form>
-            </div>
+            </Form>
+        </div>
 
-        )
-    }
-
+    )
 }
+
+
 
 export default EditSlot;

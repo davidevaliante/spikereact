@@ -46,14 +46,9 @@ export const ROUTE = {
     ADDSLOT: `${admin}/addslot`,
     ADMINBONUS: `${admin}/bonus`,
     ADDBONUS: `${admin}/addbonus`,
-<<<<<<< Updated upstream
-    ADMINPRODUCER: `${admin}/producer`,
-    ADDPRODUCER: `${admin}/addproducer`
-=======
     ADDPRODUCER: `${admin}/addproducer`,
     ADDARTICLE: `${admin}/addarticle`,
-    EDITPAGE: `${admin}/editpage`,
->>>>>>> Stashed changes
+    EDITSLOT: `${admin}/editslot`,
 };
 
 export const ADMINPAGES = {

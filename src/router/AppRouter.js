@@ -43,7 +43,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADDBONUS} component={AddBonus} />
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
-                    <Route path={ROUTE.EDITPAGE} component={EditSlot} />
+                    <Route path='/admin/editslot/:id' component={EditSlot} />
                     <Route path={ROUTE.ERROR404} component={NotFound} />
 
                     { /* test */}

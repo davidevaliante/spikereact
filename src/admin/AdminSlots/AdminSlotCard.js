@@ -61,7 +61,7 @@ class AdminSlotCard extends Component {
                             <Grid stackable columns={1}>
                                 <Grid.Column>
 
-                                    <NavLink to={ROUTE.EDITPAGE}>
+                                    <NavLink to={`/admin/editslot/${this.props.slot.id}`} >
                                         <Button icon labelPosition='left' size='mini'   >
                                             <Icon name='edit outline' />Modifica
                                     </Button>
