@@ -11,9 +11,8 @@ import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react-single/Search'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getSlotList, getBonusList, getProducerList } from '../../firebase/firebase';
-import { getSlotWithId } from '../../firebase/firebase'
-import { updateCurrentSlot } from '../../reducers/SlotPageReducer'
+import { getSlotList, getBonusList, getProducerList, getSlotWithId } from '../../firebase/firebase';
+import { updateCurrentSlot, resetSlotImage } from '../../reducers/SlotPageReducer'
 import { smoothScrollTo } from '../../utils/Utils'
 
 class NavbarSearchBar extends Component {
@@ -37,7 +36,7 @@ class NavbarSearchBar extends Component {
         keys(this.props.producerList).length === 0 && getProducerList(onProducerListFetched)
 
         this.resetComponent()
-       
+
     }
 
     resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -50,10 +49,13 @@ class NavbarSearchBar extends Component {
         if (result.link) { window.open(result.link) }
         // se non esiste link allora è una slot
         else {
-            this.setState({
-                slot: result.original, slotId: result.id,
-                redirect: { shouldRedirect: true, path: `/slot/${result.id}` }
+            getSlotWithId(result.id, (slot) => {
+                this.setState({
+                    slot: result.original, slotId: result.id,
+                    redirect: { shouldRedirect: true, path: `/slot/${result.id}` }
+                })
             })
+
         }
     }
 
@@ -90,22 +92,35 @@ class NavbarSearchBar extends Component {
         const path = this.state.redirect.path
         const { displaying } = this.props
 
-        if (displaying === PAGES.SLOT) {
-            const id = this.props.slotId
-            if(this.props.slotId !== this.state.slotId){
-                getSlotWithId(id, (slot) => {
-                    console.log('from firebase');
-    
-                    this.props.dispatch(updateCurrentSlot(slot))
-                    this.setState({ slot: slot, slotId: id })
-                })
-            }          
+        switch (displaying) {
+            case PAGES.SLOT: {
+                const id = this.props.slotId
+                if (this.props.slotId !== this.state.slotId) {
+                    getSlotWithId(id, (slot) => {
+                        console.log('from firebase');
+
+                        this.props.dispatch(updateCurrentSlot(slot))
+                        this.setState({ slot: slot, slotId: id })
+                    })
+                }
+            }
+                break;
+
+            case PAGES.ABOUT:
+                smoothScrollTo('about-page')
+                break;
+
+            case PAGES.HOME:
+                if (this.props.currentSlot.image !== '')
+                    this.props.dispatch(updateCurrentSlot({
+                        ...this.props.currentSlot,
+                        image: ''
+                    }))
+                break;
+            default:
 
         }
 
-        if (displaying === PAGES.ABOUT) {
-            smoothScrollTo('about-page')
-        }
 
         return (
             <div>

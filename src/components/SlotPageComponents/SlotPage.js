@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Header from '../Header'
+import Header from '../Header/Header'
 import TipsList from './TipsList'
 import TecnicalsList from './TecnicalsList'
 import Description from './Description'

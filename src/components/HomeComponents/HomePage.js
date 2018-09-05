@@ -1,33 +1,27 @@
-import { Grid } from 'semantic-ui-react-single/Grid'
 import { Segment } from 'semantic-ui-react-single/Segment'
-import { Sticky } from 'semantic-ui-react-single/Sticky'
-import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 import React, { Component } from 'react'
-import ResponsiveContainer from './ResponsiveContainer'
-import SlotList from './SlotList'
-import BonusList from './BonusList'
 import { connect } from 'react-redux';
 import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
 import { setHomePage, setGratisPage, setBarPage, setAboutPage } from '../../reducers/CurrentPageReducer'
+import Header from '../Header/Header'
+import SiteDescription from './HomeBody/SiteDescription'
+import HomeBody from './HomeBody/HomeBody'
 
-class HomepageLayout extends Component {
+class HomePage extends Component {
     state = {};
     title = '';
+
+    componentDidMount() {
+        // solo se redux è vuoto   
+    }
 
     handleContextRef = contextRef => this.setState({ contextRef })
     handleChange = (e, { value }) => this.setState({ order: value })
 
-    options = [
-        { key: 1, text: 'Rating', value: 'rating' },
-        { key: 2, text: 'Data', value: 'time' },
-        { key: 3, text: 'Nome', value: 'name' }
-    ]
-
     getType(path) {
         switch (path) {
-
             case ROUTE.SLOT_BAR:
                 this.title = 'Slot da Bar'
                 this.props.dispatch(setBarPage())
@@ -47,59 +41,26 @@ class HomepageLayout extends Component {
     }
 
     render() {
-        const { contextRef } = this.state
+        const { contextRef, order } = this.state
         const type = this.getType(this.props.match.path)
-        const { order } = this.state
+        console.log(this.state);
 
         return (
-            <ResponsiveContainer>
-
-                <div className='home-page-intro-container' style={{ marginTop: '6rem' }}>
-                    <div className='home-page-intro-outer'>
-                        <div className='home-page-intro-bg'>
-                            <div className='home-page-intro'>
-                                <h2>Sono giochi di fortuna o anche di abilità?</h2>
-                                <p>La <a href='https://www.adm.gov.it/portale/documents/20182/1103856/art110TULPS.pdf/e205cb30-2a0f-41b1-8578-b66d6103a38b'>legge</a> che regolamenta le <strong>awp</strong> stabilisce che oltre al fattore aleatorio, in minima parte l’esito di una partità può dover dipendere anche dall’abilità del giocatore.</p>
-                                <p>Ovviamente ci sono slot machine in cui questa componente di abilità <strong>conta in misura maggiore</strong>, altre dove è irrilevante.</p>
-                                <p style={{ width: '100%' }}>In questo sito troverai i migliori consigli ed i bonus più convenienti per trasformare la tua passione in <strong>guadagno</strong></p>
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+            <div>
+                <Header displaying='HOME' />
+                <SiteDescription />
                 <Segment vertical>
                     <ListDescriptionBanner />
-
-                    <Grid style={{ marginTop: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
-                        <Grid.Row style={{ paddingBottom: '4rem' }}>
-                            <Grid.Column width={12} style={{ paddingLeft: '0' }}>
-                                <Dropdown
-                                    style={{ marginBottom: '2rem' }}
-                                    onChange={this.handleChange}
-                                    options={this.options}
-                                    placeholder='Ordina per'
-                                    selection
-                                    value={order}
-                                />
-                                <div ref={this.handleContextRef}>
-                                    <SlotList cardPerRow={3} maxSlot={12} type={type} order={order} />
-                                </div>
-                            </Grid.Column>
-
-                            <Grid.Column
-                                style={{ paddingTop: '0' }}
-                                width={4}>
-                                <Sticky context={contextRef} offset={80}>
-                                    <BonusList maxNumber={15} />
-                                </Sticky>
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
+                    <HomeBody
+                        orderHandler={this.handleChange}
+                        slotorder={order}
+                        handleContextRef={this.handleContextRef}
+                        type={type}
+                        isSticky={contextRef}
+                    />
                 </Segment>
                 <Footer />
-            </ResponsiveContainer >
+            </div >
         )
     }
 }
@@ -107,7 +68,9 @@ class HomepageLayout extends Component {
 
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
+    slotList: state.slotList,
+    bonusList: state.bonusList,
     contextRef: state.contextRef
 })
 
-export default connect(mapStateToProps)(HomepageLayout)
+export default connect(mapStateToProps)(HomePage)

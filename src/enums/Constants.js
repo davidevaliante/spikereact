@@ -7,7 +7,6 @@ export const STORAGE_FOLDERS = {
 
 export const SLOT_TYPES = {
     BAR: 'BAR',
-    ONLINE: 'ONLINE',
     GRATIS: 'GRATIS'
 };
 

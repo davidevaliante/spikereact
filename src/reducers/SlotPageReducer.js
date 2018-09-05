@@ -9,9 +9,21 @@ const slotPageReducer = (state = defaultState, action) => {
             return {
                 currentSlot: undefined
             }
-
+        case 'SWITCH':
+            return {
+                currentSlot: {
+                    ...state,
+                    image: ''
+                }
+            }
         default:
             return state
+    }
+}
+
+export const resetSlotImage = () => {
+    return {
+        type: 'SWITCH',
     }
 }
 

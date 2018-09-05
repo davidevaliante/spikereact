@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { Image } from 'semantic-ui-react-single/Image'
 import { Card } from 'semantic-ui-react-single/Card'
-import { removeHtmlFrom } from '../utils/Utils'
+import { removeHtmlFrom } from '../../utils/Utils'
 const SlotCard = (props) => {
 
 

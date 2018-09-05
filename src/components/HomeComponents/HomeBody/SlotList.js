@@ -1,5 +1,5 @@
 import React from 'react'
-import SlotCard from '../SlotCard';
+import SlotCard from '../../Cards/SlotCard';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import chunk from 'lodash/chunk'
@@ -19,18 +19,18 @@ const SlotList = (props) => {
             listOfSlots.push(element)
         }
 
-        switch(ordering){
+        switch (ordering) {
             case 'time':
-                listOfSlots=orderBy(listOfSlots,['time'],['desc'])
+                listOfSlots = orderBy(listOfSlots, ['time'], ['desc'])
                 break
             case 'rating':
-                listOfSlots=orderBy(listOfSlots,['rating'],['desc'])
+                listOfSlots = orderBy(listOfSlots, ['rating'], ['desc'])
                 break
             case 'name':
-                listOfSlots=orderBy(listOfSlots,['name'],['asc'])
+                listOfSlots = orderBy(listOfSlots, ['name'], ['asc'])
                 break
             default:
-                // pass
+            // pass
         }
 
         const rows = chunk(slice(listOfSlots, 0, props.maxSlot), props.cardPerRow)

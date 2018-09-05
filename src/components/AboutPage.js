@@ -5,7 +5,7 @@ import { Image } from 'semantic-ui-react-single/Image'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
 import { Segment } from 'semantic-ui-react-single/Segment'
 
-import SpikeHeader from "./Header";
+import SpikeHeader from "./Header/Header";
 import Footer from "./Footer";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
@@ -51,14 +51,14 @@ const AboutPage = (props) => {
                                 iniziano ad essere seguiti. Solo nel 2014 inizio a dedicarmici seriamente, e
                                 nasce la mitica serie <strong>&#8220;Giorni di Ordinaria
                                     Follia&#8221;</strong> in cui vi mostro una giornata tipo: insieme ai miei
-                        Soci andiamo in giro a giocare alle Slot, con varie gag divertenti tra una
+                    Soci andiamo in giro a giocare alle Slot, con varie gag divertenti tra una
                                 partita e l&#8217;altra.</p>
                             <p>Poi per la passione che da sempre ho per l&#8217;informatica e il mondo
                                 digitale, <strong>SPIKE</strong> si è trasformato in qualcosa di più.</p>
                             <p>Appoggiandosi a <Link to="/"> spikeslot </Link> e al
                                 forum <a href="http://www.Professioneslot.it"
                                     target="_blank"> Professioneslot </a>, è diventato il principale
-                   (e forse unico) strumento informativo e di dialogo veramente competente in
+               (e forse unico) strumento informativo e di dialogo veramente competente in
                                 materia, <strong>per tutti i giocatori di Slot Machine d&#8217;Italia.</strong>
                             </p>
                             <p>&nbsp;</p>
