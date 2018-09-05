@@ -13,6 +13,7 @@ import { PAGES, ROUTE } from "../enums/Constants";
 import AboutPage from '../components/AboutPage'
 import SlotDashboard from "../admin/AdminSlots/SlotDashboard";
 import NotFound from "../components/SlotPageComponents/NotFound"
+import EditSlot from "../admin/EditSlot";
 
 
 const AppRouter = () => {
@@ -42,6 +43,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADDBONUS} component={AddBonus} />
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
+                    <Route path={ROUTE.EDITPAGE} component={EditSlot} />
                     <Route path={ROUTE.ERROR404} component={NotFound} />
 
                     { /* test */}

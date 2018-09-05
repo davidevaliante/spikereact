@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react-single/Button'
-import { Icon } from 'semantic-ui-react-single/Icon'
-import { Divider } from 'semantic-ui-react-single/Divider'
-import { Grid } from 'semantic-ui-react-single/Grid'
-import { List } from 'semantic-ui-react-single/List'
-import { Image } from 'semantic-ui-react-single/Image'
+import { Button } from 'semantic-ui-react-single/Button';
+import { Icon } from 'semantic-ui-react-single/Icon';
+import { Divider } from 'semantic-ui-react-single/Divider';
+import { Grid } from 'semantic-ui-react-single/Grid';
+import { List } from 'semantic-ui-react-single/List';
+import { Image } from 'semantic-ui-react-single/Image';
 
 import truncate from "lodash/truncate";
 import { deleteSlotWithId } from "../../firebase/firebase";
 import { setToUpdate } from "../../reducers/ToUpdateReducer";
+import { ROUTE } from "../../enums/Constants";
 
 function mapStateToProps(state) {
     return {
@@ -18,6 +20,8 @@ function mapStateToProps(state) {
 }
 
 class AdminSlotCard extends Component {
+
+
 
 
     deleteSlot = (id) => {
@@ -56,9 +60,13 @@ class AdminSlotCard extends Component {
                             <Divider />
                             <Grid stackable columns={1}>
                                 <Grid.Column>
-                                    <Button icon labelPosition='left' size='mini'>
-                                        <Icon name='edit outline' />Modifica
+
+                                    <NavLink to={ROUTE.EDITPAGE}>
+                                        <Button icon labelPosition='left' size='mini'   >
+                                            <Icon name='edit outline' />Modifica
                                     </Button>
+                                    </NavLink>
+
                                     <Button icon labelPosition='left' size='mini' floated='right' negative
                                         onClick={() => this.deleteSlot(this.props.slot.id)}>
                                         <Icon name='delete' />Cancella
@@ -68,6 +76,7 @@ class AdminSlotCard extends Component {
 
                         </List.Content>
                     </List.Item>
+
                 </List>
             </div>
         )

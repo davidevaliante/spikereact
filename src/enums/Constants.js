@@ -38,6 +38,7 @@ export const ROUTE = {
     ABOUT: '/about',
     ERROR404: '*',
 
+
     ADMIN: `${admin}`,
     ADMINARTICLE: `${admin}/article`,
     ADDARTICLE: `${admin}/addarticle`,
@@ -45,8 +46,14 @@ export const ROUTE = {
     ADDSLOT: `${admin}/addslot`,
     ADMINBONUS: `${admin}/bonus`,
     ADDBONUS: `${admin}/addbonus`,
+<<<<<<< Updated upstream
     ADMINPRODUCER: `${admin}/producer`,
     ADDPRODUCER: `${admin}/addproducer`
+=======
+    ADDPRODUCER: `${admin}/addproducer`,
+    ADDARTICLE: `${admin}/addarticle`,
+    EDITPAGE: `${admin}/editpage`,
+>>>>>>> Stashed changes
 };
 
 export const ADMINPAGES = {
