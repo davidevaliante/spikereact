@@ -255,3 +255,36 @@ export const deleteSlotWithId = (id, callback) => {
 }
 
 
+// ----------------------FIREBASE NON CANCELLARE
+
+// export const deleteBonusWithId = (id, callback) => {
+//     firebaseDatabase.ref(`${DATABASE_REFERENCE.BONUS}/${id}`).remove()
+//         .then(
+//             () => {
+//                 console.log('deleteBonusWithId', id, callback)
+//                 callback()
+//             }
+//         ).catch(
+//             (error) => {
+//                 console.log('deleteBonusWithId', id, callback, error)
+//                 callback(error)
+//             }
+//         )
+//     // callback()
+// }
+
+
+export const deleteBonusWithId = (id, callback) => {
+    axios.delete(`${databaseRoot}/${DATABASE_REFERENCE.SLOT}/${id}.json`)
+        .then(
+            () => callback()
+        )
+}
+
+
+export const deleteProducerWithId = (id, callback) => {
+    axios.delete(`${databaseRoot}/${DATABASE_REFERENCE.PRODUCER}/${id}.json`)
+        .then(
+            () => callback()
+        )
+}
