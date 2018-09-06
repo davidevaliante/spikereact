@@ -8,8 +8,13 @@ export const removeHtmlFrom = (str) => {
     return str.replace(/<[^>]*>/g, '');
 }
 
+// costruisce il link ad un immagine
+/* export const getImageLinkFromName = (type, name, size) => {
+    const baseUrl = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F'
+    if (type === 'SLOT') {
 
-
+    }
+} */
 
 
 export const formatList = (slotList, bonusList, producerList) => {

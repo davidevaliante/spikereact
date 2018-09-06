@@ -172,14 +172,17 @@ class AddSlot extends Component {
             time: time,
             tips: tipsField,
             tecnicals: tecnicalsField,
-            imageFile: this.state.image,
-            imageName: this.state.imageName,
             type: this.state.type,
             isFake: this.state.isFake
         }
+
+        const imageData = {
+            imageFile: this.state.image,
+            imageName: this.state.imageName,
+        }
         console.log(newSlot);
         if (name && producer && linkYoutube && linkPlay && BONUS && description && rating && tipsField && tecnicalsField && newSlot.type) {
-            pushNewSlot(newSlot, this.onSlotPushSuccess)
+            pushNewSlot(newSlot, imageData, this.onSlotPushSuccess)
         }
     }
 
@@ -240,7 +243,6 @@ class AddSlot extends Component {
 
     onImageSelected = (image) => {
         this.setState({ image: image, imageName: image.name })
-        console.log(image);
     }
 
     onTypeSelected = (data) => {

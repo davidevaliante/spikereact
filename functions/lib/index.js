@@ -21,6 +21,8 @@ const lodash_1 = require("lodash");
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
+const admin = require('firebase-admin');
+admin.initializeApp();
 const gcs = new Storage();
 // Creiamo un array di promises
 const sizes = [64, 250];
@@ -38,7 +40,7 @@ exports.onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     const baseName = newSlot.imageName;
     const slotCard = {
         name: newSlot.name,
-        image: `${baseImageUrl}${lodash_1.snakeCase(newSlot.name)}%2Fthumb_${sizes[1]}_${baseName}?alt=media`,
+        image: `${baseImageUrl}thumb_${sizes[1]}_${baseName}?alt=media`,
         producer: newSlot.producer.name,
         rating: newSlot.rating,
         time: newSlot.time,
@@ -47,10 +49,22 @@ exports.onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     };
     const slotMenu = {
         name: newSlot.name,
-        image: `${baseImageUrl}${lodash_1.snakeCase(newSlot.name)}%2Fthumb_${sizes[0]}_${baseName}?alt=media`,
+        image: `${baseImageUrl}thumb_${sizes[0]}_${baseName}?alt=media`,
         description: `${lodash_1.truncate(removeHtmlFrom(newSlot.description), { 'length': 60 })}`
     };
     return snapshot.ref.parent.parent.parent.child(`/SlotsCard/${context.params.language}/${context.params.pushId}`).set(slotCard).then(() => snapshot.ref.parent.parent.parent.child(`/SlotsMenu/${context.params.language}/${context.params.pushId}`).set(slotMenu));
+});
+exports.onSlotDeleted = functions.database.ref('/Slots/{language}/{slotId}/')
+    .onDelete((snapshot, context) => {
+    const slotId = context.params.slotId;
+    const language = context.params.language;
+    const imageName = snapshot.val().image.split('?alt')[0].split('/SlotImages%2F').pop();
+    console.log('image name', imageName);
+    return admin.database.ref.child(`/SlotsCard/${language}/${slotId}`).remove()
+        .then(() => {
+        console.log('should remove path:');
+        admin.storage.ref(`/SlotImages/${imageName}`).remove();
+    });
 });
 exports.generateThumbs = functions.storage.object().onFinalize((object) => __awaiter(this, void 0, void 0, function* () {
     const bucket = gcs.bucket(object.bucket);

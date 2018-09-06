@@ -63,13 +63,13 @@ const databaseRoot = 'https://spike-2481d.firebaseio.com';
 } */
 
 
-export const pushNewImage = (image, folderName, callback) => {
+export const pushNewImage = (image, folderName, imageName, callback) => {
     const storageRef = firebase.storage().ref();
-    storageRef.child(`${folderName}/${image.name}`).put(image)
+    storageRef.child(`${folderName}/${imageName}`).put(image)
         .then(
             (snapshot) => snapshot.ref.getDownloadURL()
                 .then(
-                    (url) => callback(url)
+                    (url) => callback && callback(url)
                 )
                 .catch(
                     (error) => { console.log(error) }
@@ -105,9 +105,7 @@ export const pushNewImage = (image, folderName, callback) => {
 
 } */
 
-export const pushNewSlot = (newSlot, onPushSlotSuccess, language) => {
-    const baseUrl = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F'
-    newSlot['image'] = `${baseUrl}${snakeCase(newSlot.name)}%2F${newSlot.imageName}?alt=media`
+export const pushNewSlot = (newSlot, imageData, onPushSlotSuccess, language) => {
     newSlot['time'] = now()
     let l = 'it'
     if (language && language !== 'it') l = language
@@ -115,14 +113,17 @@ export const pushNewSlot = (newSlot, onPushSlotSuccess, language) => {
         .then(
             (success) => {
                 const key = success.data.name;
-
                 axios.put(`${databaseRoot}/Producer-Slot/${newSlot.producer.id}/${key}.json`, true)
                 for (const bonusId in newSlot.bonus) {
                     axios.put(`${databaseRoot}/Bonus-Slot/${bonusId}/${key}.json`, true)
                 }
-                pushNewImage(newSlot.imageFile, `${STORAGE_FOLDERS.SLOT_IMAGES}/${snakeCase(newSlot.name)}`, (url) => {
+                const filetype = imageData.imageFile.name.split('.').pop()
 
-                })
+                pushNewImage(
+                    imageData.imageFile,
+                    `${STORAGE_FOLDERS.SLOT_IMAGES}`,
+                    snakeCase(newSlot.name),
+                )
                 onPushSlotSuccess();
             }
         )
