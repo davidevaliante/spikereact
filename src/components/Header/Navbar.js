@@ -49,8 +49,7 @@ class Navbar extends Component {
                 onBottomPassed={this.showFixedMenu}
                 onBottomPassedReverse={this.hideFixedMenu}>
                 <Menu
-                    style={{ zIndex: 999 }}
-                    color={this.state.fixed ? 'red' : undefined}
+                    style={!this.state.fixed ? { position: 'absolute', zIndex: 99, width: '100%' } : { zIndex: 99 }}
                     fixed={this.state.fixed ? 'top' : null}
                     inverted={!this.state.fixed}
                     pointing={!this.state.fixed}

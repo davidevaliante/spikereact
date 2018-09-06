@@ -42,7 +42,6 @@ const SlotPageHeader = ({ currentSlot, showFixedMenu, hideFixedMenu, fixmenu, lo
                             style={{ backgroundImage: `url(${getImageLinkFromName('SLOT', currentSlot.name, 'big')})` }}>
                             <div
                                 style={styles.overlay}>
-                                <Navbar fixed={fixmenu} displaying={'SLOT'} />
                                 <div className='description-alignment'>
                                     <div className='align-center'>
                                         <h1 className='header-spike-text'>{currentSlot.name}</h1>

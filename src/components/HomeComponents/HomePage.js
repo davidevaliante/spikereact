@@ -8,7 +8,7 @@ import { setHomePage, setGratisPage, setBarPage, setAboutPage } from '../../redu
 import HomePageHeader from '../Header/HomePageHeader'
 import SiteDescription from './HomeBody/SiteDescription'
 import HomeBody from './HomeBody/HomeBody'
-
+import Navbar from '../Header/Navbar'
 class HomePage extends Component {
     state = {};
     title = '';
@@ -42,14 +42,15 @@ class HomePage extends Component {
     }
 
     render() {
-        const { contextRef, order, fixed } = this.state
+        const { contextRef, order } = this.state
         const type = this.getType(this.props.match.path)
 
         return (
             <div>
-                <HomePageHeader
-                    fixmenu={fixed}
-                />
+                <div>
+                    <Navbar displaying='HOME' />
+                    <HomePageHeader style={{ position: 'absolute', zIndex: 1 }} />
+                </div>
                 <SiteDescription />
                 <Segment vertical>
                     <ListDescriptionBanner />

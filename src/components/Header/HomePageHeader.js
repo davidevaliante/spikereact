@@ -15,12 +15,9 @@ const styles = {
     }
 }
 
-const HomePageHeader = ({ fixmenu, hideFixedMenu, showFixedMenu, displaying }) => {
+const HomePageHeader = ({ displaying }) => {
     return (
-        <Visibility
-            once={false}
-            onBottomPassed={showFixedMenu}
-            onBottomPassedReverse={hideFixedMenu}>
+        <div>
             <Segment
                 inverted
                 textAlign='center'
@@ -31,17 +28,18 @@ const HomePageHeader = ({ fixmenu, hideFixedMenu, showFixedMenu, displaying }) =
                         className='fade-in-header'
                         style={{ backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a')` }}>
                         <div style={styles.overlay}>
-                            <Navbar fixed={fixmenu} displaying={displaying} />
+
                             <div className='hero-text-box'>
                                 <h1 className='header-spike-text' style={{ fontSize: '600%' }}>Spike Slot</h1>
                                 <h1 className='slideRight'>Vinci soldi veri<br></br>I migliori consigli per vincere con le slot machine sul web.</h1>
                             </div>
                         </div>
+
                     </header>
                 </LazyLoad>
             </Segment>
             <AamsBanner />
-        </Visibility>
+        </div>
     )
 }
 

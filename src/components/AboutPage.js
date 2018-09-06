@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import {smoothScrollTo} from '../utils/Utils'
+import Navbar from './Header/Navbar'
 
 class AboutPage extends Component{
 
@@ -21,7 +22,13 @@ class AboutPage extends Component{
             <div>
                 <Responsive
                     minWidth={Responsive.onlyTablet.minWidth}>
-                    <AboutPageHeader displaying='ABOUT' />
+                    <div>
+                        <Navbar displaying='ABOUT'/>
+                        <AboutPageHeader 
+                            style={{ position: 'absolute', zIndex: 1 }}
+                            displaying='ABOUT' />
+                    </div>
+                    
                     <Segment style={{ padding: '6em 0em' }} vertical id='about-page'>
                         <Container text>
                             <Header as='h3' style={{ fontSize: '2em' }}>

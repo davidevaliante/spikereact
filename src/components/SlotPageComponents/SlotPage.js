@@ -12,6 +12,8 @@ import YouTubeEmbed from './YouTubeEmbed'
 import SlotPageHeader from '../Header/SlotPageHeader'
 import { getSlotWithId } from '../../firebase/firebase'
 import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
+import Navbar from '../Header/Navbar'
+
 class SlotPage extends Component {
 
     state = {
@@ -61,12 +63,16 @@ class SlotPage extends Component {
                     {window.scrollTo(0, 0)}
 
                     <PlayDimmer url={currentSlot.linkPlay} />
+                    <div>
+                        <Navbar displaying={'SLOT'} />
 
-                    <SlotPageHeader
-                        displaying='SLOT'
-                        loading={isLoading}
-                        fixmenu={fixed}
-                        currentSlot={currentSlot} />
+                        <SlotPageHeader
+                            style={{ position: 'absolute', zIndex: 1 }}
+                            displaying='SLOT'
+                            loading={isLoading}
+                            fixmenu={fixed}
+                            currentSlot={currentSlot} />
+                    </div>
 
                     <Description
                         slotName={currentSlot.name}
