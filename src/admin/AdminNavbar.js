@@ -67,7 +67,7 @@ class AdminNavbar extends Component {
                                     <NavLink id='admin-nav-add-bonus' to={ROUTE.ADDBONUS}><Icon name='add' /> Aggiungi Bonus</NavLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item onClick={() => this.handleClick('admin-nav-bonus')}>
-                                    <NavLink id='admin-nav-bonus' to='#'>
+                                    <NavLink id='admin-nav-bonus' to={ROUTE.ADMINBONUS}>
                                         <Icon name='plus circle' /> Gestione Bonus
                                     </NavLink>
                                 </Dropdown.Item>

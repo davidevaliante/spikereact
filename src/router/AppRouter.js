@@ -14,6 +14,7 @@ import AboutPage from '../components/AboutPage'
 import SlotDashboard from "../admin/AdminSlots/SlotDashboard";
 import NotFound from "../components/SlotPageComponents/NotFound"
 import EditSlot from "../admin/EditSlot";
+import BonusDashboard from "../admin/Bonus/BonusDashboard"
 
 
 
@@ -46,6 +47,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
                     <Route path='/admin/editslot/:id' component={EditSlot} />
+                    <Route path={Route.ADMINBONUS} component={BonusDashboard}></Route>
                     <Route path={ROUTE.ERROR404} component={NotFound} />
 
                     { /* test */}
