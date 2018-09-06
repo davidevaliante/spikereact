@@ -1,5 +1,6 @@
 import truncate from 'lodash/truncate'
-
+import snakeCase from 'lodash/snakeCase'
+import { IMGS_SIZES } from '../enums/Constants'
 export const removeHtmlFrom = (str) => {
     if ((str === null) || (str === ''))
         return false;
@@ -9,12 +10,18 @@ export const removeHtmlFrom = (str) => {
 }
 
 // costruisce il link ad un immagine
-/* export const getImageLinkFromName = (type, name, size) => {
-    const baseUrl = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F'
+export const getImageLinkFromName = (type, name, size) => {
+    const urlStart = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F'
+    const urlEnd = '?alt=media'
     if (type === 'SLOT') {
-
+        switch (size) {
+            case 'big':
+                return `${urlStart}${snakeCase(name)}${urlEnd}`
+            default:
+                return `${urlStart}thumb_${IMGS_SIZES.MEDIUM}_${snakeCase(name)}${urlEnd}`
+        }
     }
-} */
+}
 
 
 export const formatList = (slotList, bonusList, producerList) => {

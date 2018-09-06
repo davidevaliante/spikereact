@@ -113,7 +113,7 @@ export const getProducerList = (callback) => {
 
 
 export const getSlotList = (callback) => {
-    axios.get(`${databaseRoot}/SlotsCard.json`)
+    axios.get(`${databaseRoot}/SlotsCard/it.json`)
         .then(
             success => callback(success.data)
         )
@@ -122,7 +122,7 @@ export const getSlotList = (callback) => {
 
 
 export const getSlotWithId = (id, callback) => {
-    axios.get(`${databaseRoot}/Slots/${id}.json`)
+    axios.get(`${databaseRoot}/Slots/it/${id}.json`)
         .then(
             success => callback(success.data)
         )

@@ -12,7 +12,6 @@ import YouTubeEmbed from './YouTubeEmbed'
 import SlotPageHeader from '../Header/SlotPageHeader'
 import { getSlotWithId } from '../../firebase/firebase'
 import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
-
 class SlotPage extends Component {
 
     state = {

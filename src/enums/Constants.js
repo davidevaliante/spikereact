@@ -58,3 +58,8 @@ export const ADMINPAGES = {
     BONUS: 'Bonus',
     PRODUCER: 'Producer'
 };
+
+export const IMGS_SIZES = {
+    SMALL: 64,
+    MEDIUM: 250
+}

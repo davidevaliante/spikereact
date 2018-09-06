@@ -9,6 +9,7 @@ import Navbar from './Navbar'
 import LazyLoad from 'react-lazyload';
 import ShortHandMenu from '../SlotPageComponents/ShortHandMenu'
 import AamsBanner from "../AamsBanner";
+import { getImageLinkFromName } from '../../utils/Utils'
 
 const styles = {
     overlay: {
@@ -38,7 +39,7 @@ const SlotPageHeader = ({ currentSlot, showFixedMenu, hideFixedMenu, fixmenu, lo
                         <header
                             id='slotHeader'
                             className='fade-in-header'
-                            style={{ backgroundImage: `url(${currentSlot.image})` }}>
+                            style={{ backgroundImage: `url(${getImageLinkFromName('SLOT', currentSlot.name, 'big')})` }}>
                             <div
                                 style={styles.overlay}>
                                 <Navbar fixed={fixmenu} displaying={'SLOT'} />

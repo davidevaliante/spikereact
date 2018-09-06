@@ -7,7 +7,7 @@ import * as fileSystem from 'fs-extra';
 import { fstat } from 'fs';
 import { truncate, snakeCase } from 'lodash';
 import { database } from 'firebase-admin';
-
+import { IMGS_SIZES } from '../../src/enums/Constants'
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
@@ -18,7 +18,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const gcs = new Storage();
 // Creiamo un array di promises
-const sizes = [64, 250];
+const sizes = [IMGS_SIZES.SMALL, IMGS_SIZES.MEDIUM];
 const removeHtmlFrom = (s) => {
     let str = s
     if ((str === null) || (str === ''))
