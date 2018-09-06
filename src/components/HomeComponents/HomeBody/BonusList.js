@@ -20,7 +20,6 @@ export const BonusList = (props) => {
         }
 
         const column = slice(shuffle(listOfBonus), 0, props.maxNumber)
-
         return slice(shuffle(column), 0, 4).map(bonus => <BonusCard bonus={bonus} key={bonus.id} />)
     }
 

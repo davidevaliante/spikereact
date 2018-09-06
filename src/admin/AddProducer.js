@@ -28,9 +28,8 @@ class AddProducer extends Component {
             const newProducer = {
                 name: name,
                 link: link,
-                image: this.state.image
             }
-            pushNewProducer(newProducer, this.onProducerPushSuccess)
+            pushNewProducer(newProducer, this.state.image, this.onProducerPushSuccess)
         }
     }
 

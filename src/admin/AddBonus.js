@@ -48,7 +48,6 @@ class AddBonus extends Component {
             errorList.push('name');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
-        const producer = this.state.producer
 
         const bonus = document.getElementById('welcomeBonusField').value.trim();
         if (!bonus) {
@@ -76,17 +75,17 @@ class AddBonus extends Component {
         }
 
 
-        if (name && producer && bonus && review && link && rating && this.state.pickedImage) {
+        if (name && bonus && link && rating && this.state.pickedImage) {
             const newBonus = {
                 name: name,
-                producer: producer,
                 bonus: bonus,
                 rating: rating,
                 review: review,
                 link: link,
-                image: this.state.pickedImage
             }
-            pushNewBonus(newBonus, this.onBonusPushSuccess);
+
+            const imageData = this.state.pickedImage
+            pushNewBonus(newBonus, imageData, this.onBonusPushSuccess);
         }
 
     }
@@ -165,12 +164,7 @@ class AddBonus extends Component {
                                 label='Nome Bonus'
                                 placeholder='Nome Bonus'>
                             </Form.Field>
-                            <Form.Field>
-                                <label>Produttore</label>
-                                <SearchField
-                                    onSelected={this.onProducerSelected}
-                                    nodename='Produttore' />
-                            </Form.Field>
+
                         </Form.Group>
 
                         <Form.Group

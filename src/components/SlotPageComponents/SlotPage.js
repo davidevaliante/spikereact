@@ -65,12 +65,10 @@ class SlotPage extends Component {
                     <PlayDimmer url={currentSlot.linkPlay} />
                     <div>
                         <Navbar displaying={'SLOT'} />
-
                         <SlotPageHeader
                             style={{ position: 'absolute', zIndex: 1 }}
                             displaying='SLOT'
                             loading={isLoading}
-                            fixmenu={fixed}
                             currentSlot={currentSlot} />
                     </div>
 

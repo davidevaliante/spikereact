@@ -39,11 +39,11 @@ const SlotPageHeader = ({ currentSlot, showFixedMenu, hideFixedMenu, fixmenu, lo
                         <header
                             id='slotHeader'
                             className='fade-in-header'
-                            style={{ backgroundImage: `url(${getImageLinkFromName('SLOT', currentSlot.name, 'big')})` }}>
+                            style={{ backgroundImage: `url(${getImageLinkFromName('slot', currentSlot.name, 'big')})` }}>
                             <div
                                 style={styles.overlay}>
-                                <div className='description-alignment'>
-                                    <div className='align-center'>
+                                <div className='description-alignment' >
+                                    <div className='align-center' style={{ marginTop: '15rem' }}>
                                         <h1 className='header-spike-text'>{currentSlot.name}</h1>
                                         <h1 className='slideRight'>{(currentSlot && currentSlot.producer) && currentSlot.producer.name}</h1>
                                         <div style={{ display: 'flex', justifyContent: 'center' }}>

@@ -7,7 +7,6 @@ import * as fileSystem from 'fs-extra';
 import { fstat } from 'fs';
 import { truncate, snakeCase } from 'lodash';
 import { database } from 'firebase-admin';
-import { IMGS_SIZES } from '../../src/enums/Constants'
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
@@ -18,7 +17,8 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const gcs = new Storage();
 // Creiamo un array di promises
-const sizes = [IMGS_SIZES.SMALL, IMGS_SIZES.MEDIUM];
+const slotSizes = [64, 250];
+const producerSizes = [64];
 const removeHtmlFrom = (s) => {
     let str = s
     if ((str === null) || (str === ''))
@@ -27,6 +27,7 @@ const removeHtmlFrom = (s) => {
     return str.replace(/<[^>]*>/g, '');
 }
 
+// -------------------DATABASE TRIGGERS--------------------------------------------------------------
 export const onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     .onCreate((snapshot, context) => {
         // Grab the current value of what was written to the Realtime Database.
@@ -35,7 +36,7 @@ export const onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
         const baseName = newSlot.imageName
         const slotCard = {
             name: newSlot.name,
-            image: `${baseImageUrl}thumb_${sizes[1]}_${baseName}?alt=media`,
+            image: `${baseImageUrl}thumb_${slotSizes[1]}_${baseName}?alt=media`,
             producer: newSlot.producer.name,
             rating: newSlot.rating,
             time: newSlot.time,
@@ -45,7 +46,7 @@ export const onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
 
         const slotMenu = {
             name: newSlot.name,
-            image: `${baseImageUrl}thumb_${sizes[0]}_${baseName}?alt=media`,
+            image: `${baseImageUrl}thumb_${slotSizes[0]}_${baseName}?alt=media`,
             description: `${truncate(removeHtmlFrom(newSlot.description), { 'length': 60 })}`
         }
 
@@ -53,6 +54,7 @@ export const onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
             snapshot.ref.parent.parent.parent.child(`/SlotsMenu/${context.params.language}/${context.params.pushId}`).set(slotMenu)
         )
     });
+
 
 export const onSlotDeleted = functions.database.ref('/Slots/{language}/{slotId}/')
     .onDelete((snapshot, context) => {
@@ -70,6 +72,8 @@ export const onSlotDeleted = functions.database.ref('/Slots/{language}/{slotId}/
 
     })
 
+
+// -----------------------STORAGE TRIGGERS------------------------------------------------------------
 export const generateThumbs = functions.storage.object().onFinalize(async object => {
     const bucket = gcs.bucket(object.bucket)
     // dove si trova il file nello storage
@@ -80,7 +84,7 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
     const bucketDir = dirname(filePath);
 
     // crea una directory temporanea dove conservare i file trasformati prima di riscriverli
-    const temporaryDirectory = join(tmpdir(), 'thumbs');
+    const temporaryDirectory = join(tmpdir(), `thumbs_${fileName}`);
     // crea un filePath temporaneo all'interno della directory temporanea
     const temporaryFilePath = join(temporaryDirectory, 'source.png');
 
@@ -88,7 +92,9 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
     // break point per evitare che la funzione trigegri all'infinito
     // di base questa funzione va ogni volta che viene aggiunta un immagine
     // quindi riscrivendo nello storage l'immagine ridimensionata il loop sarebbe infito
-    if (fileName.includes('thumb_') || !object.contentType.includes('image')) {
+    if (fileName.includes('thumb_') ||
+        fileName.includes('bonus') ||
+        !object.contentType.includes('image')) {
         return false;
     }
 
@@ -101,22 +107,50 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
         destination: temporaryFilePath
     });
 
+    // se l'immagine che triggera è di una slot servono 2 thumbnail
+    if (fileName.includes('slot')) {
+        const slotUploadPromises = slotSizes.map(async size => {
+            const thumbName = `thumb_${size}_${fileName}`;
+            const thumbPath = join(temporaryDirectory, thumbName);
 
-    const uploadPromises = sizes.map(async size => {
-        const thumbName = `thumb_${size}_${fileName}`;
-        const thumbPath = join(temporaryDirectory, thumbName);
+            await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
 
-        await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
+            // upload della nuova immagine nello storage
+            return bucket.upload(thumbPath, {
+                destination: join(bucketDir, thumbName),
+                metadata: {
+                    contentType: 'image/jpeg',
+                }
+            })
 
-        // upload della nuova immagine nello storage
-        return bucket.upload(thumbPath, {
-            destination: join(bucketDir, thumbName)
-        })
+        });
+        // chiamiamo tutte le promises nell'array
+        await Promise.all(slotUploadPromises);
+    }
 
-    });
 
-    // chiamiamo tutte le promises nell'array
-    await Promise.all(uploadPromises);
+    // se l'immagine che triggera è di un bonus serve solo 1 thumbnail piccolo per il menu
+    if (fileName.includes('producer')) {
+        const producerUploadPromises = producerSizes.map(async size => {
+            const thumbName = `thumb_${size}_${fileName}`;
+            const thumbPath = join(temporaryDirectory, thumbName);
+
+            await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
+
+            // upload della nuova immagine nello storage
+            return bucket.upload(thumbPath, {
+                destination: join(bucketDir, thumbName),
+                metadata: {
+                    contentType: 'image/jpeg',
+                }
+            })
+
+        });
+        // chiamiamo tutte le promises nell'array
+        await Promise.all(producerUploadPromises);
+    }
+
+
 
     // rimuoviamo la directory temporanea con tutti i file che ormai sono stati uplodati
     return fileSystem.remove(temporaryDirectory);

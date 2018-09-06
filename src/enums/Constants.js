@@ -63,3 +63,7 @@ export const IMGS_SIZES = {
     SMALL: 64,
     MEDIUM: 250
 }
+
+export const COUNTRY = {
+    ITALY: 'it'
+}

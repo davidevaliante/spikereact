@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/storage'
 import { setUserLoggedIn, setUserLoggedOut, setUserName, setUserId } from './../reducers/AuthReducer';
 import { configuration } from './firebaseConfig';
-import { STORAGE_FOLDERS, DATABASE_REFERENCE } from '../enums/Constants';
+import { STORAGE_FOLDERS, DATABASE_REFERENCE, COUNTRY } from '../enums/Constants';
 import now from 'lodash/now';
 import axios from 'axios'
 import snakeCase from 'lodash/snakeCase'
@@ -35,11 +35,10 @@ export const pushNewImage = (image, folderName, imageName, callback) => {
 }
 
 
-export const pushNewSlot = (newSlot, imageData, onPushSlotSuccess, language) => {
+export const pushNewSlot = (newSlot, imageData, onPushSlotSuccess, country) => {
     newSlot['time'] = now()
-    let l = 'it'
-    if (language && language !== 'it') l = language
-    axios.post(`${databaseRoot}/Slots/${l}.json`, newSlot)
+    let c = COUNTRY.ITALY
+    axios.post(`${databaseRoot}/Slots/${c}.json`, newSlot)
         .then(
             (success) => {
                 const key = success.data.name;
@@ -47,12 +46,11 @@ export const pushNewSlot = (newSlot, imageData, onPushSlotSuccess, language) => 
                 for (const bonusId in newSlot.bonus) {
                     axios.put(`${databaseRoot}/Bonus-Slot/${bonusId}/${key}.json`, true)
                 }
-                const filetype = imageData.imageFile.name.split('.').pop()
 
                 pushNewImage(
                     imageData.imageFile,
                     `${STORAGE_FOLDERS.SLOT_IMAGES}`,
-                    snakeCase(newSlot.name),
+                    `slot_${snakeCase(newSlot.name)}`,
                 )
                 onPushSlotSuccess();
             }
@@ -63,39 +61,48 @@ export const pushNewSlot = (newSlot, imageData, onPushSlotSuccess, language) => 
         .then(
 
         )
+}
+
+export const pushNewBonus = (newBonus, imageData, onBonusPushSuccess, country) => {
+    let c = COUNTRY.ITALY
+    axios.post(`${databaseRoot}/Bonus/${c}.json`, newBonus)
+        .then(
+            (success) => {
+                pushNewImage(
+                    imageData,
+                    `${STORAGE_FOLDERS.BONUS_IMAGES}`,
+                    `bonus_${snakeCase(newBonus.name)}`
+                )
+                onBonusPushSuccess()
+            }
+        )
+
+}
+
+
+export const pushNewProducer = (newProducer, image, callback, country) => {
+    let c = COUNTRY.ITALY
+    axios.post(`${databaseRoot}/Producer/${c}.json`, newProducer)
+        .then(
+            (success) => {
+                pushNewImage(
+                    image,
+                    STORAGE_FOLDERS.PRODUCER_IMAGES,
+                    `producer_${snakeCase(newProducer.name)}`
+                )
+                callback()
+            }
+        )
 
 
 }
 
 
-export const pushNewProducer = (newProducer, callback) => {
-    pushNewImage(newProducer.image, STORAGE_FOLDERS.PRODUCER_IMAGES, (url) => {
-        newProducer['image'] = url
-        axios.post(`${databaseRoot}/Producer.json`, newProducer)
-            .then(
-                (success) => {
-                    callback()
-                }
-            )
-    })
-
-}
-
-export const pushNewBonus = (newBonus, onBonusPushSuccess) => {
-    pushNewImage(newBonus.image, STORAGE_FOLDERS.BONUS_IMAGES, (url) => {
-        newBonus['image'] = url
-        axios.post(`${databaseRoot}/Bonus.json`, newBonus)
-            .then(
-                (success) => {
-                    onBonusPushSuccess()
-                }
-            )
-    })
-}
 
 
-export const getBonusList = (callback) => {
-    axios.get(`${databaseRoot}/Bonus.json`)
+export const getBonusList = (callback, country) => {
+    let c = COUNTRY.ITALY
+    axios.get(`${databaseRoot}/Bonus/${c}.json`)
         .then(
             success => callback(success.data)
         )
@@ -103,8 +110,9 @@ export const getBonusList = (callback) => {
 
 
 
-export const getProducerList = (callback) => {
-    axios.get(`${databaseRoot}/Producer.json`)
+export const getProducerList = (callback, country) => {
+    let c = COUNTRY.ITALY
+    axios.get(`${databaseRoot}/Producer/${c}.json`)
         .then(
             success => callback(success.data)
         )
@@ -112,8 +120,9 @@ export const getProducerList = (callback) => {
 
 
 
-export const getSlotList = (callback) => {
-    axios.get(`${databaseRoot}/SlotsCard/it.json`)
+export const getSlotList = (callback, country) => {
+    let c = COUNTRY.ITALY
+    axios.get(`${databaseRoot}/SlotsCard/${c}.json`)
         .then(
             success => callback(success.data)
         )
@@ -121,8 +130,9 @@ export const getSlotList = (callback) => {
 
 
 
-export const getSlotWithId = (id, callback) => {
-    axios.get(`${databaseRoot}/Slots/it/${id}.json`)
+export const getSlotWithId = (id, callback, country) => {
+    let c = COUNTRY.ITALY
+    axios.get(`${databaseRoot}/Slots/${c}/${id}.json`)
         .then(
             success => callback(success.data)
         )

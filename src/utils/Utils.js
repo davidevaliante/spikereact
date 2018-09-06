@@ -1,6 +1,6 @@
 import truncate from 'lodash/truncate'
 import snakeCase from 'lodash/snakeCase'
-import { IMGS_SIZES } from '../enums/Constants'
+import { IMGS_SIZES, LANGUAGES } from '../enums/Constants'
 export const removeHtmlFrom = (str) => {
     if ((str === null) || (str === ''))
         return false;
@@ -10,17 +10,39 @@ export const removeHtmlFrom = (str) => {
 }
 
 // costruisce il link ad un immagine
-export const getImageLinkFromName = (type, name, size) => {
-    const urlStart = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F'
+export const getImageLinkFromName = (type, name, size, ) => {
+    const urlStart = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/'
+    const slotFolder = 'SlotImages%2F'
+    const bonusFolder = 'BonusImages%2F'
+    const producerFolder = 'ProducerImages%2F'
     const urlEnd = '?alt=media'
-    if (type === 'SLOT') {
+
+    if (type === 'slot') {
         switch (size) {
+            case 'small':
+                return `${urlStart}${slotFolder}thumb_${IMGS_SIZES.SMALL}_slot_${snakeCase(name)}${urlEnd}`
+            case 'medium':
+                return `${urlStart}${slotFolder}thumb_${IMGS_SIZES.MEDIUM}_slot_${snakeCase(name)}${urlEnd}`
             case 'big':
-                return `${urlStart}${snakeCase(name)}${urlEnd}`
+                return `${urlStart}${slotFolder}slot_${snakeCase(name)}${urlEnd}`
             default:
-                return `${urlStart}thumb_${IMGS_SIZES.MEDIUM}_${snakeCase(name)}${urlEnd}`
+                return `${urlStart}${slotFolder}thumb_${IMGS_SIZES.MEDIUM}_slot_${snakeCase(name)}${urlEnd}`
         }
     }
+
+    if (type === 'bonus') {
+        return `${urlStart}${bonusFolder}bonus_${snakeCase(name)}${urlEnd}`
+    }
+
+    if (type === 'producer') {
+        switch (size) {
+            case 'small':
+                return `${urlStart}${producerFolder}thumb_${IMGS_SIZES.SMALL}_producer_${snakeCase(name)}${urlEnd}`
+            default:
+                return `${urlStart}${producerFolder}producer_${snakeCase(name)}${urlEnd}`
+        }
+    }
+
 }
 
 
@@ -58,7 +80,7 @@ export const formatList = (slotList, bonusList, producerList) => {
         formattedSlot.push({
             title: current.name,
             description: `${truncate(removeHtmlFrom(current.description), truncateOptions)}`,
-            image: current.image,
+            image: getImageLinkFromName('slot', current.name, 'small'),
             original: current,
             id: slot
         })
@@ -81,7 +103,7 @@ export const formatList = (slotList, bonusList, producerList) => {
         const current = producerList[producer]
         formattedProducer.push({
             title: current.name,
-            image: current.image,
+            image: getImageLinkFromName('producer', current.name),
             id: producer,
             link: current.link
         })

@@ -14,7 +14,7 @@ const SlotCard = (props) => {
         <NavLink to={`slot/${props.slot.id}`}>
             <div className='slot-card-shadow-animation'>
                 <Card key={props.slot.id}>
-                    <Image src={getImageLinkFromName('SLOT', props.slot.name, 'medium')} style={{ height: '14rem' }} />
+                    <Image src={getImageLinkFromName('slot', props.slot.name, 'medium')} style={{ height: '14rem', objectFit: 'cover' }} />
                     <Card.Content >
                         <Card.Header>{truncate(props.slot.name, { length: 28, omission: '...' })}</Card.Header>
                         <Card.Meta >

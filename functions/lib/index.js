@@ -25,13 +25,15 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const gcs = new Storage();
 // Creiamo un array di promises
-const sizes = [64, 250];
+const slotSizes = [64, 250];
+const producerSizes = [64];
 const removeHtmlFrom = (s) => {
     let str = s;
     if ((str === null) || (str === ''))
         return false;
     return str.replace(/<[^>]*>/g, '');
 };
+// -------------------DATABASE TRIGGERS--------------------------------------------------------------
 exports.onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     .onCreate((snapshot, context) => {
     // Grab the current value of what was written to the Realtime Database.
@@ -40,7 +42,7 @@ exports.onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     const baseName = newSlot.imageName;
     const slotCard = {
         name: newSlot.name,
-        image: `${baseImageUrl}thumb_${sizes[1]}_${baseName}?alt=media`,
+        image: `${baseImageUrl}thumb_${slotSizes[1]}_${baseName}?alt=media`,
         producer: newSlot.producer.name,
         rating: newSlot.rating,
         time: newSlot.time,
@@ -49,7 +51,7 @@ exports.onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     };
     const slotMenu = {
         name: newSlot.name,
-        image: `${baseImageUrl}thumb_${sizes[0]}_${baseName}?alt=media`,
+        image: `${baseImageUrl}thumb_${slotSizes[0]}_${baseName}?alt=media`,
         description: `${lodash_1.truncate(removeHtmlFrom(newSlot.description), { 'length': 60 })}`
     };
     return snapshot.ref.parent.parent.parent.child(`/SlotsCard/${context.params.language}/${context.params.pushId}`).set(slotCard).then(() => snapshot.ref.parent.parent.parent.child(`/SlotsMenu/${context.params.language}/${context.params.pushId}`).set(slotMenu));
@@ -66,6 +68,7 @@ exports.onSlotDeleted = functions.database.ref('/Slots/{language}/{slotId}/')
         admin.storage.ref(`/SlotImages/${imageName}`).remove();
     });
 });
+// -----------------------STORAGE TRIGGERS------------------------------------------------------------
 exports.generateThumbs = functions.storage.object().onFinalize((object) => __awaiter(this, void 0, void 0, function* () {
     const bucket = gcs.bucket(object.bucket);
     // dove si trova il file nello storage
@@ -75,13 +78,15 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
     // nome della cartella originale del file
     const bucketDir = path_1.dirname(filePath);
     // crea una directory temporanea dove conservare i file trasformati prima di riscriverli
-    const temporaryDirectory = path_1.join(os_1.tmpdir(), 'thumbs');
+    const temporaryDirectory = path_1.join(os_1.tmpdir(), `thumbs_${fileName}`);
     // crea un filePath temporaneo all'interno della directory temporanea
     const temporaryFilePath = path_1.join(temporaryDirectory, 'source.png');
     // break point per evitare che la funzione trigegri all'infinito
     // di base questa funzione va ogni volta che viene aggiunta un immagine
     // quindi riscrivendo nello storage l'immagine ridimensionata il loop sarebbe infito
-    if (fileName.includes('thumb_') || !object.contentType.includes('image')) {
+    if (fileName.includes('thumb_') ||
+        fileName.includes('bonus') ||
+        !object.contentType.includes('image')) {
         return false;
     }
     // la creazione della directory temporanea può richeiedere tempo quindi
@@ -91,17 +96,40 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
     yield bucket.file(filePath).download({
         destination: temporaryFilePath
     });
-    const uploadPromises = sizes.map((size) => __awaiter(this, void 0, void 0, function* () {
-        const thumbName = `thumb_${size}_${fileName}`;
-        const thumbPath = path_1.join(temporaryDirectory, thumbName);
-        yield sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
-        // upload della nuova immagine nello storage
-        return bucket.upload(thumbPath, {
-            destination: path_1.join(bucketDir, thumbName)
-        });
-    }));
-    // chiamiamo tutte le promises nell'array
-    yield Promise.all(uploadPromises);
+    // se l'immagine che triggera è di una slot servono 2 thumbnail
+    if (fileName.includes('slot')) {
+        const slotUploadPromises = slotSizes.map((size) => __awaiter(this, void 0, void 0, function* () {
+            const thumbName = `thumb_${size}_${fileName}`;
+            const thumbPath = path_1.join(temporaryDirectory, thumbName);
+            yield sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
+            // upload della nuova immagine nello storage
+            return bucket.upload(thumbPath, {
+                destination: path_1.join(bucketDir, thumbName),
+                metadata: {
+                    contentType: 'image/jpeg',
+                }
+            });
+        }));
+        // chiamiamo tutte le promises nell'array
+        yield Promise.all(slotUploadPromises);
+    }
+    // se l'immagine che triggera è di un bonus serve solo 1 thumbnail piccolo per il menu
+    if (fileName.includes('producer')) {
+        const producerUploadPromises = producerSizes.map((size) => __awaiter(this, void 0, void 0, function* () {
+            const thumbName = `thumb_${size}_${fileName}`;
+            const thumbPath = path_1.join(temporaryDirectory, thumbName);
+            yield sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
+            // upload della nuova immagine nello storage
+            return bucket.upload(thumbPath, {
+                destination: path_1.join(bucketDir, thumbName),
+                metadata: {
+                    contentType: 'image/jpeg',
+                }
+            });
+        }));
+        // chiamiamo tutte le promises nell'array
+        yield Promise.all(producerUploadPromises);
+    }
     // rimuoviamo la directory temporanea con tutti i file che ormai sono stati uplodati
     return fileSystem.remove(temporaryDirectory);
 }));
