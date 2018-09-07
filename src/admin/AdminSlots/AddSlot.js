@@ -158,9 +158,6 @@ class AddSlot extends Component {
         }
 
 
-        const d = new Date();
-        const time = d.getTime();
-
         const newSlot = {
             name: name,
             producer: producer,
@@ -169,7 +166,6 @@ class AddSlot extends Component {
             bonus: BONUS,
             description: description,
             rating: rating,
-            time: time,
             tips: tipsField,
             tecnicals: tecnicalsField,
             type: this.state.type,

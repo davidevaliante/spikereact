@@ -1,31 +1,37 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { Form, Dropdown, Button } from 'semantic-ui-react';
 
 class Test extends Component {
-
-
     state = {}
+    componentDidMount() {
+        this.setState({
+            options: [
+                { value: '1', text: 'Lamborghini Aventador 2016' },
+                { value: '2', text: 'VW Beetle 1971' },
+                { value: '3', text: 'Ford Mustang' },
+            ],
 
-    handleContextRef = contextRef => this.setState({ contextRef })
-
+        });
+    }
+    selected = ['1', '2']
     render() {
-        const { contextRef } = this.state
-
-        const cardShadow = {
-            boxShadow: '10px 10px 33px -8px rgba(122, 122, 122, 0.75)',
-            margin: '1rem 1rem 1rem 1rem',
-            transition: "all ease .5s",
-            ":hover": {
-                boxShadow: '10px 10px 33px -8px rgba(243, 109, 109, 0.75)'
-            }
-        }
-
         return (
             <div>
-                <h2 className="tracking-in-contract-bck">Le Slot del giorno</h2>
+                <Dropdown
+                    search
+                    placeholder="Select Options"
+                    defaultValue={this.selected}
+                    fluid
+                    multiple
+                    selection
+                    options={this.state.options && this.state.options}
+                />
 
             </div>
-        )
+        );
     }
 }
 
 export default Test
+

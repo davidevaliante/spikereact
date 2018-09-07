@@ -47,8 +47,7 @@ export const ROUTE = {
     ADMINBONUS: `${admin}/bonus`,
     ADDBONUS: `${admin}/addbonus`,
     ADDPRODUCER: `${admin}/addproducer`,
-    ADDARTICLE: `${admin}/addarticle`,
-    EDITPAGE: `${admin}/editpage`,
+    EDITPAGE: `${admin}/editpage`
 };
 
 export const ADMINPAGES = {

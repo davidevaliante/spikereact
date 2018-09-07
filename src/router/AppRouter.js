@@ -27,6 +27,7 @@ const AppRouter = () => {
             <Router>
 
                 <Switch>
+
                     { /* entry points  */}
                     <Route path={ROUTE.ROOT} component={HomePage} exact={true} page='HOME' />
                     <Route path={ROUTE.SLOT} component={SlotPage} page={PAGES.SLOT} />
@@ -38,6 +39,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.SLOT_GRATIS} component={HomePage} exact={true} page={PAGES.SLOT_GRATIS} />
                     <Route path={ROUTE.SLOT_BAR} component={HomePage} exact={true} page={PAGES.SLOT_BAR} />
 
+                    <Route path='/test' component={Test} />
 
                     { /* admin */}
                     <Route path={ROUTE.ADMIN} component={AdminDashboard} exact={true} />
@@ -51,7 +53,6 @@ const AppRouter = () => {
                     <Route path={ROUTE.ERROR404} component={NotFound} />
 
                     { /* test */}
-                    <Test path='/test' component={Test} />
                 </Switch>
 
             </Router>

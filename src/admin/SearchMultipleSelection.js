@@ -2,41 +2,47 @@ import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 import { getBonusList } from '../firebase/firebase';
 import pick from 'lodash/pick';
-
-
-
+import map from 'lodash/map'
 
 class SearchMultipleSelection extends Component {
+
+    state = {
+    }
 
     componentDidMount() {
         getBonusList(this.onBonusListFectched)
     }
 
+
     formatObjectIntoList = (list) => {
         let formattedList = [];
+        let counter = 1
         for (const key in list) {
-            formattedList.push({ key: `${key}`, value: `${key}`, text: `${list[key].name}` })
+            formattedList.push({ key: `${key}`, value: `${counter}`, text: `${list[key].name}` })
+            counter++
         }
         return formattedList;
     }
 
     onBonusListFectched = (list) => {
+
         this.setState({
             optionList: this.formatObjectIntoList(list),
-            firebaseBonusObject: list
+            firebaseBonusObject: list,
         });
     }
 
     handleClick = (data) => {
         console.log('clicked');
-
         console.log(data);
-
     }
 
     handleItemAdded = (event, data) => {
         this.setState({ pickedList: data.value })
-        this.props.onListUpdate(pick(this.state.firebaseBonusObject, data.value));
+        this.props.onListUpdate(pick(this.state.firebaseBonusObject, map(data.value, option =>
+            this.state.optionList[parseInt(option, 10)].key)
+        )
+        )
     }
 
 
@@ -46,7 +52,10 @@ class SearchMultipleSelection extends Component {
     }
 
 
+
     render() {
+        // console.log(this.state);
+
         return (
             <Dropdown
                 id='bonusField'
@@ -55,6 +64,7 @@ class SearchMultipleSelection extends Component {
                 multiple
                 search
                 selection
+                defaultValue={this.props.defaults}
                 onChange={(event, data) => this.handleItemAdded(event, data)}
                 options={this.state.optionList} />
         );

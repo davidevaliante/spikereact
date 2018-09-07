@@ -5,13 +5,11 @@ const ImagePicker = (props) => {
 
     const handleNewImage = () => {
         const selectedFile = document.getElementById('imagePicker').files[0];
-        console.log(selectedFile.type);
 
-        if (split(selectedFile.type, '/')[0] === 'image') {
+        if (selectedFile && split(selectedFile.type, '/')[0] === 'image') {
             props.onImageSelected(selectedFile)
         } else {
             console.log('unsupported file type');
-            console.log(selectedFile.type);
         }
     }
 

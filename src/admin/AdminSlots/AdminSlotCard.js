@@ -11,8 +11,7 @@ import { Image } from 'semantic-ui-react-single/Image';
 import truncate from "lodash/truncate";
 import { deleteSlotWithId } from "../../firebase/firebase";
 import { setToUpdate } from "../../reducers/ToUpdateReducer";
-import { ROUTE } from "../../enums/Constants";
-
+import { getImageLinkFromName } from '../../utils/Utils'
 function mapStateToProps(state) {
     return {
         toUpdate: state.toUpdate
@@ -51,7 +50,7 @@ class AdminSlotCard extends Component {
                                 {truncate(this.props.slot.description, { 'length': 175 })}
                                 <Divider />
                                 <div className='crop' >
-                                    <Image src={this.props.slot.image} />
+                                    <Image style={{ objectFit: 'cover' }} src={getImageLinkFromName('slot', this.props.slot.name, 'medium')} />
                                 </div>
                                 <Divider />
                                 <Icon name='star' />
