@@ -6,7 +6,6 @@ import * as sharp from 'sharp';
 import * as fileSystem from 'fs-extra';
 import { fstat } from 'fs';
 import { truncate, snakeCase } from 'lodash';
-import { database } from 'firebase-admin';
 
 // costanti necessarie
 const admin = require('firebase-admin');
@@ -24,7 +23,6 @@ admin.initializeApp();
 const gcs = new Storage();
 const slotSizes = [64, 250];
 const producerSizes = [64];
-const JPEG_EXTENSION = '.jpg';
 
 
 const removeHtmlFrom = (s) => {
