@@ -238,6 +238,8 @@ export const imageToJPG = functions.storage.object().onFinalize(async (object) =
 exports.githubWebhook = functions.https.onRequest(async (req, res) => {
     const cipher = 'sha1';
     const signature = req.headers['x-hub-signature'];
+    console.log('req', req)
+    console.log('body', req.body);
 
     // TODO: Configure the `github.secret` Google Cloud environment variables.
     const hmac = crypto.createHmac(cipher, functions.config().github.secret)
