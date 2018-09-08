@@ -161,24 +161,53 @@ export const getSlotWithId = (id, callback, country) => {
 }
 
 export const deleteSlotWithId = (id, callback) => {
-    axios.delete(`${databaseRoot}/Slots/${id}.json`)
+    axios.get(`${databaseRoot}/Slots/it/${id}/name.json`)
         .then(
-            () => callback()
+            success => {
+                const slotName = success.data
+                axios.delete(`${databaseRoot}/Slots/it/${id}.json`)
+                    .then(
+                        () => {
+                            firebase.storage().ref().child(`SlotImages/${snakeCase(slotName)}`).delete()
+                                .then(() => callback())
+                        }
+                    )
+            }
         )
+    axios.delete(`${databaseRoot}/SlotsCard/it/${id}.json`)
+    axios.delete(`${databaseRoot}/SlotsMenu/it/${id}.json`)
 
 }
 
 export const deleteBonusWithId = (id, callback) => {
-    axios.delete(`${databaseRoot}/${DATABASE_REFERENCE.SLOT}/${id}.json`)
+    axios.get(`${databaseRoot}/Bonus/it/${id}/name.json`)
         .then(
-            () => callback()
+            success => {
+                const bonusName = success.data
+                axios.delete(`${databaseRoot}/Bonus/it/${id}.json`)
+                    .then(
+                        () => {
+                            firebase.storage().ref().child(`BonusImages/${snakeCase(bonusName)}`).delete()
+                                .then(() => callback())
+                        }
+                    )
+            }
         )
 }
 
 export const deleteProducerWithId = (id, callback) => {
-    axios.delete(`${databaseRoot}/${DATABASE_REFERENCE.PRODUCER}/${id}.json`)
+    axios.get(`${databaseRoot}/Producer/it/${id}/name.json`)
         .then(
-            () => callback()
+            success => {
+                const ProducerName = success.data
+                axios.delete(`${databaseRoot}/Producer/it/${id}.json`)
+                    .then(
+                        () => {
+                            firebase.storage().ref().child(`ProducerImages/${snakeCase(ProducerName)}`).delete()
+                                .then(() => callback())
+                        }
+                    )
+            }
         )
 }
 
