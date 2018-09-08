@@ -5,6 +5,7 @@ import { setUserLoggedIn, setUserLoggedOut, setUserName, setUserId } from './../
 import { configuration } from './firebaseConfig';
 import { STORAGE_FOLDERS, DATABASE_REFERENCE, COUNTRY } from '../enums/Constants';
 import now from 'lodash/now';
+import omit from 'lodash/omit'
 import axios from 'axios'
 import snakeCase from 'lodash/snakeCase'
 const config = configuration;
@@ -14,6 +15,7 @@ export const getFirebase = () => firebase
 
 
 const databaseRoot = 'https://spike-2481d.firebaseio.com';
+
 
 
 export const pushNewImage = (image, folderName, imageName, callback) => {
@@ -199,7 +201,7 @@ export const updateSlotWithId = (slotId, updatedSlot, updatedImage, callback) =>
 
 
 // ----------------------NON CANCELLARE MA NON USARE---------------------
-export const swapSlotsToNewDatabase = () => {
+/* export const swapSlotsToNewDatabase = () => {
     // prende l'oggetto completo con tutte le slot
     axios.get(`${databaseRoot}/Slots.json`)
         .then(
@@ -208,8 +210,9 @@ export const swapSlotsToNewDatabase = () => {
                 // per ogni chiave (cioè id)
                 for (const id in slotList) {
                     const slot = slotList[id]
-                    if (!slot.isFake)
-                        axios.put(`${databaseRoot}/Slots/it/${id}.json`, slot)
+                    if (!slot.isFake) {
+                        axios.put(`${databaseRoot}/Slots/it/${id}.json`, omit(slot, ['isFake', 'image']))
+                    }
                 }
             }
         )
@@ -258,4 +261,36 @@ export const removeImageLink = () => {
         )
 }
 
+export const purgeDb = () => {
+    axios.get(`${databaseRoot}/${DATABASE_REFERENCE.SLOT}.json`)
+        .then(
+            snapshot => {
+                const l = snapshot.data
+                for (const id in l) {
+                    if (id !== 'it')
+                        axios.delete(`${databaseRoot}/${DATABASE_REFERENCE.SLOT}/${id}.json`)
+                }
+            }
+        )
+    axios.get(`${databaseRoot}/${DATABASE_REFERENCE.BONUS}.json`)
+        .then(
+            snapshot => {
+                const l = snapshot.data
+                for (const id in l) {
+                    if (id !== 'it')
+                        axios.delete(`${databaseRoot}/${DATABASE_REFERENCE.BONUS}/${id}.json`)
+                }
+            }
+        )
+    axios.get(`${databaseRoot}/${DATABASE_REFERENCE.PRODUCER}.json`)
+        .then(
+            snapshot => {
+                const l = snapshot.data
+                for (const id in l) {
+                    if (id !== 'it')
+                        axios.delete(`${databaseRoot}/${DATABASE_REFERENCE.PRODUCER}/${id}.json`)
+                }
+            }
+        )
+} */
 

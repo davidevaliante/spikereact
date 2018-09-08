@@ -38,11 +38,8 @@ export const onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     .onCreate((snapshot, context) => {
         // Grab the current value of what was written to the Realtime Database.
         const newSlot = snapshot.val();
-        const baseImageUrl = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/SlotImages%2F';
-        const baseName = newSlot.imageName
         const slotCard = {
             name: newSlot.name,
-            image: `${baseImageUrl}thumb_${slotSizes[1]}_${baseName}?alt=media`,
             producer: newSlot.producer.name,
             rating: newSlot.rating,
             time: newSlot.time,
@@ -52,7 +49,6 @@ export const onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
 
         const slotMenu = {
             name: newSlot.name,
-            image: `${baseImageUrl}thumb_${slotSizes[0]}_${baseName}?alt=media`,
             description: `${truncate(removeHtmlFrom(newSlot.description), { 'length': 60 })}`
         }
 
@@ -234,37 +230,45 @@ export const imageToJPG = functions.storage.object().onFinalize(async (object) =
  * Webhook that will be called each time there is a new GitHub commit and will post a message to
  * Slack.
  */
+
 // http generato durante il deploy per chiamare la funzione in remoto
-exports.githubWebhook = functions.https.onRequest(async (req, res) => {
+// non disponibile con il piano free :/
+
+/* exports.githubWebhook = functions.https.onRequest(async (req, res) => {
     const cipher = 'sha1';
     const signature = req.headers['x-hub-signature'];
     console.log('req', req)
     console.log('body', req.body);
+    if (req.body) {
+        // TODO: Configure the `github.secret` Google Cloud environment variables.
+        const hmac = crypto.createHmac(cipher, functions.config().github.secret)
+            .update(req.body)
+            .digest('hex');
+        const expectedSignature = `${cipher}=${hmac}`;
+        console.log('expected', expectedSignature);
+        console.log('hmac', hmac);
 
-    // TODO: Configure the `github.secret` Google Cloud environment variables.
-    const hmac = crypto.createHmac(cipher, functions.config().github.secret)
-        .update(req.body)
-        .digest('hex');
-    const expectedSignature = `${cipher}=${hmac}`;
+        // Check that the body of the request has been signed with the GitHub Secret.
+        if (!secureCompare(signature, expectedSignature)) {
+            console.error('x-hub-signature', signature, 'did not match', expectedSignature);
+            return res.status(403).send('Your x-hub-signature\'s bad and you should feel bad!');
+        }
 
-    // Check that the body of the request has been signed with the GitHub Secret.
-    if (!secureCompare(signature, expectedSignature)) {
-        console.error('x-hub-signature', signature, 'did not match', expectedSignature);
-        return res.status(403).send('Your x-hub-signature\'s bad and you should feel bad!');
-    }
+        try {
+            await postToSlack(req.body.compare, req.body.commits.length, req.body.repository);
+            return null;
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send('Something went wrong while posting the message to Slack.');
+        }
+    } else {
+        console.log('req', req)
 
-    try {
-        await postToSlack(req.body.compare, req.body.commits.length, req.body.repository);
-        return null;
-    } catch (error) {
-        console.error(error);
-        return res.status(500).send('Something went wrong while posting the message to Slack.');
+        return null
     }
 });
 
-/**
- * Post a message to Slack about the new GitHub commit.
- */
+
 function postToSlack(url, commits, repo) {
     return rp({
         method: 'POST',
@@ -276,3 +280,4 @@ function postToSlack(url, commits, repo) {
         json: true,
     });
 }
+ */
