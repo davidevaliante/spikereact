@@ -4,12 +4,11 @@ import registerServiceWorker from './registerServiceWorker';
 import AppRouter from './router/AppRouter'
 import store from './store/store.js';
 import { Provider } from 'react-redux';
-import { getUserAuthStatus } from './firebase/firebase';
 import '../src/style/base.css';
 import '../src/style/sass.scss';
 import 'semantic-ui-react-single/css'
 import { onSlotListFetched, onBonusListFetched, onProducerListFetched } from './utils/Callbacks'
-import { getSlotList, getBonusList, removeImageLink, purgeDb, getProducerList, swapSlotsToNewDatabase, swapBonusToNewDatabase, swapProducerToNewDatabase } from './firebase/firebase';
+import { getSlotList, getBonusList, getProducerList } from './firebase/firebase';
 import keys from 'lodash/keys'
 
 // // fetch dati iniziali

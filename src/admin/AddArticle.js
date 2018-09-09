@@ -209,8 +209,8 @@ class AddArticle extends Component {
                     // pass
                 }
             }
-
-        })
+            return undefined
+        });
 
         /* 
             IMPORTANTE :

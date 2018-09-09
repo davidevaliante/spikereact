@@ -2,16 +2,11 @@ import filter from 'lodash/filter'
 import reduce from 'lodash/reduce'
 import debounce from 'lodash/debounce'
 import escapeRegExp from 'lodash/escapeRegExp'
-import { formatList } from '../../utils/Utils'
-import { PAGES } from '../../enums/Constants'
-import React, { Component } from 'react'
-import { Search } from 'semantic-ui-react-single/Search'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { getSlotWithId } from '../../firebase/firebase';
-import { updateCurrentSlot } from '../../reducers/SlotPageReducer'
-import { smoothScrollTo } from '../../utils/Utils'
-import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
+import {formatList} from '../../utils/Utils'
+import React, {Component} from 'react'
+import {Search} from 'semantic-ui-react-single/Search'
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 class NavbarSearchBar extends Component {
 

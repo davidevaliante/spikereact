@@ -1,17 +1,10 @@
 import firebase from 'firebase/app';
 // import 'firebase/database'
 import 'firebase/storage'
-import { setUserLoggedIn, setUserLoggedOut, setUserName, setUserId } from './../reducers/AuthReducer';
-import { configuration } from './firebaseConfig';
-import { STORAGE_FOLDERS, DATABASE_REFERENCE, COUNTRY } from '../enums/Constants';
+import { STORAGE_FOLDERS, COUNTRY } from '../enums/Constants';
 import now from 'lodash/now';
-import omit from 'lodash/omit'
 import axios from 'axios'
 import snakeCase from 'lodash/snakeCase'
-const config = configuration;
-const firebaseApp = firebase.initializeApp(config);
-
-export const getFirebase = () => firebase
 
 
 const databaseRoot = 'https://spike-2481d.firebaseio.com';

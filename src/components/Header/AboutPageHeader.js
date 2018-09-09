@@ -3,7 +3,6 @@ import React from 'react'
 // components
 import { Segment } from 'semantic-ui-react-single/Segment'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
-import Navbar from './Navbar'
 import LazyLoad from 'react-lazyload'
 import AamsBanner from "../AamsBanner"
 

@@ -7,7 +7,7 @@ const SlotPageBonusCard = (props) => {
         window.open(props.bonus.link)
     }
 
-    const { bonus, image, link, name, rating } = props.bonus
+    const { bonus, image, rating } = props.bonus
     return (
         <div>
             <Card color='red' onClick={(event) => handleClick()}>

@@ -5,7 +5,6 @@ import { Segment } from 'semantic-ui-react-single/Segment'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
 import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import { Loader } from 'semantic-ui-react-single/Loader'
-import Navbar from './Navbar'
 import LazyLoad from 'react-lazyload';
 import ShortHandMenu from '../SlotPageComponents/ShortHandMenu'
 import AamsBanner from "../AamsBanner";

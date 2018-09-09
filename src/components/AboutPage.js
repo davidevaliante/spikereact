@@ -67,8 +67,8 @@ Soci andiamo in giro a giocare alle Slot, con varie gag divertenti tra una
                                 <p>Poi per la passione che da sempre ho per l&#8217;informatica e il mondo
                                 digitale, <strong>SPIKE</strong> si è trasformato in qualcosa di più.</p>
                                 <p>Appoggiandosi a <Link to="/"> spikeslot </Link> e al
-                                forum <a href="http://www.Professioneslot.it"
-                                        target="_blank"> Professioneslot </a>, è diventato il principale
+                                forum <a href="http://www.Professioneslot.it">
+                                        Professioneslot </a>, è diventato il principale
 (e forse unico) strumento informativo e di dialogo veramente competente in
                                 materia, <strong>per tutti i giocatori di Slot Machine d&#8217;Italia.</strong>
                                 </p>

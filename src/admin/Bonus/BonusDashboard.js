@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
-import { getSlotList } from "../../firebase/firebase";
-import AdminSlotCard from "../AdminSlots/AdminSlotCard";
+import { getBonusList } from "../../firebase/firebase";
+import AdminBonusCard from "../Slots/AdminSlotCard";
 import AdminNavbar from "../../admin/AdminNavbar";
 import { ADMINPAGES } from "../../enums/Constants";
 import { setToUpdate } from "../../reducers/ToUpdateReducer";
@@ -22,7 +22,7 @@ class BonusDashboard extends Component {
     r = 1;
 
     componentDidMount() {
-        getSlotList(this.onSlotListFetched);
+        getBonusList(this.onSlotListFetched);
     }
 
     componentWillMount() {
@@ -49,14 +49,14 @@ class BonusDashboard extends Component {
         if (this.props.toUpdate) {
             //do shit
             console.log('Aggiornare slot list', this.state.slotList, this.list)
-            getSlotList(this.onSlotListFetched);
+            getBonusList(this.onSlotListFetched);
             this.props.dispatch(setToUpdate())
         }
     }
 
     renderSlot = () => {
         return this.list.map((slot) => (slot &&
-            <Grid.Column><AdminSlotCard slot={slot} key={slot.id} /></Grid.Column>))
+            <Grid.Column><AdminBonusCard slot={slot} key={slot.id} /></Grid.Column>))
     };
 
     render() {
