@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
 import { getBonusList } from "../../firebase/firebase";
-import AdminBonusCard from "../Slots/AdminSlotCard";
+import AdminBonusCard from "./AdminBonusCard";
 import AdminNavbar from "../../admin/AdminNavbar";
 import { ADMINPAGES } from "../../enums/Constants";
 import { setToUpdate } from "../../reducers/ToUpdateReducer";
@@ -18,56 +18,41 @@ class BonusDashboard extends Component {
     state = {
         slotList: {}
     };
-    list = [];
-    r = 1;
+
 
     componentDidMount() {
-        getBonusList(this.onSlotListFetched);
+        getBonusList(this.onBonusListFetched);
     }
 
     componentWillMount() {
     }
 
-    onSlotListFetched = (slotList) => {
-        this.list = []
-        for (const key in slotList) {
-            const slot = slotList[key];
-            slot['id'] = key
-            this.list.push(slot)
-            // this.list[key] = slot
+    onBonusListFetched = (bonusList) => {
+        let list = []
+        for (const key in bonusList) {
+            const bonus = bonusList[key];
+            bonus['id'] = key
+            list.push(bonus)
         }
 
         this.setState({
-            // ...this.state,
-            slotList: this.list
+            bonusList: list
         })
-        // console.log('onSlotListFetched', this.list)
-        // store.dispatch(addSlotList(this.list))
     }
 
-    updateSlotList = () => {
-        if (this.props.toUpdate) {
-            //do shit
-            console.log('Aggiornare slot list', this.state.slotList, this.list)
-            getBonusList(this.onSlotListFetched);
-            this.props.dispatch(setToUpdate())
-        }
-    }
 
     renderSlot = () => {
-        return this.list.map((slot) => (slot &&
-            <Grid.Column><AdminBonusCard slot={slot} key={slot.id} /></Grid.Column>))
+        return this.state.bonusList.map((bonus) => (bonus &&
+            <Grid.Column><AdminBonusCard bonus={bonus} key={bonus.id} /></Grid.Column>))
     };
 
     render() {
-        console.log('rendered #', this.r++);
-        console.log('render::', this.state.slotList, this.list);
-        this.updateSlotList();
+        const { bonusList } = this.state
         return (
             <Responsive>
                 <AdminNavbar activeItem={ADMINPAGES.ADMIN} />
                 <Grid stackable columns={4} style={{ padding: '2rem' }}>
-                    {this.renderSlot()}
+                    {bonusList && this.renderSlot()}
                 </Grid>
             </Responsive>
         );

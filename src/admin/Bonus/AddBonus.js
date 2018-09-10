@@ -9,14 +9,27 @@ import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import { Header } from 'semantic-ui-react-single/Header'
 import { Icon } from 'semantic-ui-react-single/Icon'
-
-
 import ImagePicker from '../ImagePicker';
 import { pushNewBonus } from '../../firebase/firebase';
+import { updateBonusWithId } from '../../firebase/update'
 import { ADMINPAGES } from "../../enums/Constants";
+import { getBonusWithId } from '../../firebase/get'
 import AdminNavbar from "../AdminNavbar";
 
 class AddBonus extends Component {
+
+
+    componentDidMount() {
+        if (this.props.match.params.bonusid) {
+            getBonusWithId(this.props.match.params.bonusid, 'it', (bonus) => {
+                this.setState({ isInEditMode: true, bonusToEdit: bonus, defaultRating: bonus.rating, defaultReview: bonus.review })
+            })
+        }
+    }
+
+    state = {
+        isInEditMode: false
+    }
 
     onDropDownChange = (data) => {
         this.setState({
@@ -66,11 +79,13 @@ class AddBonus extends Component {
             errorList.push('link');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
-        const rating = this.state.rating;
-        if (!rating) {
+        let rating = this.state.rating;
+        if (!rating && !this.state.isInEditMode) {
             let errorList = this.state.emptyFields;
             errorList.push('rating');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
+        } else {
+            rating = this.state.bonusToEdit.rating
         }
 
 
@@ -84,7 +99,8 @@ class AddBonus extends Component {
             }
 
             const imageData = this.state.pickedImage
-            pushNewBonus(newBonus, imageData, this.onBonusPushSuccess);
+            this.state.isInEditMode ? updateBonusWithId(this.props.match.params.bonusid, newBonus, imageData, this.onBonusPushSuccess) :
+                pushNewBonus(newBonus, imageData, this.onBonusPushSuccess);
         }
 
     }
@@ -111,27 +127,32 @@ class AddBonus extends Component {
         })
     }
 
+    updateBonus = () => {
+
+    }
+
     handleOpen = () => this.setState({ active: true })
     handleClose = () => this.setState({ active: false })
 
+    ratingStateOptions = [
+        { key: 'uno', value: '1', text: '1' },
+        { key: 'due', value: '2', text: '2' },
+        { key: 'tre', value: '3', text: '3' },
+        { key: 'quattro', value: '4', text: '4' },
+        { key: 'cinque', value: '5', text: '5' },
+
+    ]
 
     state = {
         shouldDisplayErrors: false,
         emptyFields: [],
-        ratingStateOptions: [
-            { key: 'uno', value: '1', text: '1' },
-            { key: 'due', value: '2', text: '2' },
-            { key: 'tre', value: '3', text: '3' },
-            { key: 'quattro', value: '4', text: '4' },
-            { key: 'cinque', value: '5', text: '5' },
 
-        ]
     }
 
     render() {
         const { active } = this.state
         console.log(this.state);
-
+        const { bonusToEdit, isInEditMode } = this.state
         return (
             <div>
                 <AdminNavbar activeItem={ADMINPAGES.BONUS} />
@@ -159,6 +180,7 @@ class AddBonus extends Component {
                                 id='nameField'
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('name')}
                                 control={Input}
+                                defaultValue={bonusToEdit && bonusToEdit.name}
                                 onChange={() => this.resetErrorOn('name')}
                                 label='Nome Bonus'
                                 placeholder='Nome Bonus'>
@@ -168,12 +190,12 @@ class AddBonus extends Component {
 
                         <Form.Group
                             widths='equal'>
-
                             <Form.Field
                                 id='welcomeBonusField'
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('bonus')}
                                 control={Input}
                                 onChange={() => this.resetErrorOn('bonus')}
+                                defaultValue={bonusToEdit && bonusToEdit.bonus}
                                 label='Bonus di benvenuto'
                                 placeholder='Bonus di benvenuto' />
 
@@ -183,29 +205,54 @@ class AddBonus extends Component {
                                 control={Input}
                                 onChange={() => this.resetErrorOn('link')}
                                 label='Link del bonus'
+                                defaultValue={bonusToEdit && bonusToEdit.link}
                                 placeholder='Copia ed incolla qui' />
-
                         </Form.Group>
 
-                        <Form.Field
-                            id='reviewField'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('review')}
-                            control={TextArea}
-                            onChange={() => this.resetErrorOn('review')}
-                            label='Recensione'
-                            placeholder='Recensione' />
+                        {(this.state.defaultReview && isInEditMode) &&
+                            <Form.Field
+                                id='reviewField'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('review')}
+                                control={TextArea}
+                                onChange={() => this.resetErrorOn('review')}
+                                label='Recensione'
+                                defaultValue={this.state.defaultReview}
+                                placeholder='Recensione' />
+                        }
+                        {!isInEditMode &&
+                            <Form.Field
+                                id='reviewField'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('review')}
+                                control={TextArea}
+                                onChange={() => this.resetErrorOn('review')}
+                                label='Recensione'
+                                placeholder='Recensione' />
+                        }
+
                         <Form.Group
                             widths='equal'>
                             <Form.Field>
-                                <Dropdown
-                                    id='ratingField'
-                                    error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
-                                    style={{ marginBottom: '1rem' }}
-                                    placeholder='Rating'
-                                    onChange={(event, data) => this.onDropDownChange(data)}
-                                    search
-                                    selection
-                                    options={this.state.ratingStateOptions} />
+                                {(this.state.defaultRating && isInEditMode) &&
+                                    <Dropdown
+                                        id='ratingField'
+                                        error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
+                                        style={{ marginBottom: '1rem' }}
+                                        placeholder='Ok'
+                                        onChange={(event, data) => this.onDropDownChange(data)}
+                                        selection
+                                        defaultValue={this.state.defaultRating}
+                                        options={this.ratingStateOptions} />
+                                }
+                                {!isInEditMode &&
+                                    <Dropdown
+                                        id='ratingField'
+                                        error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
+                                        style={{ marginBottom: '1rem' }}
+                                        placeholder='Rating'
+                                        onChange={(event, data) => this.onDropDownChange(data)}
+                                        selection
+                                        options={this.ratingStateOptions} />
+                                }
                             </Form.Field>
 
                             <Form.Field style={{ width: '100%' }}>

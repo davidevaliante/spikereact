@@ -15,12 +15,8 @@ function mapStateToProps(state) {
 }
 
 class SlotDashboard extends Component {
-    state = {
-        slotList: {}
-    };
-    list = [];
-    r = 1;
 
+    state = {}
     componentDidMount() {
         getSlotList(this.onSlotListFetched);
     }
@@ -29,45 +25,36 @@ class SlotDashboard extends Component {
     }
 
     onSlotListFetched = (slotList) => {
-        this.list = []
+        let list = []
         for (const key in slotList) {
             const slot = slotList[key];
             slot['id'] = key
-            this.list.push(slot)
+            list.push(slot)
             // this.list[key] = slot
         }
 
         this.setState({
             // ...this.state,
-            slotList: this.list
+            slotList: list
         })
         // console.log('onSlotListFetched', this.list)
         // store.dispatch(addSlotList(this.list))
     }
 
-    updateSlotList = () => {
-        if (this.props.toUpdate) {
-            //do shit
-            console.log('Aggiornare slot list', this.state.slotList, this.list)
-            getSlotList(this.onSlotListFetched);
-            this.props.dispatch(setToUpdate())
-        }
-    }
+
 
     renderSlot = () => {
-        return this.list.map((slot) => (slot &&
+        return this.state.slotList.map((slot) => (slot &&
             <Grid.Column><AdminSlotCard slot={slot} key={slot.id} /></Grid.Column>))
     };
 
     render() {
-        console.log('rendered #', this.r++);
-        console.log('render::', this.state.slotList, this.list);
-        this.updateSlotList();
+        const { slotList } = this.state
         return (
             <Responsive>
                 <AdminNavbar activeItem={ADMINPAGES.ADMIN} />
                 <Grid stackable columns={4} style={{ padding: '2rem' }}>
-                    {this.renderSlot()}
+                    {slotList && this.renderSlot()}
                 </Grid>
             </Responsive>
         );

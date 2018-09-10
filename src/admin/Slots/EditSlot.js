@@ -38,7 +38,6 @@ class EditSlot extends React.Component {
     };
 
 
-    s = [1, 2]
 
     componentDidMount() {
         getSlotWithId(this.props.match.params.id, (slot) => {
@@ -279,8 +278,7 @@ class EditSlot extends React.Component {
                                 <Dropdown
                                     id='ratingField'
                                     style={{ marginBottom: '1rem' }}
-                                    placeholder='Rating'  // non capisco perchè   defaultValue={currentSlot.rating} non va ma nella documetazione sta scritto che si dovrebbe fa cosi
-                                    // perchè sei il peggiore... ma ci sei andato vicino
+                                    placeholder='Rating'
                                     onChange={(event, data) => this.onRatingChanged(data)}
                                     options={this.state.ratingStateOptions}
                                     search

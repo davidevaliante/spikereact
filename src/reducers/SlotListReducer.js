@@ -8,7 +8,6 @@ const slotListReducer = (state = defaultListState, action) => {
                 action.slotToAdd
             ]
         case 'ADD_SLOT_LIST': {
-            console.log("dispatching", action.slotListToAdd)
             return {
                 ...state,
                 ...action.slotListToAdd

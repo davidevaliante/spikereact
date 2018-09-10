@@ -6,9 +6,9 @@ import { Divider } from 'semantic-ui-react-single/Divider'
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { List } from 'semantic-ui-react-single/List'
 import { Image } from 'semantic-ui-react-single/Image'
-
+import { NavLink } from 'react-router-dom'
 import truncate from "lodash/truncate";
-import {deleteBonusWithId} from "../../firebase/firebase";
+import { deleteBonusWithId } from "../../firebase/firebase";
 import { setToUpdate } from "../../reducers/ToUpdateReducer";
 
 function mapStateToProps(state) {
@@ -29,10 +29,11 @@ class AdminBonusCard extends Component {
     };
 
     render() {
+        console.log(this.state);
         return (
             <div>
                 <List divided relaxed='very'>
-                    <List.Item key={this.props.bonus.id} style={{
+                    <List.Item key={this.props.key} style={{
                         border: '1px solid rgb(0, 0, 0, .2)',
                         borderRadius: '0.3rem',
                         padding: '0.3rem'
@@ -42,8 +43,6 @@ class AdminBonusCard extends Component {
                         <List.Content>
                             <List.Header as='p'>{this.props.bonus.name}</List.Header>
                             <List.Description as='p'>
-                                {this.props.bonus.producer.name}
-                                <Divider />
                                 {truncate(this.props.bonus.review, { 'length': 175 })}
                                 <Divider />
                                 <div className='crop' >
@@ -56,9 +55,11 @@ class AdminBonusCard extends Component {
                             <Divider />
                             <Grid stackable columns={1}>
                                 <Grid.Column>
-                                    <Button icon labelPosition='left' size='mini'>
-                                        <Icon name='edit outline' />Modifica
-                                    </Button>
+                                    <NavLink to={`/admin/editbonus/${this.props.bonus.id}`}>
+                                        <Button icon labelPosition='left' size='mini'>
+                                            <Icon name='edit outline' />Modifica
+                                            </Button>
+                                    </NavLink>
                                     <Button icon labelPosition='left' size='mini' floated='right' negative
                                         onClick={() => this.deleteBonus(this.props.bonus.id)}>
                                         <Icon name='delete' />Cancella
@@ -70,7 +71,9 @@ class AdminBonusCard extends Component {
                     </List.Item>
                 </List>
             </div>
+
         )
+
     };
 }
 
