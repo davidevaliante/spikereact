@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from 'semantic-ui-react-single/Container'
-import { Segment } from 'semantic-ui-react/dist/commonjs/elements/Segment'
+import { Segment } from 'semantic-ui-react-single/Segment'
 import { Image } from 'semantic-ui-react-single/Image'
 
 

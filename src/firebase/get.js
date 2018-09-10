@@ -1,18 +1,17 @@
 import axios from 'axios'
 import { databaseRoot } from './firebase'
-import firebase from 'firebase'
 import store from '../store/store'
-import keys from 'lodash/keys'
 import { addSlotList } from '../reducers/SlotListReducer'
 
 // primo chunk di 
-export const getSlotsCardBasedOnTime = (limit, start, callback) => {
-    axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="time"&startAt=${start}&limitToLast=${limit}`)
+export const getSlotsCardBasedOnTime = (limit, callback) => {
+    axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="time"&limitToLast=${limit}`)
         .then(
             list => {
                 console.log('fetching', list.data);
                 store.dispatch(addSlotList(list.data))
             }
+        ).catch(err => console.log(err)
         )
 }
 

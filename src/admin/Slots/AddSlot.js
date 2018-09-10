@@ -11,21 +11,7 @@ import { Header } from 'semantic-ui-react-single/Header'
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { FormField } from 'semantic-ui-react-single/Form'
 
-// NON CANCELLARE QUESTO BLOCCO COMMENTI - Davide
-/* import Button from 'semantic-ui-react/dist/commonjs/elements/Button'
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon'
-import Divider from 'semantic-ui-react/dist/commonjs/elements/Divider'
-import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
-import List from 'semantic-ui-react/dist/commonjs/elements/List'
-import Image from 'semantic-ui-react/dist/commonjs/elements/Image'
-import Search from 'semantic-ui-react/dist/commonjs/modules/Search'
-import Menu from 'semantic-ui-react/dist/commonjs/collections/Menu'
-import Responsive from 'semantic-ui-react/dist/commonjs/addons/Responsive'
-import Grid from 'semantic-ui-react/dist/commonjs/collections/Grid'
-import Segment from 'semantic-ui-react/dist/commonjs/elements/Segment'
-import Sticky from 'semantic-ui-react/dist/commonjs/modules/Sticky'
-import  Visibility  from'semantic-ui-react/dist/commonjs/behaviors/Visibility'
-import Container from 'semantic-ui-react/dist/commonjs/elements/Container' */
+
 
 import { pushNewSlot } from '../../firebase/firebase.js'
 import SearchField from '../SearchField.js';

@@ -6,6 +6,13 @@
       ".indexOn": [
         "time"
       ]
+    },
+    "SlotsCard": {
+      "$language": {
+        ".indexOn": [
+          "time"
+        ]
+      }
     }
   }
 }

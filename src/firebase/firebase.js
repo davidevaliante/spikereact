@@ -1,14 +1,15 @@
 import firebase from 'firebase/app';
-// import 'firebase/database'
 import 'firebase/storage'
 import { STORAGE_FOLDERS, COUNTRY } from '../enums/Constants';
 import now from 'lodash/now';
 import axios from 'axios'
 import snakeCase from 'lodash/snakeCase'
-
+import { configuration } from './firebaseConfig';
 
 export const databaseRoot = 'https://spike-2481d.firebaseio.com';
-
+const config = configuration;
+const firebaseApp = firebase.initializeApp(config);
+export const getFirebase = () => firebase
 
 
 export const pushNewImage = (image, folderName, imageName, callback) => {

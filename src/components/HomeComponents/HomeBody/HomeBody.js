@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Sticky } from 'semantic-ui-react-single/Sticky'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
-import { Visibility } from 'semantic-ui-react-single/Visibility'
 import SlotList from './SlotList'
 import BonusList from './BonusList'
 

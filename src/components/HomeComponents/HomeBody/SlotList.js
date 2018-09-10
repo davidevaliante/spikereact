@@ -3,14 +3,11 @@ import SlotCard from '../../Cards/SlotCard';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import chunk from 'lodash/chunk'
-import slice from 'lodash/slice'
 import orderBy from 'lodash/orderBy'
-import keys from 'lodash/keys'
 import last from 'lodash/last'
 import head from 'lodash/head'
-import get from 'lodash/get'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
-import { getSlotsCardBasedOnTime, loadNextChunk } from '../../../firebase/get'
+import { loadNextChunk } from '../../../firebase/get'
 
 const SlotList = (props) => {
 

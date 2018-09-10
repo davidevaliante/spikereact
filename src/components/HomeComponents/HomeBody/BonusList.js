@@ -4,7 +4,7 @@ import slice from 'lodash/slice'
 import shuffle from 'lodash/shuffle'
 import { connect } from 'react-redux'
 import BonusCard from '../../Cards/BonusCard'
-import Feed from 'semantic-ui-react/dist/commonjs/views/Feed'
+import { Feed } from 'semantic-ui-react-single/Feed'
 
 
 export const BonusList = (props) => {
