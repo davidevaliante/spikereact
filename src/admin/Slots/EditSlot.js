@@ -2,22 +2,16 @@ import React from "react";
 import { Button } from 'semantic-ui-react-single/Button';
 import { Form } from 'semantic-ui-react-single/Form';
 import { Input } from 'semantic-ui-react-single/Input';
-import { TextArea } from 'semantic-ui-react-single/TextArea';
 import { Dropdown } from 'semantic-ui-react-single/Dropdown';
-import { Dimmer } from 'semantic-ui-react-single/Dimmer';
-import { Header } from 'semantic-ui-react-single/Header';
-import { Icon } from 'semantic-ui-react-single/Icon';
-import { Radio } from 'semantic-ui-react-single/Radio';
 import { Image } from "semantic-ui-react-single/Image";
 import { FormField } from 'semantic-ui-react-single/Form';
-import SearchField from "../admin/SearchField";
-import SearchMultipleSelection from "../admin/SearchMultipleSelection";
-import ImagePicker from "../admin/ImagePicker";
-import { getSlotWithId } from "../firebase/firebase";
-import { SLOT_TYPES } from '../enums/Constants';
-import { updateSlotWithId } from '../firebase/firebase';
-import { editSlot } from "../firebase/firebase";
-import { getBonusList } from '../firebase/firebase';
+import SearchField from "../SearchField";
+import SearchMultipleSelection from "../SearchMultipleSelection";
+import ImagePicker from "../ImagePicker";
+import { getSlotWithId } from "../../firebase/firebase";
+import { SLOT_TYPES } from '../../enums/Constants';
+import { updateSlotWithId } from '../../firebase/firebase';
+import { getBonusList } from '../../firebase/firebase';
 import forEach from 'lodash/forEach'
 import keys from 'lodash/keys'
 
@@ -185,7 +179,7 @@ class EditSlot extends React.Component {
     render() {
 
         const { currentSlot } = this.state
-        const { producer, type, bonus } = this.state.currentSlot
+        const { producer } = this.state.currentSlot
 
         return (
             <div>

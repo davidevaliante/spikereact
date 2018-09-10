@@ -1,6 +1,8 @@
 import truncate from 'lodash/truncate'
 import snakeCase from 'lodash/snakeCase'
-import { IMGS_SIZES, LANGUAGES } from '../enums/Constants'
+import {IMGS_SIZES} from '../enums/Constants'
+
+
 export const removeHtmlFrom = (str) => {
     if ((str === null) || (str === ''))
         return false;
@@ -10,7 +12,7 @@ export const removeHtmlFrom = (str) => {
 }
 
 // costruisce il link ad un immagine
-export const getImageLinkFromName = (type, name, size, ) => {
+export const getImageLinkFromName = (type, name, size,) => {
     const urlStart = 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/'
     const slotFolder = 'SlotImages%2F'
     const bonusFolder = 'BonusImages%2F'
@@ -76,7 +78,7 @@ export const formatList = (slotList, bonusList, producerList) => {
     const formattedSlot = []
     for (const slot in slotList) {
         const current = slotList[slot]
-        const truncateOptions = { length: '60', omission: '...' }
+        const truncateOptions = {length: '60', omission: '...'}
         formattedSlot.push({
             title: current.name,
             description: `${truncate(removeHtmlFrom(current.description), truncateOptions)}`,

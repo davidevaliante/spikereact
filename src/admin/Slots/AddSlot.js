@@ -36,7 +36,7 @@ import delay from 'lodash/delay';
 import { SLOT_TYPES } from '../../enums/Constants.js';
 import AdminNavbar from "../AdminNavbar";
 import { ADMINPAGES } from "../../enums/Constants";
-import { compressImage } from '../../utils/Utils'
+
 
 class AddSlot extends Component {
 
@@ -59,9 +59,6 @@ class AddSlot extends Component {
     }
 
     fakeObject = () => {
-
-        const produttoriFinti = ['Ntent', 'SlotOnline', 'Pyramid', 'Haunted House Inc']
-
         document.getElementById('nameField').value = `Slot Esempio numero ${Math.floor(Math.random() * 100)}`;
         document.getElementById('producerField').placeholder = 'Produttore di esempio';
         document.getElementById('linkYoutube').value = 'https://www.youtube.com/watch?v=G4VAdWJXyFk';

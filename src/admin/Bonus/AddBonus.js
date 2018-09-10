@@ -11,11 +11,10 @@ import { Header } from 'semantic-ui-react-single/Header'
 import { Icon } from 'semantic-ui-react-single/Icon'
 
 
-import ImagePicker from './ImagePicker';
-import { pushNewBonus } from '../firebase/firebase';
-import SearchField from './SearchField';
-import { ADMINPAGES } from "../enums/Constants";
-import AdminNavbar from "./AdminNavbar";
+import ImagePicker from '../ImagePicker';
+import { pushNewBonus } from '../../firebase/firebase';
+import { ADMINPAGES } from "../../enums/Constants";
+import AdminNavbar from "../AdminNavbar";
 
 class AddBonus extends Component {
 

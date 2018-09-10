@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import AdminNavbar from "./AdminNavbar";
 import { ADMINPAGES } from "../enums/Constants";
 import { Responsive } from 'semantic-ui-react-single/Responsive';
-import AddTipsList from './AdminSlots/AddTipsList'
+import AddTipsList from './Slots/AddTipsList'
 
 
 class AdminDashboard extends Component {

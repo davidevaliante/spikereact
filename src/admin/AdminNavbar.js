@@ -4,7 +4,7 @@ import { Menu } from 'semantic-ui-react-single/Menu'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { Search } from 'semantic-ui-react-single/Search'
-import { ADMINPAGES, ROUTE, SLOT_TYPES } from "../enums/Constants";
+import { ADMINPAGES, ROUTE } from "../enums/Constants";
 
 class AdminNavbar extends Component {
     state = {};
@@ -22,7 +22,9 @@ class AdminNavbar extends Component {
             <div>
                 <Menu stackable>
                     <Menu.Item>
-                        <NavLink to={ROUTE.ADMIN}><Icon name='cog' /></NavLink>
+                        <NavLink to={ROUTE.ADMIN}>
+                            <Icon name='cog' />
+                        </NavLink>
                     </Menu.Item>
 
                     <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.ARTICLE}>

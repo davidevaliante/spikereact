@@ -55,7 +55,7 @@ class SlotPage extends Component {
 
 
     render() {
-        const { currentSlot, fixed } = this.state
+        const { currentSlot } = this.state
         const { isPlaying, isLoading } = this.props
         return (
             <div>

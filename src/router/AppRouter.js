@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HomePage from '../components/HomeComponents/HomePage'
 import AdminDashboard from './../admin/AdminDashboard';
-import AddSlot from '../admin/AdminSlots/AddSlot';
-import AddBonus from '../admin/AddBonus';
+import AddSlot from '../admin/Slots/AddSlot';
+import AddBonus from '../admin/Bonus/AddBonus';
 import AddProducer from '../admin/AddProducer';
 import AddArticle from '../admin/AddArticle';
 import Test from './Test'
 import SlotPage from '../components/SlotPageComponents/SlotPage';
 import { PAGES, ROUTE } from "../enums/Constants";
 import AboutPage from '../components/AboutPage'
-import SlotDashboard from "../admin/AdminSlots/SlotDashboard";
+import SlotDashboard from "../admin/Slots/SlotDashboard";
 import NotFound from "../components/SlotPageComponents/NotFound"
-import EditSlot from "../admin/EditSlot";
+import EditSlot from "../admin/Slots/EditSlot";
 import BonusDashboard from "../admin/Bonus/BonusDashboard"
 
 
