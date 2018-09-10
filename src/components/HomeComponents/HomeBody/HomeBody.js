@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Sticky } from 'semantic-ui-react-single/Sticky'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
+import { Visibility } from 'semantic-ui-react-single/Visibility'
 import SlotList from './SlotList'
 import BonusList from './BonusList'
 
@@ -20,6 +21,7 @@ const dropdownOptions = [
     { key: 3, text: 'Nome', value: 'name' }
 ]
 
+
 const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky }) => (
     <Grid style={{ marginTop: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
         <Grid.Row style={{ paddingBottom: '4rem' }}>
@@ -33,7 +35,7 @@ const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky })
                     value={slotorder}
                 />
                 <div ref={handleContextRef}>
-                    <SlotList cardPerRow={3} maxSlot={12} type={type} order={slotorder} />
+                    <SlotList cardPerRow={3} type={type} order={slotorder} />
                 </div>
             </Grid.Column>
 

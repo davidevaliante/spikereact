@@ -14,7 +14,7 @@ const firebaseApp = firebase.initializeApp(config);
 export const getFirebase = () => firebase
 
 
-const databaseRoot = 'https://spike-2481d.firebaseio.com';
+export const databaseRoot = 'https://spike-2481d.firebaseio.com';
 
 
 
@@ -56,12 +56,6 @@ export const pushNewSlot = (newSlot, imageData, onPushSlotSuccess, country) => {
                 onPushSlotSuccess();
             }
         )
-        .catch(
-            (error) => console.log(error)
-        )
-        .then(
-
-        )
 }
 
 export const pushNewBonus = (newBonus, imageData, onBonusPushSuccess, country) => {
@@ -78,35 +72,8 @@ export const pushNewBonus = (newBonus, imageData, onBonusPushSuccess, country) =
                 onBonusPushSuccess()
             }
         )
-
 }
 
-//non so bene come passare l immagine  
-/* export const editSlot = (slotId, slotToUpdate) => {
-
-    firebase.database().ref(`${databaseRoot}/Slots/l +${slotId}`).set({
-        name: slotToUpdate.name,
-        producer: slotToUpdate.producer,
-        linkYoutube: slotToUpdate.linkYoutube,
-        linkPlay: slotToUpdate.linkPlay,
-        bonus: slotToUpdate.BONUS,
-        description: slotToUpdate.description,
-        rating: slotToUpdate.rating,
-        time: slotToUpdate.time,
-        tips: slotToUpdate.tipsField,
-        tecnicals: slotToUpdate.tecnicalsField,
-    },
-
-
-        function (error) {
-            if (error) {
-                // The write failed...
-            } else {
-                // Data saved successfully!
-            }
-
-        });
-} */
 
 export const pushNewProducer = (newProducer, image, callback, country) => {
     newProducer['time'] = now()
@@ -133,7 +100,6 @@ export const getBonusList = (callback, country) => {
             success => callback(success.data)
         )
 }
-
 
 
 export const getProducerList = (callback, country) => {

@@ -9,21 +9,15 @@ import '../src/style/base.css';
 import '../src/style/sass.scss';
 import 'semantic-ui-react-single/css'
 import { onSlotListFetched, onBonusListFetched, onProducerListFetched } from './utils/Callbacks'
-import { getSlotList, getBonusList, removeImageLink, purgeDb, getProducerList, swapSlotsToNewDatabase, swapBonusToNewDatabase, swapProducerToNewDatabase } from './firebase/firebase';
+import { getSlotList, getBonusList, getProducerList } from './firebase/firebase';
 import keys from 'lodash/keys'
-
+import { getSlotsCardBasedOnTime, getSlotsCardBasedOnName } from './firebase/get'
 // // fetch dati iniziali
-keys(store.slotList).length === 0 && getSlotList(onSlotListFetched)
+// keys(store.slotList).length === 0 && getSlotList(onSlotListFetched)
 keys(store.bonusList).length === 0 && getBonusList(onBonusListFetched)
 keys(store.producerList).length === 0 && getProducerList(onProducerListFetched)
+getSlotsCardBasedOnTime(12, 0)
 
-// ---------------------------per swappare dal database che ho allegato su slack alla nuova struttura
-/* swapBonusToNewDatabase()
-swapProducerToNewDatabase() */
-// swapSlotsToNewDatabase()
-
-// removeImageLink()
-// purgeDb()
 // store Provider
 const jsx = (
     <Provider store={store}>

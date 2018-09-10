@@ -5,9 +5,17 @@ import PropTypes from 'prop-types';
 import chunk from 'lodash/chunk'
 import slice from 'lodash/slice'
 import orderBy from 'lodash/orderBy'
+import keys from 'lodash/keys'
+import last from 'lodash/last'
+import head from 'lodash/head'
+import get from 'lodash/get'
+import { Visibility } from 'semantic-ui-react-single/Visibility'
+import { getSlotsCardBasedOnTime, loadNextChunk } from '../../../firebase/get'
 
 const SlotList = (props) => {
 
+    // di base renderizza props.maxSlot elementi ma scrollando ne deve caricare dinamicamente 
+    // di più
     const slotListToRows = (slotList, ordering) => {
 
         let listOfSlots = []
@@ -30,13 +38,14 @@ const SlotList = (props) => {
                 listOfSlots = orderBy(listOfSlots, ['name'], ['asc'])
                 break
             default:
-            // pass
+                listOfSlots = orderBy(listOfSlots, ['time'], ['desc'])
         }
 
-        const rows = chunk(slice(listOfSlots, 0, props.maxSlot), props.cardPerRow)
+        const rows = chunk(listOfSlots, props.cardPerRow)
 
         return rows.map((row, index) => (
             <div className='horizontal-center' key={`slot_row_${index}`}>
+                {(index === rows.length - 2) && <Visibility once={false} onTopVisible={() => loadMoreSlots(listOfSlots)} />}
                 {row.map((element) =>
                     (element && <SlotCard slot={element} key={element.id} />))
                 }
@@ -44,6 +53,14 @@ const SlotList = (props) => {
 
         ))
     }
+
+    const loadMoreSlots = (listOfSlots) => {
+        console.log('start at', head(listOfSlots).time);
+
+        loadNextChunk(12, last(listOfSlots).time)
+    }
+
+
 
     return (
         <div className='vertical-center'>
