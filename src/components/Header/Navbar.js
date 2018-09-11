@@ -10,6 +10,7 @@ import NavbarSearchBar from './NavbarSearchBar';
 import { PAGES, ROUTE } from '../../enums/Constants';
 import { setHomePage, setBarPage, setGratisPage } from '../../reducers/CurrentPageReducer';
 import logo from '../../static/slot-icon.svg';
+import { Responsive } from 'semantic-ui-react-single/Responsive';
 
 
 
@@ -60,13 +61,16 @@ class Navbar extends Component {
                             <img src={logo} alt='spike-logo' />
                         </Menu.Item>
 
-                        <Menu.Item
+
+
+                        < Menu.Item
                             as='a'
                             className='navbarItemOne'
                             onClick={(event, data) => this.updateCurrentPage(PAGES.HOME)}
                             active={this.props.displaying === PAGES.HOME}>
                             <NavLink id='home-nav-link' to='/'>Home</NavLink>
                         </Menu.Item>
+
 
 
 

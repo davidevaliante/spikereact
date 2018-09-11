@@ -8,6 +8,7 @@ import { Sticky } from 'semantic-ui-react-single/Sticky'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 import SlotList from './SlotList'
 import BonusList from './BonusList'
+import { Responsive } from 'semantic-ui-react-single/Responsive'
 
 // misc
 import { SLOT_TYPES } from '../../../enums/Constants'
@@ -22,6 +23,7 @@ const dropdownOptions = [
 
 
 const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky }) => (
+
     <Grid style={{ marginTop: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
         <Grid.Row style={{ paddingBottom: '4rem' }}>
             <Grid.Column width={12} style={{ paddingLeft: '0' }}>
@@ -34,7 +36,8 @@ const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky })
                     value={slotorder}
                 />
                 <div ref={handleContextRef}>
-                    <SlotList cardPerRow={3} type={type} order={slotorder} />
+                    <Responsive minWidth={1200} as={SlotList} cardPerRow={3} type={type} order={slotorder} />
+                    <Responsive maxWidth={1200} as={SlotList} cardPerRow={1} type={type} order={slotorder} />
                 </div>
             </Grid.Column>
 
@@ -46,6 +49,7 @@ const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky })
                 </Sticky>
             </Grid.Column>
         </Grid.Row>
+
     </Grid>
 )
 

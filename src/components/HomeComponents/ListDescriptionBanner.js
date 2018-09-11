@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
 import { PAGES } from '../../enums/Constants'
+import { Responsive } from 'semantic-ui-react-single/Responsive'
 
 class ListDescriptionBanner extends Component {
 
@@ -36,12 +37,18 @@ class ListDescriptionBanner extends Component {
         }
         return (
             <div className='description-banner-container'>
-                <div className='description-banner-red'>
-                    <div className='white-line scale-in-hor-right'>
+                <Responsive minWidth={766}>
+                    <div className='description-banner-red'>
+                        <div className='white-line scale-in-hor-right'>
+                        </div>
+                        <div>
+
+                            <h2 className="tracking-in-contract"
+                                style={{ fontFamily: 'Raleway, sans-serif' }}>I migliori bonus</h2>
+
+                        </div>
                     </div>
-                    <h2 className="tracking-in-contract"
-                        style={{ fontFamily: 'Raleway, sans-serif' }}>I migliori bonus</h2>
-                </div>
+                </Responsive>
                 <div className='description-banner-black'>
                     <h2 className="tracking-in-contract"
                         style={{ fontFamily: 'Raleway, sans-serif' }}>{text}</h2>
