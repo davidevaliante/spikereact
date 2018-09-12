@@ -14,7 +14,7 @@ import { getSlotWithId } from '../../firebase/firebase'
 import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
 import Navbar from '../Header/Navbar'
 import { Responsive } from 'semantic-ui-react-single/Responsive';
-import { Segment } from 'semantic-ui-react'
+import { Segment, Button } from 'semantic-ui-react'
 
 class SlotPage extends Component {
 
@@ -66,7 +66,9 @@ class SlotPage extends Component {
 
                     <PlayDimmer url={currentSlot.linkPlay} />
                     <div>
-                        <Navbar displaying={'SLOT'} />
+                        <Responsive maxWidth={600}> <Navbar displaying={'SLOT'} isResponsive={true} /></Responsive>
+                        <Responsive minWidth={600}>   <Navbar displaying={'SLOT'} isResponsive={false} /></Responsive>
+
                         <SlotPageHeader
                             style={{ position: 'absolute', zIndex: 1 }}
                             displaying='SLOT'
@@ -90,7 +92,8 @@ class SlotPage extends Component {
 
                     </Responsive>
 
-                    <YouTubeEmbed width='900' height='450' linkYoutube={currentSlot.linkYoutube} />
+                    <Responsive minWidth={600}>  <YouTubeEmbed width='900' height='450' linkYoutube={currentSlot.linkYoutube} /></Responsive>
+                    <Responsive maxWidth={600}> <YouTubeEmbed width='300' height='150' linkYoutube={currentSlot.linkYoutube} /> </Responsive>
                     <Footer />
                 </Dimmer.Dimmable>
             </div>

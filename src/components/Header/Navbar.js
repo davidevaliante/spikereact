@@ -42,61 +42,115 @@ class Navbar extends Component {
         }
     }
 
+    responsivMobile = () => {
+        return (
+            <div>
+
+                <Menu vertical>
+                    < Menu.Item
+                        as='a'
+                        className='navbarItemOne'
+                        onClick={(event, data) => this.updateCurrentPage(PAGES.HOME)}
+                        active={this.props.displaying === PAGES.HOME}>
+                        <NavLink id='home-nav-link' to='/'>Home</NavLink>
+                    </Menu.Item>
+
+
+
+                    <Menu.Item
+                        as='a'
+                        onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_GRATIS)}
+                        active={this.props.displaying === PAGES.SLOT_GRATIS}>
+                        <NavLink id='gratis-nav-link' to={ROUTE.SLOT_GRATIS}>Slot Gratis</NavLink>
+                    </Menu.Item>
+
+
+                    <Menu.Item
+                        as='a'
+                        onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_BAR)}
+                        active={this.props.displaying === PAGES.SLOT_BAR}>
+                        <NavLink id='bar-nav-link' to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
+
+                    </Menu.Item>
+
+                    <Menu.Item  >
+                        <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
+                    </Menu.Item>
+
+
+                </Menu>
+
+
+
+            </div>
+        )
+    }
+
+
+    responsivMobile2 = () => {
+        return (
+            <div>
+                <Visibility
+                    once={false}
+                    onBottomPassed={this.showFixedMenu}
+                    onBottomPassedReverse={this.hideFixedMenu}>
+                    <Menu
+                        style={!this.state.fixed ? { position: 'absolute', zIndex: 99, width: '100%' } : { zIndex: 99 }}
+                        fixed={this.state.fixed ? 'top' : null}
+                        inverted={!this.state.fixed}
+                        pointing={!this.state.fixed}
+                        secondary={!this.state.fixed}
+                        size='large'>
+                        <Container>
+                            <Menu.Item style={{ visibility: this.state.fixed ? 'visible' : 'hidden' }} >
+                                <img src={logo} alt='spike-logo' />
+                            </Menu.Item>
+
+
+
+                            < Menu.Item
+                                as='a'
+                                className='navbarItemOne'
+                                onClick={(event, data) => this.updateCurrentPage(PAGES.HOME)}
+                                active={this.props.displaying === PAGES.HOME}>
+                                <NavLink id='home-nav-link' to='/'>Home</NavLink>
+                            </Menu.Item>
+
+
+
+
+                            <Menu.Item
+                                as='a'
+                                onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_GRATIS)}
+                                active={this.props.displaying === PAGES.SLOT_GRATIS}>
+                                <NavLink id='gratis-nav-link' to={ROUTE.SLOT_GRATIS}>Slot Gratis</NavLink>
+                            </Menu.Item>
+
+                            <Menu.Item
+                                as='a'
+                                onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_BAR)}
+                                active={this.props.displaying === PAGES.SLOT_BAR}>
+                                <NavLink id='bar-nav-link' to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
+
+                            </Menu.Item>
+
+                            <Menu.Item position='right' style={{ marginRight: '4rem' }}>
+                                <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
+                            </Menu.Item>
+
+                        </Container>
+                    </Menu>
+                </Visibility>
+            </div>)
+    }
+
+
     render() {
 
         return (
-            <Visibility
-                once={false}
-                onBottomPassed={this.showFixedMenu}
-                onBottomPassedReverse={this.hideFixedMenu}>
-                <Menu
-                    style={!this.state.fixed ? { position: 'absolute', zIndex: 99, width: '100%' } : { zIndex: 99 }}
-                    fixed={this.state.fixed ? 'top' : null}
-                    inverted={!this.state.fixed}
-                    pointing={!this.state.fixed}
-                    secondary={!this.state.fixed}
-                    size='large'>
-                    <Container>
-                        <Menu.Item style={{ visibility: this.state.fixed ? 'visible' : 'hidden' }} >
-                            <img src={logo} alt='spike-logo' />
-                        </Menu.Item>
-
-
-
-                        < Menu.Item
-                            as='a'
-                            className='navbarItemOne'
-                            onClick={(event, data) => this.updateCurrentPage(PAGES.HOME)}
-                            active={this.props.displaying === PAGES.HOME}>
-                            <NavLink id='home-nav-link' to='/'>Home</NavLink>
-                        </Menu.Item>
-
-
-
-
-                        <Menu.Item
-                            as='a'
-                            onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_GRATIS)}
-                            active={this.props.displaying === PAGES.SLOT_GRATIS}>
-                            <NavLink id='gratis-nav-link' to={ROUTE.SLOT_GRATIS}>Slot Gratis</NavLink>
-                        </Menu.Item>
-
-                        <Menu.Item
-                            as='a'
-                            onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_BAR)}
-                            active={this.props.displaying === PAGES.SLOT_BAR}>
-                            <NavLink id='bar-nav-link' to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
-
-                        </Menu.Item>
-
-                        <Menu.Item position='right' style={{ marginRight: '4rem' }}>
-                            <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
-                        </Menu.Item>
-
-                    </Container>
-                </Menu>
-            </Visibility>
-
+            <div>
+                {this.props.isResponsive ? this.responsivMobile() : this.responsivMobile2()}
+            </div>
         )
     }
 }

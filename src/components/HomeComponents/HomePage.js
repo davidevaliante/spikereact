@@ -9,6 +9,8 @@ import HomePageHeader from '../Header/HomePageHeader'
 import SiteDescription from './HomeBody/SiteDescription'
 import HomeBody from './HomeBody/HomeBody'
 import Navbar from '../Header/Navbar'
+
+import { Responsive } from 'semantic-ui-react';
 class HomePage extends Component {
     state = {};
     title = '';
@@ -48,7 +50,8 @@ class HomePage extends Component {
         return (
             <div>
                 <div>
-                    <Navbar displaying='HOME' />
+                    <Responsive maxWidth={600}> <Navbar displaying='HOME' isResponsive={true} /></Responsive>
+                    <Responsive minWidth={600}> <Navbar displaying='HOME' isResponsive={false} /></Responsive>
                     <HomePageHeader style={{ position: 'absolute', zIndex: 1 }} />
                 </div>
                 <SiteDescription />
