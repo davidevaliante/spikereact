@@ -13,6 +13,8 @@ import SlotPageHeader from '../Header/SlotPageHeader'
 import { getSlotWithId } from '../../firebase/firebase'
 import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
 import Navbar from '../Header/Navbar'
+import { Responsive } from 'semantic-ui-react-single/Responsive';
+import { Segment } from 'semantic-ui-react'
 
 class SlotPage extends Component {
 
@@ -82,7 +84,12 @@ class SlotPage extends Component {
                             <TecnicalsList tecList={currentSlot.tecnicals} />
                         </Grid.Row>
                     </Grid>
-                    <SlotPageBonusList bonusList={currentSlot.bonus} />
+                    <Responsive minWidth={1200} as={SlotPageBonusList} bonusList={currentSlot.bonus} isResponsive={true} />
+
+                    <Responsive maxWidth={1200} isResponsive={false} as={SlotPageBonusList} bonusList={currentSlot.bonus}  >
+
+                    </Responsive>
+
                     <YouTubeEmbed width='900' height='450' linkYoutube={currentSlot.linkYoutube} />
                     <Footer />
                 </Dimmer.Dimmable>

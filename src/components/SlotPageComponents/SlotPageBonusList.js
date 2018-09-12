@@ -16,6 +16,25 @@ const SlotPageBonusList = (props) => {
         )
     }
 
+    const responsive = () => {
+        return (
+            < div className='row-centered-spaced' style={{ paddingLeft: '4rem', paddingRight: '4rem' }
+            } >
+                {bonusList()}
+            </div >
+        )
+    }
+
+    const responsive2 = () => {
+        return (
+            < div style={{ paddingLeft: '4rem', paddingRight: '4rem' }
+            } >
+                {bonusList()}
+            </div >
+        )
+    }
+
+
     return (
         <div id='slot-page-bonus' style={{ paddingTop: '8rem', marginBottom: '8rem', textAlign: 'center' }}>
 
@@ -31,10 +50,8 @@ const SlotPageBonusList = (props) => {
                 </div>
             </div>
 
+            {props.isResponsive ? responsive() : responsive2()}
 
-            <div className='row-centered-spaced' style={{ paddingLeft: '4rem', paddingRight: '4rem' }} >
-                {bonusList()}
-            </div>
         </div>
 
     )

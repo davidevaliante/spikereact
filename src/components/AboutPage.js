@@ -19,9 +19,11 @@ class AboutPage extends Component{
 
     render() {
         return (
+           // minWidth={Responsive.onlyTablet.minWidth} totlto per adesso che di base è abbastanza responsive 
             <div>
                 <Responsive
-                    minWidth={Responsive.onlyTablet.minWidth}>
+               >     
+         
                     <div>
                         <Navbar displaying='ABOUT'/>
                         <AboutPageHeader 
