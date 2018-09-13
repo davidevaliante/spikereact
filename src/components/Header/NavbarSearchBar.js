@@ -2,11 +2,11 @@ import filter from 'lodash/filter'
 import reduce from 'lodash/reduce'
 import debounce from 'lodash/debounce'
 import escapeRegExp from 'lodash/escapeRegExp'
-import {formatList} from '../../utils/Utils'
-import React, {Component} from 'react'
-import {Search} from 'semantic-ui-react-single/Search'
-import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import { formatList } from '../../utils/Utils'
+import React, { Component } from 'react'
+import { Search } from 'semantic-ui-react-single/Search'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 class NavbarSearchBar extends Component {
 
@@ -84,7 +84,6 @@ class NavbarSearchBar extends Component {
                     value={value} >
                 </Search>
             </div>
-
         )
     }
 }
@@ -92,7 +91,7 @@ class NavbarSearchBar extends Component {
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
     bonusList: state.bonusList,
-    slotList: state.slotList,
+    slotList: state.slotMenuList,
     producerList: state.producerList,
     currentSlot: state.currentSlot
 })

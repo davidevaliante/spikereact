@@ -3,12 +3,23 @@ import { COUNTRY } from '../enums/Constants'
 import { databaseRoot } from './firebase'
 import store from '../store/store'
 import { addSlotList } from '../reducers/SlotListReducer'
+import { updateSlotMenuList } from '../reducers/SlotsMenuReducer'
 
 export const getBonusWithId = (id, country, callback) => {
     let c = COUNTRY.ITALY
     axios.get(`${databaseRoot}/Bonus/it/${id}.json`)
         .then(
             success => callback(success.data)
+        )
+}
+
+export const getSlotsForMenu = (callback) => {
+    let c = COUNTRY.ITALY
+    axios.get(`${databaseRoot}/SlotsMenu/it.json`)
+        .then(
+            response => {
+                store.dispatch(updateSlotMenuList(response.data))
+            }
         )
 }
 
@@ -35,14 +46,12 @@ export const loadNextChunk = (limit, end, callback) => {
 }
 
 
-
 export const getSlotsCardBasedOnName = (text, limit, callback) => {
     axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="name"&startAt="${text}"&endAt="${text}\uf8ff"`)
         .then(
             list => console.log(list.data)
         )
 }
-
 
 
 export const getSlotsCardBasedOnRating = (limit, callback) => {

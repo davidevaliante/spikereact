@@ -14,7 +14,6 @@ export const onSlotListFetched = (slotList) => {
     }
     console.log(keys(list).length)
     store.dispatch(addSlotList(list))
-
 }
 
 export const onBonusListFetched = (bonusList) => {

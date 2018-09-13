@@ -1,6 +1,6 @@
 const defaultListState = {};
 
-const slotListReducer = (state = defaultListState, action) => {
+const SlotListReducer = (state = defaultListState, action) => {
     switch (action.type) {
         case 'ADD_SINGLE_SLOT':
             return [
@@ -30,4 +30,4 @@ export const addSlotList = slotList => ({
     slotListToAdd: slotList
 })
 
-export default slotListReducer;
+export default SlotListReducer;

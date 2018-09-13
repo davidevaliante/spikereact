@@ -10,9 +10,10 @@ import 'semantic-ui-react-single/css'
 import { onBonusListFetched, onProducerListFetched } from './utils/Callbacks'
 import { getBonusList, getProducerList } from './firebase/firebase';
 import keys from 'lodash/keys'
-import { getSlotsCardBasedOnTime } from './firebase/get'
+import { getSlotsCardBasedOnTime, getSlotsForMenu } from './firebase/get'
 // // fetch dati iniziali
 getSlotsCardBasedOnTime(12)
+getSlotsForMenu()
 keys(store.bonusList).length === 0 && getBonusList(onBonusListFetched)
 keys(store.producerList).length === 0 && getProducerList(onProducerListFetched)
 

@@ -14,7 +14,6 @@ import { getSlotWithId } from '../../firebase/firebase'
 import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
 import Navbar from '../Header/Navbar'
 import { Responsive } from 'semantic-ui-react-single/Responsive';
-import { Segment, Button } from 'semantic-ui-react'
 
 class SlotPage extends Component {
 

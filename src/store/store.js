@@ -7,6 +7,7 @@ import producerListReducer from './../reducers/ProducerListReducer';
 import slotPageReducer from './../reducers/SlotPageReducer';
 import playModeReducer from './../reducers/PlayModeReducer';
 import toUpdateReducer from './../reducers/ToUpdateReducer';
+import slotMenuReducer from './../reducers/SlotsMenuReducer'
 
 const reducers = combineReducers(
     {
@@ -17,7 +18,8 @@ const reducers = combineReducers(
         'producerList': producerListReducer,
         'currentSlot': slotPageReducer,
         'isPlaying': playModeReducer,
-        'toUpdate': toUpdateReducer
+        'toUpdate': toUpdateReducer,
+        'slotMenuList': slotMenuReducer
     }
 );
 

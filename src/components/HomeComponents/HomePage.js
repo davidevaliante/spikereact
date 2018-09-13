@@ -9,8 +9,8 @@ import HomePageHeader from '../Header/HomePageHeader'
 import SiteDescription from './HomeBody/SiteDescription'
 import HomeBody from './HomeBody/HomeBody'
 import Navbar from '../Header/Navbar'
+import { Responsive } from 'semantic-ui-react-single/Responsive';
 
-import { Responsive } from 'semantic-ui-react';
 class HomePage extends Component {
     state = {};
     title = '';
