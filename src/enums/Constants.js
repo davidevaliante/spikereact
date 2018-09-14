@@ -7,7 +7,8 @@ export const STORAGE_FOLDERS = {
 
 export const SLOT_TYPES = {
     BAR: 'BAR',
-    GRATIS: 'GRATIS'
+    GRATIS: 'GRATIS',
+    PRODUCER_FILTERED: 'PRODUCER_FILTERED'
 };
 
 export const DATABASE_REFERENCE = {
@@ -24,6 +25,7 @@ export const PAGES = {
     SLOT: 'SLOT',
     HOME: 'HOME',
     ABOUT: 'ABOUT',
+    PRODUCER: 'PRODUCER',
     PAGE_NOT_FOUND: '*'
 };
 
@@ -36,6 +38,7 @@ export const ROUTE = {
     SLOT_GRATIS: '/slot-gratis',
     SLOT_BAR: '/slot-bar',
     ABOUT: '/about',
+    PRODUCER: `/producer/:name`,
     ERROR404: '*',
 
 
@@ -47,7 +50,7 @@ export const ROUTE = {
     ADMINBONUS: `${admin}/bonus`,
     ADDBONUS: `${admin}/addbonus`,
     ADDPRODUCER: `${admin}/addproducer`,
-    EDITPAGE: `${admin}/editpage`
+    EDITPAGE: `${admin}/editpage`,
 };
 
 export const ADMINPAGES = {

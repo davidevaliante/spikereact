@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
-import { setHomePage, setGratisPage, setBarPage, setAboutPage } from '../../reducers/CurrentPageReducer'
+import { setHomePage, setGratisPage, setBarPage, setAboutPage, setProducerPage } from '../../reducers/CurrentPageReducer'
 import HomePageHeader from '../Header/HomePageHeader'
 import SiteDescription from './HomeBody/SiteDescription'
 import HomeBody from './HomeBody/HomeBody'
 import Navbar from '../Header/Navbar'
+import { getSlotBasedOnProducer } from '../../firebase/get'
 import { Responsive } from 'semantic-ui-react-single/Responsive';
 
 class HomePage extends Component {
@@ -16,7 +17,11 @@ class HomePage extends Component {
     title = '';
 
     componentDidMount() {
-        // solo se redux è vuoto   
+        // allora è la pagina dei producer
+        if (this.props.match.params.name) {
+            // data fetch
+            getSlotBasedOnProducer(this.props.match.params.name)
+        }
     }
 
     handleContextRef = contextRef => this.setState({ contextRef })
@@ -35,7 +40,11 @@ class HomePage extends Component {
                 return SLOT_TYPES.GRATIS;
             case ROUTE.ABOUT:
                 this.props.dispatch(setAboutPage())
-                return undefined
+                return 'ABOUT'
+            case ROUTE.PRODUCER:
+                this.title = this.props.match.params.name
+                this.props.dispatch(setProducerPage(this.props.match.params.name))
+                return SLOT_TYPES.PRODUCER_FILTERED
             default:
                 this.title = 'Le Slot del giorno'
                 this.props.dispatch(setHomePage())
@@ -74,6 +83,7 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
+    displaying:state.displaying,
     slotList: state.slotList,
     bonusList: state.bonusList,
     contextRef: state.contextRef

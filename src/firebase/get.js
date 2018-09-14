@@ -23,6 +23,15 @@ export const getSlotsForMenu = (callback) => {
         )
 }
 
+export const getSlotBasedOnProducer = (producerName, callback) => {
+    axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="name"&startAt="${producerName}"`)
+        .then(
+            list => {
+                store.dispatch(addSlotList(list.data))
+            }
+        ).catch(err => console.log(err)
+        )
+}
 
 // primo chunk di 
 export const getSlotsCardBasedOnTime = (limit, callback) => {

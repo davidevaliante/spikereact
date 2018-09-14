@@ -16,8 +16,20 @@ const currentPageReducer = (state = defaultCurrentPageState, action) => {
             return PAGES.ABOUT
         case PAGES.SLOT:
             return PAGES.SLOT
+        case PAGES.PRODUCER:
+            return {
+                displaying: PAGES.PRODUCER,
+                producerName: action.producerName
+            }
         default:
             return state
+    }
+}
+
+export const setProducerPage = (producerName) => {
+    return {
+        type: PAGES.PRODUCER,
+        producerName: producerName
     }
 }
 

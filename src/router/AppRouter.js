@@ -18,7 +18,6 @@ import BonusDashboard from "../admin/Bonus/BonusDashboard"
 
 
 
-
 const AppRouter = () => {
 
 
@@ -38,6 +37,8 @@ const AppRouter = () => {
                     <Route path={ROUTE.SLOT_ONLINE} component={HomePage} exact={true} page={PAGES.SLOT_ONLINE} />
                     <Route path={ROUTE.SLOT_GRATIS} component={HomePage} exact={true} page={PAGES.SLOT_GRATIS} />
                     <Route path={ROUTE.SLOT_BAR} component={HomePage} exact={true} page={PAGES.SLOT_BAR} />
+                    { /* HOME filtered by producers */}
+                    <Route path={ROUTE.PRODUCER} component={HomePage} />
 
                     <Route path='/test' component={Test} />
 

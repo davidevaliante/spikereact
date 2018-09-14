@@ -18,8 +18,6 @@ const SlotList = (props) => {
         let listOfSlots = []
         for (const key in slotList) {
             const element = slotList[key]
-            if (props.type && element.type !== props.type)
-                continue
             element['id'] = key
             listOfSlots.push(element)
         }
@@ -52,12 +50,9 @@ const SlotList = (props) => {
     }
 
     const loadMoreSlots = (listOfSlots) => {
-        console.log('start at', head(listOfSlots).time);
 
         loadNextChunk(12, last(listOfSlots).time)
     }
-
-
 
     return (
         <div className='vertical-center'>
@@ -73,6 +68,7 @@ SlotList.propTypes = {
 
 const mapStateToProps = (state) => ({
     slotList: state.slotList,
+    displaying: state.displaying
 })
 
 export default connect(mapStateToProps)(SlotList)

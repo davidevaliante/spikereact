@@ -23,6 +23,7 @@ class SlotPage extends Component {
     }
 
     componentDidMount() {
+        console.log('mounting')
         getSlotWithId(this.props.match.params.id, (slot) => {
             this.props.dispatch(slotIsLoaded())
             this.setState({

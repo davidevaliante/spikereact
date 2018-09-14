@@ -68,10 +68,11 @@ class NavbarSearchBar extends Component {
         const { isLoading, value, results } = this.state
         const path = this.state.redirect.path
 
+       
 
         return (
-            <div>
-                <Redirect to={path} push={path ? true : undefined} />
+            <div>       
+               
                 <Search
                     color='red'
                     size='mini'
@@ -83,6 +84,7 @@ class NavbarSearchBar extends Component {
                     results={results}
                     value={value} >
                 </Search>
+                {path &&  <Redirect to={path} />}        
             </div>
         )
     }
