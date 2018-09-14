@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react-single/Search'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class NavbarSearchBar extends Component {
 
@@ -68,11 +69,11 @@ class NavbarSearchBar extends Component {
         const { isLoading, value, results } = this.state
         const path = this.state.redirect.path
 
-       
 
         return (
-            <div>       
-               
+            <div>
+                <Redirect to={path && path} push={path && true} />
+
                 <Search
                     color='red'
                     size='mini'
@@ -84,7 +85,6 @@ class NavbarSearchBar extends Component {
                     results={results}
                     value={value} >
                 </Search>
-                {path &&  <Redirect to={path} />}        
             </div>
         )
     }
@@ -98,4 +98,4 @@ const mapStateToProps = (state) => ({
     currentSlot: state.currentSlot
 })
 
-export default connect(mapStateToProps)(NavbarSearchBar);
+export default withRouter(connect(mapStateToProps)(NavbarSearchBar));

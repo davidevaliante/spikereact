@@ -36,18 +36,17 @@ class Navbar extends Component {
                 this.props.dispatch(setGratisPage())
                 break;
             default:
-                document.getElementById('home-nav-link').click()
+                // document.getElementById('home-nav-link').click()
                 this.props.dispatch(setHomePage())
         }
     }
 
-   
+
     responsivMobile = () => {
         return (
             <div>
                 <Menu vertical>
                     <Menu.Item
-                        as='a'
                         className='navbarItemOne'
                         onClick={(event, data) => this.updateCurrentPage(PAGES.HOME)}
                         active={this.props.displaying === PAGES.HOME}>
@@ -55,14 +54,12 @@ class Navbar extends Component {
                     </Menu.Item>
 
                     <Menu.Item
-                        as='a'
                         onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_GRATIS)}
                         active={this.props.displaying === PAGES.SLOT_GRATIS}>
                         <NavLink id='gratis-nav-link' to={ROUTE.SLOT_GRATIS}>Slot Gratis</NavLink>
                     </Menu.Item>
 
                     <Menu.Item
-                        as='a'
                         onClick={(event, data) => this.updateCurrentPage(PAGES.SLOT_BAR)}
                         active={this.props.displaying === PAGES.SLOT_BAR}>
                         <NavLink id='bar-nav-link' to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>

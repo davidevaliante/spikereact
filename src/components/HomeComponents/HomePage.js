@@ -9,7 +9,7 @@ import HomePageHeader from '../Header/HomePageHeader'
 import SiteDescription from './HomeBody/SiteDescription'
 import HomeBody from './HomeBody/HomeBody'
 import Navbar from '../Header/Navbar'
-import { getSlotBasedOnProducer } from '../../firebase/get'
+import { getSlotBasedOnProducer, getAllByType } from '../../firebase/get'
 import { Responsive } from 'semantic-ui-react-single/Responsive';
 
 class HomePage extends Component {
@@ -21,6 +21,20 @@ class HomePage extends Component {
         if (this.props.match.params.name) {
             // data fetch
             getSlotBasedOnProducer(this.props.match.params.name)
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.displaying !== this.props.displaying) {
+            switch (this.props.displaying) {
+                case 'SLOT_BAR':
+                    getAllByType('BAR')
+                    break
+                case 'SLOT_GRATIS':
+                    getAllByType('GRATIS')
+                default:
+            }
+
         }
     }
 
@@ -75,7 +89,7 @@ class HomePage extends Component {
                     />
                 </Segment>
                 <Footer />
-            </div >
+            </div>
         )
     }
 }
@@ -83,7 +97,7 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
-    displaying:state.displaying,
+    displaying: state.displaying,
     slotList: state.slotList,
     bonusList: state.bonusList,
     contextRef: state.contextRef

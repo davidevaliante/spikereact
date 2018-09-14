@@ -52,7 +52,7 @@ const AppRouter = () => {
                     <Route path='/admin/editslot/:id' component={EditSlot} />
                     <Route path='/admin/editbonus/:bonusid' component={AddBonus} />
                     <Route path={Route.ADMINBONUS} component={BonusDashboard}></Route>
-                    <Route path={ROUTE.ERROR404} component={NotFound} />
+                    { /* <Route path={ROUTE.ERROR404} component={NotFound} /> */}
 
                     { /* test */}
                 </Switch>

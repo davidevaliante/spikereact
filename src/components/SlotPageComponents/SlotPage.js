@@ -14,6 +14,7 @@ import { getSlotWithId } from '../../firebase/firebase'
 import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
 import Navbar from '../Header/Navbar'
 import { Responsive } from 'semantic-ui-react-single/Responsive';
+import { withRouter } from 'react-router-dom'
 
 class SlotPage extends Component {
 
@@ -108,4 +109,4 @@ const mapStateToProps = (state) => ({
     isLoading: state.currentSlot.isLoading
 })
 
-export default connect(mapStateToProps)(SlotPage)
+export default withRouter(connect(mapStateToProps)(SlotPage))

@@ -43,7 +43,7 @@ const ShortHandMenu = (props) => {
                 <Button
                     style={{ width: '30%' }}
                     inverted
-                    color='red'
+                    color={'red'}
                     onClick={() => smoothScrollTo('slot-page-lists')}>
                     Scheda tecnica
                 </Button>

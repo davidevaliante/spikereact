@@ -9,8 +9,8 @@ const SlotPageBonusList = (props) => {
             const current = props.bonusList[key]
             formattedList.push(current)
         }
-        return formattedList.map(bonus =>
-            <div className='row-centered-spaced'>
+        return formattedList.map((bonus, index) =>
+            <div key={index} className='row-centered-spaced'>
                 <SlotPageSlotCard bonus={bonus} />
             </div>
         )
@@ -18,19 +18,17 @@ const SlotPageBonusList = (props) => {
 
     const responsive = () => {
         return (
-            < div className='row-centered-spaced' style={{ paddingLeft: '4rem', paddingRight: '4rem' }
-            } >
+            <div className='row-centered-spaced' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
                 {bonusList()}
-            </div >
+            </div>
         )
     }
 
     const responsive2 = () => {
         return (
-            < div style={{ paddingLeft: '4rem', paddingRight: '4rem' }
-            } >
+            <div style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
                 {bonusList()}
-            </div >
+            </div>
         )
     }
 

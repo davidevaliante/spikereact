@@ -13,6 +13,9 @@ const SlotListReducer = (state = defaultListState, action) => {
                 ...action.slotListToAdd
             }
         }
+        case 'REPLACE_SLOT_LIST':
+            return action.newList
+
         default:
             return state
     }
@@ -22,6 +25,13 @@ export const addSingleSlot = (slot) => {
     return {
         type: 'ADD_SINGLE_SLOT',
         slotToAdd: slot
+    }
+}
+
+export const replaceSlotList = (newList) => {
+    return {
+        type: 'REPLACE_SLOT_LIST',
+        newList: newList
     }
 }
 

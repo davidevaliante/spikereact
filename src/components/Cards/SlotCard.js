@@ -26,14 +26,12 @@ const SlotCard = (props) => {
                         <Card.Description>{truncate(removeHtmlFrom(props.slot.description), { 'length': 150 })}</Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
-                            <Icon name='star' />
-                            {props.slot.rating}
-                        </a>
+                        <Icon name='star' />
+                        {props.slot.rating}
                     </Card.Content>
                 </Card>
             </div>
-        </NavLink >
+        </NavLink>
     );
 }
 

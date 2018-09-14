@@ -2,7 +2,7 @@ import axios from 'axios'
 import { COUNTRY } from '../enums/Constants'
 import { databaseRoot } from './firebase'
 import store from '../store/store'
-import { addSlotList } from '../reducers/SlotListReducer'
+import { addSlotList, replaceSlotList } from '../reducers/SlotListReducer'
 import { updateSlotMenuList } from '../reducers/SlotsMenuReducer'
 
 export const getBonusWithId = (id, country, callback) => {
@@ -50,6 +50,17 @@ export const loadNextChunk = (limit, end, callback) => {
         .then(
             list => {
                 store.dispatch(addSlotList(list.data))
+            }
+        )
+}
+
+export const getAllByType = (type, callback) => {
+    axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="type"&equalTo="${type}"`)
+        .then(
+            list => {
+                console.log(list.data);
+
+                store.dispatch(replaceSlotList(list.data))
             }
         )
 }
