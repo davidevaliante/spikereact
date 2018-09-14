@@ -50,6 +50,10 @@ class SlotPage extends Component {
                 })
             })
         }
+
+        if (prevState.currentSlot.linkYoutube) {
+            this.setState({ currentSlot: { ...this.state.currentSlot, linkYoutube: undefined } })
+        }
     }
 
     componentWillUnmount() {
@@ -96,7 +100,7 @@ class SlotPage extends Component {
                     <Responsive maxWidth={1200} isResponsive={false} as={SlotPageBonusList} bonusList={currentSlot.bonus}  >
 
                     </Responsive>
-                    {currentSlot &&
+                    {currentSlot.linkYoutube &&
                         <div>
                             <Responsive minWidth={600}>  <YouTubeEmbed width='900' height='450' src={this.getYoutubeEmbedSource()} /></Responsive>
                             <Responsive maxWidth={600}> <YouTubeEmbed width='300' height='150' src={this.getYoutubeEmbedSource()} /></Responsive>
