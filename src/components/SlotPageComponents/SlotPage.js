@@ -98,8 +98,8 @@ class SlotPage extends Component {
                     </Responsive>
                     {currentSlot &&
                         <div>
-                            <Responsive minWidth={600}>  <YouTubeEmbed width='900' height='450' linkYoutube={this.getYoutubeEmbedSource()} /></Responsive>
-                            <Responsive maxWidth={600}> <YouTubeEmbed width='300' height='150' linkYoutube={this.getYoutubeEmbedSource()} /></Responsive>
+                            <Responsive minWidth={600}>  <YouTubeEmbed width='900' height='450' src={this.getYoutubeEmbedSource()} /></Responsive>
+                            <Responsive maxWidth={600}> <YouTubeEmbed width='300' height='150' src={this.getYoutubeEmbedSource()} /></Responsive>
                         </div>
                     }
                     <Footer />
