@@ -18,7 +18,6 @@ const PlayDimmer = (props) => {
                     width='900'
                     height='500'
                     src={props.url}
-
                 ></iframe>
             </Dimmer>
         </div>

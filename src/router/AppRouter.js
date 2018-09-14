@@ -19,18 +19,19 @@ import BonusDashboard from "../admin/Bonus/BonusDashboard"
 
 
 const AppRouter = () => {
-
+    let currentSlotPath = ''
 
     return (
         <div className='matchParentHeight'>
             <Router>
 
                 <Switch>
+                    console.log(props.location);
 
                     { /* entry points  */}
                     <Route path={ROUTE.ROOT} component={HomePage} exact={true} page='HOME' />
-                    <Route path={ROUTE.SLOT} component={SlotPage} page={PAGES.SLOT} />
                     <Route path={ROUTE.ABOUT} component={AboutPage} page={PAGES.ABOUT} />
+                    <Route path={ROUTE.SLOT} component={SlotPage} page={PAGES.SLOT} />
 
 
                     { /* HOME filtered */}
@@ -52,7 +53,7 @@ const AppRouter = () => {
                     <Route path='/admin/editslot/:id' component={EditSlot} />
                     <Route path='/admin/editbonus/:bonusid' component={AddBonus} />
                     <Route path={Route.ADMINBONUS} component={BonusDashboard}></Route>
-                    { /* <Route path={ROUTE.ERROR404} component={NotFound} /> */}
+                    <Route path={ROUTE.ERROR404} component={NotFound} />
 
                     { /* test */}
                 </Switch>

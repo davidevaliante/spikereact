@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { capitalize } from 'lodash/capitalize'
 import { getImageLinkFromName } from '../../utils/Utils'
 import { addSlotList } from '../../reducers/SlotListReducer'
-import { setProducerPage} from '../../reducers/CurrentPageReducer'
+import { setProducerPage } from '../../reducers/CurrentPageReducer'
 import { Redirect } from 'react-router-dom'
- 
+
 // ----------------Come va formattata la lista da mostrare
 // friendOptions = [
 //   {
@@ -18,7 +18,7 @@ import { Redirect } from 'react-router-dom'
 // ]
 
 class ProducersDropdown extends Component {
-    state={}
+    state = {}
 
     formatProducerForDropdown = (list) => {
         let formattedList = []
@@ -39,21 +39,21 @@ class ProducersDropdown extends Component {
 
     dropdownChoiceHandler = (producerName) => {
         this.props.dispatch(setProducerPage(producerName))
-        this.setState({path:`/producer/${producerName}`})
+        this.setState({ path: `/producer/${producerName}` })
     }
 
 
-    render(){
-        const {path} = this.state
-        if(path) return <Redirect to={path} push />
-        return(
+    render() {
+        const { path } = this.state
+        // if(path) return <Redirect to={path} push />
+        return (
             <Dropdown
                 placeholder='Produttori'
                 onChange={(event, data) => this.dropdownChoiceHandler(data.value)}
                 options={this.formatProducerForDropdown(this.props.producerList)} />
         )
     }
-    
+
 }
 
 const mapStateToProps = (state) => ({

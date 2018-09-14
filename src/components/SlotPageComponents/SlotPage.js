@@ -15,7 +15,7 @@ import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
 import Navbar from '../Header/Navbar'
 import { Responsive } from 'semantic-ui-react-single/Responsive';
 import { withRouter } from 'react-router-dom'
-
+import split from 'lodash/split'
 class SlotPage extends Component {
 
     state = {
@@ -37,6 +37,7 @@ class SlotPage extends Component {
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+
         // se l'id nell'url è cambiato
         if (prevProps.match.params.id !== this.props.match.params.id) {
             console.log('firebase query');
@@ -55,7 +56,10 @@ class SlotPage extends Component {
         this.props.dispatch(slotIsLoading())
     }
 
-
+    getYoutubeEmbedSource = () => {
+        const id = split(this.state.currentSlot.linkYoutube, '=').pop()
+        return `https://www.youtube.com/embed/${id}`
+    }
 
     render() {
         const { currentSlot } = this.state
@@ -92,9 +96,12 @@ class SlotPage extends Component {
                     <Responsive maxWidth={1200} isResponsive={false} as={SlotPageBonusList} bonusList={currentSlot.bonus}  >
 
                     </Responsive>
-
-                    <Responsive minWidth={600}>  <YouTubeEmbed width='900' height='450' linkYoutube={currentSlot.linkYoutube} /></Responsive>
-                    <Responsive maxWidth={600}> <YouTubeEmbed width='300' height='150' linkYoutube={currentSlot.linkYoutube} /> </Responsive>
+                    {currentSlot &&
+                        <div>
+                            <Responsive minWidth={600}>  <YouTubeEmbed width='900' height='450' linkYoutube={this.getYoutubeEmbedSource()} /></Responsive>
+                            <Responsive maxWidth={600}> <YouTubeEmbed width='300' height='150' linkYoutube={this.getYoutubeEmbedSource()} /></Responsive>
+                        </div>
+                    }
                     <Footer />
                 </Dimmer.Dimmable>
             </div>

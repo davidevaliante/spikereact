@@ -31,10 +31,11 @@ class NavbarSearchBar extends Component {
         if (result.link) { window.open(result.link) }
         // se non esiste link allora è una slot
         else {
-            this.setState({
-                value: result.title,
-                redirect: { path: `/slot/${result.id}` }
-            })
+            this.props.history.push(`/slot/${result.id}`)
+            // this.setState({
+            //     value: result.title,
+            //     redirect: { path: `/slot/${result.id}` }
+            // })
         }
     }
 
@@ -72,8 +73,6 @@ class NavbarSearchBar extends Component {
 
         return (
             <div>
-                <Redirect to={path && path} push={path && true} />
-
                 <Search
                     color='red'
                     size='mini'

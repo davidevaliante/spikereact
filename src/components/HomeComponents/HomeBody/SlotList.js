@@ -15,7 +15,6 @@ const SlotList = (props) => {
     // di base renderizza props.maxSlot elementi ma scrollando ne deve caricare dinamicamente 
     // di più
     const slotListToRows = (slotList, ordering) => {
-        console.log(props.type)
         let listOfSlots = []
         for (const key in slotList) {
             const element = slotList[key]

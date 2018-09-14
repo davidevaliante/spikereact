@@ -5,13 +5,17 @@ import { Image } from 'semantic-ui-react-single/Image'
 import { List } from 'semantic-ui-react-single/List'
 import { Segment } from 'semantic-ui-react-single/Segment'
 import { Icon } from 'semantic-ui-react-single/Icon'
-
+import { withRouter } from 'react-router'
 import React from "react";
 import { ROUTE } from "../enums/Constants";
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { PAGES } from '../enums/Constants'
 const Footer = (props) => {
+
+    const goToAboutPage = () => {
+        props.history.push(ROUTE.ABOUT)
+    }
 
     return (
         <div>
@@ -22,12 +26,12 @@ const Footer = (props) => {
                             <Grid.Column width={4}>
                                 <Header inverted as='h4' content='Spike' />
                                 <List link inverted>
-                                    <NavLink to={ROUTE.ABOUT}>
+                                    <div onClick={() => goToAboutPage()}>
                                         {props.displaying === PAGES.ABOUT && window.scrollTo(0, 0)}
                                         <Image circular
                                             src="https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/FooterImage%2FKarloSpike.jpg?alt=media&token=a6e240b0-4a52-4525-9c9b-c3ecd6df77e2"
                                             size="tiny" />
-                                    </NavLink>
+                                    </div>
                                 </List>
                             </Grid.Column>
 
@@ -91,4 +95,4 @@ const mapStateToProps = (state) => ({
     displaying: state.displaying
 })
 
-export default connect(mapStateToProps)(Footer)
+export default withRouter(connect(mapStateToProps)(Footer))

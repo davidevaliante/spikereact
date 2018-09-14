@@ -10,7 +10,8 @@
     "SlotsCard": {
       "$language": {
         ".indexOn": [
-          "time"
+          "time",
+          "type"
         ]
       }
     }
