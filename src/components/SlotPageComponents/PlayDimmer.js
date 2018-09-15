@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import { setUserNotPlaying } from '../../reducers/PlayModeReducer'
+import RandomBonus from './RandomBonus'
 
 const PlayDimmer = (props) => {
 
@@ -13,12 +14,18 @@ const PlayDimmer = (props) => {
                 page
                 active={props.isPlaying}
                 onClickOutside={() => props.dispatch(setUserNotPlaying())} >
-                <iframe
-                    title='test'
-                    width='900'
-                    height='500'
-                    src={props.url}
-                ></iframe>
+                <div>
+                    <iframe
+                        style={{ position: 'absolute', right: '25%', top: '11%' }}
+                        title='test'
+                        width='900'
+                        height='500'
+                        src={props.url}
+                    ></iframe>
+                    <div style={{ position: 'absolute', left: '77%', top: '39%' }}>
+                        <RandomBonus bonus={props.bonusList} />
+                    </div>
+                </div>
             </Dimmer>
         </div>
     )

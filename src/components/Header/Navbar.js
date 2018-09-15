@@ -65,9 +65,7 @@ class Navbar extends Component {
                         <NavLink id='bar-nav-link' to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
                     </Menu.Item>
 
-                    <Menu.Item>
-                        <ProducersDropdown />
-                    </Menu.Item>
+
 
                     <Menu.Item  >
                         <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />

@@ -20,7 +20,7 @@ const BonusCard = (props) => {
             </Card.Content>
             <Card.Content extra>
                 <div className='vertical-center'>
-                    <Image circular style={{ height: '3rem', objectFit: 'cover' }} src={getImageLinkFromName('bonus', props.bonus.name)} />
+                    <Image style={{ height: '6rem', objectFit: 'cover' }} src={getImageLinkFromName('bonus', props.bonus.name)} />
                 </div>
             </Card.Content>
 

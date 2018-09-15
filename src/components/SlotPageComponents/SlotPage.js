@@ -73,7 +73,7 @@ class SlotPage extends Component {
                 <Dimmer.Dimmable dimmed={isPlaying}>
                     {window.scrollTo(0, 0)}
 
-                    <PlayDimmer url={currentSlot.linkPlay} />
+                    <PlayDimmer url={currentSlot.linkPlay} bonusList={currentSlot.bonus} />
                     <div>
                         <Responsive maxWidth={600}> <Navbar displaying={'SLOT'} isResponsive={true} /></Responsive>
                         <Responsive minWidth={600}>   <Navbar displaying={'SLOT'} isResponsive={false} /></Responsive>

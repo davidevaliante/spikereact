@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 import { connect } from 'react-redux'
 import { capitalize } from 'lodash/capitalize'
 import { getImageLinkFromName } from '../../utils/Utils'

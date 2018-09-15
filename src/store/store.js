@@ -8,6 +8,7 @@ import slotPageReducer from './../reducers/SlotPageReducer';
 import playModeReducer from './../reducers/PlayModeReducer';
 import toUpdateReducer from './../reducers/ToUpdateReducer';
 import slotMenuReducer from './../reducers/SlotsMenuReducer'
+import popularSlotReducer from './../reducers/PopularSlotreducer'
 
 const reducers = combineReducers(
     {
@@ -19,7 +20,8 @@ const reducers = combineReducers(
         'currentSlot': slotPageReducer,
         'isPlaying': playModeReducer,
         'toUpdate': toUpdateReducer,
-        'slotMenuList': slotMenuReducer
+        'slotMenuList': slotMenuReducer,
+        'popularSlots': popularSlotReducer
     }
 );
 
