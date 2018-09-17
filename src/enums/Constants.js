@@ -75,3 +75,9 @@ export const IMGS_SIZES = {
 export const COUNTRY = {
     ITALY: 'it'
 }
+
+export const RESPONSIVE_RESOLUTION = {
+    SMALL: 425,
+    MEDIUM: 950,
+    LARGE: 1200
+}
