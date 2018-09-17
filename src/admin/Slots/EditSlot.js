@@ -1,4 +1,5 @@
 import React from "react";
+import { Radio } from "semantic-ui-react-single/Radio";
 import { Button } from 'semantic-ui-react-single/Button';
 import { Form } from 'semantic-ui-react-single/Form';
 import { TextArea } from 'semantic-ui-react-single/TextArea';
@@ -16,11 +17,15 @@ import { updateSlotWithId } from '../../firebase/firebase';
 import { getBonusList } from '../../firebase/firebase';
 import forEach from 'lodash/forEach'
 import keys from 'lodash/keys'
+import replace from "lodash/replace"
+import { TextArea } from "semantic-ui-react";
+import { replaceTextTips, replaceTextTec } from "../../utils/Utils";
 
 
 
 class EditSlot extends React.Component {
     state = {
+        isInCopyPasteMode: true,
         currentSlot: {},
         ratingStateOptions: [
             { key: 'uno', value: '1', text: '1' },
@@ -70,7 +75,8 @@ class EditSlot extends React.Component {
                     currentSlotId: this.props.match.params.id,
                     optionList: options,
                     firebaseBonusObject: slot.bonus,
-                    selectedBonus: slot.bonus
+                    selectedBonus: slot.bonus,
+                    currentDescription: slot.description
                 })
             })
 
@@ -97,6 +103,41 @@ class EditSlot extends React.Component {
         console.log(selectedBonus);
 
         this.setState({ selectedBonus: selectedBonus })
+    }
+
+    switchCopyPasteMode = () => {
+        this.setState({
+            isInCopyPasteMode: !this.state.isInCopyPasteMode
+
+        })
+    }
+
+    handleTipsCopyMode = data => {
+
+        const textIn = data.value
+
+        const b = replaceTextTips(textIn)
+        this.setState({ currentSlot: { ...this.state.currentSlot, tips: b } })
+    }
+    handleTecnicalsCopyMode = data => {
+        const textIn = data.value
+        const b = replaceTextTec(textIn)
+        this.setState({ currentSlot: { ...this.state.currentSlot, tecnicals: b } })
+    }
+
+
+
+    handleTipsChange = newValue => {
+
+
+        this.setState({ currentSlot: { ...this.state.currentSlot, tips: newValue.value } })
+    }
+    handleTecnicalsChange = data => {
+
+        this.setState({ currentSlot: { ...this.state.currentSlot, tecnicals: data.value } })
+    }
+    handleDescriptionChange = (data) => {
+        this.setState({ currentSlot: { ...this.state.currentSlot, description: data.value } })
     }
 
     submitEditSlot = () => {
@@ -186,6 +227,7 @@ class EditSlot extends React.Component {
         const { currentSlot } = this.state
         const { producer } = this.state.currentSlot
 
+
         return (
             <div>
                 <h1
@@ -242,19 +284,37 @@ class EditSlot extends React.Component {
                         Liste
                     </h1>
 
+
+                    <Form.Group>
+                        <Radio
+                            label="CopyMode"
+                            id='copyPasteMode'
+                            onChange={this.switchCopyPasteMode}
+                            style={{ marginLeft: '1rem' }}
+                            toggle />
+                    </Form.Group>
                     <Form.Group
                         widths='equal'>
+
                         <Form.Field
                             id='tipsField'
                             value={currentSlot.tips}
+
+                            onChange={(event, data) => this.state.isInCopyPasteMode ? this.handleTipsCopyMode(data) : this.handleTipsChange(data)}
+
+
                             rows={10}
                             control={TextArea}
-                            onChange={(event, data) => this.handleTipsChange(data)}
                             label='Consigli'
-                            placeholder='Consigli...' />
+                            placeholder='Consigli...'
+
+                        />
                         <Form.Field
                             id='tecnicalsField'
                             value={currentSlot.tecnicals}
+
+                            onChange={(event, data) => this.state.isInCopyPasteMode ? this.handleTecnicalsCopyMode(data) : this.handleTecnicalsChange(data)}
+
                             rows={10}
                             control={TextArea}
                             label='Scheda Tecnica'
@@ -265,8 +325,9 @@ class EditSlot extends React.Component {
 
                     <Form.Field
                         id='descriptionField'
-                        defaultValue={currentSlot.description}
-                        control={Input}
+                        value={currentSlot.description}
+                        onChange={(event, data) => this.handleDescriptionChange(data)}
+                        control={TextArea}
                         label='Descrizione'
                         placeholder='Descrizione slot...' />
                     <Form.Group widths='equal'>
@@ -313,9 +374,9 @@ class EditSlot extends React.Component {
                         control={Button}>
                         Modifica
                     </Form.Field>
-                    <Image >ci vorrei mette la foto corrente della macchinetta ma non so dove prenderla xD</Image>
+
                 </Form>
-            </div>
+            </div >
 
         )
     }

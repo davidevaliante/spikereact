@@ -311,7 +311,9 @@ class AddSlot extends Component {
                         </h1>
 
                         <Form.Group
-                            widths='equal'>
+                            widths='equal'
+
+                        >
 
                             <Form.Field
                                 id='tipsField'
@@ -402,3 +404,4 @@ class AddSlot extends Component {
 
 
 export default AddSlot;
+
