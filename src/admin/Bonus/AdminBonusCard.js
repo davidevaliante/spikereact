@@ -10,6 +10,8 @@ import { NavLink } from 'react-router-dom'
 import truncate from "lodash/truncate";
 import { deleteBonusWithId } from "../../firebase/firebase";
 import { setToUpdate } from "../../reducers/ToUpdateReducer";
+import {getImageLinkFromName} from "../../utils/Utils";
+import Parser from "html-react-parser";
 
 function mapStateToProps(state) {
     return {
@@ -29,7 +31,6 @@ class AdminBonusCard extends Component {
     };
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <List divided relaxed='very'>
@@ -43,10 +44,11 @@ class AdminBonusCard extends Component {
                         <List.Content>
                             <List.Header as='p'>{this.props.bonus.name}</List.Header>
                             <List.Description as='p'>
-                                {truncate(this.props.bonus.review, { 'length': 175 })}
+                                {Parser(truncate(this.props.bonus.review, { 'length': 175 }))}
+                                {/*{truncate(Parser(`${this.props.bonus.review}`), { 'length': 175 })}*/}
                                 <Divider />
                                 <div className='crop' >
-                                    <Image src={this.props.bonus.image} />
+                                    <Image style={{ objectFit: 'cover' }} src={getImageLinkFromName('bonus', this.props.bonus.name, 'medium')} />
                                 </div>
                                 <Divider />
                                 <Icon name='star' />
