@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
-import { getBonusList } from '../firebase/firebase';
+import { getBonusList } from '../firebase/get';
 import pick from 'lodash/pick';
 import map from 'lodash/map'
 

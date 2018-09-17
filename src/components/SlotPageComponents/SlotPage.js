@@ -10,7 +10,7 @@ import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import Footer from "../Footer";
 import YouTubeEmbed from './YouTubeEmbed'
 import SlotPageHeader from '../Header/SlotPageHeader'
-import { getSlotWithId } from '../../firebase/firebase'
+import { getSlotWithId } from '../../firebase/get'
 import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
 import Navbar from '../Header/Navbar'
 import { Responsive } from 'semantic-ui-react-single/Responsive';

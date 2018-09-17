@@ -8,7 +8,7 @@ import { List } from 'semantic-ui-react-single/List'
 import { Image } from 'semantic-ui-react-single/Image'
 import { NavLink } from 'react-router-dom'
 import truncate from "lodash/truncate";
-import { deleteBonusWithId } from "../../firebase/firebase";
+import { deleteBonusWithId } from "../../firebase/delete";
 import { setToUpdate } from "../../reducers/ToUpdateReducer";
 import {getImageLinkFromName} from "../../utils/Utils";
 import Parser from "html-react-parser";

@@ -9,7 +9,7 @@ import { List } from 'semantic-ui-react-single/List';
 import { Image } from 'semantic-ui-react-single/Image';
 
 import truncate from "lodash/truncate";
-import { deleteSlotWithId } from "../../firebase/firebase";
+import { deleteSlotWithId } from "../../firebase/delete";
 import { setToUpdate } from "../../reducers/ToUpdateReducer";
 import { getImageLinkFromName } from '../../utils/Utils'
 function mapStateToProps(state) {

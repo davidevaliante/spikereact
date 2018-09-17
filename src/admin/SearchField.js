@@ -3,7 +3,8 @@ import debounce from 'lodash/debounce'
 import escapeRegExp from 'lodash/escapeRegExp'
 import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react-single/Search'
-import { getBonusList, getProducerList } from '../firebase/firebase';
+import { getBonusList} from '../firebase/get';
+import {getProducerList} from "../firebase/get";
 
 
 let producerList = [];

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
-import { getBonusList } from "../../firebase/firebase";
+import { getBonusList } from "../../firebase/get";
 import AdminBonusCard from "./AdminBonusCard";
 import AdminNavbar from "../../admin/AdminNavbar";
 import {ADMINPAGES, RESPONSIVE_RESOLUTION} from "../../enums/Constants";
