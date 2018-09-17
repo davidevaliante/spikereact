@@ -23,14 +23,22 @@ export const getPopularSlots = () => {
     const queries = map(idListToFetch, id => axios.get(`${databaseRoot}/SlotsCard/it/${id}.json`))
     axios.all(queries).then(axios.spread(
         (one, two, three, four, five, six, seven, eight) => {
-            store.dispatch(addPopularSlot(one.data))
-            store.dispatch(addPopularSlot(two.data))
-            store.dispatch(addPopularSlot(three.data))
-            store.dispatch(addPopularSlot(four.data))
-            store.dispatch(addPopularSlot(five.data))
-            store.dispatch(addPopularSlot(six.data))
-            store.dispatch(addPopularSlot(seven.data))
-            store.dispatch(addPopularSlot(eight.data))
+            const One = { ...one.data, id: '-LMTB6IRITXsmWGp4e-s' }
+            const Two = { ...two.data, id: '-LLt3eNw41nayvVTDtSC' }
+            const Three = { ...three.data, id: '-LMTDa-DXBM08cj454s5' }
+            const Four = { ...four.data, id: '-LLtKLvdUfpgpLPJU_5x' }
+            const Five = { ...five.data, id: '-LLVjwJsBoMYGlYTQmzE' }
+            const Six = { ...six.data, id: '-LLtVumsNX92o6518exz' }
+            const Seven = { ...seven.data, id: '-LMJ7Hu1ifdhKmRB4lDo' }
+            const Eight = { ...eight.data, id: '-LMIsiZ_b3kF9UtnJ9bC' }
+            store.dispatch(addPopularSlot(One))
+            store.dispatch(addPopularSlot(Two))
+            store.dispatch(addPopularSlot(Three))
+            store.dispatch(addPopularSlot(Four))
+            store.dispatch(addPopularSlot(Five))
+            store.dispatch(addPopularSlot(Six))
+            store.dispatch(addPopularSlot(Seven))
+            store.dispatch(addPopularSlot(Eight))
         }
     ))
 }

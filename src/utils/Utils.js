@@ -2,6 +2,55 @@ import truncate from 'lodash/truncate'
 import snakeCase from 'lodash/snakeCase'
 import { IMGS_SIZES } from '../enums/Constants'
 
+import split from 'lodash/split'
+import dropRight from "lodash/dropRight"
+import map from "lodash/map"
+import replace from "lodash/replace"
+import forEach from "lodash/forEach"
+
+
+
+
+
+
+
+export const replaceTextTips = (text) => {
+
+    const QUALCHE_STRING = text
+
+    let listArray = split(QUALCHE_STRING, '</li>')
+    console.log(listArray)
+    //va rimosso l'ultimo elemento che è stringa vuota
+    listArray = dropRight(listArray, 1)
+    console.log(listArray)
+    //sostituzione
+    listArray = map(listArray, x => replace(x, '<li>', '@'))
+    console.log(listArray)
+    //stringa finale
+    let finalString = ''
+    forEach(listArray, x => finalString += x)
+
+    return finalString
+}
+
+export const replaceTextTec = (text) => {
+
+    const QUALCHE_STRING = text
+
+    let listArray = split(QUALCHE_STRING, '</li>')
+    console.log(listArray)
+    //va rimosso l'ultimo elemento che è stringa vuota
+    listArray = dropRight(listArray, 1)
+    console.log(listArray)
+    //sostituzione
+    listArray = map(listArray, x => replace(x, '<li>', '$'))
+    console.log(listArray)
+    //stringa finale
+    let finalString = ''
+    forEach(listArray, x => finalString += x)
+
+    return finalString
+}
 
 export const removeHtmlFrom = (str) => {
     if ((str === null) || (str === ''))
