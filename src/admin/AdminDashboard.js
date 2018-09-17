@@ -10,12 +10,10 @@ class AdminDashboard extends Component {
     state = {};
 
     handleClick = (childComponent) => {
-        console.log("childComponent:", childComponent)
-        console.log(ReactDOM.findDOMNode(this.refs.theChild))
+
     };
 
     render() {
-        console.log(this.props.match.path);
         return (
             <Responsive>
                 <AdminNavbar activeItem={ADMINPAGES.ADMIN} />

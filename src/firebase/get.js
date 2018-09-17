@@ -4,15 +4,33 @@ import { databaseRoot } from './firebase'
 import store from '../store/store'
 import { addSlotList, replaceSlotList } from '../reducers/SlotListReducer'
 import { updateSlotMenuList } from '../reducers/SlotsMenuReducer'
+import { addPopularSlot } from '../reducers/PopularSlotreducer'
 import map from 'lodash/map'
+import forEach from 'lodash/forEach'
+
+export const getExtraById = (extraId, callback) => {
+    axios.get(`${databaseRoot}/Extra/it/${extraId}.json`)
+        .then(value => {
+            callback(value.data)
+        })
+}
 
 export const getPopularSlots = () => {
-    const idListToFetch = ['-LMJ8I1hFbX5OMfqzaHj', '-LMJ3NF0P7hwE2xzfdcV']
+    const idListToFetch = ['-LMTB6IRITXsmWGp4e-s', '-LLt3eNw41nayvVTDtSC',
+        '-LMTDa-DXBM08cj454s5', '-LLtKLvdUfpgpLPJU_5x',
+        '-LLVjwJsBoMYGlYTQmzE', '-LLtVumsNX92o6518exz',
+        '-LMJ7Hu1ifdhKmRB4lDo', '-LMIsiZ_b3kF9UtnJ9bC']
     const queries = map(idListToFetch, id => axios.get(`${databaseRoot}/SlotsCard/it/${id}.json`))
     axios.all(queries).then(axios.spread(
-        (one, two) => {
-            console.log(one)
-            console.log(two)
+        (one, two, three, four, five, six, seven, eight) => {
+            store.dispatch(addPopularSlot(one.data))
+            store.dispatch(addPopularSlot(two.data))
+            store.dispatch(addPopularSlot(three.data))
+            store.dispatch(addPopularSlot(four.data))
+            store.dispatch(addPopularSlot(five.data))
+            store.dispatch(addPopularSlot(six.data))
+            store.dispatch(addPopularSlot(seven.data))
+            store.dispatch(addPopularSlot(eight.data))
         }
     ))
 }

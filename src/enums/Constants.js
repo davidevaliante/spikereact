@@ -38,6 +38,7 @@ export const ROUTE = {
     SLOT_GRATIS: '/slot-gratis',
     SLOT_BAR: '/slot-bar',
     ABOUT: '/about',
+    EXTRA: `/extra/:id`,
     PRODUCER: `/producer/:name`,
     ERROR404: '*',
 
@@ -50,6 +51,7 @@ export const ROUTE = {
     ADMINBONUS: `${admin}/bonus`,
     ADDBONUS: `${admin}/addbonus`,
     ADDPRODUCER: `${admin}/addproducer`,
+    ADDEXTRAFROMHTML: `${admin}/addextrafromhtml`,
     EDITPAGE: `${admin}/editpage`,
 };
 
@@ -58,7 +60,8 @@ export const ADMINPAGES = {
     ARTICLE: 'Article',
     SLOT: 'Slot',
     BONUS: 'Bonus',
-    PRODUCER: 'Producer'
+    PRODUCER: 'Producer',
+    EXTRA: 'Extra'
 };
 
 export const IMGS_SIZES = {

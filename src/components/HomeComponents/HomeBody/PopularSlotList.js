@@ -7,6 +7,10 @@ import chunk from 'lodash/chunk'
 class PopularSlotList extends Component {
     state = {}
 
+    componentDidMount() {
+
+    }
+
     slotListToRows = (slotList) => {
         let listOfSlots = []
         for (const key in slotList) {
@@ -30,10 +34,10 @@ class PopularSlotList extends Component {
     }
 
     render() {
-        getPopularSlots()
 
         return (
-            <div className='vertical-center'>
+            <div className='vertical-center' style={{ marginTop: '4rem' }}>
+                <h3 className='popular-slot-header'>Le slot più popolari</h3>
                 {this.props.popularSlots ? this.slotListToRows(this.props.popularSlots) : <div></div>}
             </div>
         )

@@ -11,6 +11,7 @@ import HomeBody from './HomeBody/HomeBody'
 import Navbar from '../Header/Navbar'
 import { getSlotBasedOnProducer, getAllByType } from '../../firebase/get'
 import { Responsive } from 'semantic-ui-react-single/Responsive';
+import PopularSlotList from './HomeBody/PopularSlotList'
 
 class HomePage extends Component {
     state = {};
@@ -79,6 +80,8 @@ class HomePage extends Component {
                 </div>
                 <SiteDescription />
                 <Segment vertical>
+                    <PopularSlotList />
+
                     <ListDescriptionBanner />
                     <HomeBody
                         orderHandler={this.handleChange}

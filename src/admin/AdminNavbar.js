@@ -11,7 +11,6 @@ class AdminNavbar extends Component {
     activeItem = ADMINPAGES.ADMIN;
 
     handleClick = (id) => {
-        console.log('ID', id)
         document.getElementById(id).click()
     };
 
@@ -87,6 +86,21 @@ class AdminNavbar extends Component {
                                     <NavLink id='admin-nav-producer' to='#'>
                                         <Icon name='lab' /> Gestione Produttori
                                     </NavLink>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Menu.Item>
+
+                    <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.EXTRA}>
+                        <Dropdown item simple text='Extra'>
+                            <Dropdown.Menu simple>
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-extra')}>
+                                    <NavLink id='admin-nav-add-extra' to={ROUTE.ADDEXTRAFROMHTML}><Icon name='add' /> Aggiungi Extra da Html</NavLink>
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.handleClick('admin-nav-extra')}>
+                                    <NavLink id='admin-nav-extra' to='#'>
+                                        <Icon name='lab' /> Gestione Extra
+                                </NavLink>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>

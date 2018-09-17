@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from 'semantic-ui-react-single/Button';
 import { Form } from 'semantic-ui-react-single/Form';
+import { TextArea } from 'semantic-ui-react-single/TextArea';
+
 import { Input } from 'semantic-ui-react-single/Input';
 import { Dropdown } from 'semantic-ui-react-single/Dropdown';
 import { Image } from "semantic-ui-react-single/Image";
@@ -175,6 +177,10 @@ class EditSlot extends React.Component {
 
     }
 
+    handleTipsChange = newValue => {
+        this.setState({ currentSlot: { ...this.state.currentSlot, tips: newValue.value } })
+    }
+
     render() {
 
         const { currentSlot } = this.state
@@ -240,14 +246,17 @@ class EditSlot extends React.Component {
                         widths='equal'>
                         <Form.Field
                             id='tipsField'
-                            defaultValue={currentSlot.tips}
-                            control={Input}
+                            value={currentSlot.tips}
+                            rows={10}
+                            control={TextArea}
+                            onChange={(event, data) => this.handleTipsChange(data)}
                             label='Consigli'
                             placeholder='Consigli...' />
                         <Form.Field
                             id='tecnicalsField'
-                            defaultValue={currentSlot.tecnicals}
-                            control={Input}
+                            value={currentSlot.tecnicals}
+                            rows={10}
+                            control={TextArea}
                             label='Scheda Tecnica'
                             placeholder='Scheda Tecnica...' />
                     </Form.Group>

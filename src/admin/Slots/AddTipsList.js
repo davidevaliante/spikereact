@@ -19,7 +19,6 @@ class AddTipsList extends Component {
                 s += value.content
             }
         })
-        console.log(s);
 
         this.setState(prevState => {
             if (prevState.listToPreview !== s)
@@ -28,7 +27,6 @@ class AddTipsList extends Component {
     }
 
     render() {
-        console.log(this.state);
 
         return (
             <div style={{

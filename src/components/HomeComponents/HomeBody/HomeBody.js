@@ -12,7 +12,6 @@ import { Responsive } from 'semantic-ui-react-single/Responsive'
 
 // misc
 import { SLOT_TYPES } from '../../../enums/Constants'
-import PopularSlotList from '../HomeBody/PopularSlotList'
 
 
 const dropdownOptions = [
@@ -25,7 +24,6 @@ const dropdownOptions = [
 const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky }) => (
 
     <Grid style={{ marginTop: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
-        <PopularSlotList />
         <Grid.Row style={{ paddingBottom: '4rem' }}>
             <Grid.Column width={12} style={{ paddingLeft: '0' }}>
                 <Dropdown
