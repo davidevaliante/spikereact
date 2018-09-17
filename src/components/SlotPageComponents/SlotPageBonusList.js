@@ -1,5 +1,8 @@
 import React from 'react'
 import SlotPageSlotCard from './SlotPageBonusCard'
+import {Grid} from 'semantic-ui-react-single/Grid'
+import {Responsive} from 'semantic-ui-react-single/Responsive'
+import {RESPONSIVE_RESOLUTION} from "../../enums/Constants";
 
 const SlotPageBonusList = (props) => {
 
@@ -10,15 +13,13 @@ const SlotPageBonusList = (props) => {
             formattedList.push(current)
         }
         return formattedList.map((bonus, index) =>
-            <div key={index} className='row-centered-spaced'>
-                <SlotPageSlotCard bonus={bonus} />
-            </div>
+            <Grid.Column><SlotPageSlotCard bonus={bonus}/></Grid.Column>
         )
     }
 
     const responsive = () => {
         return (
-            <div className='row-centered-spaced' style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
+            <div className='row-centered-spaced' style={{paddingLeft: '4rem', paddingRight: '4rem'}}>
                 {bonusList()}
             </div>
         )
@@ -26,7 +27,7 @@ const SlotPageBonusList = (props) => {
 
     const responsive2 = () => {
         return (
-            <div style={{ paddingLeft: '4rem', paddingRight: '4rem' }}>
+            <div style={{paddingLeft: '4rem', paddingRight: '4rem'}}>
                 {bonusList()}
             </div>
         )
@@ -34,12 +35,12 @@ const SlotPageBonusList = (props) => {
 
 
     return (
-        <div id='slot-page-bonus' style={{ paddingTop: '8rem', marginBottom: '8rem', textAlign: 'center' }}>
+        <div id='slot-page-bonus' style={{paddingTop: '8rem', marginBottom: '8rem', textAlign: 'center'}}>
 
-            <div className='home-page-intro-container' style={{ width: '100%', marginBottom: '8rem' }}>
-                <div className='home-page-intro-outer' style={{ width: '100%' }}>
-                    <div className='home-page-intro-bg' style={{ width: '100%' }}>
-                        <div className='home-page-intro' style={{ width: '100%' }}>
+            <div className='home-page-intro-container' style={{width: '100%', marginBottom: '8rem'}}>
+                <div className='home-page-intro-outer' style={{width: '100%'}}>
+                    <div className='home-page-intro-bg' style={{width: '100%'}}>
+                        <div className='home-page-intro' style={{width: '100%'}}>
                             <h1>I migliori Bonus</h1>
                             <p>Passa dalla teoria alla pratica</p>
                             <p>Utilizza questi bonus ed inizia a vincere soldi veri su siti certificati e sicuri</p>
@@ -47,9 +48,28 @@ const SlotPageBonusList = (props) => {
                     </div>
                 </div>
             </div>
-
-            {props.isResponsive ? responsive() : responsive2()}
-
+            <div style={{padding: '0 2rem'}}>
+                <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>
+                    <Grid stackable columns={4}>
+                        {bonusList()}
+                    </Grid>
+                </Responsive>
+                <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} maxWidth={RESPONSIVE_RESOLUTION.LARGE}>
+                    <Grid stackable columns={3}>
+                        {bonusList()}
+                    </Grid>
+                </Responsive>
+                <Responsive minWidth={RESPONSIVE_RESOLUTION.SMALL} maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
+                    <Grid stackable columns={2}>
+                        {bonusList()}
+                    </Grid>
+                </Responsive>
+                <Responsive maxWidth={RESPONSIVE_RESOLUTION.SMALL}>
+                    <Grid stackable columns={1}>
+                        {bonusList()}
+                    </Grid>
+                </Responsive>
+            </div>
         </div>
 
     )
