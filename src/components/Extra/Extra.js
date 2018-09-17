@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Container } from 'semantic-ui-react-single/Container'
+import Navbar from '../Header/Navbar'
+import Footer from '../Footer'
 import { getExtraById } from '../../firebase/get'
 import Parser from 'html-react-parser';
 
@@ -24,11 +26,16 @@ class Extra extends Component {
         console.log(content);
 
         return (
-            <div className='extra-bg'>
-                <Container text className='extra'>
-                    {content && Parser(`${content.content}`)}
-                </Container>
+            <div>
+                <Navbar fixColor={true} />
+                <div className='extra-bg'>
+                    <Container text className='extra'>
+                        {content && Parser(`${content.content}`)}
+                    </Container>
+                </div>
+                <Footer />
             </div>
+
         )
     }
 }

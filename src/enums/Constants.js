@@ -38,7 +38,7 @@ export const ROUTE = {
     SLOT_GRATIS: '/slot-gratis',
     SLOT_BAR: '/slot-bar',
     ABOUT: '/about',
-    EXTRA: `/extra/:id`,
+    EXTRA: `/article/:id`,
     PRODUCER: `/producer/:name`,
     ERROR404: '*',
 

@@ -16,7 +16,7 @@ import { getBonusList } from '../../firebase/firebase';
 import forEach from 'lodash/forEach'
 import keys from 'lodash/keys'
 import replace from "lodash/replace"
-import { TextArea } from "semantic-ui-react";
+import { TextArea } from "semantic-ui-react-single/TextArea";
 import { replaceTextTips, replaceTextTec } from "../../utils/Utils";
 
 

@@ -3,6 +3,10 @@
     background: white;
     padding: 4rem;
     width: 70%;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+
     h1 {
         color: black;
         font-family: 'Raleway', 'Arial', sans-serif;
@@ -18,5 +22,7 @@
 }
 
 .extra-bg{
+    padding-top:6rem;
+    padding-bottom: 6rem;
     background: rgb(235, 38, 19);
 }
