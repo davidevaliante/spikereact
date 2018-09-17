@@ -2,8 +2,6 @@ import React from "react";
 import { Radio } from "semantic-ui-react-single/Radio";
 import { Button } from 'semantic-ui-react-single/Button';
 import { Form } from 'semantic-ui-react-single/Form';
-import { TextArea } from 'semantic-ui-react-single/TextArea';
-
 import { Input } from 'semantic-ui-react-single/Input';
 import { Dropdown } from 'semantic-ui-react-single/Dropdown';
 import { Image } from "semantic-ui-react-single/Image";
@@ -216,10 +214,6 @@ class EditSlot extends React.Component {
             updateSlotWithId(slotId, updatedSlot, image)
         }
 
-    }
-
-    handleTipsChange = newValue => {
-        this.setState({ currentSlot: { ...this.state.currentSlot, tips: newValue.value } })
     }
 
     render() {
