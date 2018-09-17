@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SlotCard from '../../Cards/SlotCard'
+
 import { getPopularSlots } from '../../../firebase/get'
 import chunk from 'lodash/chunk'
 
@@ -15,7 +16,6 @@ class PopularSlotList extends Component {
         let listOfSlots = []
         for (const key in slotList) {
             const element = slotList[key]
-            element['id'] = key
             listOfSlots.push(element)
         }
 
@@ -34,6 +34,8 @@ class PopularSlotList extends Component {
     }
 
     render() {
+
+        console.log(this.props.popularSlots);
 
         return (
             <div className='vertical-center' style={{ marginTop: '4rem' }}>
