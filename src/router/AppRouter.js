@@ -17,6 +17,7 @@ import EditSlot from "../admin/Slots/EditSlot";
 import BonusDashboard from "../admin/Bonus/BonusDashboard"
 import AddExtraFromHtml from '../admin/Extra/AddExtraFromHtml'
 import Extra from '../components/Extra/Extra'
+import RichTextEditor from "../admin/Extra/RichEdit";
 
 const AppRouter = () => {
     let currentSlotPath = ''
@@ -43,8 +44,6 @@ const AppRouter = () => {
                     { /* HOME filtered by producers */}
                     <Route path={ROUTE.PRODUCER} component={HomePage} />
 
-                    <Route path='/test' component={Test} />
-
                     { /* admin */}
                     <Route path={ROUTE.ADMIN} component={AdminDashboard} exact={true} />
                     <Route path={ROUTE.ADMINSLOT} component={SlotDashboard} />
@@ -53,12 +52,15 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
                     <Route path={ROUTE.ADDEXTRAFROMHTML} component={AddExtraFromHtml} />
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
-                    <Route path='/admin/editslot/:id' component={EditSlot} />
-                    <Route path='/admin/editbonus/:bonusid' component={AddBonus} />
-                    <Route path={Route.ADMINBONUS} component={BonusDashboard}></Route>
-                    <Route path={ROUTE.ERROR404} component={NotFound} />
+                    <Route path={ROUTE.EDITSLOT} component={EditSlot} />
+                    <Route path={ROUTE.EDITBONUS} component={AddBonus} />
+                    <Route path={ROUTE.ADMINBONUS} component={BonusDashboard}></Route>
 
                     { /* test */}
+                    <Route path='/test' component={Test} />
+
+                    {/* Error */}
+                    <Route path={ROUTE.ERROR404} component={NotFound} />
                 </Switch>
 
             </Router>
