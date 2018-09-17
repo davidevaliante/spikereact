@@ -92,7 +92,7 @@ class SlotPage extends Component {
                     <Grid celled='internally' columns='equal' stackable style={{ paddingTop: '0rem', paddingBottom: '0rem' }}>
                         <Grid.Row textAlign='center' id='slot-page-lists'>
                             <TipsList tipList={currentSlot.tips} />
-                            <TecnicalsList tecList={currentSlot.tecnicals} />
+                            <TecnicalsList tecList={currentSlot.tecnicals} producerName={(currentSlot.producer && currentSlot.producer.name)}/>
                         </Grid.Row>
                     </Grid>
                     <Responsive minWidth={1200} as={SlotPageBonusList} bonusList={currentSlot.bonus} isResponsive={true} />

@@ -15,6 +15,19 @@ const TecnicalsList = (props) => {
 
     const tecnicalList = () =>
         <ul>
+            <div className='tip-tec-card'>
+                <div className='tip-tec-row'>
+                    <div className='column-align-start-center'>
+                        <Icon
+                            className='column-align-start-center'
+                            size='small'
+                            style={{ marginRight: '2rem' }}
+                            circular inverted color='red' name='angle right' />
+                    </div>
+                    <p style={{ fontFamily: 'Raleway' }}>Produttore: <a href='#'><strong>{props.producerName}</strong></a></p>
+                </div>
+                <Divider />
+            </div>
             {slice(splittedArray, 1, splittedArray.length).map(
                 t =>
                     <div className='tip-tec-card'>
@@ -33,7 +46,6 @@ const TecnicalsList = (props) => {
             )
             }
         </ul>
-
     return (
         <Grid.Column style={{ paddingTop: '5em', paddingBottom: '0rem', paddingRight: '4rem' }}>
             <Header as='h3' style={{ fontSize: '2em', fontFamily: 'Raleway', marginBottom: '4rem' }}>
