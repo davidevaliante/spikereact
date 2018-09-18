@@ -17,7 +17,7 @@ import forEach from 'lodash/forEach'
 import keys from 'lodash/keys'
 import replace from "lodash/replace"
 import {TextArea} from "semantic-ui-react-single/TextArea";
-import {replaceTextTips, replaceTextTec} from "../../utils/Utils";
+import {replaceTextTips, replaceTextTec, getImageLinkFromName} from "../../utils/Utils";
 import AdminNavbar from "../AdminNavbar";
 
 
@@ -359,7 +359,7 @@ class EditSlot extends React.Component {
                                 }
                             </FormField>
                             <Form.Field>
-                                <ImagePicker onImageSelected={this.onImageSelected}/>
+                                <ImagePicker onImageSelected={this.onImageSelected} imagePreview={getImageLinkFromName('slot', this.state.currentSlot.name, 'medium')}/>
                             </Form.Field>
                         </Form.Group>
 
