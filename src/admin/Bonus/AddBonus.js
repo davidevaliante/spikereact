@@ -15,6 +15,7 @@ import {ADMINPAGES} from "../../enums/Constants";
 import {getBonusWithId} from '../../firebase/get'
 import AdminNavbar from "../AdminNavbar";
 import RichEdit from "../Extra/RichEdit";
+import {getImageLinkFromName} from "../../utils/Utils";
 
 class AddBonus extends Component {
 
@@ -22,6 +23,7 @@ class AddBonus extends Component {
         isInEditMode: false,
         shouldDisplayErrors: false,
         emptyFields: [],
+        submitBtn: 'Aggiungi',
     };
 
     ratingStateOptions = [
@@ -33,8 +35,6 @@ class AddBonus extends Component {
 
     ];
 
-    btnText = 'Aggiungi'
-
     componentDidMount() {
         if (this.props.match.params.bonusid) {
             getBonusWithId(this.props.match.params.bonusid, 'it', (bonus) => {
@@ -44,7 +44,7 @@ class AddBonus extends Component {
                     defaultRating: bonus.rating,
                     defaultReview: bonus.review
                 })
-                this.btnText = 'Modifica'
+                this.setState({submitBtn: 'Modifica'})
             })
         }
     }
@@ -152,7 +152,6 @@ class AddBonus extends Component {
         this.setState({
             pickedImage: image
         })
-        console.log(this.state)
     };
 
     updateBonus = () => {
@@ -256,7 +255,9 @@ class AddBonus extends Component {
                             <Form.Field style={{width: '100%'}}>
                                 <ImagePicker
                                     onImageSelected={this.onImageSelected}
-                                    style={{width: '100%', marginLeft: '2rem'}}/>
+                                    style={{width: '100%', marginLeft: '2rem'}}
+                                    imagePreview={getImageLinkFromName('bonus', (this.state.bonusToEdit && this.state.bonusToEdit.name))}/>
+                                {console.log('IMG LINK', getImageLinkFromName('bonus', (this.state.bonusToEdit && this.state.bonusToEdit.name)))}
 
                             </Form.Field>
 
@@ -266,7 +267,7 @@ class AddBonus extends Component {
                             style={{width: '100%'}}
                             onClick={this.submitNewBonus}
                             control={Button}>
-                            {this.btnText}
+                            {this.state.submitBtn}
                         </Form.Field>
 
                         <Form.Field
