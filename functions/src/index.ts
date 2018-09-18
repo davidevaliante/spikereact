@@ -144,7 +144,7 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
             const thumbPath = join(temporaryDirectory, thumbName);
 
             await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
-
+            console.log(`creating ${thumbPath}`)
             // upload della nuova immagine nello storage
             return bucket.upload(thumbPath, {
                 destination: join(bucketDir, thumbName),
@@ -181,6 +181,8 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
     }
 
     // rimuoviamo la directory temporanea con tutti i file che ormai sono stati uplodati
+    await fileSystem.emptyDir(temporaryDirectory)
+
     return fileSystem.remove(temporaryDirectory);
 })
 

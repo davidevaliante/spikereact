@@ -123,6 +123,7 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
             const thumbName = `thumb_${size}_${fileName}`;
             const thumbPath = path_1.join(temporaryDirectory, thumbName);
             yield sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
+            console.log(`creating ${thumbPath}`);
             // upload della nuova immagine nello storage
             return bucket.upload(thumbPath, {
                 destination: path_1.join(bucketDir, thumbName),
@@ -152,6 +153,7 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
         yield Promise.all(producerUploadPromises);
     }
     // rimuoviamo la directory temporanea con tutti i file che ormai sono stati uplodati
+    yield fileSystem.emptyDir(temporaryDirectory);
     return fileSystem.remove(temporaryDirectory);
 }));
 exports.imageToJPG = functions.storage.object().onFinalize((object) => __awaiter(this, void 0, void 0, function* () {

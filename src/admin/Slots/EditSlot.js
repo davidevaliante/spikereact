@@ -1,23 +1,23 @@
 import React from "react";
-import {Radio} from "semantic-ui-react-single/Radio";
-import {Button} from 'semantic-ui-react-single/Button';
-import {Form} from 'semantic-ui-react-single/Form';
-import {Input} from 'semantic-ui-react-single/Input';
-import {Dropdown} from 'semantic-ui-react-single/Dropdown';
-import {Image} from "semantic-ui-react-single/Image";
-import {FormField} from 'semantic-ui-react-single/Form';
+import { Radio } from "semantic-ui-react-single/Radio";
+import { Button } from 'semantic-ui-react-single/Button';
+import { Form } from 'semantic-ui-react-single/Form';
+import { Input } from 'semantic-ui-react-single/Input';
+import { Dropdown } from 'semantic-ui-react-single/Dropdown';
+import { Image } from "semantic-ui-react-single/Image";
+import { FormField } from 'semantic-ui-react-single/Form';
 import SearchField from "../SearchField";
 import SearchMultipleSelection from "../SearchMultipleSelection";
 import ImagePicker from "../ImagePicker";
-import {getSlotWithId} from "../../firebase/get";
-import {ADMINPAGES, SLOT_TYPES} from '../../enums/Constants';
-import {updateSlotWithId} from '../../firebase/update';
-import {getBonusList} from '../../firebase/get';
+import { getSlotWithId } from "../../firebase/get";
+import { ADMINPAGES, SLOT_TYPES } from '../../enums/Constants';
+import { updateSlotWithId } from '../../firebase/update';
+import { getBonusList } from '../../firebase/get';
 import forEach from 'lodash/forEach'
 import keys from 'lodash/keys'
 import replace from "lodash/replace"
-import {TextArea} from "semantic-ui-react-single/TextArea";
-import {replaceTextTips, replaceTextTec, getImageLinkFromName} from "../../utils/Utils";
+import { TextArea } from "semantic-ui-react-single/TextArea";
+import { replaceTextTips, replaceTextTec, getImageLinkFromName } from "../../utils/Utils";
 import AdminNavbar from "../AdminNavbar";
 
 
@@ -26,15 +26,15 @@ class EditSlot extends React.Component {
         isInCopyPasteMode: true,
         currentSlot: {},
         ratingStateOptions: [
-            {key: 'uno', value: '1', text: '1'},
-            {key: 'due', value: '2', text: '2'},
-            {key: 'tre', value: '3', text: '3'},
-            {key: 'quattro', value: '4', text: '4'},
-            {key: 'cinque', value: '5', text: '5'},
+            { key: 'uno', value: '1', text: '1' },
+            { key: 'due', value: '2', text: '2' },
+            { key: 'tre', value: '3', text: '3' },
+            { key: 'quattro', value: '4', text: '4' },
+            { key: 'cinque', value: '5', text: '5' },
         ],
         slotTypeOptions: [
-            {key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar'},
-            {key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis'},
+            { key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar' },
+            { key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis' },
         ],
         shouldDisplayErrors: false,
         emptyFields: [],
@@ -50,7 +50,7 @@ class EditSlot extends React.Component {
             getBonusList(list => {
                 let counter = 1
                 for (const key in list) {
-                    options.push({key: `${key}`, value: `${counter}`, text: `${list[key].name}`})
+                    options.push({ key: `${key}`, value: `${counter}`, text: `${list[key].name}` })
                     counter++
                 }
                 const k = keys(slot.bonus)
@@ -82,25 +82,25 @@ class EditSlot extends React.Component {
     }
 
     onProducerSelected = (selectedProducer) => {
-        this.setState({selectedProducer: selectedProducer})
+        this.setState({ selectedProducer: selectedProducer })
         console.log(selectedProducer);
     }
     onImageSelected = (image) => {
-        this.setState({image: image, imageName: image.name})
+        this.setState({ image: image, imageName: image.name })
     }
 
     onTypeChanged = (data) => {
-        this.setState({type: data.value})
+        this.setState({ type: data.value })
     }
 
     onRatingChanged = (data) => {
-        this.setState({rating: data.value})
+        this.setState({ rating: data.value })
     }
 
     onBonusSelected = (selectedBonus) => {
         console.log(selectedBonus);
 
-        this.setState({selectedBonus: selectedBonus})
+        this.setState({ selectedBonus: selectedBonus })
     }
 
     switchCopyPasteMode = () => {
@@ -115,26 +115,26 @@ class EditSlot extends React.Component {
         const textIn = data.value
 
         const b = replaceTextTips(textIn)
-        this.setState({currentSlot: {...this.state.currentSlot, tips: b}})
+        this.setState({ currentSlot: { ...this.state.currentSlot, tips: b } })
     }
     handleTecnicalsCopyMode = data => {
         const textIn = data.value
         const b = replaceTextTec(textIn)
-        this.setState({currentSlot: {...this.state.currentSlot, tecnicals: b}})
+        this.setState({ currentSlot: { ...this.state.currentSlot, tecnicals: b } })
     }
 
 
     handleTipsChange = newValue => {
 
 
-        this.setState({currentSlot: {...this.state.currentSlot, tips: newValue.value}})
+        this.setState({ currentSlot: { ...this.state.currentSlot, tips: newValue.value } })
     }
     handleTecnicalsChange = data => {
 
-        this.setState({currentSlot: {...this.state.currentSlot, tecnicals: data.value}})
+        this.setState({ currentSlot: { ...this.state.currentSlot, tecnicals: data.value } })
     }
     handleDescriptionChange = (data) => {
-        this.setState({currentSlot: {...this.state.currentSlot, description: data.value}})
+        this.setState({ currentSlot: { ...this.state.currentSlot, description: data.value } })
     }
 
     submitEditSlot = () => {
@@ -142,25 +142,25 @@ class EditSlot extends React.Component {
         if (!name) {
             let errorList = this.state.emptyFields;
             errorList.push('name');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const linkYoutube = document.getElementById('linkYoutube').value.trim();
         if (!linkYoutube) {
             let errorList = this.state.emptyFields;
             errorList.push('linkYoutube');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const linkPlay = document.getElementById('linkPlay').value.trim();
         if (!linkPlay) {
             let errorList = this.state.emptyFields;
             errorList.push('linkPlay');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const description = document.getElementById('descriptionField').value.trim();
         if (!description) {
             let errorList = this.state.emptyFields;
             errorList.push('description');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
 
 
@@ -168,13 +168,13 @@ class EditSlot extends React.Component {
         if (!tipsField) {
             let errorList = this.state.emptyFields;
             errorList.push('tips');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         const tecnicalsField = document.getElementById('tecnicalsField').value.trim();
         if (!tecnicalsField) {
             let errorList = this.state.emptyFields;
             errorList.push('tecnicals');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
         let BONUS = this.state.selectedBonus
 
@@ -217,15 +217,15 @@ class EditSlot extends React.Component {
 
     render() {
 
-        const {currentSlot} = this.state
-        const {producer} = this.state.currentSlot
+        const { currentSlot } = this.state
+        const { producer } = this.state.currentSlot
 
 
         return (
             <div>
-                <AdminNavbar activeItem={ADMINPAGES.SLOT}/>
+                <AdminNavbar activeItem={ADMINPAGES.SLOT} />
                 <div
-                    style={{padding: '4rem'}}>
+                    style={{ padding: '4rem' }}>
                     <h1
                         style={{
                             color: 'black',
@@ -262,13 +262,13 @@ class EditSlot extends React.Component {
                                 defaultValue={currentSlot.linkYoutube}
                                 control={Input}
                                 label='YouTube Link'
-                                placeholder='YouTube Link...'/>
+                                placeholder='YouTube Link...' />
                             <Form.Field
                                 id='linkPlay'
                                 defaultValue={currentSlot.linkPlay}
                                 control={Input}
                                 label='Slot Link'
-                                placeholder='Slot Play Link...'/>
+                                placeholder='Slot Play Link...' />
                         </Form.Group>
 
                         <h1
@@ -286,8 +286,8 @@ class EditSlot extends React.Component {
                                 label="CopyMode"
                                 id='copyPasteMode'
                                 onChange={this.switchCopyPasteMode}
-                                style={{marginLeft: '1rem'}}
-                                toggle/>
+                                style={{ marginLeft: '1rem' }}
+                                toggle />
                         </Form.Group>
                         <Form.Group
                             widths='equal'>
@@ -314,7 +314,7 @@ class EditSlot extends React.Component {
                                 rows={10}
                                 control={TextArea}
                                 label='Scheda Tecnica'
-                                placeholder='Scheda Tecnica...'/>
+                                placeholder='Scheda Tecnica...' />
                         </Form.Group>
 
 
@@ -324,47 +324,50 @@ class EditSlot extends React.Component {
                             onChange={(event, data) => this.handleDescriptionChange(data)}
                             control={TextArea}
                             label='Descrizione'
-                            placeholder='Descrizione slot...'/>
+                            placeholder='Descrizione slot...' />
                         <Form.Group widths='equal'>
                             <FormField>
                                 {this.state.defaultType &&
-                                <Dropdown
-                                    id='typeField'
-                                    placeholder='Gratis / Da Bar'
-                                    onChange={(event, data) => this.onTypeChanged(data)}
-                                    defaultValue={this.state.defaultType}
-                                    options={this.state.slotTypeOptions}
-                                    search
-                                    selection/>
+                                    <Dropdown
+                                        id='typeField'
+                                        placeholder='Gratis / Da Bar'
+                                        onChange={(event, data) => this.onTypeChanged(data)}
+                                        defaultValue={this.state.defaultType}
+                                        options={this.state.slotTypeOptions}
+                                        search
+                                        selection />
                                 }
                             </FormField>
                             <FormField>
                                 {this.state.defaultRating &&
-                                <Dropdown
-                                    id='ratingField'
-                                    style={{marginBottom: '1rem'}}
-                                    placeholder='Rating'
-                                    onChange={(event, data) => this.onRatingChanged(data)}
-                                    options={this.state.ratingStateOptions}
-                                    search
-                                    defaultValue={this.state.defaultRating}
-                                    selection/>
+                                    <Dropdown
+                                        id='ratingField'
+                                        style={{ marginBottom: '1rem' }}
+                                        placeholder='Rating'
+                                        onChange={(event, data) => this.onRatingChanged(data)}
+                                        options={this.state.ratingStateOptions}
+                                        search
+                                        defaultValue={this.state.defaultRating}
+                                        selection />
                                 }
                             </FormField>
                             <FormField>
                                 {this.state.defaultValuesForBonus &&
-                                <SearchMultipleSelection
-                                    defaults={this.state.defaultValuesForBonus}
-                                    onListUpdate={this.onBonusSelected}/>
+                                    <SearchMultipleSelection
+                                        defaults={this.state.defaultValuesForBonus}
+                                        onListUpdate={this.onBonusSelected} />
                                 }
                             </FormField>
                             <Form.Field>
-                                <ImagePicker onImageSelected={this.onImageSelected} imagePreview={getImageLinkFromName('slot', this.state.currentSlot.name, 'medium')}/>
+                                {this.state.currentSlot.name &&
+                                    <ImagePicker
+                                        onImageSelected={this.onImageSelected}
+                                        imagePreview={getImageLinkFromName('slot', this.state.currentSlot.name, 'medium')} />}
                             </Form.Field>
                         </Form.Group>
 
                         <Form.Field
-                            style={{width: '100%'}}
+                            style={{ width: '100%' }}
                             onClick={this.submitEditSlot}
                             control={Button}>
                             Modifica

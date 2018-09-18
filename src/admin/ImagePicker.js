@@ -6,6 +6,14 @@ import { doesFileExist } from "../utils/Utils";
 class ImagePicker extends Component {
     state = {}
 
+    componentDidMount() {
+        if (this.props.imagePreview) {
+            console.log(this.props.imagePreview)
+            this.setState({ currentImageUrl: this.props.imagePreview })
+
+        }
+    }
+
 
     handleNewImage = () => {
         const selectedFile = document.getElementById('imagePicker').files[0];
@@ -20,7 +28,7 @@ class ImagePicker extends Component {
 
     render() {
         const { currentImage, currentImageUrl } = this.state
-        console.log(currentImage);
+        console.log(currentImageUrl);
 
         return (
 
@@ -36,7 +44,10 @@ class ImagePicker extends Component {
                     </div>
                 </Grid.Column>
                 <Grid.Column>
-                    <img id='imagePreview' alt='preview' src={currentImageUrl} style={{ width: '150px' }} />
+                    <img id='imagePreview'
+                        alt='preview'
+                        src={currentImageUrl}
+                        style={{ width: '150px' }} />
                 </Grid.Column>
             </Grid>
         )

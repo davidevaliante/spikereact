@@ -30,7 +30,6 @@ class BonusArticle extends Component {
     }
 
     footerBottomTrigger = () => {
-
     }
 
     render() {
@@ -38,6 +37,7 @@ class BonusArticle extends Component {
 
         return (
             <div className='extra-bg'>
+                {window.scrollTo(0, 0)}
                 <Navbar fixColor={true} />
                 <div className='extra-button-left'>
                     <Button size='large' animated inverted>
