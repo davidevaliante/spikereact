@@ -61,7 +61,7 @@ class BonusArticle extends Component {
                         {content && Parser(`${content.content}`)}
                     </Container>
                 </div>
-                <Visibility onBottomVisible={footerBottomTrigger()}>
+                <Visibility onBottomVisible={this.footerBottomTrigger()}>
                     <Footer />
                 </Visibility>
             </div>

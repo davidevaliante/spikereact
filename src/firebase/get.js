@@ -1,10 +1,10 @@
 import axios from 'axios'
-import {COUNTRY} from '../enums/Constants'
-import {databaseRoot} from './firebaseConfig'
+import { COUNTRY } from '../enums/Constants'
+import { databaseRoot } from './firebaseConfig'
 import store from '../store/store'
-import {addSlotList, replaceSlotList} from '../reducers/SlotListReducer'
-import {updateSlotMenuList} from '../reducers/SlotsMenuReducer'
-import {addPopularSlot} from '../reducers/PopularSlotreducer'
+import { addSlotList, replaceSlotList } from '../reducers/SlotListReducer'
+import { updateSlotMenuList } from '../reducers/SlotsMenuReducer'
+import { addPopularSlot } from '../reducers/PopularSlotreducer'
 import map from 'lodash/map'
 
 export const getExtraById = (extraId, callback) => {
