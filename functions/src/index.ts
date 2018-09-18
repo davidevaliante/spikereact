@@ -4,7 +4,6 @@ import { tmpdir } from 'os';
 import { join, dirname } from 'path';
 import * as sharp from 'sharp';
 import * as fileSystem from 'fs-extra';
-import { fstat } from 'fs';
 import { truncate, snakeCase } from 'lodash';
 
 // costanti necessarie
@@ -155,7 +154,9 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
 
         });
         // chiamiamo tutte le promises nell'array
-        await Promise.all(slotUploadPromises);
+        await Promise.all(slotUploadPromises)
+            .then(success => console.log('success', success))
+            .catch(error => console.log('error', error));
     }
 
 

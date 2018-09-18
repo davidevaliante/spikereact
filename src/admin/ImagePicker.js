@@ -7,11 +7,11 @@ class ImagePicker extends Component {
     state = {}
 
     componentDidMount() {
-        if (this.props.imagePreview) {
-            console.log(this.props.imagePreview)
-            this.setState({ currentImageUrl: this.props.imagePreview })
-
-        }
+        /*  if (this.props.imagePreview) {
+             console.log(this.props.imagePreview)
+             this.setState({ currentImageUrl: this.props.imagePreview })
+ 
+         } */
     }
 
 

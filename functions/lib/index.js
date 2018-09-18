@@ -133,7 +133,9 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
             });
         }));
         // chiamiamo tutte le promises nell'array
-        yield Promise.all(slotUploadPromises);
+        yield Promise.all(slotUploadPromises)
+            .then(success => console.log(success))
+            .catch(error => console.log(error));
     }
     // se l'immagine che triggera è di un bonus serve solo 1 thumbnail piccolo per il menu
     if (fileName.includes('producer')) {
