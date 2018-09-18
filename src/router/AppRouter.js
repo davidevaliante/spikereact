@@ -16,7 +16,7 @@ import NotFound from "../components/SlotPageComponents/NotFound"
 import EditSlot from "../admin/Slots/EditSlot";
 import BonusDashboard from "../admin/Bonus/BonusDashboard"
 import AddExtraFromHtml from '../admin/Extra/AddExtraFromHtml'
-import Extra from '../components/Extra/Extra'
+import BonusArticle from '../components/Extra/BonusArticle'
 import RichTextEditor from "../admin/Extra/RichEdit";
 
 const AppRouter = () => {
@@ -39,7 +39,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.SLOT_ONLINE} component={HomePage} exact={true} page={PAGES.SLOT_ONLINE} />
                     <Route path={ROUTE.SLOT_GRATIS} component={HomePage} exact={true} page={PAGES.SLOT_GRATIS} />
                     <Route path={ROUTE.SLOT_BAR} component={HomePage} exact={true} page={PAGES.SLOT_BAR} />
-                    <Route path={ROUTE.EXTRA} component={Extra} />
+                    <Route path={ROUTE.EXTRA} component={BonusArticle} />
 
                     { /* HOME filtered by producers */}
                     <Route path={ROUTE.PRODUCER} component={HomePage} />

@@ -6,7 +6,7 @@
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-
+    
     h1 {
         color: black;
         font-family: 'Raleway', 'Arial', sans-serif;
@@ -22,7 +22,31 @@
 }
 
 .extra-bg{
-    padding-top:6rem;
-    padding-bottom: 6rem;
     background: rgb(235, 38, 19);
+}
+
+.extra-flex-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+.extra-content{
+    padding-top: 9rem;
+    padding-bottom: 6rem;
+}
+
+.extra-button-left{
+    position: fixed;
+    width: 10%;
+    left: 7vw;
+    top: 50vh;
+}
+
+.extra-button-right{
+    position: fixed;
+    width: 10%;
+    left: 82%;
+    top: 50vh;
 }
