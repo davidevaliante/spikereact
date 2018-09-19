@@ -1,7 +1,10 @@
 import axios from "axios";
 import firebase from "firebase";
 import snakeCase from "lodash/snakeCase";
-import {databaseRoot} from "./firebaseConfig";
+import { databaseRoot } from "./firebaseConfig";
+import { storageRef, pushNewImage } from './firebase'
+
+
 
 export const deleteSlotWithId = (id, callback) => {
     axios.get(`${databaseRoot}/Slots/it/${id}/name.json`)

@@ -1,18 +1,44 @@
 import firebase from 'firebase/app';
 import 'firebase/storage'
-import {COUNTRY, STORAGE_FOLDERS} from '../enums/Constants';
+import { COUNTRY, STORAGE_FOLDERS } from '../enums/Constants';
 import now from 'lodash/now';
 import axios from 'axios'
 import snakeCase from 'lodash/snakeCase'
-import {configuration, databaseRoot} from './firebaseConfig';
+import { configuration, databaseRoot } from './firebaseConfig';
 
 const firebaseApp = firebase.initializeApp(configuration);
 export const getFirebase = () => firebase;
 
+export const updateSlotImage = async (name, image) => {
+    pushImage(image, `slot_${name}`, () => console.log("Submitted"))
+}
+
+export const deleteImages = async (name) => {
+    await firebase.storage().ref().child(`slot_${snakeCase(name)}`).delete().catch((err) => console.log(err))
+    await firebase.storage().ref().child(`thumb_250_slot_${snakeCase(name)}`).delete().catch((err) => console.log(err))
+    await firebase.storage().ref().child(`thumb_64_slot_${snakeCase(name)}`).delete().catch((err) => console.log(err))
+}
 
 export const pushNewImage = (image, folderName, imageName, callback) => {
     const storageRef = firebase.storage().ref();
     storageRef.child(`${folderName}/${imageName}`).put(image)
+        .then(
+            (snapshot) => snapshot.ref.getDownloadURL()
+                .then(
+                    (url) => callback && callback(url)
+                )
+                .catch(
+                    (error) => { console.log(error) }
+                )
+                .catch(
+                    (error) => { console.log(error) }
+                )
+        )
+};
+
+export const pushImage = (image, imageName, callback) => {
+    const storageRef = firebase.storage().ref();
+    storageRef.child(`${imageName}`).put(image)
         .then(
             (snapshot) => snapshot.ref.getDownloadURL()
                 .then(

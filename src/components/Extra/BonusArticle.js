@@ -29,11 +29,18 @@ class BonusArticle extends Component {
         }
     }
 
-    footerBottomTrigger = () => {
+    footerBottomTrigger = (bool) => {
+        bool ? this.setState({ bottomIsVisible: true }) : this.setState({ bottomIsVisible: false })
+    }
+
+    BottomButtonGroup = () => {
+        return (
+            <div></div>
+        )
     }
 
     render() {
-        const { content } = this.state
+        const { content, bottomIsVisible } = this.state
 
         return (
             <div className='extra-bg'>
@@ -61,7 +68,10 @@ class BonusArticle extends Component {
                         {content && Parser(`${content.content}`)}
                     </Container>
                 </div>
-                <Visibility onBottomVisible={this.footerBottomTrigger()}>
+                {bottomIsVisible && <this.BottomButtonGroup />}
+                <Visibility
+                    onBottomPassed={() => this.setState({ bottomIsVisible: true })}
+                    onBottomPassedReverse={() => this.setState({ bottomIsVisible: false })}>
                     <Footer />
                 </Visibility>
             </div>

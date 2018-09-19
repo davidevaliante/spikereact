@@ -7,15 +7,17 @@ class ImagePicker extends Component {
     state = {}
 
     componentDidMount() {
-        /*  if (this.props.imagePreview) {
-             console.log(this.props.imagePreview)
-             this.setState({ currentImageUrl: this.props.imagePreview })
- 
-         } */
+        if (this.props.imagePreview) {
+            console.log(this.props.imagePreview)
+            this.setState({ currentImageUrl: this.props.imagePreview })
+
+        }
     }
 
 
     handleNewImage = () => {
+        console.log('on change triggered');
+
         const selectedFile = document.getElementById('imagePicker').files[0];
         const url = URL.createObjectURL(selectedFile);
         if (selectedFile && split(selectedFile.type, '/')[0] === 'image') {
@@ -27,7 +29,7 @@ class ImagePicker extends Component {
     }
 
     render() {
-        const { currentImage, currentImageUrl } = this.state
+        const { currentImageUrl } = this.state
         console.log(currentImageUrl);
 
         return (
