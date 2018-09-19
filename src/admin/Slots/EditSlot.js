@@ -4,7 +4,6 @@ import { Button } from 'semantic-ui-react-single/Button';
 import { Form } from 'semantic-ui-react-single/Form';
 import { Input } from 'semantic-ui-react-single/Input';
 import { Dropdown } from 'semantic-ui-react-single/Dropdown';
-import { Image } from "semantic-ui-react-single/Image";
 import { FormField } from 'semantic-ui-react-single/Form';
 import SearchField from "../SearchField";
 import SearchMultipleSelection from "../SearchMultipleSelection";
@@ -15,10 +14,13 @@ import { updateSlotWithId } from '../../firebase/update';
 import { getBonusList } from '../../firebase/get';
 import forEach from 'lodash/forEach'
 import keys from 'lodash/keys'
-import replace from "lodash/replace"
+import delay from 'lodash/delay'
 import { TextArea } from "semantic-ui-react-single/TextArea";
 import { replaceTextTips, replaceTextTec, getImageLinkFromName } from "../../utils/Utils";
 import AdminNavbar from "../AdminNavbar";
+import {Header} from "semantic-ui-react-single/Header";
+import {Icon} from "semantic-ui-react-single/Icon";
+import {Dimmer} from "semantic-ui-react-single/Dimmer";
 
 
 class EditSlot extends React.Component {
@@ -39,7 +41,8 @@ class EditSlot extends React.Component {
         shouldDisplayErrors: false,
         emptyFields: [],
         list: "",
-        selectedBonus: {}
+        selectedBonus: {},
+        active: false
     };
 
 
@@ -210,14 +213,24 @@ class EditSlot extends React.Component {
         console.log(updatedSlot);
 
         if (name && producer && linkYoutube && linkPlay && BONUS && description && rating && tipsField && tecnicalsField && updatedSlot.type) {
-            updateSlotWithId(slotId, updatedSlot, image)
+            updateSlotWithId(slotId, updatedSlot, image, this.onSuccess)
         }
 
-    }
+    };
+
+    onSuccess = () => {
+        this.setState({active: true})
+        delay(() => {
+            this.setState({active: false})
+        }, 800)
+    };
+
+    handleOpen = () => this.setState({active: true});
+    handleClose = () => this.setState({active: false});
 
     render() {
 
-        const { currentSlot } = this.state
+        const { currentSlot, active } = this.state
         const { producer } = this.state.currentSlot
 
 
@@ -226,6 +239,12 @@ class EditSlot extends React.Component {
                 <AdminNavbar activeItem={ADMINPAGES.SLOT} />
                 <div
                     style={{ padding: '4rem' }}>
+                    <Dimmer active={active} onClickOutside={this.handleClose} page>
+                        <Header as='h2' icon inverted>
+                            <Icon name='check'/>
+                            Modificato con successo
+                        </Header>
+                    </Dimmer>
                     <h1
                         style={{
                             color: 'black',

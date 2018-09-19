@@ -22,7 +22,7 @@ class AdminNavbar extends Component {
                 <Menu stackable>
                     <Menu.Item>
                         <NavLink to={ROUTE.ADMIN}>
-                            <Icon name='cog' />
+                            <Icon name='cogs' />
                         </NavLink>
                     </Menu.Item>
 
