@@ -220,13 +220,16 @@ class AddBonus extends Component {
                                 placeholder='Copia ed incolla qui'/>
                         </Form.Group>
 
-                        <Form.Field
-                            label='Recensione'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('review')}/>
-                        {!isInEditMode && <RichEdit/>}
-                        {isInEditMode && <RichEdit defaultContent={this.state.defaultReview}/>}
+                        <Form.Group>
+                            <Form.Field
+                                label='Recensione'
+                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('review')}/>
+                        </Form.Group>
+                            {!isInEditMode && <RichEdit/>}
+                            {isInEditMode && <RichEdit defaultContent={this.state.defaultReview}/>}
 
                         <Form.Group
+                            style={{marginTop: '2rem'}}
                             widths='equal'>
                             <Form.Field>
                                 {(this.state.defaultRating && isInEditMode) &&
@@ -253,10 +256,18 @@ class AddBonus extends Component {
                             </Form.Field>
 
                             <Form.Field style={{width: '100%'}}>
+
+                                {(this.state.bonusToEdit && isInEditMode) &&
                                 <ImagePicker
                                     onImageSelected={this.onImageSelected}
                                     style={{width: '100%', marginLeft: '2rem'}}
-                                    imagePreview={getImageLinkFromName('bonus', (this.state.bonusToEdit && this.state.bonusToEdit.name))}/>
+                                    imagePreview={getImageLinkFromName('bonus', this.state.bonusToEdit.name)}/>
+                                }
+                                {!isInEditMode &&
+                                <ImagePicker
+                                    onImageSelected={this.onImageSelected}
+                                    style={{width: '100%', marginLeft: '2rem'}}/>
+                                }
                                 {console.log('IMG LINK', getImageLinkFromName('bonus', (this.state.bonusToEdit && this.state.bonusToEdit.name)))}
 
                             </Form.Field>

@@ -7,10 +7,8 @@ class ImagePicker extends Component {
     state = {}
 
     componentDidMount() {
-        if (this.props.imagePreview) {
-            console.log(this.props.imagePreview)
+        if (this.props.imagePreview && doesFileExist(this.props.imagePreview) ) {
             this.setState({ currentImageUrl: this.props.imagePreview })
-
         }
     }
 
@@ -29,11 +27,9 @@ class ImagePicker extends Component {
     }
 
     render() {
-        const { currentImageUrl } = this.state
-        console.log(currentImageUrl);
+        const { currentImageUrl } = this.state;
 
         return (
-
             <Grid stackable columns={1} >
                 <Grid.Column>
                     <div className='upload-btn-wrapper'>
