@@ -172,7 +172,7 @@ class AddBonus extends Component {
                     <Dimmer active={active} onClickOutside={this.handleClose} page>
                         <Header as='h2' icon inverted>
                             <Icon name='check'/>
-                            Aggiunto con successo
+                            {isInEditMode ? 'Modificato' : 'Aggiunto'} con successo
                         </Header>
                     </Dimmer>
 

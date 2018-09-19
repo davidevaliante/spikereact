@@ -16,6 +16,7 @@ export const updateBonusWithId = (bonusId, updatedBonus, updatedImage, callback)
                     `bonus_${snakeCase(updatedBonus.name)}`
                 )
             }
+            callback();
             console.log('patched');
         })
         .catch(error => console.log(error)
@@ -33,6 +34,7 @@ export const updateSlotWithId = (slotId, updatedSlot, updatedImage, callback) =>
                     `slot_${snakeCase(updatedSlot.name)}`
                 )
             }
+            callback();
             console.log('patched');
         })
         .catch(error => console.log(error)
