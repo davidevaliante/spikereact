@@ -8,7 +8,6 @@ import { Icon } from 'semantic-ui-react-single/Icon'
 import { withRouter } from 'react-router'
 import React from "react";
 import { ROUTE } from "../enums/Constants";
-import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { PAGES } from '../enums/Constants'
 const Footer = (props) => {

@@ -1,26 +1,27 @@
-import { Segment } from 'semantic-ui-react-single/Segment'
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
+// semantic
+import { Segment } from 'semantic-ui-react-single/Segment'
+import { Responsive } from 'semantic-ui-react-single/Responsive';
+// components
 import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'
-import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
-import { setHomePage, setGratisPage, setBarPage, setAboutPage, setProducerPage } from '../../reducers/CurrentPageReducer'
 import HomePageHeader from '../Header/HomePageHeader'
 import SiteDescription from './HomeBody/SiteDescription'
 import HomeBody from './HomeBody/HomeBody'
 import Navbar from '../Header/Navbar'
-import { getSlotBasedOnProducer, getAllByType } from '../../firebase/get'
-import { Responsive } from 'semantic-ui-react-single/Responsive';
 import PopularSlotList from './HomeBody/PopularSlotList'
+// router e redux
+import { connect } from 'react-redux';
+import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
+import { setHomePage, setGratisPage, setBarPage, setAboutPage, setProducerPage } from '../../reducers/CurrentPageReducer'
+// data
+import { getSlotBasedOnProducer, getAllByType } from '../../firebase/get'
 
 class HomePage extends Component {
     state = {};
-    title = '';
 
     componentDidMount() {
-        // allora è la pagina dei producer
         if (this.props.match.params.name) {
-            // data fetch
             getSlotBasedOnProducer(this.props.match.params.name)
         }
     }
@@ -33,15 +34,14 @@ class HomePage extends Component {
                     break
                 case 'SLOT_GRATIS':
                     getAllByType('GRATIS')
+                    break
                 default:
             }
-
         }
     }
 
     handleContextRef = contextRef => this.setState({ contextRef })
     handleChange = (e, { value }) => this.setState({ order: value })
-
 
     getType(path) {
         switch (path) {
@@ -88,15 +88,13 @@ class HomePage extends Component {
                         slotorder={order}
                         handleContextRef={this.handleContextRef}
                         type={type}
-                        isSticky={contextRef}
-                    />
+                        isSticky={contextRef} />
                 </Segment>
                 <Footer />
             </div>
         )
     }
 }
-
 
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,

@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+// semantic
 import { Menu } from 'semantic-ui-react-single/Menu'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
 import { Container } from 'semantic-ui-react-single/Container'
-
-import { NavLink } from 'react-router-dom'
-import NavbarSearchBar from './NavbarSearchBar';
-import { PAGES, ROUTE } from '../../enums/Constants';
-import { setHomePage, setBarPage, setGratisPage, setProducerPage } from '../../reducers/CurrentPageReducer';
-import logo from '../../static/slot-icon.svg';
-import { Responsive } from 'semantic-ui-react-single/Responsive';
+import { Responsive } from 'semantic-ui-react-single/Responsive'
+// components
+import NavbarSearchBar from './NavbarSearchBar'
 import ProducersDropdown from './ProducersDropdown'
+// router e redux
+import { NavLink } from 'react-router-dom'
+import { PAGES, ROUTE } from '../../enums/Constants'
+import { setHomePage, setBarPage, setGratisPage, setProducerPage } from '../../reducers/CurrentPageReducer'
+import { connect } from 'react-redux'
+// static files
+import logo from '../../static/slot-icon.svg';
 
 
 class Navbar extends Component {
@@ -84,7 +87,6 @@ class Navbar extends Component {
                     onBottomPassed={this.showFixedMenu}
                     onBottomPassedReverse={this.hideFixedMenu}>
                     <div>
-
                         <Menu
                             style={!this.state.fixed ? { position: 'absolute', zIndex: 99, width: '100%' } : { zIndex: 99 }}
                             fixed={this.state.fixed ? 'top' : null}
@@ -127,17 +129,15 @@ class Navbar extends Component {
                                 <Menu.Item borderless position='right' style={{ marginRight: '4rem' }}>
                                     <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
                                 </Menu.Item>
-
                             </Container>
                         </Menu>
                     </div>
                 </Visibility>
-            </div>)
+            </div>
+        )
     }
 
-
     render() {
-
         return (
             <div>
                 {this.props.isResponsive ? this.responsivMobile() : this.responsivMobile2()}

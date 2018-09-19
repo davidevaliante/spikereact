@@ -1,21 +1,27 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+// semantic
+import { Grid } from 'semantic-ui-react-single/Grid'
+import { Dimmer } from 'semantic-ui-react-single/Dimmer'
+import { Responsive } from 'semantic-ui-react-single/Responsive'
+// components
 import TipsList from './TipsList'
 import TecnicalsList from './TecnicalsList'
 import Description from './Description'
 import PlayDimmer from './PlayDimmer'
 import SlotPageBonusList from './SlotPageBonusList'
-import { Grid } from 'semantic-ui-react-single/Grid'
-import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import Footer from "../Footer";
 import YouTubeEmbed from './YouTubeEmbed'
 import SlotPageHeader from '../Header/SlotPageHeader'
-import { getSlotWithId } from '../../firebase/get'
-import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
 import Navbar from '../Header/Navbar'
-import { Responsive } from 'semantic-ui-react-single/Responsive';
+// data
+import { getSlotWithId } from '../../firebase/get'
+// router e redux
+import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+// mix
 import split from 'lodash/split'
+
 class SlotPage extends Component {
 
     state = {
@@ -37,8 +43,6 @@ class SlotPage extends Component {
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
-        // se l'id nell'url è cambiato
         if (prevProps.match.params.id !== this.props.match.params.id) {
             console.log('firebase query');
             this.props.dispatch(slotIsLoading())
@@ -74,9 +78,18 @@ class SlotPage extends Component {
                     {window.scrollTo(0, 0)}
 
                     <PlayDimmer url={currentSlot.linkPlay} bonusList={currentSlot.bonus} />
+
                     <div>
-                        <Responsive maxWidth={600}> <Navbar displaying={'SLOT'} isResponsive={true} /></Responsive>
-                        <Responsive minWidth={600}>   <Navbar displaying={'SLOT'} isResponsive={false} /></Responsive>
+
+                        <Responsive maxWidth={600}> 
+                            <Navbar displaying={'SLOT'} 
+                                    isResponsive={true} />
+                        </Responsive>
+                        
+                        <Responsive minWidth={600}>   
+                            <Navbar displaying={'SLOT'} 
+                            isResponsive={false} />
+                        </Responsive>
 
                         <SlotPageHeader
                             style={{ position: 'absolute', zIndex: 1 }}
@@ -89,21 +102,47 @@ class SlotPage extends Component {
                         slotName={currentSlot.name}
                         text={currentSlot.description} />
 
-                    <Grid celled='internally' columns='equal' stackable style={{ paddingTop: '0rem', paddingBottom: '0rem' }}>
-                        <Grid.Row textAlign='center' id='slot-page-lists'>
+                    <Grid 
+                        celled='internally' 
+                        columns='equal' 
+                        stackable 
+                        style={{ paddingTop: '0rem', paddingBottom: '0rem' }}>
+                        <Grid.Row 
+                            textAlign='center' 
+                            id='slot-page-lists'>
                             <TipsList tipList={currentSlot.tips} />
-                            <TecnicalsList tecList={currentSlot.tecnicals} producerName={(currentSlot.producer && currentSlot.producer.name)}/>
+                            <TecnicalsList 
+                                tecList={currentSlot.tecnicals} 
+                                producerName={(currentSlot.producer && currentSlot.producer.name)}/>
                         </Grid.Row>
                     </Grid>
-                    <Responsive minWidth={1200} as={SlotPageBonusList} bonusList={currentSlot.bonus} isResponsive={true} />
+                    <Responsive 
+                        minWidth={1200} 
+                        as={SlotPageBonusList} 
+                        bonusList={currentSlot.bonus} 
+                        isResponsive={true} />
 
-                    <Responsive maxWidth={1200} isResponsive={false} as={SlotPageBonusList} bonusList={currentSlot.bonus}  >
+                    <Responsive 
+                        maxWidth={1200} 
+                        isResponsive={false} 
+                        as={SlotPageBonusList} 
+                        bonusList={currentSlot.bonus}>
 
                     </Responsive>
                     {currentSlot.linkYoutube &&
                         <div>
-                            <Responsive minWidth={600}>  <YouTubeEmbed width='900' height='450' src={this.getYoutubeEmbedSource()} /></Responsive>
-                            <Responsive maxWidth={600}> <YouTubeEmbed width='300' height='150' src={this.getYoutubeEmbedSource()} /></Responsive>
+                            <Responsive minWidth={600}>  
+                                <YouTubeEmbed 
+                                    width='900' 
+                                    height='450' 
+                                    src={this.getYoutubeEmbedSource()} />
+                            </Responsive>
+                            <Responsive maxWidth={600}> 
+                                <YouTubeEmbed 
+                                    width='300' 
+                                    height='150' 
+                                    src={this.getYoutubeEmbedSource()} />
+                            </Responsive>
                         </div>
                     }
                     <Footer />
@@ -111,7 +150,6 @@ class SlotPage extends Component {
             </div>
         )
     }
-
 }
 
 const mapStateToProps = (state) => ({

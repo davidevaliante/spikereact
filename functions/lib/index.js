@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 const { Storage } = require('@google-cloud/storage');
-const os_1 = require("os");
 const path_1 = require("path");
 const sharp = require("sharp");
 const fileSystem = require("fs-extra");
@@ -98,10 +97,6 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
     const fileName = filePath.split('/').pop();
     // nome della cartella originale del file
     const bucketDir = path_1.dirname(filePath);
-    // crea una directory temporanea dove conservare i file trasformati prima di riscriverli
-    const temporaryDirectory = path_1.join(os_1.tmpdir(), `thumbs_${fileName}_${lodash_1.now()}`);
-    // crea un filePath temporaneo all'interno della directory temporanea
-    const temporaryFilePath = path_1.join(temporaryDirectory, 'source.png');
     // metadata file
     const metadata = {
         contentType: 'image/jpeg',
@@ -114,13 +109,6 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
         !object.contentType.includes('image')) {
         return false;
     }
-    // la creazione della directory temporanea può richeiedere tempo quindi
-    // utilizziamo awai per aspettare che sia creata e inseriamo un callback
-    yield fileSystem.ensureDir(temporaryDirectory);
-    // scarichiamo il file nella directory (sempre in maniera asincrona)
-    yield bucket.file(filePath).download({
-        destination: temporaryFilePath
-    });
     // se l'immagine che triggera è di una slot servono 2 thumbnail
     if (fileName.includes('slot')) {
         // array di promises
@@ -153,7 +141,7 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
         // chiamiamo tutte le promises nell'array
         yield Promise.all(producerUploadPromises);
     }
-    return fileSystem.remove(temporaryDirectory);
+    return true;
 }));
 /* // -----------------------STORAGE TRIGGERS------------------------------------------------------------
 export const generateThumbs = functions.storage.object().onFinalize(async object => {

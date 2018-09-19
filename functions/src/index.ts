@@ -111,10 +111,7 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
     // nome della cartella originale del file
     const bucketDir = dirname(filePath);
 
-    // crea una directory temporanea dove conservare i file trasformati prima di riscriverli
-    const temporaryDirectory = join(tmpdir(), `thumbs_${fileName}_${now()}`);
-    // crea un filePath temporaneo all'interno della directory temporanea
-    const temporaryFilePath = join(temporaryDirectory, 'source.png');
+   
     // metadata file
     const metadata = {
         contentType: 'image/jpeg',
@@ -128,15 +125,6 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
         !object.contentType.includes('image')) {
         return false;
     }
-
-    // la creazione della directory temporanea può richeiedere tempo quindi
-    // utilizziamo awai per aspettare che sia creata e inseriamo un callback
-    await fileSystem.ensureDir(temporaryDirectory);
-
-    // scarichiamo il file nella directory (sempre in maniera asincrona)
-    await bucket.file(filePath).download({
-        destination: temporaryFilePath
-    });
 
     // se l'immagine che triggera è di una slot servono 2 thumbnail
     if (fileName.includes('slot')) {
@@ -183,97 +171,10 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
         await Promise.all(producerUploadPromises);
     }
 
-    return fileSystem.remove(temporaryDirectory);
+    return true
 })
 
 
-/* // -----------------------STORAGE TRIGGERS------------------------------------------------------------
-export const generateThumbs = functions.storage.object().onFinalize(async object => {
-    const bucket = gcs.bucket(object.bucket)
-    // dove si trova il file nello storage
-    const filePath = object.name;
-    // fa split rispetto a '/' e prende l'ultimo elemento dell'array
-    const fileName = filePath.split('/').pop();
-    // nome della cartella originale del file
-    const bucketDir = dirname(filePath);
-
-    // crea una directory temporanea dove conservare i file trasformati prima di riscriverli
-    const temporaryDirectory = join(tmpdir(), `thumbs_${fileName}_${now()}`);
-    // crea un filePath temporaneo all'interno della directory temporanea
-    const temporaryFilePath = join(temporaryDirectory, 'source.png');
-
-
-    // break point per evitare che la funzione trigegri all'infinito
-    // di base questa funzione va ogni volta che viene aggiunta un immagine
-    // quindi riscrivendo nello storage l'immagine ridimensionata il loop sarebbe infito
-    if (fileName.includes('thumb_') ||
-        fileName.includes('bonus') ||
-        !object.contentType.includes('image')) {
-        return false;
-    }
-
-    // la creazione della directory temporanea può richeiedere tempo quindi
-    // utilizziamo awai per aspettare che sia creata e inseriamo un callback
-    await fileSystem.ensureDir(temporaryDirectory);
-
-    // scarichiamo il file nella directory (sempre in maniera asincrona)
-    await bucket.file(filePath).download({
-        destination: temporaryFilePath
-    });
-
-    // se l'immagine che triggera è di una slot servono 2 thumbnail
-    if (fileName.includes('slot')) {
-        const slotUploadPromises = slotSizes.map(async size => {
-            const thumbName = `thumb_${size}_${fileName}`;
-            // nome con tempo aggiunto
-            const thumbTempName = `thumb_${size}_${fileName}_${now()}`
-            const thumbPath = join(temporaryDirectory, thumbTempName);
-
-            await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
-            // upload della nuova immagine nello storage
-            return bucket.upload(thumbPath, {
-                destination: join(bucketDir, thumbName),
-                metadata: {
-                    contentType: 'image/jpeg',
-                }
-            })
-
-        });
-
-
-        // chiamiamo tutte le promises nell'array
-        await Promise.all(slotUploadPromises)
-
-    }
-
-
-    // se l'immagine che triggera è di un bonus serve solo 1 thumbnail piccolo per il menu
-    if (fileName.includes('producer')) {
-        const producerUploadPromises = producerSizes.map(async size => {
-            const thumbName = `thumb_${size}_${fileName}`;
-            const thumbPath = join(temporaryDirectory, thumbName);
-            const metadata = 
-
-            await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
-
-            // upload della nuova immagine nello storage
-            return bucket.upload(thumbPath, {
-                destination: join(bucketDir, thumbName),
-                metadata: {
-                    contentType: 'image/jpeg',
-                }
-            })
-
-        });
-
-        // chiamiamo tutte le promises nell'array
-        await Promise.all(producerUploadPromises);
-    }
-
-
-
-    return fileSystem.remove(temporaryDirectory);
-}) */
 
 export const imageToJPG = functions.storage.object().onFinalize(async (object) => {
     const filePath = object.name;

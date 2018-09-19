@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+// semantic
 import { Visibility } from 'semantic-ui-react-single/Visibility'
-import { PAGES } from '../../enums/Constants'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
+// mix 
+import { PAGES } from '../../enums/Constants'
+// router e redux
+import { connect } from 'react-redux'
 
 class ListDescriptionBanner extends Component {
 
@@ -14,8 +17,6 @@ class ListDescriptionBanner extends Component {
     fireAnimation = () => {
         !this.state.bottomPassed && this.setState({ bottomPassed: true })
     }
-
-
 
     renderHeader = () => {
         let text = ''
@@ -37,35 +38,21 @@ class ListDescriptionBanner extends Component {
         }
         return (
             <div className='description-banner-container'>
+
                 <Responsive minWidth={766}>
                     <div className='description-banner-red'>
-                        <div className='white-line scale-in-hor-right'>
-                        </div>
+                        <div className='white-line scale-in-hor-right'/>
                         <div>
-
                             <h2 className="tracking-in-contract"
                                 style={{ fontFamily: 'Raleway, sans-serif' }}>I migliori bonus</h2>
-
                         </div>
                     </div>
                 </Responsive>
+
                 <div className='description-banner-black'>
                     <h2 className="tracking-in-contract"
                         style={{ fontFamily: 'Raleway, sans-serif' }}>{text}</h2>
-                    <div className='white-line scale-in-hor-left'>
-                    </div>
-
-                    {/* <div style={{ marginBottom: '3rem' }}>
-                
-                <Header
-                    as='p'
-                    className="tracking-in-contract"
-                    style={{ color: '#424242', fontSize: '2em', textAlign: 'center', marginTop: '2rem', marginBottom: '2rem' }}>
-                    {text}
-                </Header>
-                <div className='black-line scale-in-hor-right'>
-                </div>
-            </div> */}
+                    <div className='white-line scale-in-hor-left'/>
                 </div>
             </div>
         )
@@ -83,10 +70,8 @@ class ListDescriptionBanner extends Component {
                 onBottomVisible={this.fireAnimation}>
                 {this.state.bottomPassed ? this.renderHeader() : <div></div>}
             </Visibility>
-
         )
     }
-
 }
 
 const mapStateToProps = (state) => ({

@@ -1,19 +1,22 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+// semantic
+import { Visibility } from 'semantic-ui-react-single/Visibility'
+// components
 import SlotCard from '../../Cards/SlotCard';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// mix
 import chunk from 'lodash/chunk'
 import orderBy from 'lodash/orderBy'
-import filter from 'lodash/filter'
 import last from 'lodash/last'
-import head from 'lodash/head'
-import { Visibility } from 'semantic-ui-react-single/Visibility'
-import { loadNextChunk, getAllByType } from '../../../firebase/get'
+// data
+import { loadNextChunk } from '../../../firebase/get'
+// router e redux
+import { connect } from 'react-redux';
+
 
 const SlotList = (props) => {
 
-    // di base renderizza props.maxSlot elementi ma scrollando ne deve caricare dinamicamente 
-    // di più
+    // di base renderizza props.maxSlot elementi ma scrollando ne deve carica altre 
     const slotListToRows = (slotList, ordering) => {
         let listOfSlots = []
         for (const key in slotList) {
@@ -36,24 +39,24 @@ const SlotList = (props) => {
                 listOfSlots = orderBy(listOfSlots, ['time'], ['desc'])
         }
 
-
         const rows = chunk(listOfSlots, props.cardPerRow)
 
         return rows.map((row, index) => (
             <div className='horizontal-center' key={`slot_row_${index}`}>
-                {(index === rows.length - 2 && props.type !== 'BAR' && props.type !== 'GRATIS') && <Visibility once={false} onTopVisible={() => loadMoreSlots(listOfSlots)} />}
+                {(index === rows.length - 2 && 
+                       props.type !== 'BAR' && 
+                   props.type !== 'GRATIS') 
+                        && <Visibility once={false} onTopVisible={() => loadMoreSlots(listOfSlots)} />}
                 {row.map((element) =>
                     (element && <SlotCard slot={element} key={element.id} />))
                 }
             </div>
-
         ))
     }
 
     const loadMoreSlots = (listOfSlots) => {
         loadNextChunk(12, last(listOfSlots).time)
     }
-
 
     return (
         <div className='vertical-center'>

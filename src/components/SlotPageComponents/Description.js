@@ -1,17 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { setUserPlaying } from '../../reducers/PlayModeReducer'
+// semantic
 import { Segment } from 'semantic-ui-react-single/Segment'
 import { Container } from 'semantic-ui-react-single/Container'
 import { Header } from 'semantic-ui-react-single/Header'
 import { Button } from 'semantic-ui-react-single/Button'
 import { Icon } from 'semantic-ui-react-single/Icon'
-import Parser from 'html-react-parser';
+// router e redux
+import { connect } from 'react-redux'
+import { setUserPlaying } from '../../reducers/PlayModeReducer'
+// mix
+import Parser from 'html-react-parser'
 
 const Description = (props) => {
-
-
-
+    
     return (
         <Segment style={{ padding: '6em 0em', borderBottom: '0px' }} vertical id='slot-page-description'>
             <Container text>

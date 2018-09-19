@@ -1,14 +1,15 @@
 import React from 'react'
-
-// components
+// semantic
 import { Segment } from 'semantic-ui-react-single/Segment'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
 import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import { Loader } from 'semantic-ui-react-single/Loader'
-import LazyLoad from 'react-lazyload';
+// components
 import ShortHandMenu from '../SlotPageComponents/ShortHandMenu'
 import AamsBanner from "../AamsBanner";
+// mix
 import { getImageLinkFromName } from '../../utils/Utils'
+import LazyLoad from 'react-lazyload';
 
 const styles = {
     overlay: {
@@ -55,7 +56,7 @@ const SlotPageHeader = ({ currentSlot, showFixedMenu, hideFixedMenu, fixmenu, lo
                 </LazyLoad>
             </Segment>
             <AamsBanner />
-        </Visibility >
+        </Visibility>
     )
 }
 

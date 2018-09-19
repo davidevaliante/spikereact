@@ -1,16 +1,14 @@
-// react
 import React from 'react'
 import PropTypes from 'prop-types';
-
-// components
+// semantic
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Sticky } from 'semantic-ui-react-single/Sticky'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
+import { Responsive } from 'semantic-ui-react-single/Responsive'
+// components
 import SlotList from './SlotList'
 import BonusList from './BonusList'
-import { Responsive } from 'semantic-ui-react-single/Responsive'
-
-// misc
+// mix
 import { SLOT_TYPES } from '../../../enums/Constants'
 
 
@@ -32,8 +30,7 @@ const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky })
                     options={dropdownOptions}
                     placeholder='Ordina per'
                     selection
-                    value={slotorder}
-                />
+                    value={slotorder} />
                 <div ref={handleContextRef}>
                     <Responsive minWidth={1200} as={SlotList} cardPerRow={3} type={type} order={slotorder} />
                     <Responsive maxWidth={1200} as={SlotList} cardPerRow={1} type={type} order={slotorder} />
@@ -48,7 +45,6 @@ const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky })
                 </Sticky>
             </Grid.Column>
         </Grid.Row>
-
     </Grid>
 )
 

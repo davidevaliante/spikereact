@@ -1,37 +1,37 @@
 import React, { Component } from 'react'
+// semantic
 import { Container } from 'semantic-ui-react-single/Container'
 import { Button } from 'semantic-ui-react-single/Button'
 import { Icon } from 'semantic-ui-react-single/Icon'
-import { Sticky } from 'semantic-ui-react-single/Sticky'
-import { Grid } from 'semantic-ui-react-single/Grid'
+import { Dimmer } from 'semantic-ui-react-single/Dimmer'
+import { Loader } from 'semantic-ui-react-single/Loader'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
+// components
 import Navbar from '../Header/Navbar'
 import Footer from '../Footer'
+// data
 import { getExtraById } from '../../firebase/get'
-import Parser from 'html-react-parser';
-import { GridColumn } from 'semantic-ui-react';
+// mix
+import Parser from 'html-react-parser'
+// router e redux
+import { withRouter } from 'react-router-dom'
 
 class BonusArticle extends Component {
 
-    state = {}
-
-
-
-    style = {
-        h1: "{color:black}",
+    state = {
+        isLoading:true
     }
 
     componentDidMount() {
         if (this.props.match.params.id) {
             getExtraById(this.props.match.params.id, data => {
-                this.setState({ content: data })
+                this.setState({isLoading:false, content: data, parsedContent: Parser(`${data.content}`) })
             })
         }
     }
 
-    footerBottomTrigger = (bool) => {
-        bool ? this.setState({ bottomIsVisible: true }) : this.setState({ bottomIsVisible: false })
-    }
+    showBottomButtons = () => this.setState({ showBottomButtons: true })
+    hideBottomButtons = () => this.setState({ showBottomButtons: false })
 
     BottomButtonGroup = () => {
         return (
@@ -39,46 +39,68 @@ class BonusArticle extends Component {
         )
     }
 
-    render() {
-        const { content, bottomIsVisible } = this.state
+    goBack = () => {
+        this.props.history.goBack()
+    }
 
-        return (
+    goToBonus = () => this.props.bonus.link && window.open(this.props.bonus.link)
+    
+
+    render() {
+        const { content, showBottomButtons, parsedContent, isLoading } = this.state
+        console.log(showBottomButtons);
+        
+        if(isLoading)  return (
             <div className='extra-bg'>
                 {window.scrollTo(0, 0)}
                 <Navbar fixColor={true} />
-                <div className='extra-button-left'>
-                    <Button size='large' animated inverted>
-                        <Button.Content visible>Torna Indietro</Button.Content>
-                        <Button.Content hidden inverted>
-                            <Icon name='arrow left' />
-                        </Button.Content>
-                    </Button>
-                </div>
+                <Dimmer active>
+                    <Loader />
+                </Dimmer>
+                <Visibility
+                    once={false}
+                    onBottomVisible={this.showBottomButtons}
+                    onBottomVisibleReverse={this.hideBottomButtons}>
+                </Visibility>
+            </div>
+        )
+
+        else return (
+            <div className='extra-bg'>
+                {window.scrollTo(0, 0)}
+                <Navbar fixColor={true} />
+                    <Visibility
+                        once={false}
+                        offset={500}
+                        onBottomVisible={this.showBottomButtons}
+                        onBottomVisibleReverse={this.hideBottomButtons}>
+                        <div className='extra-button-left'>
+                            <Button onClick={()=>this.goBack()} size='large' animated inverted>
+                                <Button.Content visible>Torna Indietro</Button.Content>
+                                <Button.Content hidden inverted>
+                                    <Icon name='arrow left' />
+                                </Button.Content>
+                            </Button>
+                        </div>
+                    </Visibility>
                 <div className='extra-button-right'>
-                    <Button size='large' animated inverted>
+                    <Button onClick={()=>this.goToBonus()} size='large' animated inverted>
                         <Button.Content visible>Provalo Subito</Button.Content>
                         <Button.Content hidden inverted>
                             <Icon name='arrow left' />
                         </Button.Content>
                     </Button>
                 </div>
-
                 <div className='extra-content'>
                     <Container text className='extra'>
-                        {content && Parser(`${content.content}`)}
+                        {parsedContent}
                     </Container>
                 </div>
-                {bottomIsVisible && <this.BottomButtonGroup />}
-                <Visibility
-                    onBottomPassed={() => this.setState({ bottomIsVisible: true })}
-                    onBottomPassedReverse={() => this.setState({ bottomIsVisible: false })}>
-                    <Footer />
-                </Visibility>
+                <Footer />
             </div>
-
         )
     }
 }
 
-export default BonusArticle
+export default withRouter(BonusArticle)
 

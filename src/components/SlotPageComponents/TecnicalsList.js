@@ -1,9 +1,10 @@
 import React from 'react'
+// semantic
 import { Header } from 'semantic-ui-react-single/Header'
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { Divider } from 'semantic-ui-react-single/Divider'
-
+// mix
 import slice from 'lodash/slice'
 import split from 'lodash/split'
 import Parser from 'html-react-parser';
@@ -29,21 +30,21 @@ const TecnicalsList = (props) => {
                 <Divider />
             </div>
             {slice(splittedArray, 1, splittedArray.length).map(
-                t =>
-                    <div className='tip-tec-card'>
-                        <div className='tip-tec-row'>
-                            <div className='column-align-start-center'>
-                                <Icon
-                                    className='column-align-start-center'
-                                    size='small'
-                                    style={{ marginRight: '2rem' }}
-                                    circular inverted color='red' name='angle right' />
+                    t =>
+                        <div className='tip-tec-card'>
+                            <div className='tip-tec-row'>
+                                <div className='column-align-start-center'>
+                                    <Icon
+                                        className='column-align-start-center'
+                                        size='small'
+                                        style={{ marginRight: '2rem' }}
+                                        circular inverted color='red' name='angle right' />
+                                </div>
+                                <p style={{ fontFamily: 'Raleway' }}>{Parser(`${t}`)}</p>
                             </div>
-                            <p style={{ fontFamily: 'Raleway' }}>{Parser(`${t}`)}</p>
+                            <Divider />
                         </div>
-                        <Divider />
-                    </div>
-            )
+                )
             }
         </ul>
     return (

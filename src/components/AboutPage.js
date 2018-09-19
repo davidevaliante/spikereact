@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
+// semantic
 import { Container } from 'semantic-ui-react-single/Container'
 import { Header } from 'semantic-ui-react-single/Header'
 import { Image } from 'semantic-ui-react-single/Image'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
 import { Segment } from 'semantic-ui-react-single/Segment'
+// components
 import AboutPageHeader from './Header/AboutPageHeader'
 import Footer from "./Footer";
+import Navbar from './Header/Navbar'
+// router e redux
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
+// mix
 import {smoothScrollTo} from '../utils/Utils'
-import Navbar from './Header/Navbar'
 
 class AboutPage extends Component{
 
@@ -21,8 +25,7 @@ class AboutPage extends Component{
         return (
            // minWidth={Responsive.onlyTablet.minWidth} totlto per adesso che di base è abbastanza responsive 
             <div>
-                <Responsive
-               >     
+                <Responsive>     
          
                     <div>
                         <Navbar displaying='ABOUT'/>
@@ -42,8 +45,6 @@ class AboutPage extends Component{
                                 <Image floated='left'
                                     src='https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fspike-slot.jpg?alt=media&token=965c3785-1b53-47b9-a50f-a5c757c00269'
                                     size='medium' />
-
-
                                 <p>
                                     Salve a tutti signori, sono <strong>SPIKE</strong>!
                                     Sono un ragazzo del centro-italia di 28 anni che ha fatto del suo vizio la

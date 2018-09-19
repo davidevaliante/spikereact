@@ -1,11 +1,14 @@
-import PropTypes from 'prop-types';
 import React from 'react'
+import PropTypes from 'prop-types';
+// semantic
+import { Feed } from 'semantic-ui-react-single/Feed'
+// components
+import BonusCard from '../../Cards/BonusCard'
+// mix
 import slice from 'lodash/slice'
 import shuffle from 'lodash/shuffle'
+// router e redux
 import { connect } from 'react-redux'
-import BonusCard from '../../Cards/BonusCard'
-import { Feed } from 'semantic-ui-react-single/Feed'
-
 
 export const BonusList = (props) => {
 
@@ -39,6 +42,5 @@ const mapStateToProps = (state) => ({
     contextRef: state.contextRef
 
 })
-
 
 export default connect(mapStateToProps)(BonusList)

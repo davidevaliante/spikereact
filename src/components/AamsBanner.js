@@ -1,4 +1,5 @@
 import React from 'react'
+// semantic
 import { Image } from 'semantic-ui-react-single/Image'
 import { Responsive } from 'semantic-ui-react-single/Responsive';
 import { Container } from 'semantic-ui-react-single/Container';

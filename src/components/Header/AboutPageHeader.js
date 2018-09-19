@@ -1,8 +1,8 @@
 import React from 'react'
-
-// components
+// semantic
 import { Segment } from 'semantic-ui-react-single/Segment'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
+// components
 import LazyLoad from 'react-lazyload'
 import AamsBanner from "../AamsBanner"
 

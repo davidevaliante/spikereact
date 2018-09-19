@@ -1,11 +1,14 @@
 import React from 'react'
+// semantic
 import { Card } from 'semantic-ui-react-single/Card'
 import { Image } from 'semantic-ui-react-single/Image'
 import { Button } from 'semantic-ui-react-single/Button'
+// data
 import { getImageLinkFromName } from '../../utils/Utils'
+// mix
 import lowerCase from 'lodash/lowerCase'
+// router e redux
 import { withRouter } from 'react-router-dom'
-import { ROUTE } from '../../enums/Constants'
 
 const BonusCard = (props) => {
 

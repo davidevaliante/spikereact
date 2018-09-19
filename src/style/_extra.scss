@@ -1,11 +1,12 @@
 .extra{
     font-family: 'Raleway', 'Arial', sans-serif;
-    background: white;
+    background:white;
     padding: 4rem;
     width: 70%;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
+
     
     h1 {
         color: black;
@@ -22,7 +23,9 @@
 }
 
 .extra-bg{
-    background: rgb(235, 38, 19);
+    background: url('https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fbonus_article_bg.jpg?alt=media&token=a46e2bf8-4f76-4c10-a48f-cfad0f93f1fb');
+    background-size: cover;
+    min-height: 800px;
 }
 
 .extra-flex-container{

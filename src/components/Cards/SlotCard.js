@@ -1,15 +1,19 @@
 import React from 'react'
-import truncate from 'lodash/truncate'
-import { NavLink } from 'react-router-dom'
+// semantic
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { Image } from 'semantic-ui-react-single/Image'
 import { Card } from 'semantic-ui-react-single/Card'
+// data
 import { removeHtmlFrom } from '../../utils/Utils'
 import { getImageLinkFromName } from '../../utils/Utils'
+// mix
+import truncate from 'lodash/truncate'
 import lowerCase from 'lodash/lowerCase'
 import capitalize from 'lodash/capitalize'
 import moment from 'moment'
+// router e redux
 import { withRouter } from 'react-router'
+
 const SlotCard = (props) => {
 
     const formatTitle = (title) => truncate(capitalize(lowerCase(props.slot.name)), { length: 30, omission: '...' })
@@ -17,7 +21,6 @@ const SlotCard = (props) => {
     const handleClick = () => (props.history.push(`slot/${props.slot.id}`))
 
     return (
-
         <div className='slot-card-shadow-animation' onClick={() => handleClick()}>
             <Card key={props.slot.id}>
                 <Image src={getImageLinkFromName('slot', props.slot.name, 'medium')} style={{ height: '14rem', objectFit: 'cover' }} />

@@ -1,12 +1,14 @@
+import React, { Component } from 'react'
+// semantic
+import { Search } from 'semantic-ui-react-single/Search'
+// mix
 import filter from 'lodash/filter'
 import reduce from 'lodash/reduce'
 import debounce from 'lodash/debounce'
 import escapeRegExp from 'lodash/escapeRegExp'
 import { formatList } from '../../utils/Utils'
-import React, { Component } from 'react'
-import { Search } from 'semantic-ui-react-single/Search'
+// router e redux
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 class NavbarSearchBar extends Component {
@@ -17,26 +19,20 @@ class NavbarSearchBar extends Component {
         }
     }
 
-
     componentDidMount() {
         this.resetComponent()
     }
 
     resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-    // ------------------------ HANDLERS --------------------------------------------------
     handleResultSelect = (e, { result }) => {
 
         // solo bonus e produttori hanno la proprietà "link"
-        if (result.link) { window.open(result.link) }
+        if (result.link) 
+            { window.open(result.link) }
         // se non esiste link allora è una slot
-        else {
+        else 
             this.props.history.push(`/slot/${result.id}`)
-            // this.setState({
-            //     value: result.title,
-            //     redirect: { path: `/slot/${result.id}` }
-            // })
-        }
     }
 
     handleSearchChange = (e, { value }) => {
@@ -52,7 +48,7 @@ class NavbarSearchBar extends Component {
                 formatList(this.props.slotList, this.props.bonusList, this.props.producerList),
                 (memo, data, name) => {
                     const results = filter(data.results, isMatch)
-                    if (results.length) memo[name] = { name, results } // eslint-disable-line no-param-reassign
+                    if (results.length) memo[name] = { name, results }
                     return memo
                 },
                 {},
@@ -68,8 +64,6 @@ class NavbarSearchBar extends Component {
 
     render() {
         const { isLoading, value, results } = this.state
-        const path = this.state.redirect.path
-
 
         return (
             <div>

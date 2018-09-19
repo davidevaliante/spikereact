@@ -1,12 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
+// semantic
 import { Dimmer } from 'semantic-ui-react-single/Dimmer'
-import { setUserNotPlaying } from '../../reducers/PlayModeReducer'
+// components
 import RandomBonus from './RandomBonus'
+// router e redux
+import { connect } from 'react-redux'
+import { setUserNotPlaying } from '../../reducers/PlayModeReducer'
 
 const PlayDimmer = (props) => {
-
-    // src da cambiare in {props.url}
 
     return (
         <div>
@@ -20,8 +21,7 @@ const PlayDimmer = (props) => {
                         title='test'
                         width='900'
                         height='500'
-                        src={props.url}
-                    ></iframe>
+                        src={props.url}/>
                     <div style={{ position: 'absolute', left: '77%', top: '39%' }}>
                         <RandomBonus bonus={props.bonusList} />
                     </div>

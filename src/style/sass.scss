@@ -10,6 +10,10 @@
 @import 'extra';
 @import 'bonuscard';
 
+html, body {
+    height: 100%;
+  }
+
 .columns {
     display: flex;
     justify-content: space-around;
