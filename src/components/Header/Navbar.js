@@ -133,6 +133,12 @@ class Navbar extends Component {
                                     as="a" >
                                     <ProducersDropdown />
                                 </Menu.Item>
+                                <Menu.Item
+                                    as='a'
+                                    onClick={""}
+                                    active={this.props.displaying === PAGES.ARTICLE}>
+                                    <NavLink id='bar-nav-link' to={ROUTE.ARTICLE}>Articoli</NavLink>
+                                </Menu.Item>
 
                                 <Menu.Item borderless position='right'>
                                     <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />

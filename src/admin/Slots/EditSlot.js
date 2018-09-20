@@ -18,14 +18,14 @@ import delay from 'lodash/delay'
 import { TextArea } from "semantic-ui-react-single/TextArea";
 import { replaceTextTips, replaceTextTec, getImageLinkFromName } from "../../utils/Utils";
 import AdminNavbar from "../AdminNavbar";
-import {Header} from "semantic-ui-react-single/Header";
-import {Icon} from "semantic-ui-react-single/Icon";
-import {Dimmer} from "semantic-ui-react-single/Dimmer";
+import { Header } from "semantic-ui-react-single/Header";
+import { Icon } from "semantic-ui-react-single/Icon";
+import { Dimmer } from "semantic-ui-react-single/Dimmer";
 
 
 class EditSlot extends React.Component {
     state = {
-        isInCopyPasteMode: true,
+        isInCopyPasteMode: false,
         currentSlot: {},
         ratingStateOptions: [
             { key: 'uno', value: '1', text: '1' },
@@ -219,14 +219,14 @@ class EditSlot extends React.Component {
     };
 
     onSuccess = () => {
-        this.setState({active: true})
+        this.setState({ active: true })
         delay(() => {
-            this.setState({active: false})
+            this.setState({ active: false })
         }, 800)
     };
 
-    handleOpen = () => this.setState({active: true});
-    handleClose = () => this.setState({active: false});
+    handleOpen = () => this.setState({ active: true });
+    handleClose = () => this.setState({ active: false });
 
     render() {
 
@@ -241,7 +241,7 @@ class EditSlot extends React.Component {
                     style={{ padding: '4rem' }}>
                     <Dimmer active={active} onClickOutside={this.handleClose} page>
                         <Header as='h2' icon inverted>
-                            <Icon name='check'/>
+                            <Icon name='check' />
                             Modificato con successo
                         </Header>
                     </Dimmer>

@@ -19,6 +19,7 @@ import AddExtraFromHtml from '../admin/Extra/AddExtraFromHtml'
 import BonusArticle from '../components/Extra/BonusArticle'
 import RichTextEditor from "../admin/Extra/RichEdit";
 import ProducerPage from "../components/ProducerComponents/ProducerPage";
+import ListArticle from "../components/Extra/ListArticle";
 
 const AppRouter = () => {
     let currentSlotPath = ''
@@ -41,6 +42,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.SLOT_BAR} component={HomePage} exact={true} page={PAGES.SLOT_BAR} />
                     <Route path={ROUTE.PRODUCER} component={ProducerPage} exact={true} page={PAGES.PRODUCER} />
                     <Route path={ROUTE.EXTRA} component={BonusArticle} />
+                    <Route path={ROUTE.ARTICOLI} component={ListArticle} />
 
                     { /* HOME filtered by producers */}
                     {/*<Route path={ROUTE.PRODUCER} component={HomePage} />*/}

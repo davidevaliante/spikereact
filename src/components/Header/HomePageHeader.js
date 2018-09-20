@@ -4,6 +4,8 @@ import { Segment } from 'semantic-ui-react-single/Segment'
 // components
 import LazyLoad from 'react-lazyload'
 import AamsBanner from "../AamsBanner"
+import ProducersDropdown from './ProducersDropdown';
+import { connect } from 'react-redux';
 
 const styles = {
     overlay: {
@@ -11,8 +13,30 @@ const styles = {
         height: '100vh',
     }
 }
+const homeImage = "https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a"
+const slotGratis ="https://images.pexels.com/photos/203088/pexels-photo-203088.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+const slotDaBar ="https://images.pexels.com/photos/972990/pexels-photo-972990.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 
-const HomePageHeader = ({ displaying }) => {
+const currentoslotImage = (tiposlot) => {
+    switch (tiposlot) {
+        case "HOME":
+            return homeImage
+
+        case 'SLOT_GRATIS':
+
+            return slotGratis
+        case 'SLOT_BAR':
+
+            return slotDaBar
+        default:
+            return tiposlot
+
+    }
+}
+
+const HomePageHeader = (props) => {
+    const a = currentoslotImage(props.displaying)
+
     return (
         <div>
             <Segment
@@ -21,20 +45,32 @@ const HomePageHeader = ({ displaying }) => {
                 style={{ minHeight: 700, padding: 0 }}
                 vertical>
                 <LazyLoad height={'100vh'}>
-                    <header
-                        className='fade-in-header'>
+                    <header className='fade-in-header'
+                        style={{
+                            backgroundImage: `url(${a})`
+                        }} >
                         <div style={styles.overlay}>
                             <div className='hero-text-box'>
                                 <h1 className='header-spike-text' style={{ fontSize: '600%' }}>Spike Slot</h1>
                                 <h1 className='slideRight'>Vinci soldi veri<br></br>I migliori consigli per vincere con le slot machine sul web.</h1>
+                                <p>{this.a}</p>
+
                             </div>
                         </div>
                     </header>
                 </LazyLoad>
             </Segment>
             <AamsBanner />
+
         </div>
     )
 }
 
-export default HomePageHeader
+
+
+const mapStateToProps = (props) => ({
+    displaying: props.displaying,
+})
+
+
+export default connect(mapStateToProps)(HomePageHeader)
