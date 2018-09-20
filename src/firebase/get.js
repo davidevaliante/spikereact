@@ -1,11 +1,16 @@
 import axios from 'axios'
-import {COUNTRY, DATABASE_REFERENCE} from '../enums/Constants'
+import { COUNTRY, DATABASE_REFERENCE } from '../enums/Constants'
 import { databaseRoot } from './firebaseConfig'
 import store from '../store/store'
 import { addSlotList, replaceSlotList } from '../reducers/SlotListReducer'
 import { updateSlotMenuList } from '../reducers/SlotsMenuReducer'
 import { addPopularSlot } from '../reducers/PopularSlotreducer'
 import map from 'lodash/map'
+
+export const getProducerByName = async (producerName, callback) => {
+    const producerData = await axios.get(`${databaseRoot}/Producer/it.json?orderBy="name"&equalTo="${producerName}"`)
+    callback(producerData.data)
+}
 
 export const getGuideById = (guideId, callback) => {
     axios.get(`${databaseRoot}/BonusGuides/it/${guideId}.json`)
@@ -77,7 +82,6 @@ export const getSlotBasedOnProducer = (producerName, callback) => {
         )
 };
 
-// primo chunk di 
 export const getSlotsCardBasedOnTime = (limit, callback) => {
     axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="time"&limitToLast=${limit}`)
         .then(
@@ -88,7 +92,6 @@ export const getSlotsCardBasedOnTime = (limit, callback) => {
         )
 };
 
-// primo chunk di 
 export const loadNextChunk = (limit, end, callback) => {
     axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="time"&endAt=${end}&limitToLast=${limit}`)
         .then(
@@ -109,17 +112,17 @@ export const getAllByType = (type, callback) => {
         )
 };
 
-export const getAllByProducer = (producerId, callback) => {
-    axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="producer"&equalTo="${producerId}"`)
+export const getSlotListByProducerName = (producerName, callback) => {
+    axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="producer"&equalTo="${producerName}"`)
         .then(
             list => {
-                console.log(list.data);
+                console.log(list);
                 callback(list.data)
-                // store.dispatch(replaceSlotList(list.data))
             }
+        ).catch(
+            err => console.log(err)
         )
 };
-
 
 export const getSlotsCardBasedOnName = (text, limit, callback) => {
     axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="name"&startAt="${text}"&endAt="${text}\uf8ff"`)
@@ -127,7 +130,6 @@ export const getSlotsCardBasedOnName = (text, limit, callback) => {
             list => console.log(list.data)
         )
 };
-
 
 export const getSlotsCardBasedOnRating = (limit, callback) => {
     axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="rating"&limitToLast=${limit}`)

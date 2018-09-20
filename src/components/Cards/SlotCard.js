@@ -18,7 +18,7 @@ const SlotCard = (props) => {
 
     const formatTitle = (title) => truncate(capitalize(lowerCase(props.slot.name)), { length: 30, omission: '...' })
 
-    const handleClick = () => (props.history.push(`slot/${props.slot.id}`))
+    const handleClick = () => (props.history.push(`/slot/${props.slot.id}`))
 
     return (
         <div className='slot-card-shadow-animation' onClick={() => handleClick()}>

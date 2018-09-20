@@ -152,8 +152,6 @@ class Navbar extends Component {
     }
 
     render() {
-        console.log('STATE', this.state)
-        console.log('PROPS', this.props)
         return (
             <div>
                 {this.props.isResponsive ? this.responsivMobile() : this.responsivMobile2()}

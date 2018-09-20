@@ -43,10 +43,10 @@ const SlotList = (props) => {
 
         return rows.map((row, index) => (
             <div className='horizontal-center' key={`slot_row_${index}`}>
-                {(index === rows.length - 2 && 
-                       props.type !== 'BAR' && 
-                   props.type !== 'GRATIS') 
-                        && <Visibility once={false} onTopVisible={() => loadMoreSlots(listOfSlots)} />}
+                {(index === rows.length - 2 &&
+                    props.type !== 'BAR' &&
+                    props.type !== 'GRATIS')
+                    && <Visibility once={false} onTopVisible={() => loadMoreSlots(listOfSlots)} />}
                 {row.map((element) =>
                     (element && <SlotCard slot={element} key={element.id} />))
                 }
