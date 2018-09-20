@@ -14,8 +14,9 @@ const styles = {
     }
 }
 const homeImage = "https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/Mix%2Fslot-header-img-min-min.jpg?alt=media&token=6648de0a-3cd6-402f-9ada-a961cf893c2a"
-const slotGratis ="https://images.pexels.com/photos/203088/pexels-photo-203088.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-const slotDaBar ="https://images.pexels.com/photos/972990/pexels-photo-972990.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+const slotGratis = "https://images.pexels.com/photos/203088/pexels-photo-203088.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+const slotDaBar = "https://images.pexels.com/photos/972990/pexels-photo-972990.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+const articleImage = "https://images.pexels.com/photos/1249214/pexels-photo-1249214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
 
 const currentoslotImage = (tiposlot) => {
     switch (tiposlot) {
@@ -28,6 +29,8 @@ const currentoslotImage = (tiposlot) => {
         case 'SLOT_BAR':
 
             return slotDaBar
+        case 'ARTICLE':
+            return articleImage
         default:
             return tiposlot
 

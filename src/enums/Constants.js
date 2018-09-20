@@ -26,7 +26,7 @@ export const PAGES = {
     HOME: 'HOME',
     ABOUT: 'ABOUT',
     PRODUCER: 'PRODUCER',
-    ARTICOLI: 'ARTICOLI',
+    ARTICLE: 'ARTICLE',
     PAGE_NOT_FOUND: '*'
 };
 
@@ -40,8 +40,13 @@ export const ROUTE = {
     SLOT_BAR: '/slot-bar',
     ABOUT: '/about',
     EXTRA: `/article/:id`,
+<<<<<<< HEAD
     PRODUCER: `/producer/:producerName`,
     ARTICLE: '/articoli',
+=======
+    PRODUCER: `/producer/:id`,
+    ARTICLE: '/article',
+>>>>>>> 42dd22fee8e50b9bb4bd2a130f671f3577956d5f
     ERROR404: '*',
 
 

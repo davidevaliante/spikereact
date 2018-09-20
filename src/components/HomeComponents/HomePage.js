@@ -13,9 +13,10 @@ import PopularSlotList from './HomeBody/PopularSlotList'
 // router e redux
 import { connect } from 'react-redux';
 import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
-import { setHomePage, setGratisPage, setBarPage, setAboutPage, setProducerPage } from '../../reducers/CurrentPageReducer'
+import { setHomePage, setGratisPage, setBarPage, setAboutPage, setProducerPage, setArticlePage } from '../../reducers/CurrentPageReducer'
 // data
 import { getSlotBasedOnProducer, getAllByType } from '../../firebase/get'
+import { router } from 'sw-toolbox';
 
 class HomePage extends Component {
     state = {};
@@ -56,10 +57,15 @@ class HomePage extends Component {
             case ROUTE.ABOUT:
                 this.props.dispatch(setAboutPage())
                 return 'ABOUT'
+            case ROUTE.ARTICLE:
+                this.props.dispatch(setArticlePage())
+                return 'ARTICLE'
             case ROUTE.PRODUCER:
                 this.title = this.props.match.params.name
                 this.props.dispatch(setProducerPage(this.props.match.params.name))
                 return SLOT_TYPES.PRODUCER_FILTERED
+
+
             default:
                 this.title = 'Le Slot del giorno'
                 this.props.dispatch(setHomePage())
