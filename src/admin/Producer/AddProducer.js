@@ -8,10 +8,10 @@ import { Header } from 'semantic-ui-react-single/Header'
 import { Icon } from 'semantic-ui-react-single/Icon'
 
 
-import ImagePicker from './ImagePicker';
-import { pushNewProducer } from '../firebase/firebase';
-import AdminNavbar from "./AdminNavbar";
-import { ADMINPAGES } from "../enums/Constants";
+import ImagePicker from '../ImagePicker';
+import { pushNewProducer } from '../../firebase/firebase';
+import AdminNavbar from "../AdminNavbar";
+import { ADMINPAGES } from "../../enums/Constants";
 
 class AddProducer extends Component {
 

@@ -2,94 +2,96 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Grid} from 'semantic-ui-react-single/Grid'
 import {Responsive} from 'semantic-ui-react-single/Responsive'
-import {getProducerList, getSlotList} from "../../firebase/get";
-import AdminSlotCard from "./AdminSlotCard";
-import AdminNavbar from "../AdminNavbar";
+import {getProducerList} from "../../firebase/get";
+import AdminNavbar from "../../admin/AdminNavbar";
 import {ADMINPAGES, RESPONSIVE_RESOLUTION} from "../../enums/Constants";
-import delay from 'lodash/delay';
+import AdminProducerCard from "./AdminProducerCard";
 import {Header} from "semantic-ui-react-single/Header";
 import {Icon} from "semantic-ui-react-single/Icon";
 import {Dimmer} from "semantic-ui-react-single/Dimmer";
+import delay from 'lodash/delay';
 
 function mapStateToProps(state) {
     return {};
 }
 
-class SlotDashboard extends Component {
+class ProducerDashboard extends Component {
 
     state = {
         active: false
     };
 
-    onSlotListFetched = (slotList) => {
+    onListFetched = (rawList) => {
         let list = []
-        for (const key in slotList) {
-            const slot = slotList[key];
-            slot['id'] = key
-            list.push(slot)
+        for (const key in rawList) {
+            const item = rawList[key];
+            item['id'] = key
+            list.push(item)
         }
 
         this.setState({
-            slotList: list
+            producerList: list
         })
     };
 
-    onSlotDeleted = (id) => {
+    onProducerDeleted = (id) => {
         this.setState({ active: true })
         delay(() => {
             this.setState({ active: false })
         }, 1000);
         // TODO cercare nello state l'id cancellato ed eliminarlo evitando una chiamata al DB
-        getSlotList(this.onSlotListFetched);
+        getProducerList(this.onListFetched);
     };
 
-    renderSlot = () => {
-        return this.state.slotList.map((slot) => (slot &&
+    renderItem = () => {
+        return this.state.producerList.map((producer) => (producer &&
             <Grid.Column>
-                <AdminSlotCard slot={slot} key={slot.id} onDelete={this.onSlotDeleted}/>
+                <AdminProducerCard key={producer.id} producer={producer} onDelete={this.onProducerDeleted}/>
             </Grid.Column>))
     };
 
     componentDidMount() {
-        getSlotList(this.onSlotListFetched);
+        getProducerList(this.onListFetched);
     }
 
     render() {
-        const { slotList, active } = this.state;
+        const {producerList, active} = this.state;
+
         return (
-            <div>
+            <div style={{maxWidth: '1920px'}}>
                 <Dimmer blurring active={active} page>
                     <Header as='h2' icon inverted>
                         <Icon name='check' />
-                        Slot cancellata con successo
+                        Produttore cancellato con successo
                     </Header>
                 </Dimmer>
-                <AdminNavbar activeItem={ADMINPAGES.SLOT}/>
+                <AdminNavbar activeItem={ADMINPAGES.PRODUCER}/>
                 <div style={{marginTop: '5rem'}}>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>
                         <Grid stackable columns={4} style={{padding: '2rem'}}>
-                            {slotList && this.renderSlot()}
+                            {producerList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} maxWidth={RESPONSIVE_RESOLUTION.LARGE}>
                         <Grid stackable columns={3} style={{padding: '2rem'}}>
-                            {slotList && this.renderSlot()}
+                            {producerList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.SMALL} maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
                         <Grid stackable columns={2} style={{padding: '2rem'}}>
-                            {slotList && this.renderSlot()}
+                            {producerList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive maxWidth={RESPONSIVE_RESOLUTION.SMALL}>
                         <Grid stackable columns={1} style={{padding: '2rem'}}>
-                            {slotList && this.renderSlot()}
+                            {producerList && this.renderItem()}
                         </Grid>
                     </Responsive>
                 </div>
             </div>
+
         );
     }
 }
 
-export default connect(mapStateToProps)(SlotDashboard);
+export default connect(mapStateToProps)(ProducerDashboard);

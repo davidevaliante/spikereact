@@ -19,7 +19,7 @@ class AdminNavbar extends Component {
         const activeItem = this.props.activeItem;
         return (
             <div>
-                <Menu stackable>
+                <Menu stackable fixed='top'>
                     <Menu.Item>
                         <NavLink to={ROUTE.ADMIN}>
                             <Icon name='cogs' />
@@ -83,7 +83,7 @@ class AdminNavbar extends Component {
                                     <NavLink id='admin-nav-add-producer' to={ROUTE.ADDPRODUCER}><Icon name='add' /> Aggiungi Produttore</NavLink>
                                 </Dropdown.Item>
                                 <Dropdown.Item onClick={() => this.handleClick('admin-nav-producer')}>
-                                    <NavLink id='admin-nav-producer' to='#'>
+                                    <NavLink id='admin-nav-producer' to={ROUTE.ADMINPRODUCER}>
                                         <Icon name='lab' /> Gestione Produttori
                                     </NavLink>
                                 </Dropdown.Item>

@@ -14,8 +14,9 @@ export const deleteSlotWithId = (id, callback) => {
                 axios.delete(`${databaseRoot}/Slots/it/${id}.json`)
                     .then(
                         () => {
-                            firebase.storage().ref().child(`SlotImages/${snakeCase(slotName)}`).delete()
-                                .then(() => callback())
+                            callback()
+                            // firebase.storage().ref().child(`SlotImages/${snakeCase(slotName)}`).delete()
+                            //     .then(() => callback())
                         }
                     )
             }
@@ -32,8 +33,9 @@ export const deleteBonusWithId = (id, callback) => {
                 axios.delete(`${databaseRoot}/Bonus/it/${id}.json`)
                     .then(
                         () => {
-                            firebase.storage().ref().child(`BonusImages/${snakeCase(bonusName)}`).delete()
-                                .then(() => callback())
+                            callback()
+                            // firebase.storage().ref().child(`BonusImages/${snakeCase(bonusName)}`).delete()
+                            //     .then(() => callback())
                         }
                     )
             }
@@ -48,8 +50,9 @@ export const deleteProducerWithId = (id, callback) => {
                 axios.delete(`${databaseRoot}/Producer/it/${id}.json`)
                     .then(
                         () => {
-                            firebase.storage().ref().child(`ProducerImages/${snakeCase(ProducerName)}`).delete()
-                                .then(() => callback())
+                            callback()
+                            // firebase.storage().ref().child(`ProducerImages/${snakeCase(ProducerName)}`).delete()
+                            //     .then(() => callback())
                         }
                     )
             }

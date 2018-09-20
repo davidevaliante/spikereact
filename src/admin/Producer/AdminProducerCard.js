@@ -5,24 +5,20 @@ import { Icon } from 'semantic-ui-react-single/Icon'
 import { Divider } from 'semantic-ui-react-single/Divider'
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { List } from 'semantic-ui-react-single/List'
-import { Image } from 'semantic-ui-react-single/Image'
 import { NavLink } from 'react-router-dom'
-import truncate from "lodash/truncate";
-import { deleteBonusWithId } from "../../firebase/delete";
-import { setToUpdate } from "../../reducers/ToUpdateReducer";
-import {getImageLinkFromName} from "../../utils/Utils";
-import Parser from "html-react-parser";
+import { deleteProducerWithId } from "../../firebase/delete";
 
 function mapStateToProps(state) {
     return {};
 }
 
-class AdminBonusCard extends Component {
+class AdminProducerCard extends Component {
     state = {};
 
-    deleteBonus = (id) => {
-        deleteBonusWithId(id,
+    deleteProducer = (id) => {
+        deleteProducerWithId(id,
             () => {
+                // console.log('DELETE PRODUCER', id)
                 // callback alla dashboard per aggiornare la lista mostrata
                 this.props.onDelete(id)
             })
@@ -40,28 +36,28 @@ class AdminBonusCard extends Component {
                         {/*<Image className='icon slot-card-image' src={this.props.slot.image} size='mini'/>*/}
                         <List.Icon name='github' size='large' verticalAlign='middle' />
                         <List.Content>
-                            <List.Header as='p'>{this.props.bonus.name}</List.Header>
+                            <List.Header as='p'>{this.props.producer.name}</List.Header>
                             <List.Description as='p'>
-                                {Parser(truncate(this.props.bonus.review, { 'length': 175 }))}
+                                {/*{Parser(truncate(this.props.bonus.review, { 'length': 175 }))}*/}
                                 {/*{truncate(Parser(`${this.props.bonus.review}`), { 'length': 175 })}*/}
                                 <Divider />
                                 <div className='crop' >
-                                    <Image style={{ objectFit: 'cover' }} src={getImageLinkFromName('bonus', this.props.bonus.name, 'medium')} />
+                                    {/*<Image style={{ objectFit: 'cover' }} src={getImageLinkFromName('producer', this.props.producer.name, 'large')} />*/}
                                 </div>
                                 <Divider />
-                                <Icon name='star' />
-                                {this.props.bonus.rating}
+                                {/*<Icon name='star' />*/}
+                                {/*{this.props.bonus.rating}*/}
                             </List.Description>
                             <Divider />
                             <Grid stackable columns={1}>
                                 <Grid.Column>
-                                    <NavLink to={`/admin/editbonus/${this.props.bonus.id}`}>
+                                    <NavLink to='#'>
                                         <Button icon labelPosition='left' size='mini'>
                                             <Icon name='edit outline' />Modifica
-                                            </Button>
+                                        </Button>
                                     </NavLink>
                                     <Button icon labelPosition='left' size='mini' floated='right' negative
-                                        onClick={() => this.deleteBonus(this.props.bonus.id)}>
+                                            onClick={() => this.deleteProducer(this.props.producer.id)}>
                                         <Icon name='delete' />Cancella
                                     </Button>
                                 </Grid.Column>
@@ -77,4 +73,4 @@ class AdminBonusCard extends Component {
     };
 }
 
-export default connect(mapStateToProps)(AdminBonusCard);
+export default connect(mapStateToProps)(AdminProducerCard);
