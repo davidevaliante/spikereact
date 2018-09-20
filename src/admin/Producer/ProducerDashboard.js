@@ -6,6 +6,10 @@ import {getProducerList} from "../../firebase/get";
 import AdminNavbar from "../../admin/AdminNavbar";
 import {ADMINPAGES, RESPONSIVE_RESOLUTION} from "../../enums/Constants";
 import AdminProducerCard from "./AdminProducerCard";
+import {Header} from "semantic-ui-react-single/Header";
+import {Icon} from "semantic-ui-react-single/Icon";
+import {Dimmer} from "semantic-ui-react-single/Dimmer";
+import delay from 'lodash/delay';
 
 function mapStateToProps(state) {
     return {};
@@ -13,7 +17,9 @@ function mapStateToProps(state) {
 
 class ProducerDashboard extends Component {
 
-    state = {};
+    state = {
+        active: false
+    };
 
     onListFetched = (rawList) => {
         let list = []
@@ -29,6 +35,10 @@ class ProducerDashboard extends Component {
     };
 
     onProducerDeleted = (id) => {
+        this.setState({ active: true })
+        delay(() => {
+            this.setState({ active: false })
+        }, 1000);
         // TODO cercare nello state l'id cancellato ed eliminarlo evitando una chiamata al DB
         getProducerList(this.onListFetched);
     };
@@ -45,11 +55,16 @@ class ProducerDashboard extends Component {
     }
 
     render() {
-        console.log('STATE', this.state);
-        console.log('PROPS', this.props);
-        const {producerList} = this.state
+        const {producerList, active} = this.state;
+
         return (
             <div style={{maxWidth: '1920px'}}>
+                <Dimmer blurring active={active} page>
+                    <Header as='h2' icon inverted>
+                        <Icon name='check' />
+                        Produttore cancellato con successo
+                    </Header>
+                </Dimmer>
                 <AdminNavbar activeItem={ADMINPAGES.PRODUCER}/>
                 <div style={{marginTop: '5rem'}}>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>

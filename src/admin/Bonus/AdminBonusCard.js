@@ -14,19 +14,17 @@ import {getImageLinkFromName} from "../../utils/Utils";
 import Parser from "html-react-parser";
 
 function mapStateToProps(state) {
-    return {
-        toUpdate: state.toUpdate
-    };
+    return {};
 }
 
 class AdminBonusCard extends Component {
-
+    state = {};
 
     deleteBonus = (id) => {
         deleteBonusWithId(id,
             () => {
-                console.log('AdminBonusCard::deleteBonus', id, this.props)
-                this.props.dispatch(setToUpdate())
+                // callback alla dashboard per aggiornare la lista mostrata
+                this.props.onDelete(id)
             })
     };
 

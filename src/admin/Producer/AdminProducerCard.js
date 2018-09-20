@@ -5,20 +5,15 @@ import { Icon } from 'semantic-ui-react-single/Icon'
 import { Divider } from 'semantic-ui-react-single/Divider'
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { List } from 'semantic-ui-react-single/List'
-import { Image } from 'semantic-ui-react-single/Image'
 import { NavLink } from 'react-router-dom'
-import truncate from "lodash/truncate";
-import {deleteBonusWithId, deleteProducerWithId} from "../../firebase/delete";
-import { setToUpdate } from "../../reducers/ToUpdateReducer";
-import {getImageLinkFromName} from "../../utils/Utils";
-import Parser from "html-react-parser";
+import { deleteProducerWithId } from "../../firebase/delete";
 
 function mapStateToProps(state) {
     return {};
 }
 
 class AdminProducerCard extends Component {
-    state ={};
+    state = {};
 
     deleteProducer = (id) => {
         deleteProducerWithId(id,
