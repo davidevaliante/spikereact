@@ -9,10 +9,10 @@ import {withRouter} from "react-router-dom";
 import ProducerHeader from "../Header/ProducerHeader";
 import {PAGES, RESPONSIVE_RESOLUTION, SLOT_TYPES} from "../../enums/Constants";
 import Description from "../SlotPageComponents/Description";
-import {getProducerWithId, getProducerByName,getSlotListByProducerName} from "../../firebase/get";
+import {getProducerWithId, getProducerByName,getSlotListByProducerName, getSlotsCardBasedOnTime} from "../../firebase/get";
 import Footer from "../Footer";
 import {Segment} from "semantic-ui-react-single/Segment";
-import SlotList from "../HomeComponents/HomeBody/SlotList";
+import FixedSlotList from '../FixedSlotList'
 import {setProducerPage} from "../../reducers/CurrentPageReducer";
 import {onListFetched} from "../../utils/Callbacks";
 
@@ -103,19 +103,22 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
                     {/*/>*/}
                     <Responsive 
                         minWidth={RESPONSIVE_RESOLUTION.LARGE} 
-                        as={SlotList} 
-                        cardPerRow={3} 
+                        as={FixedSlotList} 
+                        cardPerRow={4} 
+                        order='name'
                         slotList={this.state.slotProducerList} />
                     <Responsive 
                         minWidth={RESPONSIVE_RESOLUTION.MEDIUM} 
                         maxWidth={RESPONSIVE_RESOLUTION.LARGE} 
-                        as={SlotList} 
+                        as={FixedSlotList} 
                         cardPerRow={2} 
+                        order='name'
                         slotList={this.state.slotProducerList} />
                     <Responsive 
                         maxWidth={RESPONSIVE_RESOLUTION.MEDIUM} 
-                        as={SlotList} 
+                        as={FixedSlotList} 
                         cardPerRow={1} 
+                        order='name'
                         slotList={this.state.slotProducerList} />
                 </Segment>
 

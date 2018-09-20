@@ -86,6 +86,7 @@ export const getSlotsCardBasedOnTime = (limit, callback) => {
     axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="time"&limitToLast=${limit}`)
         .then(
             list => {
+                console.log(list)
                 store.dispatch(addSlotList(list.data))
             }
         ).catch(err => console.log(err)

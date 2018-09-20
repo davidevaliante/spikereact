@@ -3,18 +3,14 @@ import PropTypes from 'prop-types'
 // semantic
 import { Visibility } from 'semantic-ui-react-single/Visibility'
 // components
-import SlotCard from '../../Cards/SlotCard';
+import SlotCard from './Cards/SlotCard';
 // mix
 import chunk from 'lodash/chunk'
 import orderBy from 'lodash/orderBy'
-import last from 'lodash/last'
-// data
-import { loadNextChunk } from '../../../firebase/get'
-// router e redux
-import { connect } from 'react-redux';
 
 
-const SlotList = (props) => {
+
+const FixedSlotList = (props) => {
 
     // di base renderizza props.maxSlot elementi ma scrollando ne deve carica altre 
     const slotListToRows = (slotList, ordering) => {
@@ -43,10 +39,6 @@ const SlotList = (props) => {
 
         return rows.map((row, index) => (
             <div className='horizontal-center' key={`slot_row_${index}`}>
-                {(index === rows.length - 2 &&
-                    props.type !== 'BAR' &&
-                    props.type !== 'GRATIS')
-                    && <Visibility once={false} onTopVisible={() => loadMoreSlots(listOfSlots)} />}
                 {row.map((element) =>
                     (element && <SlotCard slot={element} key={element.id} />))
                 }
@@ -55,28 +47,18 @@ const SlotList = (props) => {
     }
 
 
-
-    const loadMoreSlots = (listOfSlots) => {
-        loadNextChunk(12, last(listOfSlots).time)
-    }
-
     return (
         <div className='vertical-center'>
-            {props.type === 'GRATIS' && slotListToRows}
             {props.slotList && slotListToRows(props.slotList, props.order)}
         </div>
     )
 }
 
-SlotList.propTypes = {
+FixedSlotList.propTypes = {
     cardPerRow: PropTypes.number,
     maxSlot: PropTypes.number,
     isFixed: PropTypes.bool
 }
 
-const mapStateToProps = (state) => ({
-    slotList: state.slotList,
-    displaying: state.displaying
-})
 
-export default connect(mapStateToProps)(SlotList)
+export default FixedSlotList
