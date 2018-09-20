@@ -38,6 +38,7 @@ class Navbar extends Component {
                 document.getElementById('gratis-nav-link').click()
                 this.props.dispatch(setGratisPage())
                 break;
+
             default:
                 // document.getElementById('home-nav-link').click()
                 this.props.dispatch(setHomePage())
@@ -124,6 +125,12 @@ class Navbar extends Component {
                                 <Menu.Item
                                     as="a">
                                     <ProducersDropdown />
+                                </Menu.Item>
+                                <Menu.Item
+                                    as='a'
+                                    onClick={""}
+                                    active={this.props.displaying === PAGES.ARTICLE}>
+                                    <NavLink id='bar-nav-link' to={ROUTE.ARTICLE}>Articoli</NavLink>
                                 </Menu.Item>
 
                                 <Menu.Item borderless position='right' style={{ marginRight: '4rem' }}>

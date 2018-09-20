@@ -18,6 +18,7 @@ import BonusDashboard from "../admin/Bonus/BonusDashboard"
 import AddExtraFromHtml from '../admin/Extra/AddExtraFromHtml'
 import BonusArticle from '../components/Extra/BonusArticle'
 import RichTextEditor from "../admin/Extra/RichEdit";
+import ListArticle from "../components/Extra/ListArticle";
 
 const AppRouter = () => {
     let currentSlotPath = ''
@@ -40,6 +41,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.SLOT_GRATIS} component={HomePage} exact={true} page={PAGES.SLOT_GRATIS} />
                     <Route path={ROUTE.SLOT_BAR} component={HomePage} exact={true} page={PAGES.SLOT_BAR} />
                     <Route path={ROUTE.EXTRA} component={BonusArticle} />
+                    <Route path={ROUTE.ARTICOLI} component={ListArticle} />
 
                     { /* HOME filtered by producers */}
                     <Route path={ROUTE.PRODUCER} component={HomePage} />
