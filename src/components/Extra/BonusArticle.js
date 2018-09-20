@@ -10,7 +10,7 @@ import { Visibility } from 'semantic-ui-react-single/Visibility'
 import Navbar from '../Header/Navbar'
 import Footer from '../Footer'
 // data
-import { getExtraById } from '../../firebase/get'
+import { getGuideById } from '../../firebase/get'
 // mix
 import Parser from 'html-react-parser'
 // router e redux
@@ -19,13 +19,13 @@ import { withRouter } from 'react-router-dom'
 class BonusArticle extends Component {
 
     state = {
-        isLoading:true
+        isLoading: true
     }
 
     componentDidMount() {
         if (this.props.match.params.id) {
-            getExtraById(this.props.match.params.id, data => {
-                this.setState({isLoading:false, content: data, parsedContent: Parser(`${data.content}`) })
+            getGuideById(this.props.match.params.id, data => {
+                this.setState({ isLoading: false, content: data, parsedContent: Parser(`${data.content}`) })
             })
         }
     }
@@ -44,13 +44,13 @@ class BonusArticle extends Component {
     }
 
     goToBonus = () => this.props.bonus.link && window.open(this.props.bonus.link)
-    
+
 
     render() {
         const { content, showBottomButtons, parsedContent, isLoading } = this.state
         console.log(showBottomButtons);
-        
-        if(isLoading)  return (
+
+        if (isLoading) return (
             <div className='extra-bg'>
                 {window.scrollTo(0, 0)}
                 <Navbar fixColor={true} />
@@ -69,22 +69,22 @@ class BonusArticle extends Component {
             <div className='extra-bg'>
                 {window.scrollTo(0, 0)}
                 <Navbar fixColor={true} />
-                    <Visibility
-                        once={false}
-                        offset={500}
-                        onBottomVisible={this.showBottomButtons}
-                        onBottomVisibleReverse={this.hideBottomButtons}>
-                        <div className='extra-button-left'>
-                            <Button onClick={()=>this.goBack()} size='large' animated inverted>
-                                <Button.Content visible>Torna Indietro</Button.Content>
-                                <Button.Content hidden inverted>
-                                    <Icon name='arrow left' />
-                                </Button.Content>
-                            </Button>
-                        </div>
-                    </Visibility>
+                <Visibility
+                    once={false}
+                    offset={500}
+                    onBottomVisible={this.showBottomButtons}
+                    onBottomVisibleReverse={this.hideBottomButtons}>
+                    <div className='extra-button-left'>
+                        <Button onClick={() => this.goBack()} size='large' animated inverted>
+                            <Button.Content visible>Torna Indietro</Button.Content>
+                            <Button.Content hidden inverted>
+                                <Icon name='arrow left' />
+                            </Button.Content>
+                        </Button>
+                    </div>
+                </Visibility>
                 <div className='extra-button-right'>
-                    <Button onClick={()=>this.goToBonus()} size='large' animated inverted>
+                    <Button onClick={() => this.goToBonus()} size='large' animated inverted>
                         <Button.Content visible>Provalo Subito</Button.Content>
                         <Button.Content hidden inverted>
                             <Icon name='arrow left' />

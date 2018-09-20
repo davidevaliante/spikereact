@@ -1,21 +1,25 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import filter from 'lodash/filter';
 import delay from 'lodash/delay'
-import {Button} from 'semantic-ui-react-single/Button'
-import {Form} from 'semantic-ui-react-single/Form'
-import {Input} from 'semantic-ui-react-single/Input'
-import {Dropdown} from 'semantic-ui-react-single/Dropdown'
-import {Dimmer} from 'semantic-ui-react-single/Dimmer'
-import {Header} from 'semantic-ui-react-single/Header'
-import {Icon} from 'semantic-ui-react-single/Icon'
+import { Button } from 'semantic-ui-react-single/Button'
+import { Form } from 'semantic-ui-react-single/Form'
+import { Input } from 'semantic-ui-react-single/Input'
+import { Dropdown } from 'semantic-ui-react-single/Dropdown'
+import { Dimmer } from 'semantic-ui-react-single/Dimmer'
+import { Header } from 'semantic-ui-react-single/Header'
+import { Icon } from 'semantic-ui-react-single/Icon'
+import { Checkbox } from 'semantic-ui-react-single/Checkbox'
+import AddExtraFromHtml from '../Extra/AddExtraFromHtml'
 import ImagePicker from '../ImagePicker';
-import {pushNewBonus} from '../../firebase/firebase';
-import {updateBonusWithId} from '../../firebase/update'
-import {ADMINPAGES} from "../../enums/Constants";
-import {getBonusWithId} from '../../firebase/get'
+import { pushNewBonus } from '../../firebase/firebase';
+import { updateBonusWithId } from '../../firebase/update'
+import { ADMINPAGES } from "../../enums/Constants";
+import { getBonusWithGuide } from '../../firebase/get'
 import AdminNavbar from "../AdminNavbar";
 import RichEdit from "../Extra/RichEdit";
-import {getImageLinkFromName} from "../../utils/Utils";
+import { getImageLinkFromName } from "../../utils/Utils";
+import { removeHtmlFrom } from '../../utils/Utils'
+import { pushNewBonuswithGuide } from '../../firebase/post'
 
 class AddBonus extends Component {
 
@@ -27,25 +31,34 @@ class AddBonus extends Component {
     };
 
     ratingStateOptions = [
-        {key: 'uno', value: '1', text: '1'},
-        {key: 'due', value: '2', text: '2'},
-        {key: 'tre', value: '3', text: '3'},
-        {key: 'quattro', value: '4', text: '4'},
-        {key: 'cinque', value: '5', text: '5'},
+        { key: 'uno', value: '1', text: '1' },
+        { key: 'due', value: '2', text: '2' },
+        { key: 'tre', value: '3', text: '3' },
+        { key: 'quattro', value: '4', text: '4' },
+        { key: 'cinque', value: '5', text: '5' },
 
     ];
 
     componentDidMount() {
         if (this.props.match.params.bonusid) {
-            getBonusWithId(this.props.match.params.bonusid, 'it', (bonus) => {
-                this.setState({
-                    isInEditMode: true,
-                    bonusToEdit: bonus,
-                    defaultRating: bonus.rating,
-                    defaultReview: bonus.review
-                })
-                this.setState({submitBtn: 'Modifica'})
-            })
+            getBonusWithGuide(this.props.match.params.bonusid, 'it',
+                // callback
+                (bonus, guide) => {
+                    console.log(bonus.data)
+                    console.log(guide.data)
+
+                    this.setState({
+                        isInEditMode: true,
+                        bonusToEdit: bonus.data,
+                        defaultRating: bonus.data.rating,
+                        currentGuideValue: guide.data.content,
+                        guideInputMode: 'pastedGuideInput',
+                        bonusGuideId: bonus.data.guideId,
+                        submitBtn: 'Modifica'
+                    })
+                    document.getElementById('pastedHtml').value = guide.data.content
+                }
+            )
         }
     }
 
@@ -60,7 +73,6 @@ class AddBonus extends Component {
     buildFakeSlot = () => {
         document.getElementById('nameField').value = `Bonus Esempio numero ${Math.floor(Math.random() * 100)}`;
         document.getElementById('welcomeBonusField').value = `${Math.floor(Math.random() * 4) * 10} SENZA DEPOSITO + 30 FREE SPIN + 300€`;
-        // document.getElementById('reviewField').value = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque ea tempora delectus rem omnis vero, tenetur quaerat numquam repellat architecto quas minus debitis deleniti? Eveniet accusantium quo amet deleniti tempora?";
         document.getElementById('linkField').value = "https://youtu.be/G4VAdWJXyFk?list=RDG4VAdWJXyFk";
 
         this.setState({
@@ -70,43 +82,36 @@ class AddBonus extends Component {
     };
 
     submitNewBonus = () => {
+        const { isInEditMode } = this.state
         // resetta quali sono i field vuoti errori
-        this.setState({shouldDisplayErrors: false, emptyFields: []});
+        this.setState({ shouldDisplayErrors: false, emptyFields: [] });
 
         const name = document.getElementById('nameField').value.trim();
         if (!name) {
             let errorList = this.state.emptyFields;
             errorList.push('name');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
 
         const bonus = document.getElementById('welcomeBonusField').value.trim();
         if (!bonus) {
             let errorList = this.state.emptyFields;
             errorList.push('bonus');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
-        }
-
-        // const review = document.getElementById('reviewField').value.trim();
-        const review = document.getElementById('htmlText').value.trim();
-        if (!review) {
-            let errorList = this.state.emptyFields;
-            errorList.push('review');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
 
         const link = document.getElementById('linkField').value.trim();
         if (!link) {
             let errorList = this.state.emptyFields;
             errorList.push('link');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
 
         let rating = this.state.rating;
         if (!rating && !this.state.isInEditMode) {
             let errorList = this.state.emptyFields;
             errorList.push('rating');
-            this.setState({shouldDisplayErrors: true, emptyFields: errorList})
+            this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         } else {
             if (this.state.isInEditMode)
                 rating = this.state.bonusToEdit.rating
@@ -114,38 +119,47 @@ class AddBonus extends Component {
                 rating = this.state.rating
         }
 
+        let htmlTextString = ''
+        if (this.state.guideInputMode === 'manualGuideInput')
+            htmlTextString = document.getElementById('htmlText').value.trim()
+        if (this.state.guideInputMode === 'pastedGuideInput')
+            htmlTextString = document.getElementById('pastedHtml').value.trim()
+
+
 
         if (name && bonus && link && rating) {
             const newBonus = {
                 name: name,
                 bonus: bonus,
                 rating: rating,
-                review: review,
                 link: link,
+                guideId: this.state.bonusGuideId
             }
 
             const imageData = this.state.pickedImage;
 
-            this.state.isInEditMode ? updateBonusWithId(this.props.match.params.bonusid, newBonus, imageData, this.onBonusPushSuccess) :
-                pushNewBonus(newBonus, imageData, this.onBonusPushSuccess);
+            if (!isInEditMode)
+                pushNewBonuswithGuide(newBonus, imageData, htmlTextString, 'it')
+            else
+                updateBonusWithId(this.props.match.params.bonusid, newBonus, imageData, htmlTextString, this.onBonusPushSuccess)
         }
 
     };
 
     resetErrorOn = (fieldName) => {
         const updated = filter(this.state.emptyFields, (field) => field !== fieldName);
-        this.setState({emptyFields: updated});
+        this.setState({ emptyFields: updated });
     };
 
     onBonusPushSuccess = () => {
-        this.setState({active: true})
+        this.setState({ active: true })
         delay(() => {
-            this.setState({active: false})
+            this.setState({ active: false })
         }, 800)
     };
 
     onProducerSelected = (producer) => {
-        this.setState({producer: producer})
+        this.setState({ producer: producer })
     };
 
     onImageSelected = (image) => {
@@ -154,24 +168,28 @@ class AddBonus extends Component {
         })
     };
 
-    updateBonus = () => {
-
-    };
-
-    handleOpen = () => this.setState({active: true});
-    handleClose = () => this.setState({active: false});
+    handleOpen = () => this.setState({ active: true });
+    handleClose = () => this.setState({ active: false });
+    handleGuideInputMode = (e, { value }) => this.setState({ guideInputMode: value })
 
     render() {
-        const {active} = this.state;
-        const {bonusToEdit, isInEditMode} = this.state;
+        const { active } = this.state;
+        const { bonusToEdit, isInEditMode } = this.state;
+        let guideInputisManual = true
+        if (this.state.guideInputMode === 'manualGuideInput')
+            guideInputisManual = true
+        if (this.state.guideInputMode === 'pastedGuideInput')
+            guideInputisManual = false
+        console.log(this.state);
+
         return (
             <div>
-                <AdminNavbar activeItem={ADMINPAGES.BONUS}/>
+                <AdminNavbar activeItem={ADMINPAGES.BONUS} />
                 <div
-                    style={{padding: '4rem'}}>
+                    style={{ padding: '4rem' }}>
                     <Dimmer active={active} onClickOutside={this.handleClose} page>
                         <Header as='h2' icon inverted>
-                            <Icon name='check'/>
+                            <Icon name='check' />
                             {isInEditMode ? 'Modificato' : 'Aggiunto'} con successo
                         </Header>
                     </Dimmer>
@@ -208,7 +226,7 @@ class AddBonus extends Component {
                                 onChange={() => this.resetErrorOn('bonus')}
                                 defaultValue={bonusToEdit && bonusToEdit.bonus}
                                 label='Bonus di benvenuto'
-                                placeholder='Bonus di benvenuto'/>
+                                placeholder='Bonus di benvenuto' />
 
                             <Form.Field
                                 id='linkField'
@@ -217,65 +235,88 @@ class AddBonus extends Component {
                                 onChange={() => this.resetErrorOn('link')}
                                 label='Link del bonus'
                                 defaultValue={bonusToEdit && bonusToEdit.link}
-                                placeholder='Copia ed incolla qui'/>
+                                placeholder='Copia ed incolla qui' />
                         </Form.Group>
 
-                        <Form.Group>
-                            <Form.Field
-                                label='Recensione'
-                                error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('review')}/>
+                        <h1
+                            style={{
+                                color: 'black',
+                                marginBottom: '2rem',
+                                textAlign: 'center'
+                            }}>
+                            Guida (opzionale)
+                        </h1>
+
+                        <Form.Group inline style={{ marginBottom: '2rem' }}>
+                            <Checkbox
+                                style={{ marginRight: '3rem' }}
+                                radio
+                                label='Inserisci guida manualmente'
+                                name='checkboxRadioGroup'
+                                value='manualGuideInput'
+                                checked={guideInputisManual}
+                                onChange={this.handleGuideInputMode}
+                            />
+                            <Checkbox
+                                radio
+                                label='Copia e incolla html'
+                                name='checkboxRadioGroup'
+                                value='pastedGuideInput'
+                                checked={!guideInputisManual}
+                                onChange={this.handleGuideInputMode}
+                            />
                         </Form.Group>
-                            {!isInEditMode && <RichEdit/>}
-                            {isInEditMode && <RichEdit defaultContent={this.state.defaultReview}/>}
+                        {(!isInEditMode && guideInputisManual) && <RichEdit />}
+                        {(isInEditMode && guideInputisManual) && <RichEdit defaultContent={this.state.defaultReview} />}
+                        {((!isInEditMode && !guideInputisManual) && <AddExtraFromHtml />)}
+                        {((isInEditMode && !guideInputisManual) && <AddExtraFromHtml defaultValue={this.state.currentGuideValue} />)}
 
                         <Form.Group
-                            style={{marginTop: '2rem'}}
+                            style={{ marginTop: '2rem' }}
                             widths='equal'>
                             <Form.Field>
                                 {(this.state.defaultRating && isInEditMode) &&
-                                <Dropdown
-                                    id='ratingField'
-                                    error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
-                                    style={{marginBottom: '1rem'}}
-                                    placeholder='Ok'
-                                    onChange={(event, data) => this.onDropDownChange(data)}
-                                    selection
-                                    defaultValue={this.state.defaultRating}
-                                    options={this.ratingStateOptions}/>
+                                    <Dropdown
+                                        id='ratingField'
+                                        error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
+                                        style={{ marginBottom: '1rem' }}
+                                        placeholder='Ok'
+                                        onChange={(event, data) => this.onDropDownChange(data)}
+                                        selection
+                                        defaultValue={this.state.defaultRating}
+                                        options={this.ratingStateOptions} />
                                 }
                                 {!isInEditMode &&
-                                <Dropdown
-                                    id='ratingField'
-                                    error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
-                                    style={{marginBottom: '1rem'}}
-                                    placeholder='Rating'
-                                    onChange={(event, data) => this.onDropDownChange(data)}
-                                    selection
-                                    options={this.ratingStateOptions}/>
+                                    <Dropdown
+                                        id='ratingField'
+                                        error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('rating')}
+                                        style={{ marginBottom: '1rem' }}
+                                        placeholder='Rating'
+                                        onChange={(event, data) => this.onDropDownChange(data)}
+                                        selection
+                                        options={this.ratingStateOptions} />
                                 }
                             </Form.Field>
 
-                            <Form.Field style={{width: '100%'}}>
+                            <Form.Field style={{ width: '100%' }}>
 
                                 {(this.state.bonusToEdit && isInEditMode) &&
-                                <ImagePicker
-                                    onImageSelected={this.onImageSelected}
-                                    style={{width: '100%', marginLeft: '2rem'}}
-                                    imagePreview={getImageLinkFromName('bonus', this.state.bonusToEdit.name)}/>
+                                    <ImagePicker
+                                        onImageSelected={this.onImageSelected}
+                                        style={{ width: '100%', marginLeft: '2rem' }}
+                                        imagePreview={getImageLinkFromName('bonus', this.state.bonusToEdit.name)} />
                                 }
                                 {!isInEditMode &&
-                                <ImagePicker
-                                    onImageSelected={this.onImageSelected}
-                                    style={{width: '100%', marginLeft: '2rem'}}/>
+                                    <ImagePicker
+                                        onImageSelected={this.onImageSelected}
+                                        style={{ width: '100%', marginLeft: '2rem' }} />
                                 }
-                                {console.log('IMG LINK', getImageLinkFromName('bonus', (this.state.bonusToEdit && this.state.bonusToEdit.name)))}
-
                             </Form.Field>
 
 
                         </Form.Group>
                         <Form.Field
-                            style={{width: '100%'}}
+                            style={{ width: '100%' }}
                             onClick={this.submitNewBonus}
                             control={Button}>
                             {this.state.submitBtn}

@@ -7,8 +7,8 @@ import { updateSlotMenuList } from '../reducers/SlotsMenuReducer'
 import { addPopularSlot } from '../reducers/PopularSlotreducer'
 import map from 'lodash/map'
 
-export const getExtraById = (extraId, callback) => {
-    axios.get(`${databaseRoot}/Extra/it/${extraId}.json`)
+export const getGuideById = (guideId, callback) => {
+    axios.get(`${databaseRoot}/BonusGuides/it/${guideId}.json`)
         .then(value => {
             callback(value.data)
         })
@@ -48,6 +48,13 @@ export const getBonusWithId = (id, country, callback) => {
         .then(
             success => callback(success.data)
         )
+};
+
+export const getBonusWithGuide = async (id, country, callback) => {
+    let c = COUNTRY.ITALY;
+    const bonusData = await axios.get(`${databaseRoot}/Bonus/it/${id}.json`)
+    const guideData = await axios.get(`${databaseRoot}/BonusGuides/it/${bonusData.data.guideId}.json`)
+    callback(bonusData, guideData)
 };
 
 export const getSlotsForMenu = (callback) => {

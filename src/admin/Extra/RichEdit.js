@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import RichTextEditor from 'react-rte';
 
 class RichEdit extends Component {
@@ -8,7 +8,7 @@ class RichEdit extends Component {
     };
 
     componentDidMount() {
-        if (this.props.defaultContent){
+        if (this.props.defaultContent) {
             this.setState({
                 value: this.state.value.setContentFromString(this.props.defaultContent, this.state.format),
             });
@@ -16,11 +16,12 @@ class RichEdit extends Component {
     }
 
     onChange = (value) => {
-        this.setState({value});
+        this.setState({ value });
         if (this.props.onChange) {
             // Send the changes up to the parent component as an HTML string.
             // This is here to demonstrate using `.toString()` but in a real app it
             // would be better to avoid generating a string on each change.
+            // da cambiare, utilizzare lodash/debounce ??? --- DAVIDE
             this.props.onChange(
                 value.toString('html')
             );
@@ -36,16 +37,16 @@ class RichEdit extends Component {
     };
 
     render() {
-        let {value, format} = this.state;
+        let { value, format } = this.state;
 
         return (
             <div>
                 <RichTextEditor
-                    id='formatedText'
+                    id='richTextInput'
                     value={this.state.value}
                     onChange={this.onChange}
                 />
-                <label for="htmlText">HTML da cssare</label>
+                <label for="htmlText">Trasformato in html :</label>
                 <textarea
                     id='htmlText'
                     placeholder="Editor Source"

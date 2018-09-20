@@ -19,7 +19,7 @@ export const deleteImages = async (name) => {
     await firebase.storage().ref().child(`thumb_64_slot_${snakeCase(name)}`).delete().catch((err) => console.log(err))
 }
 
-export const pushNewImage = (image, folderName, imageName, callback) => {
+export const pushNewImage = async (image, folderName, imageName, callback) => {
     const storageRef = firebase.storage().ref();
     storageRef.child(`${folderName}/${imageName}`).put(image)
         .then(
@@ -76,7 +76,7 @@ export const pushNewSlot = (newSlot, imageData, onPushSlotSuccess, country) => {
         )
 };
 
-export const pushNewBonus = (newBonus, imageData, onBonusPushSuccess, country) => {
+export const pushNewBonus = (newBonus, imageData, country, onBonusPushSuccess) => {
     newBonus['time'] = now();
     let c = COUNTRY.ITALY;
     axios.post(`${databaseRoot}/Bonus/${c}.json`, newBonus)

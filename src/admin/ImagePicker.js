@@ -7,7 +7,7 @@ class ImagePicker extends Component {
     state = {}
 
     componentDidMount() {
-        if (this.props.imagePreview && doesFileExist(this.props.imagePreview) ) {
+        if (this.props.imagePreview && doesFileExist(this.props.imagePreview)) {
             this.setState({ currentImageUrl: this.props.imagePreview })
         }
     }
@@ -17,8 +17,8 @@ class ImagePicker extends Component {
         console.log('on change triggered');
 
         const selectedFile = document.getElementById('imagePicker').files[0];
-        const url = URL.createObjectURL(selectedFile);
         if (selectedFile && split(selectedFile.type, '/')[0] === 'image') {
+            const url = URL.createObjectURL(selectedFile);
             this.props.onImageSelected(selectedFile)
             this.setState({ currentImage: selectedFile, currentImageUrl: url })
         } else {
