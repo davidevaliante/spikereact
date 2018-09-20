@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { COUNTRY } from '../enums/Constants'
+import {COUNTRY, DATABASE_REFERENCE} from '../enums/Constants'
 import { databaseRoot } from './firebaseConfig'
 import store from '../store/store'
 import { addSlotList, replaceSlotList } from '../reducers/SlotListReducer'
@@ -109,6 +109,17 @@ export const getAllByType = (type, callback) => {
         )
 };
 
+export const getAllByProducer = (producerId, callback) => {
+    axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="producer"&equalTo="${producerId}"`)
+        .then(
+            list => {
+                console.log(list.data);
+                callback(list.data)
+                // store.dispatch(replaceSlotList(list.data))
+            }
+        )
+};
+
 
 export const getSlotsCardBasedOnName = (text, limit, callback) => {
     axios.get(`${databaseRoot}/SlotsCard/it.json?orderBy="name"&startAt="${text}"&endAt="${text}\uf8ff"`)
@@ -152,6 +163,14 @@ export const getSlotList = (callback, country) => {
 export const getSlotWithId = (id, callback, country) => {
     let c = COUNTRY.ITALY;
     axios.get(`${databaseRoot}/Slots/${c}/${id}.json`)
+        .then(
+            success => callback(success.data)
+        )
+};
+
+export const getProducerWithId = (id, callback, country) => {
+    let c = COUNTRY.ITALY;
+    axios.get(`${databaseRoot}/${DATABASE_REFERENCE.PRODUCER}/${c}/${id}.json`)
         .then(
             success => callback(success.data)
         )

@@ -25,14 +25,16 @@ const Description = (props) => {
                     {Parser(`${props.text}`)}
                 </p>
 
+                {!props.hidePlayButton &&
                 <div className='slot-playbutton'>
                     <Button animated color='red' size='huge' onClick={() => props.dispatch(setUserPlaying())}>
                         <Button.Content visible>Provala Subito !</Button.Content>
                         <Button.Content hidden>
-                            <Icon name='gamepad' size='large' />
+                            <Icon name='gamepad' size='large'/>
                         </Button.Content>
                     </Button>
                 </div>
+                }
             </Container>
         </Segment>
     )
