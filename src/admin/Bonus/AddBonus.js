@@ -28,6 +28,7 @@ class AddBonus extends Component {
         shouldDisplayErrors: false,
         emptyFields: [],
         submitBtn: 'Aggiungi',
+        guideInputMode: 'manualGuideInput'
     };
 
     ratingStateOptions = [
@@ -51,12 +52,12 @@ class AddBonus extends Component {
                         isInEditMode: true,
                         bonusToEdit: bonus.data,
                         defaultRating: bonus.data.rating,
-                        currentGuideValue: guide.data.content,
+                        currentGuideValue: guide.data && guide.data.content,
                         guideInputMode: 'pastedGuideInput',
                         bonusGuideId: bonus.data.guideId,
                         submitBtn: 'Modifica'
                     })
-                    document.getElementById('pastedHtml').value = guide.data.content
+                    document.getElementById('pastedHtml').value = guide.data ? guide.data.content : ''
                 }
             )
         }
@@ -124,8 +125,6 @@ class AddBonus extends Component {
             htmlTextString = document.getElementById('htmlText').value.trim()
         if (this.state.guideInputMode === 'pastedGuideInput')
             htmlTextString = document.getElementById('pastedHtml').value.trim()
-
-
 
         if (name && bonus && link && rating) {
             const newBonus = {
