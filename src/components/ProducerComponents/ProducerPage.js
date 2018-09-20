@@ -9,10 +9,10 @@ import {withRouter} from "react-router-dom";
 import ProducerHeader from "../Header/ProducerHeader";
 import {PAGES, RESPONSIVE_RESOLUTION, SLOT_TYPES} from "../../enums/Constants";
 import Description from "../SlotPageComponents/Description";
-import {getAllByProducer, getAllByType, getProducerWithId, getSlotBasedOnProducer} from "../../firebase/get";
+import {getProducerWithId, getProducerByName,getSlotListByProducerName, getSlotsCardBasedOnTime} from "../../firebase/get";
 import Footer from "../Footer";
 import {Segment} from "semantic-ui-react-single/Segment";
-import SlotList from "../HomeComponents/HomeBody/SlotList";
+import FixedSlotList from '../FixedSlotList'
 import {setProducerPage} from "../../reducers/CurrentPageReducer";
 import {onListFetched} from "../../utils/Callbacks";
 
@@ -27,18 +27,21 @@ class ProducerPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.match.params.id !== this.props.match.params.id){
+        if (prevProps.match.params.producerName !== this.props.match.params.producerName){
             this.gettingPageData()
         }
     }
 
     gettingPageData = () => {
-        getProducerWithId(this.props.match.params.id, (producer) => {
-            this.props.dispatch(setProducerPage(producer.name));
-            this.setState({currentProducer: producer});
-            // get dal DB delle slot relative al produttore
-            getAllByProducer(producer.name, (data) => {
-                this.setState({slotProducerList: onListFetched(data)})
+        console.log(this.props.match.params.producerName);
+        
+        getProducerByName(this.props.match.params.producerName, 
+            // callback 
+            producerDataResponse => {
+            getSlotListByProducerName(this.props.match.params.producerName, 
+                // callback 
+                slotListObject => {
+                this.setState({producer:producerDataResponse, slotProducerList: onListFetched(slotListObject)})
             })
         })
     }
@@ -47,11 +50,9 @@ class ProducerPage extends Component {
     handleContextRef = contextRef => this.setState({contextRef});
 
     render() {
-        console.log('STATE', this.state)
-        console.log('PROPS', this.props)
-        const {contextRef, order, currentProducer} = this.state;
-        const type = '';
-
+        const { currentProducer} = this.state;
+        console.log(this.state);
+        
         return (
             <div>
                 <Navbar displaying={PAGES.PRODUCER}/>
@@ -100,9 +101,25 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
                         {/*type={SLOT_TYPES.PRODUCER_FILTERED}*/}
                         {/*isSticky={contextRef}*/}
                     {/*/>*/}
-                    <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE} as={SlotList} cardPerRow={3} type={type} slotList={this.state.slotProducerList} />
-                    <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} maxWidth={RESPONSIVE_RESOLUTION.LARGE} as={SlotList} cardPerRow={2} type={type} slotList={this.state.slotProducerList} />
-                    <Responsive maxWidth={RESPONSIVE_RESOLUTION.MEDIUM} as={SlotList} cardPerRow={1} type={type} slotList={this.state.slotProducerList} />
+                    <Responsive 
+                        minWidth={RESPONSIVE_RESOLUTION.LARGE} 
+                        as={FixedSlotList} 
+                        cardPerRow={4} 
+                        order='name'
+                        slotList={this.state.slotProducerList} />
+                    <Responsive 
+                        minWidth={RESPONSIVE_RESOLUTION.MEDIUM} 
+                        maxWidth={RESPONSIVE_RESOLUTION.LARGE} 
+                        as={FixedSlotList} 
+                        cardPerRow={2} 
+                        order='name'
+                        slotList={this.state.slotProducerList} />
+                    <Responsive 
+                        maxWidth={RESPONSIVE_RESOLUTION.MEDIUM} 
+                        as={FixedSlotList} 
+                        cardPerRow={1} 
+                        order='name'
+                        slotList={this.state.slotProducerList} />
                 </Segment>
 
                 <Footer/>

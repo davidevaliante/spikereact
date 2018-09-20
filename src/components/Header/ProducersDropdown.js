@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 // mix
 import { getImageLinkFromName } from '../../utils/Utils'
-import { setProducerPage } from '../../reducers/CurrentPageReducer'
 // router e redux
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class ProducersDropdown extends Component {
     state = {};
@@ -28,8 +28,7 @@ class ProducersDropdown extends Component {
     }
 
     dropdownChoiceHandler = (producerName) => {
-        this.props.dispatch(setProducerPage(producerName))
-        this.setState({ path: `/producer/${producerName}` })
+        this.props.history.push(`/producer/${producerName}`)
     }
 
 
@@ -48,4 +47,4 @@ const mapStateToProps = (state) => ({
     producerList: state.producerList
 })
 
-export default connect(mapStateToProps)(ProducersDropdown)
+export default withRouter(connect(mapStateToProps)(ProducersDropdown))
