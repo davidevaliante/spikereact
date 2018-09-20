@@ -3,7 +3,7 @@ import now from 'lodash/now'
 import {databaseRoot} from './firebaseConfig'
 import snakeCase from 'lodash/snakeCase'
 import {pushNewImage} from './firebase'
-import {STORAGE_FOLDERS} from '../enums/Constants'
+import {DATABASE_REFERENCE, STORAGE_FOLDERS} from '../enums/Constants'
 
 export const updateBonusWithId = (bonusId, updatedBonus, updatedImage, callback) => {
     const data = now();
@@ -32,6 +32,24 @@ export const updateSlotWithId = (slotId, updatedSlot, updatedImage, callback) =>
                     updatedImage,
                     STORAGE_FOLDERS.SLOT_IMAGES,
                     `slot_${snakeCase(updatedSlot.name)}`
+                )
+            }
+            callback();
+            console.log('patched');
+        })
+        .catch(error => console.log(error)
+        )
+};
+
+export const updateProducerWithId = (id, updatedProducer, updatedImage, callback) => {
+    const data = now();
+    axios.patch(`${databaseRoot}/Producer/it/${id}.json`, { ...updatedProducer, time: data })
+        .then((fullfilled) => {
+            if (updatedImage) {
+                pushNewImage(
+                    updatedImage,
+                    STORAGE_FOLDERS.BONUS_IMAGES,
+                    `bonus_${snakeCase(updatedProducer.name)}`
                 )
             }
             callback();

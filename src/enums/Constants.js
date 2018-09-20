@@ -39,7 +39,7 @@ export const ROUTE = {
     SLOT_BAR: '/slot-bar',
     ABOUT: '/about',
     EXTRA: `/article/:id`,
-    PRODUCER: `/producer/:name`,
+    PRODUCER: `/producer/:id`,
     ERROR404: '*',
 
 

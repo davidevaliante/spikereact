@@ -33,3 +33,14 @@ export const onProducerListFetched = (producerList) => {
     }
     store.dispatch(addProducerList(list))
 }
+
+
+export const onListFetched = (rawList) => {
+    let list = []
+    for (const key in rawList) {
+        const item = rawList[key];
+        item['id'] = key
+        list.push(item)
+    }
+    return list
+}

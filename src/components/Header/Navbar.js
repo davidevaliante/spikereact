@@ -38,6 +38,9 @@ class Navbar extends Component {
                 document.getElementById('gratis-nav-link').click()
                 this.props.dispatch(setGratisPage())
                 break;
+            case PAGES.PRODUCER:
+                this.props.dispatch(setProducerPage(this.props.match.params.name));
+                break;
             default:
                 // document.getElementById('home-nav-link').click()
                 this.props.dispatch(setHomePage())
@@ -68,7 +71,11 @@ class Navbar extends Component {
                         <NavLink id='bar-nav-link' to={ROUTE.SLOT_BAR}>Slot da bar</NavLink>
                     </Menu.Item>
 
-
+                    <Menu.Item
+                        as="a"
+                        active={this.props.displaying === PAGES.PRODUCER}>
+                        <ProducersDropdown />
+                    </Menu.Item>
 
                     <Menu.Item  >
                         <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
@@ -88,6 +95,7 @@ class Navbar extends Component {
                     onBottomPassedReverse={this.hideFixedMenu}>
                     <div>
                         <Menu
+                            stackable
                             style={!this.state.fixed ? { position: 'absolute', zIndex: 99, width: '100%' } : { zIndex: 99 }}
                             fixed={this.state.fixed ? 'top' : null}
                             inverted={!this.props.fixColor && !this.state.fixed}
@@ -122,11 +130,11 @@ class Navbar extends Component {
                                 </Menu.Item>
 
                                 <Menu.Item
-                                    as="a">
+                                    as="a" >
                                     <ProducersDropdown />
                                 </Menu.Item>
 
-                                <Menu.Item borderless position='right' style={{ marginRight: '4rem' }}>
+                                <Menu.Item borderless position='right'>
                                     <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
                                 </Menu.Item>
                             </Container>
@@ -138,6 +146,8 @@ class Navbar extends Component {
     }
 
     render() {
+        console.log('STATE', this.state)
+        console.log('PROPS', this.props)
         return (
             <div>
                 {this.props.isResponsive ? this.responsivMobile() : this.responsivMobile2()}

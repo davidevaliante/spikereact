@@ -8,7 +8,7 @@ import { setProducerPage } from '../../reducers/CurrentPageReducer'
 import { connect } from 'react-redux'
 
 class ProducersDropdown extends Component {
-    state = {}
+    state = {};
 
     formatProducerForDropdown = (list) => {
         let formattedList = []
@@ -36,7 +36,7 @@ class ProducersDropdown extends Component {
     render() {
         return (
             <Dropdown
-                placeholder='Produttori'
+                text='Produttori'
                 onChange={(event, data) => this.dropdownChoiceHandler(data.value)}
                 options={this.formatProducerForDropdown(this.props.producerList)} />
         )
