@@ -11,7 +11,7 @@ import ProducersDropdown from './ProducersDropdown'
 // router e redux
 import { NavLink } from 'react-router-dom'
 import { PAGES, ROUTE } from '../../enums/Constants'
-import { setHomePage, setBarPage, setGratisPage, setProducerPage } from '../../reducers/CurrentPageReducer'
+import { setHomePage, setBarPage, setGratisPage, setProducerPage, setArticlePage } from '../../reducers/CurrentPageReducer'
 import { connect } from 'react-redux'
 // static files
 import logo from '../../static/slot-icon.svg';
@@ -37,6 +37,10 @@ class Navbar extends Component {
             case PAGES.SLOT_GRATIS:
                 document.getElementById('gratis-nav-link').click()
                 this.props.dispatch(setGratisPage())
+                break;
+            case PAGES.ARTICLE:
+                document.getElementById('article-nav-link').click()
+                this.props.dispatch(setArticlePage())
                 break;
             case PAGES.PRODUCER:
                 this.props.dispatch(setProducerPage(this.props.match.params.name));
@@ -75,6 +79,12 @@ class Navbar extends Component {
                         as="a"
                         active={this.props.displaying === PAGES.PRODUCER}>
                         <ProducersDropdown />
+                    </Menu.Item>
+                    <Menu.Item
+                        as='a'
+                        onClick={(event, data) => this.updateCurrentPage(PAGES.ARTICLE)}
+                        active={this.props.displaying === PAGES.ARTICLE}>
+                        <NavLink id='article-nav-link' to={ROUTE.ARTICLE}>Articoli</NavLink>
                     </Menu.Item>
 
                     <Menu.Item  >
@@ -135,9 +145,9 @@ class Navbar extends Component {
                                 </Menu.Item>
                                 <Menu.Item
                                     as='a'
-                                    onClick={""}
+                                    onClick={(event, data) => this.updateCurrentPage(PAGES.ARTICLE)}
                                     active={this.props.displaying === PAGES.ARTICLE}>
-                                    <NavLink id='bar-nav-link' to={ROUTE.ARTICLE}>Articoli</NavLink>
+                                    <NavLink id='article-nav-link' to={ROUTE.ARTICLE}>Articoli</NavLink>
                                 </Menu.Item>
 
                                 <Menu.Item borderless position='right'>

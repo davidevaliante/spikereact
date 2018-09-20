@@ -26,7 +26,7 @@ export const PAGES = {
     HOME: 'HOME',
     ABOUT: 'ABOUT',
     PRODUCER: 'PRODUCER',
-    ARTICOLI: 'ARTICOLI',
+    ARTICLE: 'ARTICLE',
     PAGE_NOT_FOUND: '*'
 };
 
@@ -41,7 +41,7 @@ export const ROUTE = {
     ABOUT: '/about',
     EXTRA: `/article/:id`,
     PRODUCER: `/producer/:id`,
-    ARTICLE: '/articoli',
+    ARTICLE: '/article',
     ERROR404: '*',
 
 
