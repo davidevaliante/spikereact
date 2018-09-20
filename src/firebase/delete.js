@@ -48,8 +48,9 @@ export const deleteProducerWithId = (id, callback) => {
                 axios.delete(`${databaseRoot}/Producer/it/${id}.json`)
                     .then(
                         () => {
-                            firebase.storage().ref().child(`ProducerImages/${snakeCase(ProducerName)}`).delete()
-                                .then(() => callback())
+                            callback()
+                            // firebase.storage().ref().child(`ProducerImages/${snakeCase(ProducerName)}`).delete()
+                            //     .then(() => callback())
                         }
                     )
             }
