@@ -5,7 +5,7 @@ import HomePage from '../components/HomeComponents/HomePage'
 import AdminDashboard from './../admin/AdminDashboard';
 import AddSlot from '../admin/Slots/AddSlot';
 import AddBonus from '../admin/Bonus/AddBonus';
-import AddProducer from '../admin/AddProducer';
+import AddProducer from '../admin/Producer/AddProducer';
 import AddArticle from '../admin/AddArticle';
 import Test from './Test'
 import SlotPage from '../components/SlotPageComponents/SlotPage';
@@ -20,6 +20,7 @@ import BonusArticle from '../components/Extra/BonusArticle'
 import RichTextEditor from "../admin/Extra/RichEdit";
 import ProducerPage from "../components/ProducerComponents/ProducerPage";
 import ListArticle from "../components/Extra/ListArticle";
+import ProducerDashboard from "../admin/Producer/ProducerDashboard";
 
 
 const AppRouter = () => {
@@ -61,7 +62,8 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
                     <Route path={ROUTE.EDITSLOT} component={EditSlot} />
                     <Route path={ROUTE.EDITBONUS} component={AddBonus} />
-                    <Route path={ROUTE.ADMINBONUS} component={BonusDashboard}></Route>
+                    <Route path={ROUTE.ADMINBONUS} component={BonusDashboard}/>
+                    <Route path={ROUTE.ADMINPRODUCER} component={ProducerDashboard}/>
 
                     { /* test */}
                     <Route path='/test' component={Test} />
