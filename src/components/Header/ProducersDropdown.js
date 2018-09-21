@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 // mix
 import { getImageLinkFromName } from '../../utils/Utils'
+import {setProducerPage} from "../../reducers/CurrentPageReducer";
 // router e redux
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -19,10 +20,12 @@ class ProducersDropdown extends Component {
             formattedList.push({
                 text: prod.name,
                 value: prod.name,
-                image: {
-                    avatar: true,
-                    src: getImageLinkFromName(prod.name)
-                },
+                // image: {
+                //     avatar: true,
+                //     rounded: true,
+                //     size: 'mini',
+                //     src: getImageLinkFromName('producer', prod.name)
+                // },
                 id: key
             })
         }
@@ -32,6 +35,7 @@ class ProducersDropdown extends Component {
 
     dropdownChoiceHandler = (producerName) => {
         this.props.history.push(`/producer/${producerName}`)
+        this.props.dispatch(setProducerPage(producerName));
     }
 
 
