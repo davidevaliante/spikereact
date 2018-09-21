@@ -63,6 +63,17 @@ class AddBonus extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if (prevProps.match.params.bonusid !==this.props.match.params.bonusid) {
+            this.setState({
+                bonusToEdit: undefined,
+                isInEditMode: false,
+                shouldDisplayErrors: false,
+                submitBtn: 'Aggiungi',
+            })
+        }
+    }
+
 
     onDropDownChange = (data) => {
         this.setState({
