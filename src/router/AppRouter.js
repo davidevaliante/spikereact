@@ -55,15 +55,18 @@ const AppRouter = () => {
                     { /* admin */}
                     <Route path={ROUTE.ADMIN} component={AdminDashboard} exact={true} />
                     <Route path={ROUTE.ADMINSLOT} component={SlotDashboard} />
+                    <Route path={ROUTE.ADMINBONUS} component={BonusDashboard}/>
+                    <Route path={ROUTE.ADMINPRODUCER} component={ProducerDashboard}/>
+                    { /* add */ }
                     <Route path={ROUTE.ADDSLOT} component={AddSlot} />
                     <Route path={ROUTE.ADDBONUS} component={AddBonus} />
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
                     <Route path={ROUTE.ADDEXTRAFROMHTML} component={AddExtraFromHtml} />
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
+                    { /* edit */ }
                     <Route path={ROUTE.EDITSLOT} component={EditSlot} />
                     <Route path={ROUTE.EDITBONUS} component={AddBonus} />
-                    <Route path={ROUTE.ADMINBONUS} component={BonusDashboard}/>
-                    <Route path={ROUTE.ADMINPRODUCER} component={ProducerDashboard}/>
+                    <Route path={ROUTE.EDITPRODUCER} component={AddProducer} />
 
                     { /* test */}
                     <Route path='/test' component={Test} />
