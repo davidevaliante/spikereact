@@ -11,14 +11,12 @@ import { Icon } from 'semantic-ui-react-single/Icon'
 import { Checkbox } from 'semantic-ui-react-single/Checkbox'
 import AddExtraFromHtml from '../Extra/AddExtraFromHtml'
 import ImagePicker from '../ImagePicker';
-import { pushNewBonus } from '../../firebase/firebase';
 import { updateBonusWithId } from '../../firebase/update'
 import { ADMINPAGES } from "../../enums/Constants";
 import { getBonusWithGuide } from '../../firebase/get'
 import AdminNavbar from "../AdminNavbar";
 import RichEdit from "../Extra/RichEdit";
 import { getImageLinkFromName } from "../../utils/Utils";
-import { removeHtmlFrom } from '../../utils/Utils'
 import { pushNewBonuswithGuide } from '../../firebase/post'
 
 class AddBonus extends Component {
@@ -73,7 +71,6 @@ class AddBonus extends Component {
             })
         }
     }
-
 
     onDropDownChange = (data) => {
         this.setState({
@@ -153,7 +150,6 @@ class AddBonus extends Component {
             else
                 updateBonusWithId(this.props.match.params.bonusid, newBonus, imageData, htmlTextString, this.onBonusPushSuccess)
         }
-
     };
 
     resetErrorOn = (fieldName) => {
