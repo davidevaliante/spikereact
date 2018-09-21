@@ -44,19 +44,22 @@ export const ROUTE = {
     ARTICLE: '/articoli',
     ERROR404: '*',
 
-
+    // admin
     ADMIN: `${admin}`,
-    ADMINARTICLE: `${admin}/article`,
-    ADDARTICLE: `${admin}/addarticle`,
     ADMINSLOT: `${admin}/slots`,
-    ADDSLOT: `${admin}/addslot`,
-    EDITSLOT: `${admin}/editslot/:id`,
     ADMINBONUS: `${admin}/bonus`,
-    ADDBONUS: `${admin}/addbonus`,
-    EDITBONUS: `${admin}/editbonus/:bonusid`,
+    ADMINARTICLE: `${admin}/article`,
     ADMINPRODUCER: `${admin}/producers`,
+    // add
+    ADDARTICLE: `${admin}/addarticle`,
+    ADDSLOT: `${admin}/addslot`,
+    ADDBONUS: `${admin}/addbonus`,
     ADDPRODUCER: `${admin}/addproducer`,
     ADDEXTRAFROMHTML: `${admin}/addextrafromhtml`,
+    // edit
+    EDITSLOT: `${admin}/editslot/:id`,
+    EDITBONUS: `${admin}/editbonus/:bonusid`,
+    EDITPRODUCER: `${admin}/producer/:id`,
     EDITPAGE: `${admin}/editpage`,
 };
 
