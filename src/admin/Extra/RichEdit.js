@@ -3,7 +3,7 @@ import RichTextEditor from 'react-rte';
 
 class RichEdit extends Component {
     state = {
-        value: RichTextEditor.createEmptyValue(),
+        value: RichTextEditor.createValueFromString('', 'html'),
         format: 'html'
     };
 
@@ -45,6 +45,7 @@ class RichEdit extends Component {
                     id='richTextInput'
                     value={this.state.value}
                     onChange={this.onChange}
+                    placeholder="Editor"
                 />
                 <label for="htmlText">Trasformato in html :</label>
                 <textarea
