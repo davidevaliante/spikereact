@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react-single/Button'
+import { Image } from 'semantic-ui-react-single/Image'
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { Divider } from 'semantic-ui-react-single/Divider'
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { List } from 'semantic-ui-react-single/List'
 import { NavLink } from 'react-router-dom'
 import { deleteProducerWithId } from "../../firebase/delete";
+import { getImageLinkFromName } from "../../utils/Utils";
+import {ROUTE} from "../../enums/Constants";
 
 function mapStateToProps(state) {
     return {};
@@ -42,7 +45,7 @@ class AdminProducerCard extends Component {
                                 {/*{truncate(Parser(`${this.props.bonus.review}`), { 'length': 175 })}*/}
                                 <Divider />
                                 <div className='crop' >
-                                    {/*<Image style={{ objectFit: 'cover' }} src={getImageLinkFromName('producer', this.props.producer.name, 'large')} />*/}
+                                    <Image style={{ objectFit: 'cover' }} src={getImageLinkFromName('producer', this.props.producer.name, 'large')} />*
                                 </div>
                                 <Divider />
                                 {/*<Icon name='star' />*/}
@@ -51,7 +54,7 @@ class AdminProducerCard extends Component {
                             <Divider />
                             <Grid stackable columns={1}>
                                 <Grid.Column>
-                                    <NavLink to='#'>
+                                    <NavLink to={`/admin/producer/${this.props.producer.id}`}>
                                         <Button icon labelPosition='left' size='mini'>
                                             <Icon name='edit outline' />Modifica
                                         </Button>

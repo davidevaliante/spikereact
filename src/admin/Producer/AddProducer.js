@@ -9,11 +9,21 @@ import { Icon } from 'semantic-ui-react-single/Icon'
 
 
 import ImagePicker from '../ImagePicker';
-import { pushNewProducer } from '../../firebase/firebase';
 import AdminNavbar from "../AdminNavbar";
+import RichEdit from "../Extra/RichEdit";
 import { ADMINPAGES } from "../../enums/Constants";
+import { pushNewProducer } from '../../firebase/firebase';
+import { updateProducerWithId } from '../../firebase/update';
+import { getProducerWithId } from "../../firebase/get";
+import { getImageLinkFromName } from "../../utils/Utils";
 
 class AddProducer extends Component {
+
+    state = {
+        isInEditMode: false,
+        shouldDisplayErrors: false,
+        submitBtn: 'Aggiungi',
+    }
 
     buildFakeProducer = () => {
         document.getElementById('nameField').value = `Casinò finto numero ${Math.floor(Math.random() * 100)}`;
@@ -23,13 +33,19 @@ class AddProducer extends Component {
     submitNewProducer = () => {
         const name = document.getElementById('nameField').value.trim();
         const link = document.getElementById('linkField').value.trim();
+        const description = document.getElementById('htmlText').value.trim()
+        console.log("Pushing", name, link, description)
 
-        if (name && link) {
+        if ( name && link ) {
             const newProducer = {
                 name: name,
                 link: link,
+                description: description
             }
-            pushNewProducer(newProducer, this.state.image, this.onProducerPushSuccess)
+            if (!this.state.isInEditMode)
+                pushNewProducer(newProducer, this.state.image, this.onProducerPushSuccess)
+            else
+                updateProducerWithId(this.props.match.params.id, newProducer, this.state.image, this.onProducerPushSuccess)
         }
     }
 
@@ -43,15 +59,39 @@ class AddProducer extends Component {
             this.setState({ active: false })
         }, 800)
     }
-
     handleOpen = () => this.setState({ active: true })
     handleClose = () => this.setState({ active: false })
 
-    state = {}
+    componentDidMount(){
+        if (this.props.match.params.id) {
+            getProducerWithId( this.props.match.params.id,
+                (producer) => {
+                    console.log(producer)
+                    this.setState({
+                        isInEditMode: true,
+                        producer: producer,
+                        submitBtn: 'Modifica',
+
+                    })
+                })
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if (prevProps.match.params.id !==this.props.match.params.id) {
+            console.log("GG")
+            this.setState({
+                producer: undefined,
+                isInEditMode: false,
+                shouldDisplayErrors: false,
+                submitBtn: 'Aggiungi',
+            })
+        }
+    }
 
     render() {
 
-        const { active } = this.state
+        const { producer, active, isInEditMode } = this.state
 
         return (
             <div>
@@ -62,7 +102,7 @@ class AddProducer extends Component {
                     <Dimmer blurring active={active} onClickOutside={this.handleClose} page>
                         <Header as='h2' icon inverted>
                             <Icon name='check' />
-                            Aggiunto con successo
+                            { !isInEditMode ? 'Aggiunto' : 'Modificato' } con successo
                         </Header>
                     </Dimmer>
                     <h1
@@ -81,6 +121,7 @@ class AddProducer extends Component {
                                 control={Input}
                                 label='Nome Casinò / Produttore'
                                 placeholder='Inserisci nome'
+                                defaultValue={producer && producer.name}
                             >
                             </Form.Field>
 
@@ -89,17 +130,33 @@ class AddProducer extends Component {
                                 control={Input}
                                 label='Link del sito'
                                 placeholder='Inserisci link'
+                                defaultValue={producer && producer.link}
                             >
                             </Form.Field>
                         </Form.Group>
 
-                        <ImagePicker onImageSelected={this.onImageSelected} />
+                        <Form.Field>
+                            <label>Descrizione</label>
+                            {isInEditMode && this.state.producer &&
+                            <RichEdit defaultContent={this.state.producer.description}/>}
+                            {!isInEditMode && <RichEdit />}
+                        </Form.Field>
+
+                        {isInEditMode && producer &&
+                            <ImagePicker
+                                onImageSelected={this.onImageSelected}
+                                style={{ width: '100%', marginLeft: '2rem' }}
+                                imagePreview={getImageLinkFromName('producer', this.state.producer.name)} />
+                        }
+
+                        {!isInEditMode &&
+                            <ImagePicker onImageSelected={this.onImageSelected} />}
 
                         <Form.Field
                             style={{ width: '100%' }}
                             onClick={this.submitNewProducer}
                             control={Button}>
-                            Aggiungi
+                            {this.state.submitBtn}
                         </Form.Field>
 
                         <Form.Field
