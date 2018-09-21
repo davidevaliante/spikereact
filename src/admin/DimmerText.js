@@ -7,8 +7,19 @@ export const DimmerText = (props) => {
     return (
         <Dimmer blurring active={props.active} page>
             <Header as='h2' icon inverted>
-                <Icon name='check'/>
-                Produttore cancellato con successo
+                <Icon name={props.icon}/>
+                {props.text}
+            </Header>
+        </Dimmer>
+    )
+};
+
+export const DimmerLoading = (props) => {
+    return (
+        <Dimmer blurring active={props.active} page>
+            <Header as='h2' icon inverted>
+                <Icon name={props.icon}/>
+                {props.text}
             </Header>
         </Dimmer>
     )

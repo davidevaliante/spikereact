@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
-// semantic
-import {Responsive} from "semantic-ui-react-single/Responsive";
-// mix
-import Navbar from "../Header/Navbar";
 // router e redux
 import {connect} from 'react-redux'
 import {withRouter} from "react-router-dom";
-import ProducerHeader from "../Header/ProducerHeader";
-import {PAGES, RESPONSIVE_RESOLUTION, SLOT_TYPES} from "../../enums/Constants";
-import Description from "../SlotPageComponents/Description";
-import {getProducerWithId, getProducerByName,getSlotListByProducerName, getSlotsCardBasedOnTime} from "../../firebase/get";
-import Footer from "../Footer";
+// semantic
+import {Responsive} from "semantic-ui-react-single/Responsive";
 import {Segment} from "semantic-ui-react-single/Segment";
-import FixedSlotList from '../FixedSlotList'
-import {setProducerPage} from "../../reducers/CurrentPageReducer";
+import { Container } from 'semantic-ui-react-single/Container'
+import {Button} from "semantic-ui-react-single/Button";
+import {Icon} from "semantic-ui-react-single/Icon";
+// mix
+import {PAGES, RESPONSIVE_RESOLUTION, SLOT_TYPES} from "../../enums/Constants";
+import { getProducerByName, getSlotListByProducerName } from "../../firebase/get";
 import {onListFetched} from "../../utils/Callbacks";
+// Components
+import Navbar from "../Header/Navbar";
+import ProducerHeader from "../Header/ProducerHeader";
+import Description from "../SlotPageComponents/Description";
+import Footer from "../Footer";
+import FixedSlotList from '../FixedSlotList';
 
 
 class ProducerPage extends Component {
@@ -67,13 +70,16 @@ class ProducerPage extends Component {
                     currentProducer={currentProducer}
                 />
 
-                 {/*<SiteDescription />*/}
-
                 <Description
                     slotName={(currentProducer && currentProducer.name)}
                     text={currentProducer && currentProducer.description}
                     hidePlayButton={true}
                 />
+
+                <center>
+                    <a href={currentProducer &&currentProducer.link}>Visita la pagina del produttore</a>
+                </center>
+
                 { !(slotLength === 0) &&
                 <div>
                 <div className='description-banner-container'>
