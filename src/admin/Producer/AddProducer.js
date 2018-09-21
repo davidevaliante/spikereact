@@ -98,7 +98,7 @@ class AddProducer extends Component {
                 <AdminNavbar activeItem={ADMINPAGES.PRODUCER} />
 
                 <div
-                    style={{ padding: '4rem' }}>
+                    style={{ padding: '5.5rem' }}>
                     <Dimmer blurring active={active} onClickOutside={this.handleClose} page>
                         <Header as='h2' icon inverted>
                             <Icon name='check' />

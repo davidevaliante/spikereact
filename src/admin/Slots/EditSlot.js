@@ -21,6 +21,7 @@ import AdminNavbar from "../AdminNavbar";
 import { Header } from "semantic-ui-react-single/Header";
 import { Icon } from "semantic-ui-react-single/Icon";
 import { Dimmer } from "semantic-ui-react-single/Dimmer";
+import RichEdit from "../Extra/RichEdit";
 
 
 class EditSlot extends React.Component {
@@ -68,11 +69,11 @@ class EditSlot extends React.Component {
 
 
                 this.setState({
+                    currentSlotId: this.props.match.params.id,
                     currentSlot: slot,
                     defaultType: slot.type,
                     defaultRating: slot.rating,
                     defaultValuesForBonus: def,
-                    currentSlotId: this.props.match.params.id,
                     optionList: options,
                     firebaseBonusObject: slot.bonus,
                     selectedBonus: slot.bonus,
@@ -159,7 +160,7 @@ class EditSlot extends React.Component {
             errorList.push('linkPlay');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
-        const description = document.getElementById('descriptionField').value.trim();
+        const description = document.getElementById('htmlText').value.trim();
         if (!description) {
             let errorList = this.state.emptyFields;
             errorList.push('description');
@@ -232,7 +233,7 @@ class EditSlot extends React.Component {
 
         const { currentSlot, active } = this.state
         const { producer } = this.state.currentSlot
-
+        console.log(currentSlot.description)
 
         return (
             <div>
@@ -336,14 +337,12 @@ class EditSlot extends React.Component {
                                 placeholder='Scheda Tecnica...' />
                         </Form.Group>
 
+                        <Form.Field>
+                            <label>Descrizione</label>
+                            { currentSlot.description &&
+                            <RichEdit defaultContent={currentSlot.description} />}
+                        </Form.Field>
 
-                        <Form.Field
-                            id='descriptionField'
-                            value={currentSlot.description}
-                            onChange={(event, data) => this.handleDescriptionChange(data)}
-                            control={TextArea}
-                            label='Descrizione'
-                            placeholder='Descrizione slot...' />
                         <Form.Group widths='equal'>
                             <FormField>
                                 {this.state.defaultType &&

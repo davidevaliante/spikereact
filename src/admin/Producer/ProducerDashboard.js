@@ -10,6 +10,7 @@ import {Header} from "semantic-ui-react-single/Header";
 import {Icon} from "semantic-ui-react-single/Icon";
 import {Dimmer} from "semantic-ui-react-single/Dimmer";
 import delay from 'lodash/delay';
+import orderBy from 'lodash/orderBy'
 
 function mapStateToProps(state) {
     return {};
@@ -28,6 +29,8 @@ class ProducerDashboard extends Component {
             item['id'] = key
             list.push(item)
         }
+        
+        list = orderBy(list, ['name'], ['asc'])
 
         this.setState({
             producerList: list

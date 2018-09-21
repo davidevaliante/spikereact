@@ -192,7 +192,7 @@ class AddBonus extends Component {
             <div>
                 <AdminNavbar activeItem={ADMINPAGES.BONUS} />
                 <div
-                    style={{ padding: '4rem' }}>
+                    style={{ padding: '5.5rem' }}>
                     <Dimmer active={active} onClickOutside={this.handleClose} page>
                         <Header as='h2' icon inverted>
                             <Icon name='check' />

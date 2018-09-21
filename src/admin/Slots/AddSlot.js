@@ -22,6 +22,7 @@ import delay from 'lodash/delay';
 import { SLOT_TYPES } from '../../enums/Constants.js';
 import AdminNavbar from "../AdminNavbar";
 import { ADMINPAGES } from "../../enums/Constants";
+import RichEdit from "../Extra/RichEdit";
 
 
 class AddSlot extends Component {
@@ -102,7 +103,7 @@ class AddSlot extends Component {
             errorList.push('linkPlay');
             this.setState({ shouldDisplayErrors: true, emptyFields: errorList })
         }
-        const description = document.getElementById('descriptionField').value.trim();
+        const description = document.getElementById('htmlText').value.trim();
         if (!description) {
             let errorList = this.state.emptyFields;
             errorList.push('description');
@@ -238,7 +239,7 @@ class AddSlot extends Component {
             <div>
                 <AdminNavbar activeItem={ADMINPAGES.SLOT} />
                 <div
-                    style={{ padding: '4rem' }}>
+                    style={{ padding: '5.5rem' }}>
                     <Form>
 
                         <Dimmer blurring active={active} onClickOutside={this.handleClose} page>
@@ -343,13 +344,10 @@ class AddSlot extends Component {
 
                         </Form.Group>
 
-                        <Form.Field
-                            id='descriptionField'
-                            error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('description')}
-                            onChange={() => this.resetErrorOn('description')}
-                            control={TextArea}
-                            label='Descrizione'
-                            placeholder='Descrizione slot...' />
+                        <Form.Field>
+                            <label>Descrizione</label>
+                            <RichEdit />
+                        </Form.Field>
 
                         <Form.Group widths='equal'>
 

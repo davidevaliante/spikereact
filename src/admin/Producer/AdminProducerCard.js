@@ -10,6 +10,8 @@ import { NavLink } from 'react-router-dom'
 import { deleteProducerWithId } from "../../firebase/delete";
 import { getImageLinkFromName } from "../../utils/Utils";
 import {ROUTE} from "../../enums/Constants";
+import Parser from "html-react-parser";
+import truncate from "lodash/truncate";
 
 function mapStateToProps(state) {
     return {};
@@ -40,18 +42,15 @@ class AdminProducerCard extends Component {
                         <List.Icon name='github' size='large' verticalAlign='middle' />
                         <List.Content>
                             <List.Header as='p'>{this.props.producer.name}</List.Header>
+                            <Divider />
                             <List.Description as='p'>
-                                {/*{Parser(truncate(this.props.bonus.review, { 'length': 175 }))}*/}
-                                {/*{truncate(Parser(`${this.props.bonus.review}`), { 'length': 175 })}*/}
-                                <Divider />
                                 <div className='crop' >
                                     <Image style={{ objectFit: 'cover' }} src={getImageLinkFromName('producer', this.props.producer.name, 'large')} />*
                                 </div>
                                 <Divider />
-                                {/*<Icon name='star' />*/}
-                                {/*{this.props.bonus.rating}*/}
+                                { (this.props.producer.description) ? Parser(truncate(this.props.producer.description, { 'length': 40 })) : 'Nessuna descrizione disponibile' }
+                                <Divider />
                             </List.Description>
-                            <Divider />
                             <Grid stackable columns={1}>
                                 <Grid.Column>
                                     <NavLink to={`/admin/producer/${this.props.producer.id}`}>
