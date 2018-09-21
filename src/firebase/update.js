@@ -49,8 +49,8 @@ export const updateProducerWithId = (id, updatedProducer, updatedImage, callback
             if (updatedImage) {
                 pushNewImage(
                     updatedImage,
-                    STORAGE_FOLDERS.BONUS_IMAGES,
-                    `bonus_${snakeCase(updatedProducer.name)}`
+                    STORAGE_FOLDERS.PRODUCER_IMAGES,
+                    `producer_${snakeCase(updatedProducer.name)}`
                 )
             }
             callback();
