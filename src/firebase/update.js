@@ -12,13 +12,21 @@ export const updateBonusWithId = async (bonusId, updatedBonus, updatedImage, upd
     updatedBonus['bonusId'] = undefined
     const updatedGuide = { bonus: updatedBonus, time: now(), content: updatedBonusString }
     try {
-        // update bonus
-        await axios.patch(`${databaseRoot}/Bonus/it/${bonusId}.json`, { ...updatedBonus, time: data })
+
         // update immagine bonus
         if (updatedImage)
             await pushNewImage(updatedImage, STORAGE_FOLDERS.BONUS_IMAGES, `bonus_${snakeCase(updatedBonus.name)}`)
         // update guida
-        await axios.patch(`${databaseRoot}/BonusGuides/it/${guideId}.json`, updatedGuide)
+        if (guideId) {
+            await axios.patch(`${databaseRoot}/Bonus/it/${bonusId}.json`, { ...updatedBonus, time: data })
+            await axios.patch(`${databaseRoot}/BonusGuides/it/${guideId}.json`, updatedGuide)
+        }
+        else {
+            const guideId = await axios.post(`${databaseRoot}/BonusGuides/it/.json`, updatedGuide)
+            // update bonus
+            updatedBonus['guideId'] = guideId.data.name
+            await axios.patch(`${databaseRoot}/Bonus/it/${bonusId}.json`, { ...updatedBonus, time: data })
+        }
     } catch (error) {
         console.log(error)
     }

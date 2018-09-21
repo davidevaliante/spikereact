@@ -15,7 +15,7 @@ export const getProducerByName = async (producerName, callback) => {
 export const getGuideById = (guideId, callback) => {
     axios.get(`${databaseRoot}/BonusGuides/it/${guideId}.json`)
         .then(value => {
-            callback(value.data)
+            callback && callback(value.data)
         })
 };
 

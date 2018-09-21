@@ -1,8 +1,8 @@
+import snakeCase from 'lodash';
 import React, { Component } from 'react';
-import ImagePicker from '../admin/ImagePicker'
-import { pushImage, updateSlotImage, deleteImages } from '../firebase/firebase'
-import { Button } from 'semantic-ui-react-single/Button'
-import snakeCase from 'lodash'
+import { Button } from 'semantic-ui-react-single/Button';
+import ImagePicker from '../admin/ImagePicker';
+import { deleteImages, updateSlotImage } from '../firebase/firebase'
 
 class Test extends Component {
     state = {}

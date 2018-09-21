@@ -13,6 +13,7 @@ import Footer from '../Footer'
 import { getGuideById } from '../../firebase/get'
 // mix
 import Parser from 'html-react-parser'
+import truncate from 'lodash/truncate'
 // router e redux
 import { withRouter } from 'react-router-dom'
 
@@ -25,7 +26,12 @@ class BonusArticle extends Component {
     componentDidMount() {
         if (this.props.match.params.id) {
             getGuideById(this.props.match.params.id, data => {
-                this.setState({ isLoading: false, content: data, parsedContent: Parser(`${data.content}`) })
+                this.setState({
+                    isLoading: false,
+                    content: data,
+                    parsedContent: Parser(`${data.content}`),
+                    bonus: data.bonus
+                })
             })
         }
     }
@@ -43,12 +49,25 @@ class BonusArticle extends Component {
         this.props.history.goBack()
     }
 
-    goToBonus = () => this.props.bonus.link && window.open(this.props.bonus.link)
+    goToBonus = () => {
+        const { link } = this.state.bonus.bonus
+        link && window.open(link)
+    }
+
+    buttonAnimation = () => {
+
+        const x = truncate(this.state.bonus.name, {
+            'length': 15,
+        })
+        console.log(x);
+        return x
+
+    }
 
 
     render() {
         const { content, showBottomButtons, parsedContent, isLoading } = this.state
-        console.log(showBottomButtons);
+        const { bonus } = this.state
 
         if (isLoading) return (
             <div className='extra-bg'>
@@ -84,11 +103,9 @@ class BonusArticle extends Component {
                     </div>
                 </Visibility>
                 <div className='extra-button-right'>
-                    <Button onClick={() => this.goToBonus()} size='large' animated inverted>
+                    <Button onClick={() => this.goToBonus()} size='large' animated='fade' inverted>
                         <Button.Content visible>Provalo Subito</Button.Content>
-                        <Button.Content hidden inverted>
-                            <Icon name='arrow left' />
-                        </Button.Content>
+                        <Button.Content hidden>{bonus && this.buttonAnimation()}</Button.Content>
                     </Button>
                 </div>
                 <div className='extra-content'>

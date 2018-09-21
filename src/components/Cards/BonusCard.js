@@ -17,8 +17,7 @@ const BonusCard = (props) => {
     }
 
     const goToGuide = () => {
-        // props.history.push(`/article/${props.bonus.id}`)
-        props.history.push('/article/-LMaxXw5Z0MHi_mIY27Z')
+        props.history.push(`/article/${props.bonus.id}`)
     }
 
     return (
@@ -44,8 +43,12 @@ const BonusCard = (props) => {
                     <Card style={{ background: '#454545' }}>
                         <Card.Content>
                             <Button onClick={(event) => goToExternalLink()} fluid color='red'>Provalo subito</Button>
-                            <br></br>
-                            <Button onClick={(event) => goToGuide()} fluid color='green'>Leggi la guida</Button>
+                            {props.bonus.guideId &&
+                                <div>
+                                    <br></br>
+                                    <Button onClick={(event) => goToGuide()} fluid color='green'>Leggi la guida</Button>
+                                </div>
+                            }
                         </Card.Content>
                     </Card>
                 </div>
