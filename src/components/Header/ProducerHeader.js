@@ -8,6 +8,7 @@ import { Loader } from 'semantic-ui-react-single/Loader'
 import AamsBanner from "../AamsBanner";
 // mix
 import LazyLoad from 'react-lazyload';
+import {getImageLinkFromName} from "../../utils/Utils";
 
 const styles = {
     overlay: {
@@ -35,9 +36,7 @@ const ProducerHeader = ({ loading, currentProducer}) => {
                         <header
                             id='producerHeader'
                             className='fade-in-header'
-                            // style={{ backgroundImage: `url(${getImageLinkFromName('producer', 'LottoMatica')})` }}
-                            // TODO: sistemare immagine di BG
-                            style={{ backgroundImage: 'https://firebasestorage.googleapis.com/v0/b/spike-2481d.appspot.com/o/ProducerImages%2Flottomatica-logo.png?alt=media' }}
+                            style={{ backgroundImage: `url(${getImageLinkFromName('producer', (currentProducer && currentProducer.name))})` }}
                         >
                             <div
                                 style={styles.overlay}>

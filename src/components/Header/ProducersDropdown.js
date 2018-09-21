@@ -6,6 +6,8 @@ import { getImageLinkFromName } from '../../utils/Utils'
 // router e redux
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+// lodash
+import orderBy from 'lodash/orderBy'
 
 class ProducersDropdown extends Component {
     state = {};
@@ -24,6 +26,7 @@ class ProducersDropdown extends Component {
                 id: key
             })
         }
+        formattedList = orderBy(formattedList, ['value'], ['asc']);
         return formattedList
     }
 

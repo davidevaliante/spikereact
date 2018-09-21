@@ -41,7 +41,10 @@ class ProducerPage extends Component {
             getSlotListByProducerName(this.props.match.params.producerName, 
                 // callback 
                 slotListObject => {
-                this.setState({producer:producerDataResponse, slotProducerList: onListFetched(slotListObject)})
+                    this.setState({
+                        currentProducer:onListFetched(producerDataResponse)[0],
+                        slotProducerList: onListFetched(slotListObject)
+                    })
             })
         })
     }
@@ -50,8 +53,10 @@ class ProducerPage extends Component {
     handleContextRef = contextRef => this.setState({contextRef});
 
     render() {
-        const { currentProducer} = this.state;
-        console.log(this.state);
+        const { currentProducer, slotProducerList } = this.state;
+        const slotLength = ( slotProducerList ) ? slotProducerList.length : 0
+        console.log("STATE", this.state);
+        console.log('SLOTS', slotLength)
         
         return (
             <div>
@@ -66,14 +71,11 @@ class ProducerPage extends Component {
 
                 <Description
                     slotName={(currentProducer && currentProducer.name)}
-                    text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                    text={currentProducer && currentProducer.description}
                     hidePlayButton={true}
                 />
+                { !(slotLength === 0) &&
+                <div>
                 <div className='description-banner-container'>
 
                     <Responsive minWidth={766}>
@@ -94,13 +96,6 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
                 </div>
 
                 <Segment vertical>
-                    {/*<HomeBody*/}
-                        {/*orderHandler={this.handleChange}*/}
-                        {/*slotorder={order}*/}
-                        {/*handleContextRef={this.handleContextRef}*/}
-                        {/*type={SLOT_TYPES.PRODUCER_FILTERED}*/}
-                        {/*isSticky={contextRef}*/}
-                    {/*/>*/}
                     <Responsive 
                         minWidth={RESPONSIVE_RESOLUTION.LARGE} 
                         as={FixedSlotList} 
@@ -121,7 +116,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
                         order='name'
                         slotList={this.state.slotProducerList} />
                 </Segment>
-
+                </div>}
                 <Footer/>
             </div>
         );
