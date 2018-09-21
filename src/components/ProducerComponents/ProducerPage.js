@@ -5,9 +5,8 @@ import {withRouter} from "react-router-dom";
 // semantic
 import {Responsive} from "semantic-ui-react-single/Responsive";
 import {Segment} from "semantic-ui-react-single/Segment";
-import { Container } from 'semantic-ui-react-single/Container'
-import {Button} from "semantic-ui-react-single/Button";
-import {Icon} from "semantic-ui-react-single/Icon";
+// lodash
+import delay from 'lodash/delay'
 // mix
 import {PAGES, RESPONSIVE_RESOLUTION, SLOT_TYPES} from "../../enums/Constants";
 import { getProducerByName, getSlotListByProducerName } from "../../firebase/get";
@@ -18,11 +17,13 @@ import ProducerHeader from "../Header/ProducerHeader";
 import Description from "../SlotPageComponents/Description";
 import Footer from "../Footer";
 import FixedSlotList from '../FixedSlotList';
+import {smoothScrollTo} from "../../utils/Utils";
 
 
 class ProducerPage extends Component {
     state = {
-        displaying: PAGES.PRODUCER
+        displaying: PAGES.PRODUCER,
+        loading: true
     };
 
     componentDidMount() {
@@ -31,13 +32,15 @@ class ProducerPage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.producerName !== this.props.match.params.producerName){
+            this.setState({
+                loading: true
+            })
+            window.scrollTo(0, 0)
             this.gettingPageData()
         }
     }
 
     gettingPageData = () => {
-        console.log(this.props.match.params.producerName);
-        
         getProducerByName(this.props.match.params.producerName, 
             // callback 
             producerDataResponse => {
@@ -46,7 +49,8 @@ class ProducerPage extends Component {
                 slotListObject => {
                     this.setState({
                         currentProducer:onListFetched(producerDataResponse)[0],
-                        slotProducerList: onListFetched(slotListObject)
+                        slotProducerList: onListFetched(slotListObject),
+                        loading: false
                     })
             })
         })
@@ -57,9 +61,8 @@ class ProducerPage extends Component {
 
     render() {
         const { currentProducer, slotProducerList } = this.state;
-        const slotLength = ( slotProducerList ) ? slotProducerList.length : 0
-        console.log("STATE", this.state);
-        console.log('SLOTS', slotLength)
+        const slotLength = ( slotProducerList ) ? slotProducerList.length : 0;
+        delay( () => {smoothScrollTo('aamsBanner')}, 2500);
         
         return (
             <div>
@@ -68,9 +71,11 @@ class ProducerPage extends Component {
                 <ProducerHeader
                     style={{position: 'absolute', zIndex: 1}}
                     currentProducer={currentProducer}
+                    loading={this.state.loading}
                 />
 
                 <Description
+                    id='producerName'
                     slotName={(currentProducer && currentProducer.name)}
                     text={currentProducer && currentProducer.description}
                     hidePlayButton={true}

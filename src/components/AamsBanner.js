@@ -8,7 +8,7 @@ import { Container } from 'semantic-ui-react-single/Container';
 export const AamsBanner = (props) => {
 
     return (
-        <div>
+        <div id='aamsBanner'>
             <Responsive as={Container} minWidth={1200} >
                 <div style={{ marginTop: '2rem', marginBottom: '1.6rem' }} className='ams-box' >
                     <div className='row-centered-spaced'>

@@ -37,7 +37,7 @@ class ListDescriptionBanner extends Component {
                 text = 'Slot del giorno'
         }
         return (
-            <div className='description-banner-container'>
+            <div id='descriptionBanner' className='description-banner-container'>
 
                 <Responsive minWidth={766}>
                     <div className='description-banner-red'>

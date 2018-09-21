@@ -33,32 +33,32 @@ class AddProducer extends Component {
     submitNewProducer = () => {
         const name = document.getElementById('nameField').value.trim();
         const link = document.getElementById('linkField').value.trim();
-        const description = document.getElementById('htmlText').value.trim()
-        console.log("Pushing", name, link, description)
+        const description = (document.getElementById('htmlText').value.trim() !== '<p><br></p>') ? document.getElementById('htmlText').value.trim() : ''
 
         if ( name && link ) {
             const newProducer = {
                 name: name,
                 link: link,
                 description: description
-            }
+            };
             if (!this.state.isInEditMode)
                 pushNewProducer(newProducer, this.state.image, this.onProducerPushSuccess)
             else
                 updateProducerWithId(this.props.match.params.id, newProducer, this.state.image, this.onProducerPushSuccess)
         }
-    }
+    };
 
     onImageSelected = (image) => {
         this.setState({ image: image })
-    }
+    };
 
     onProducerPushSuccess = () => {
         this.setState({ active: true })
         delay(() => {
             this.setState({ active: false })
         }, 800)
-    }
+    };
+
     handleOpen = () => this.setState({ active: true })
     handleClose = () => this.setState({ active: false })
 
@@ -71,7 +71,6 @@ class AddProducer extends Component {
                         isInEditMode: true,
                         producer: producer,
                         submitBtn: 'Modifica',
-
                     })
                 })
         }
@@ -79,7 +78,6 @@ class AddProducer extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot){
         if (prevProps.match.params.id !==this.props.match.params.id) {
-            console.log("GG")
             this.setState({
                 producer: undefined,
                 isInEditMode: false,
@@ -91,7 +89,7 @@ class AddProducer extends Component {
 
     render() {
 
-        const { producer, active, isInEditMode } = this.state
+        const { producer, active, isInEditMode } = this.state;
 
         return (
             <div>
