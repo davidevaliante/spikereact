@@ -38,7 +38,7 @@ class AdminBonusCard extends Component {
                         border: '1px solid rgb(0, 0, 0, .2)',
                         borderRadius: '0.3rem',
                         padding: '0.3rem',
-                        height: 470,
+                        height: 520,
 
 
 
@@ -56,7 +56,7 @@ class AdminBonusCard extends Component {
                                 <List> <List.Icon name='github' size='large' verticalAlign='middle' /></List>
                                 <Divider style={{ marginTop: "0.3rem" }} />
 
-                                <div style={{ height: 100 }}  >
+                                <div style={{ height: 150 }}  >
 
                                     <Image style={{ objectFit: 'cover' }} src={getImageLinkFromName('bonus', this.props.bonus.name, 'medium')} />
                                 </div>
