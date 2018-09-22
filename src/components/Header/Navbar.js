@@ -90,6 +90,7 @@ class Navbar extends Component {
                     <Menu.Item  >
                         <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
                     </Menu.Item>
+
                 </Menu>
             </div>
         )
