@@ -17,7 +17,8 @@ const FixedSlotList = (props) => {
         let listOfSlots = []
         for (const key in slotList) {
             const element = slotList[key]
-            element['id'] = key
+            if (element['id'] === undefined)
+                element['id'] = key
             listOfSlots.push(element)
         }
 
