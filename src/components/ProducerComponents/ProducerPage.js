@@ -62,7 +62,7 @@ class ProducerPage extends Component {
     render() {
         const { currentProducer, slotProducerList } = this.state;
         const slotLength = ( slotProducerList ) ? slotProducerList.length : 0;
-        delay( () => {smoothScrollTo('aamsBanner')}, 2500);
+        delay( () => {smoothScrollTo('aamsBanner')}, 1500);
         
         return (
             <div>
