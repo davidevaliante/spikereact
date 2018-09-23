@@ -53,8 +53,8 @@ export const replaceTextTec = (text) => {
 }
 
 export const removeHtmlFrom = (str) => {
-    if ((str === null) || (str === ''))
-        return false;
+    if ((str === null) || (str === '') || (str === undefined))
+        return '';
     else
         str = str.toString();
     return str.replace(/<[^>]*>/g, '');
@@ -99,7 +99,7 @@ export const getImageLinkFromName = (type, name, size, ) => {
 
 export const formatList = (slotList, bonusList, producerList) => {
 
-    // oggetto di base, 
+    // oggetto di base,
     // results deve contenere una lista di oggetti con questa struttura :
     /*
         {
@@ -109,6 +109,7 @@ export const formatList = (slotList, bonusList, producerList) => {
             "price": "$88.56"
         },
     */
+    const truncateOptions = { length: '60', omission: '...' }
     const list = {
         slot: {
             name: "Slot",
@@ -127,13 +128,13 @@ export const formatList = (slotList, bonusList, producerList) => {
     const formattedSlot = []
     for (const slot in slotList) {
         const current = slotList[slot]
-        const truncateOptions = { length: '60', omission: '...' }
         formattedSlot.push({
+            id: slot,
             title: current.name,
             description: `${truncate(removeHtmlFrom(current.description), truncateOptions)}`,
             image: getImageLinkFromName('slot', current.name, 'small'),
             original: current,
-            id: slot
+            type: 'slot'
         })
     }
 
@@ -141,11 +142,12 @@ export const formatList = (slotList, bonusList, producerList) => {
     for (const bonus in bonusList) {
         const current = bonusList[bonus]
         formattedBonus.push({
+            id: bonus,
             title: `Bonus ${current.name}`,
             description: current.bonus,
             image: getImageLinkFromName('bonus', current.name, 'medium'),
-            id: bonus,
-            link: current.link
+            link: current.link,
+            type: 'bonus'
         })
     }
 
@@ -153,10 +155,12 @@ export const formatList = (slotList, bonusList, producerList) => {
     for (const producer in producerList) {
         const current = producerList[producer]
         formattedProducer.push({
+            id: producer,
             title: current.name,
             image: getImageLinkFromName('producer', current.name),
-            id: producer,
-            link: current.link
+            link: current.link,
+            description: `${truncate(removeHtmlFrom(current.description), truncateOptions)}`,
+            type: 'producer'
         })
     }
     list['slot']['results'] = formattedSlot

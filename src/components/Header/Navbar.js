@@ -15,6 +15,8 @@ import { setHomePage, setBarPage, setGratisPage, setProducerPage, setArticlePage
 import { connect } from 'react-redux'
 // static files
 import logo from '../../static/slot-icon.svg';
+// utils
+import { smoothScrollTo } from '../../utils/Utils';
 
 
 class Navbar extends Component {
@@ -49,6 +51,8 @@ class Navbar extends Component {
                 // document.getElementById('home-nav-link').click()
                 this.props.dispatch(setHomePage())
         }
+        if(document.getElementById('descriptionBanner'))
+            smoothScrollTo('descriptionBanner')
     }
 
 

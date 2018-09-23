@@ -26,14 +26,20 @@ class NavbarSearchBar extends Component {
     resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
     handleResultSelect = (e, { result }) => {
+        switch (result.type) {
+            case 'slot':
+                this.props.history.push(`/slot/${result.id}`)
+                break;
+            case 'bonus':
+                window.open(result.link)
+                break;
+            case 'producer':
+                this.props.history.push(`/producer/${result.title}`)
+                break;
+            default:
 
-        // solo bonus e produttori hanno la proprietà "link"
-        if (result.link) 
-            { window.open(result.link) }
-        // se non esiste link allora è una slot
-        else 
-            this.props.history.push(`/slot/${result.id}`)
-    }
+        }
+    };
 
     handleSearchChange = (e, { value }) => {
         this.setState({ isLoading: true, value })
