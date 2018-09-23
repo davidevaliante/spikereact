@@ -4,21 +4,21 @@ import {Icon} from "semantic-ui-react-single/Icon";
 import {Dimmer} from "semantic-ui-react-single/Dimmer";
 import {Loader} from "semantic-ui-react-single/Loader";
 
-export const InfoDimmer = (props) => {
+export const InfoDimmer = ({active, icon, text}) => {
     // props.icon = error || check
     return (
-        <Dimmer blurring active={props.active} page>
+        <Dimmer blurring active={active} page>
             <Header as='h2' icon inverted>
-                <Icon name={props.icon}/>
-                {props.text}
+                <Icon name={icon}/>
+                {text}
             </Header>
         </Dimmer>
     )
 };
 
-export const LoadingDimmer = (props) => {
+export const LoadingDimmer = ({active}) => {
     return (
-        <Dimmer blurring active={props.active} page>
+        <Dimmer blurring active={active} page>
             <Header as='h2' icon inverted>
                 <Loader />
             </Header>
