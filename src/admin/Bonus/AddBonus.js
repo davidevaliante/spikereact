@@ -146,7 +146,7 @@ class AddBonus extends Component {
             const imageData = this.state.pickedImage;
 
             if (!isInEditMode)
-                pushNewBonuswithGuide(newBonus, imageData, htmlTextString, 'it')
+                pushNewBonuswithGuide(newBonus, imageData, htmlTextString, 'it', this.onBonusPushSuccess)
             else
                 updateBonusWithId(this.props.match.params.bonusid, newBonus, imageData, htmlTextString, this.onBonusPushSuccess)
         }

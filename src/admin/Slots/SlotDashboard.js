@@ -10,6 +10,7 @@ import delay from 'lodash/delay';
 import {Header} from "semantic-ui-react-single/Header";
 import {Icon} from "semantic-ui-react-single/Icon";
 import {Dimmer} from "semantic-ui-react-single/Dimmer";
+import { LoadingDimmer } from '../../utils/DimmerText';
 
 function mapStateToProps(state) {
     return {};
@@ -18,6 +19,7 @@ function mapStateToProps(state) {
 class SlotDashboard extends Component {
 
     state = {
+        loadingDimmer: true,
         active: false
     };
 
@@ -30,7 +32,8 @@ class SlotDashboard extends Component {
         }
 
         this.setState({
-            slotList: list
+            slotList: list,
+            loadingDimmer: false
         })
     };
 
@@ -55,7 +58,7 @@ class SlotDashboard extends Component {
     }
 
     render() {
-        const { slotList, active } = this.state;
+        const { slotList, active, loadingDimmer } = this.state;
         return (
             <div>
                 <Dimmer blurring active={active} page>
@@ -64,6 +67,7 @@ class SlotDashboard extends Component {
                         Slot cancellata con successo
                     </Header>
                 </Dimmer>
+                <LoadingDimmer active={loadingDimmer} />
                 <AdminNavbar activeItem={ADMINPAGES.SLOT}/>
                 <div style={{marginTop: '5rem'}}>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>

@@ -4,7 +4,8 @@ import {Icon} from "semantic-ui-react-single/Icon";
 import {Dimmer} from "semantic-ui-react-single/Dimmer";
 import {Loader} from "semantic-ui-react-single/Loader";
 
-export const DimmerText = (props) => {
+export const InfoDimmer = (props) => {
+    // props.icon = error || check
     return (
         <Dimmer blurring active={props.active} page>
             <Header as='h2' icon inverted>
@@ -15,7 +16,7 @@ export const DimmerText = (props) => {
     )
 };
 
-export const DimmerLoading = (props) => {
+export const LoadingDimmer = (props) => {
     return (
         <Dimmer blurring active={props.active} page>
             <Header as='h2' icon inverted>

@@ -10,7 +10,8 @@ import {Header} from "semantic-ui-react-single/Header";
 import {Icon} from "semantic-ui-react-single/Icon";
 import {Dimmer} from "semantic-ui-react-single/Dimmer";
 import delay from 'lodash/delay';
-import orderBy from 'lodash/orderBy'
+import orderBy from 'lodash/orderBy';
+import { LoadingDimmer } from '../../utils/DimmerText';
 
 function mapStateToProps(state) {
     return {};
@@ -19,7 +20,8 @@ function mapStateToProps(state) {
 class ProducerDashboard extends Component {
 
     state = {
-        active: false
+        active: false,
+        loadingDimmer: true
     };
 
     onListFetched = (rawList) => {
@@ -33,7 +35,8 @@ class ProducerDashboard extends Component {
         list = orderBy(list, ['name'], ['asc'])
 
         this.setState({
-            producerList: list
+            producerList: list,
+            loadingDimmer: false
         })
     };
 
@@ -58,7 +61,7 @@ class ProducerDashboard extends Component {
     }
 
     render() {
-        const {producerList, active} = this.state;
+        const {producerList, active, loadingDimmer} = this.state;
 
         return (
             <div style={{maxWidth: '1920px'}}>
@@ -68,6 +71,7 @@ class ProducerDashboard extends Component {
                         Produttore cancellato con successo
                     </Header>
                 </Dimmer>
+                <LoadingDimmer active={loadingDimmer} />
                 <AdminNavbar activeItem={ADMINPAGES.PRODUCER}/>
                 <div style={{marginTop: '5rem'}}>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>

@@ -10,6 +10,7 @@ import delay from 'lodash/delay';
 import { Header } from "semantic-ui-react-single/Header";
 import { Icon } from "semantic-ui-react-single/Icon";
 import { Dimmer } from "semantic-ui-react-single/Dimmer";
+import { LoadingDimmer, InfoDimmer } from '../../utils/DimmerText';
 
 function mapStateToProps(state) {
     return {};
@@ -18,6 +19,7 @@ function mapStateToProps(state) {
 class BonusDashboard extends Component {
 
     state = {
+        loadingDimmer: true,
         active: false
     };
 
@@ -30,7 +32,8 @@ class BonusDashboard extends Component {
         }
 
         this.setState({
-            bonusList: list
+            bonusList: list,
+            loadingDimmer: false
         })
     };
 
@@ -55,15 +58,13 @@ class BonusDashboard extends Component {
     };
 
     render() {
-        const { bonusList, active } = this.state
+        const { bonusList, active, loadingDimmer } = this.state
         return (
             <div style={{ maxWidth: '1920px' }}>
-                <Dimmer blurring active={active} page>
-                    <Header as='h2' icon inverted>
-                        <Icon name='check' />
-                        Bonus cancellato con successo
-                    </Header>
-                </Dimmer>
+                
+                <InfoDimmer active={active} text='Bonus cancellato con successo' icon='check'/>}
+                <LoadingDimmer active={loadingDimmer}/>
+
                 <AdminNavbar activeItem={ADMINPAGES.BONUS} />
                 <div style={{ marginTop: '5rem' }}>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>
