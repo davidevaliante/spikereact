@@ -25,7 +25,7 @@ const TecnicalsList = (props) => {
                             style={{ marginRight: '2rem' }}
                             circular inverted color='red' name='angle right' />
                     </div>
-                    <p style={{ fontFamily: 'Raleway' }}>Produttore: <a href='#'><strong>{props.producerName}</strong></a></p>
+                    <p style={{ fontFamily: 'Raleway' }}>Produttore: <a href={`/producer/${props.producerName}`}><strong>{props.producerName}</strong></a></p>
                 </div>
                 <Divider />
             </div>
