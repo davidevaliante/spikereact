@@ -43,6 +43,7 @@ class ProducersDropdown extends Component {
         return (
             <Dropdown
                 text='Produttori'
+                scrolling
                 onChange={(event, data) => this.dropdownChoiceHandler(data.value)}
                 options={this.formatProducerForDropdown(this.props.producerList)} />
         )
