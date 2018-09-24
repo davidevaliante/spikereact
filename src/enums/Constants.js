@@ -86,6 +86,6 @@ export const COUNTRY = {
 
 export const RESPONSIVE_RESOLUTION = {
     SMALL: 425,
-    MEDIUM: 950,
+    MEDIUM: 805,
     LARGE: 1200
 }

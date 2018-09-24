@@ -5,6 +5,9 @@ import SlotCard from '../../Cards/SlotCard'
 import chunk from 'lodash/chunk'
 // router e redux
 import { connect } from 'react-redux'
+// semantic
+import { Grid } from 'semantic-ui-react-single/Grid'
+import { Responsive } from 'semantic-ui-react-single/Responsive'
 
 class PopularSlotList extends Component {
     state = {}
@@ -28,13 +31,32 @@ class PopularSlotList extends Component {
         ))
     }
 
+    slotListToCard = (slotList) => {
+        let listOfSlots = []
+        for (const key in slotList) {
+            const element = slotList[key]
+            listOfSlots.push(element)
+        }
+
+        return listOfSlots.map((element) => {
+            return <SlotCard slot={element} key={element.id} />
+        })
+    }
+
     render() {
-        console.log(this.props.popularSlots)
+        console.log("POPULAR", this.props.popularSlots)
 
         return (
-            <div className='vertical-center' style={{ marginTop: '4rem' }}>
-                <h3 className='popular-slot-header'>Le slot più popolari</h3>
-                {this.props.popularSlots ? this.slotListToRows(this.props.popularSlots) : <div></div>}
+            <div>
+                <div className='vertical-center' style={{ marginTop: '4rem' }}>
+                    <h3 className='popular-slot-header'>Le slot più popolari</h3>
+                    {/*this.props.popularSlots ? this.slotListToRows(this.props.popularSlots) : <div></div>*/}
+                </div>
+                <Grid style={{ marginTop: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
+                    <Grid.Row style={{ paddingBottom: '4rem' }}>
+                        {this.props.popularSlots ? this.slotListToCard(this.props.popularSlots) : ''}
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }
