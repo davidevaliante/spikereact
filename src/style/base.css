@@ -133,7 +133,7 @@ header {
 }
 
 .slideRight{
-  margin-bottom: 3.6rem;
+  margin-bottom: 3rem;
   animation-name: moveInRight;
   animation-duration: 1s;
   animation-timing-function: ease-out;

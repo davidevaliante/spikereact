@@ -45,7 +45,7 @@ const HomePageHeader = (props) => {
             <Segment
                 inverted
                 textAlign='center'
-                style={{ minHeight: 700, padding: 0 }}
+                style={{ minHeight: '100vh', padding: 0 }}
                 vertical>
                 <LazyLoad height={'100vh'}>
                     <header className='fade-in-header'
