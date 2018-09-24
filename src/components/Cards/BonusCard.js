@@ -17,7 +17,7 @@ const BonusCard = (props) => {
     }
 
     const goToGuide = () => {
-        props.history.push(`/article/${props.bonus.id}`)
+        props.history.push(`/article/${props.bonus.guideId}`)
     }
 
     return (

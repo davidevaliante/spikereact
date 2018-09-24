@@ -21,7 +21,8 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 // mix
 import split from 'lodash/split'
-
+import Helmet from 'react-helmet'
+import { lowerAndCap } from '../../'
 class SlotPage extends Component {
 
     state = {
@@ -74,6 +75,17 @@ class SlotPage extends Component {
         const { isPlaying, isLoading } = this.props
         return (
             <div>
+                <Helmet>
+                    <title>{currentSlot.name}</title>
+                    <meta charSet="utf-8" />
+                    <link rel="canonical" href="http://mysite.com/example" />
+                    <meta property="og:locale" content='it' />
+                    <meta property="article:tag" content="slot" />
+                    <meta property="article:tag" content={`slot ${currentSlot.name}`} />
+                    <meta property="article:published_time" content={currentSlot.time} />
+
+                </Helmet>
+
                 <Dimmer.Dimmable dimmed={isPlaying}>
                     {window.scrollTo(0, 0)}
 
@@ -81,14 +93,14 @@ class SlotPage extends Component {
 
                     <div>
 
-                        <Responsive maxWidth={600}> 
-                            <Navbar displaying={'SLOT'} 
-                                    isResponsive={true} />
+                        <Responsive maxWidth={600}>
+                            <Navbar displaying={'SLOT'}
+                                isResponsive={true} />
                         </Responsive>
-                        
-                        <Responsive minWidth={600}>   
-                            <Navbar displaying={'SLOT'} 
-                            isResponsive={false} />
+
+                        <Responsive minWidth={600}>
+                            <Navbar displaying={'SLOT'}
+                                isResponsive={false} />
                         </Responsive>
 
                         <SlotPageHeader
@@ -102,45 +114,45 @@ class SlotPage extends Component {
                         slotName={currentSlot.name}
                         text={currentSlot.description} />
 
-                    <Grid 
-                        celled='internally' 
-                        columns='equal' 
-                        stackable 
+                    <Grid
+                        celled='internally'
+                        columns='equal'
+                        stackable
                         style={{ paddingTop: '0rem', paddingBottom: '0rem' }}>
-                        <Grid.Row 
-                            textAlign='center' 
+                        <Grid.Row
+                            textAlign='center'
                             id='slot-page-lists'>
                             <TipsList tipList={currentSlot.tips} />
-                            <TecnicalsList 
-                                tecList={currentSlot.tecnicals} 
-                                producerName={(currentSlot.producer && currentSlot.producer.name)}/>
+                            <TecnicalsList
+                                tecList={currentSlot.tecnicals}
+                                producerName={(currentSlot.producer && currentSlot.producer.name)} />
                         </Grid.Row>
                     </Grid>
-                    <Responsive 
-                        minWidth={1200} 
-                        as={SlotPageBonusList} 
-                        bonusList={currentSlot.bonus} 
+                    <Responsive
+                        minWidth={1200}
+                        as={SlotPageBonusList}
+                        bonusList={currentSlot.bonus}
                         isResponsive={true} />
 
-                    <Responsive 
-                        maxWidth={1200} 
-                        isResponsive={false} 
-                        as={SlotPageBonusList} 
+                    <Responsive
+                        maxWidth={1200}
+                        isResponsive={false}
+                        as={SlotPageBonusList}
                         bonusList={currentSlot.bonus}>
 
                     </Responsive>
                     {currentSlot.linkYoutube &&
                         <div>
-                            <Responsive minWidth={600}>  
-                                <YouTubeEmbed 
-                                    width='900' 
-                                    height='450' 
+                            <Responsive minWidth={600}>
+                                <YouTubeEmbed
+                                    width='900'
+                                    height='450'
                                     src={this.getYoutubeEmbedSource()} />
                             </Responsive>
-                            <Responsive maxWidth={600}> 
-                                <YouTubeEmbed 
-                                    width='300' 
-                                    height='150' 
+                            <Responsive maxWidth={600}>
+                                <YouTubeEmbed
+                                    width='300'
+                                    height='150'
                                     src={this.getYoutubeEmbedSource()} />
                             </Responsive>
                         </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 // components
-import SlotPageSlotCard from './SlotPageBonusCard'
+import SlotPageSlotCard from '../Cards/BonusCard'
 // semantic
 import {Grid} from 'semantic-ui-react-single/Grid'
 import {Responsive} from 'semantic-ui-react-single/Responsive'

@@ -42,6 +42,7 @@
     "react": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",
+    "react-helmet": "^5.2.0",
     "react-lazyload": "^2.3.0",
     "react-preload-image": "^1.0.4",
     "react-redux": "^5.0.7",
