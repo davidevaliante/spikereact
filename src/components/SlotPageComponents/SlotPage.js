@@ -23,7 +23,7 @@ import { connect } from 'react-redux'
 import split from 'lodash/split'
 import Helmet from 'react-helmet'
 import { lowerAndCap } from '../../'
-import { ROUTE } from "../../enums/Constants";
+import { ROUTE, RESPONSIVE_RESOLUTION } from "../../enums/Constants";
 
 
 class SlotPage extends Component {
@@ -151,16 +151,23 @@ class SlotPage extends Component {
                     </Responsive>
                     {currentSlot.linkYoutube &&
                         <div>
-                            <Responsive minWidth={600}>
-                                <YouTubeEmbed
-                                    width='900'
-                                    height='450'
-                                    src={this.getYoutubeEmbedSource()} />
-                            </Responsive>
-                            <Responsive maxWidth={600}>
+                            <Responsive maxWidth={RESPONSIVE_RESOLUTION.SMALL}>
                                 <YouTubeEmbed
                                     width='300'
                                     height='150'
+                                    src={this.getYoutubeEmbedSource()} />
+                            </Responsive>
+                            <Responsive minWidth={RESPONSIVE_RESOLUTION.SMALL + 1} 
+                                        maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
+                                <YouTubeEmbed
+                                    width='750'
+                                    height='325'
+                                    src={this.getYoutubeEmbedSource()} />
+                            </Responsive>
+                            <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} >
+                                <YouTubeEmbed
+                                    width='900'
+                                    height='450'
                                     src={this.getYoutubeEmbedSource()} />
                             </Responsive>
                         </div>
