@@ -9,7 +9,6 @@ import slice from 'lodash/slice'
 import shuffle from 'lodash/shuffle'
 // router e redux
 import { connect } from 'react-redux'
-import { GridRow } from 'semantic-ui-react';
 
 export const BonusList = (props) => {
 
@@ -28,9 +27,9 @@ export const BonusList = (props) => {
     }
 
     return (
-        <GridRow centered>
+        <Grid centered>
             {bonusListToColumn(props.bonusList)}
-        </GridRow>
+        </Grid>
     )
 }
 
