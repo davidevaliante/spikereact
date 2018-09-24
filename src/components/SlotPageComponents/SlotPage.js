@@ -23,7 +23,7 @@ import { connect } from 'react-redux'
 import split from 'lodash/split'
 import Helmet from 'react-helmet'
 import { lowerAndCap } from '../../'
-import {ROUTE} from "../../enums/Constants";
+import { ROUTE } from "../../enums/Constants";
 
 
 class SlotPage extends Component {
@@ -36,8 +36,8 @@ class SlotPage extends Component {
     componentDidMount() {
         console.log('mounting')
         getSlotWithId(this.props.match.params.id, (slot) => {
-            console.log("GETTING SLOT DB",slot)
-            if( !slot ){
+            console.log("GETTING SLOT DB", slot)
+            if (!slot) {
                 this.props.history.push(ROUTE.ERROR404)
             }
             this.props.dispatch(slotIsLoaded())
@@ -145,6 +145,7 @@ class SlotPage extends Component {
                         maxWidth={1200}
                         isResponsive={false}
                         as={SlotPageBonusList}
+                        maxNumber={3}
                         bonusList={currentSlot.bonus}>
 
                     </Responsive>

@@ -38,9 +38,6 @@ class SearchMultipleSelection extends Component {
     }
 
     handleItemAdded = (event, data) => {
-        console.log(pick(this.state.firebaseBonusObject, map(data.value, option =>
-            this.state.optionList[parseInt(option, 10)].key)
-        ));
 
         this.setState({ pickedList: data.value })
         this.props.onListUpdate(pick(this.state.firebaseBonusObject, map(data.value, option =>

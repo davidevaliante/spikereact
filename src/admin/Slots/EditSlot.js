@@ -21,6 +21,7 @@ import AdminNavbar from "../AdminNavbar";
 import { Header } from "semantic-ui-react-single/Header";
 import { Icon } from "semantic-ui-react-single/Icon";
 import { Dimmer } from "semantic-ui-react-single/Dimmer";
+import { Menu } from 'semantic-ui-react-single/Menu'
 import RichEdit from "../Extra/RichEdit";
 
 
@@ -35,6 +36,10 @@ class EditSlot extends React.Component {
             { key: 'quattro', value: '4', text: '4' },
             { key: 'cinque', value: '5', text: '5' },
         ],
+        isPopularOptions: [
+            { key: 'uno', value: 'true', text: 'Vero' },
+            { key: 'due', value: 'false', text: 'False' },
+        ],
         slotTypeOptions: [
             { key: 'one', value: SLOT_TYPES.BAR, text: 'Slot da bar' },
             { key: 'two', value: SLOT_TYPES.GRATIS, text: 'Slot gratis' },
@@ -43,7 +48,8 @@ class EditSlot extends React.Component {
         emptyFields: [],
         list: "",
         selectedBonus: {},
-        active: false
+        active: false,
+        isPopular: false
     };
 
 
@@ -77,7 +83,8 @@ class EditSlot extends React.Component {
                     optionList: options,
                     firebaseBonusObject: slot.bonus,
                     selectedBonus: slot.bonus,
-                    currentDescription: slot.description
+                    currentDescription: slot.description,
+                    isPopular: slot.isPopular
                 })
             })
 
@@ -139,6 +146,14 @@ class EditSlot extends React.Component {
     }
     handleDescriptionChange = (data) => {
         this.setState({ currentSlot: { ...this.state.currentSlot, description: data.value } })
+    }
+
+    onPopularSelected = value => {
+        if(value.value==="true"){
+            this.setState({ isPopular: true })
+        }else{
+            this.setState({ isPopular: false })
+        }
     }
 
     submitEditSlot = () => {
@@ -206,6 +221,7 @@ class EditSlot extends React.Component {
             tips: tipsField,
             tecnicals: tecnicalsField,
             type: type,
+            isPopular: this.state.isPopular
         }
 
         const image = this.state.image
@@ -231,7 +247,7 @@ class EditSlot extends React.Component {
 
     render() {
 
-        const { currentSlot, active } = this.state
+        const { currentSlot, active, isPopularOptions } = this.state
         const { producer } = this.state.currentSlot
         console.log(currentSlot.description)
 
@@ -339,8 +355,8 @@ class EditSlot extends React.Component {
 
                         <Form.Field>
                             <label>Descrizione</label>
-                            { currentSlot.description &&
-                            <RichEdit defaultContent={currentSlot.description} />}
+                            {currentSlot.description &&
+                                <RichEdit defaultContent={currentSlot.description} />}
                         </Form.Field>
 
                         <Form.Group widths='equal'>
@@ -356,6 +372,12 @@ class EditSlot extends React.Component {
                                         selection />
                                 }
                             </FormField>
+                            <FormField>
+                                <Menu compact>
+                                    <Dropdown text='Popolare' onChange={(event, data) => this.onPopularSelected(data)} options={isPopularOptions} simple item />
+                                </Menu>
+                            </FormField>
+
                             <FormField>
                                 {this.state.defaultRating &&
                                     <Dropdown
@@ -382,6 +404,7 @@ class EditSlot extends React.Component {
                                         onImageSelected={this.onImageSelected}
                                         imagePreview={getImageLinkFromName('slot', this.state.currentSlot.name, 'medium')} />}
                             </Form.Field>
+
                         </Form.Group>
 
                         <Form.Field

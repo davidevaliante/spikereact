@@ -33,6 +33,30 @@ const removeHtmlFrom = (s) => {
 }
 
 // -------------------DATABASE TRIGGERS--------------------------------------------------------------
+export const onBonusUpdated = functions.database.ref('Bonus/{language}/{id}').onUpdate(
+    (ciao, context) => {
+        const updatedBonus = ciao.after.exportVal()
+
+
+        admin.database().ref(`/Slots/${context.params.language}`).once("value", snapshot => {
+            const x = snapshot.val()
+            for (const key in x) {
+                const changedId = context.params.id
+                const element = x[key]
+                if (element.bonus[changedId] !== undefined) {
+                    element.bonus[changedId] = updatedBonus
+                    admin.database().ref(`/Slots/${context.params.language}/${key}`).set(element)
+                }
+
+
+            }
+        })
+
+        return null
+
+    }
+)
+
 export const onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     .onCreate((snapshot, context) => {
         // Grab the current value of what was written to the Realtime Database.
@@ -70,7 +94,8 @@ export const onSlotUpdated = functions.database.ref('/Slots/{language}/{editedId
             rating: newSlot.rating,
             time: newSlot.time,
             type: newSlot.type,
-            description: truncate(removeHtmlFrom(newSlot.description), { 'length': 150 })
+            description: truncate(removeHtmlFrom(newSlot.description), { 'length': 150 }),
+            isPopular: newSlot.isPopular
         }
 
         const slotMenu = {
@@ -111,7 +136,7 @@ export const generateThumbs = functions.storage.object().onFinalize(async object
     // nome della cartella originale del file
     const bucketDir = dirname(filePath);
 
-   
+
     // metadata file
     const metadata = {
         contentType: 'image/jpeg',

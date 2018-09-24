@@ -35,6 +35,21 @@ const removeHtmlFrom = (s) => {
     return str.replace(/<[^>]*>/g, '');
 };
 // -------------------DATABASE TRIGGERS--------------------------------------------------------------
+exports.onBonusUpdated = functions.database.ref('Bonus/{language}/{id}').onUpdate((ciao, context) => {
+    const updatedBonus = ciao.after.exportVal();
+    admin.database().ref(`/Slots/${context.params.language}`).once("value", snapshot => {
+        const x = snapshot.val();
+        for (const key in x) {
+            const changedId = context.params.id;
+            const element = x[key];
+            if (element.bonus[changedId] !== undefined) {
+                element.bonus[changedId] = updatedBonus;
+                admin.database().ref(`/Slots/${context.params.language}/${key}`).set(element);
+            }
+        }
+    });
+    return null;
+});
 exports.onSlotAdded = functions.database.ref('/Slots/{language}/{pushId}/')
     .onCreate((snapshot, context) => {
     // Grab the current value of what was written to the Realtime Database.
@@ -67,7 +82,8 @@ exports.onSlotUpdated = functions.database.ref('/Slots/{language}/{editedId}/')
         rating: newSlot.rating,
         time: newSlot.time,
         type: newSlot.type,
-        description: lodash_1.truncate(removeHtmlFrom(newSlot.description), { 'length': 150 })
+        description: lodash_1.truncate(removeHtmlFrom(newSlot.description), { 'length': 150 }),
+        isPopular: newSlot.isPopular
     };
     const slotMenu = {
         name: newSlot.name,
@@ -143,93 +159,6 @@ exports.generateThumbs = functions.storage.object().onFinalize((object) => __awa
     }
     return true;
 }));
-/* // -----------------------STORAGE TRIGGERS------------------------------------------------------------
-export const generateThumbs = functions.storage.object().onFinalize(async object => {
-    const bucket = gcs.bucket(object.bucket)
-    // dove si trova il file nello storage
-    const filePath = object.name;
-    // fa split rispetto a '/' e prende l'ultimo elemento dell'array
-    const fileName = filePath.split('/').pop();
-    // nome della cartella originale del file
-    const bucketDir = dirname(filePath);
-
-    // crea una directory temporanea dove conservare i file trasformati prima di riscriverli
-    const temporaryDirectory = join(tmpdir(), `thumbs_${fileName}_${now()}`);
-    // crea un filePath temporaneo all'interno della directory temporanea
-    const temporaryFilePath = join(temporaryDirectory, 'source.png');
-
-
-    // break point per evitare che la funzione trigegri all'infinito
-    // di base questa funzione va ogni volta che viene aggiunta un immagine
-    // quindi riscrivendo nello storage l'immagine ridimensionata il loop sarebbe infito
-    if (fileName.includes('thumb_') ||
-        fileName.includes('bonus') ||
-        !object.contentType.includes('image')) {
-        return false;
-    }
-
-    // la creazione della directory temporanea può richeiedere tempo quindi
-    // utilizziamo awai per aspettare che sia creata e inseriamo un callback
-    await fileSystem.ensureDir(temporaryDirectory);
-
-    // scarichiamo il file nella directory (sempre in maniera asincrona)
-    await bucket.file(filePath).download({
-        destination: temporaryFilePath
-    });
-
-    // se l'immagine che triggera è di una slot servono 2 thumbnail
-    if (fileName.includes('slot')) {
-        const slotUploadPromises = slotSizes.map(async size => {
-            const thumbName = `thumb_${size}_${fileName}`;
-            // nome con tempo aggiunto
-            const thumbTempName = `thumb_${size}_${fileName}_${now()}`
-            const thumbPath = join(temporaryDirectory, thumbTempName);
-
-            await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
-            // upload della nuova immagine nello storage
-            return bucket.upload(thumbPath, {
-                destination: join(bucketDir, thumbName),
-                metadata: {
-                    contentType: 'image/jpeg',
-                }
-            })
-
-        });
-
-
-        // chiamiamo tutte le promises nell'array
-        await Promise.all(slotUploadPromises)
-
-    }
-
-
-    // se l'immagine che triggera è di un bonus serve solo 1 thumbnail piccolo per il menu
-    if (fileName.includes('producer')) {
-        const producerUploadPromises = producerSizes.map(async size => {
-            const thumbName = `thumb_${size}_${fileName}`;
-            const thumbPath = join(temporaryDirectory, thumbName);
-            const metadata =
-
-            await sharp(temporaryFilePath).resize(size, Math.floor((size * 9) / 16)).toFile(thumbPath);
-
-            // upload della nuova immagine nello storage
-            return bucket.upload(thumbPath, {
-                destination: join(bucketDir, thumbName),
-                metadata: {
-                    contentType: 'image/jpeg',
-                }
-            })
-
-        });
-
-        // chiamiamo tutte le promises nell'array
-        await Promise.all(producerUploadPromises);
-    }
-
-
-
-    return fileSystem.remove(temporaryDirectory);
-}) */
 exports.imageToJPG = functions.storage.object().onFinalize((object) => __awaiter(this, void 0, void 0, function* () {
     const filePath = object.name;
     const baseFileName = path.basename(filePath, path.extname(filePath));

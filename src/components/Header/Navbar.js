@@ -51,7 +51,7 @@ class Navbar extends Component {
                 // document.getElementById('home-nav-link').click()
                 this.props.dispatch(setHomePage())
         }
-        if(document.getElementById('descriptionBanner'))
+        if (document.getElementById('descriptionBanner'))
             smoothScrollTo('descriptionBanner')
     }
 
@@ -92,7 +92,7 @@ class Navbar extends Component {
                     </Menu.Item>
 
                     <Menu.Item >
-                        <NavbarSearchBar style={{marginLeft: '-1rem'}} displaying={this.props.displaying} slotId={this.props.slotId} />
+                        <NavbarSearchBar style={{ marginLeft: '-1rem' }} displaying={this.props.displaying} slotId={this.props.slotId} />
                     </Menu.Item>
 
                 </Menu>
@@ -155,7 +155,7 @@ class Navbar extends Component {
                                     <NavLink id='article-nav-link' to={ROUTE.ARTICLE}>Articoli</NavLink>
                                 </Menu.Item>
 
-                                <Menu.Item borderless position='right'>
+                                <Menu.Item borderless>
                                     <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
                                 </Menu.Item>
                             </Container>
