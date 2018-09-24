@@ -28,7 +28,7 @@ const SlotPageHeader = ({ currentSlot, showFixedMenu, hideFixedMenu, fixmenu, lo
             <Segment
                 inverted
                 textAlign='center'
-                style={{ minHeight: 700, padding: 0 }}
+                style={{ minHeight: '100vh', padding: 0 }}
                 vertical>
                 <LazyLoad height={'100vh'}>
                     {loading ?
