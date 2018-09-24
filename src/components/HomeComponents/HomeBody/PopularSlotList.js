@@ -53,7 +53,7 @@ class PopularSlotList extends Component {
                     {/*this.props.popularSlots ? this.slotListToRows(this.props.popularSlots) : <div></div>*/}
                 </div>
                 <Grid style={{ marginTop: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
-                    <Grid.Row style={{ paddingBottom: '4rem' }}>
+                    <Grid.Row style={{ paddingBottom: '4rem' }} centered>
                         {this.props.popularSlots ? this.slotListToCard(this.props.popularSlots) : ''}
                     </Grid.Row>
                 </Grid>
