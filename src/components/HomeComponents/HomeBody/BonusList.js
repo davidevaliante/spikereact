@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 // semantic
-import { Feed } from 'semantic-ui-react-single/Feed'
+import { Grid } from 'semantic-ui-react-single/Grid'
 // components
 import BonusCard from '../../Cards/BonusCard'
 // mix
@@ -9,6 +9,7 @@ import slice from 'lodash/slice'
 import shuffle from 'lodash/shuffle'
 // router e redux
 import { connect } from 'react-redux'
+import { GridRow } from 'semantic-ui-react';
 
 export const BonusList = (props) => {
 
@@ -27,9 +28,9 @@ export const BonusList = (props) => {
     }
 
     return (
-        <div className='vertical-center'>
+        <GridRow centered>
             {bonusListToColumn(props.bonusList)}
-        </div>
+        </GridRow>
     )
 }
 

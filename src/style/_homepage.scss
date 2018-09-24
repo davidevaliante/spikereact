@@ -47,6 +47,12 @@
     align-content: center;
 }
 
+@media only screen and (max-width: 600px){
+    .home-page-intro {
+        padding: 3.5rem 3.5rem;
+    }
+}
+
 .home-bg{
     background: #2c2c2c;
 }

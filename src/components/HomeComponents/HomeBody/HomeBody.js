@@ -40,9 +40,7 @@ const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky })
             <Grid.Column
                 style={{ paddingTop: '0' }}
                 width={4}>
-                <Sticky context={isSticky} offset={80}>
-                    <BonusList maxNumber={15} />
-                </Sticky>
+                <BonusList maxNumber={15} />
             </Grid.Column>
         </Grid.Row>
     </Grid>

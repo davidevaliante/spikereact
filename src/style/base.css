@@ -132,6 +132,7 @@ header {
   animation-timing-function: ease-out;
   
 }
+
 @media only screen and (max-width: 600px){
   .header-spike-text{
     font-size: 200%;
