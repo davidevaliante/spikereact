@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 // components
 import SlotCard from '../../Cards/SlotCard'
 // mix
 import chunk from 'lodash/chunk'
 // router e redux
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
+// semantic
+import {Grid} from 'semantic-ui-react-single/Grid'
+import {Responsive} from 'semantic-ui-react-single/Responsive'
 
 class PopularSlotList extends Component {
     state = {}
@@ -21,20 +24,39 @@ class PopularSlotList extends Component {
         return rows.map((row, index) => (
             <div className='horizontal-center' key={`slot_row_${index}`}>
                 {row.map((element) =>
-                    (element && <SlotCard slot={element} key={element.id} />))
+                    (element && <SlotCard slot={element} key={element.id}/>))
                 }
             </div>
 
         ))
     }
 
+    slotListToCard = (slotList) => {
+        let listOfSlots = []
+        for (const key in slotList) {
+            const element = slotList[key]
+            listOfSlots.push(element)
+        }
+
+        return listOfSlots.map((element) => {
+            (element && <Grid.Column style={{paddingLeft: '0'}}><SlotCard slot={element} key={element.id}/> </Grid.Column>)
+        })
+    }
+
     render() {
-        console.log(this.props.popularSlots)
+        console.log("POPULAR", this.props.popularSlots)
 
         return (
-            <div className='vertical-center' style={{ marginTop: '4rem' }}>
-                <h3 className='popular-slot-header'>Le slot più popolari</h3>
-                {this.props.popularSlots ? this.slotListToRows(this.props.popularSlots) : <div></div>}
+            <div>
+                <div className='vertical-center' style={{marginTop: '4rem'}}>
+                    <h3 className='popular-slot-header'>Le slot più popolari</h3>
+                    {/*this.props.popularSlots ? this.slotListToRows(this.props.popularSlots) : <div></div>*/}
+                </div>
+                <Grid style={{marginTop: '0rem'}} celled='internally' stackable className='row-centered-spaced'>
+                    <Grid.Row style={{paddingBottom: '4rem'}}>
+                        {this.props.popularSlots ? this.slotListToCard(this.props.popularSlots) : ''}
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }
