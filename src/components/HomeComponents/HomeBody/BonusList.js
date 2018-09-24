@@ -27,9 +27,9 @@ export const BonusList = (props) => {
     }
 
     return (
-        <Feed className='vertical-center'>
+        <div className='vertical-center'>
             {bonusListToColumn(props.bonusList)}
-        </Feed>
+        </div>
     )
 }
 

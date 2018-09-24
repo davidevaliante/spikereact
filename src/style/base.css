@@ -130,6 +130,12 @@ header {
   animation-name: moveInLeft;
   animation-duration: 1s;
   animation-timing-function: ease-out;
+  
+}
+@media only screen and (max-width: 600px){
+  .header-spike-text{
+    font-size: 200%;
+  }
 }
 
 .slideRight{
