@@ -12,7 +12,7 @@ import SlotPage from '../components/SlotPageComponents/SlotPage';
 import { PAGES, ROUTE } from "../enums/Constants";
 import AboutPage from '../components/AboutPage'
 import SlotDashboard from "../admin/Slots/SlotDashboard";
-import NotFound from "../components/SlotPageComponents/NotFound"
+import NotFound from "../components/NotFound"
 import EditSlot from "../admin/Slots/EditSlot";
 import BonusDashboard from "../admin/Bonus/BonusDashboard"
 import AddExtraFromHtml from '../admin/Extra/AddExtraFromHtml'
@@ -73,6 +73,7 @@ const AppRouter = () => {
 
                     {/* Error */}
                     <Route path={ROUTE.ERROR404} component={NotFound} />
+                    <Route path='*' component={NotFound} />
                 </Switch>
 
             </Router>

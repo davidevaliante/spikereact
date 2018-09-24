@@ -5,15 +5,11 @@ import { Segment } from 'semantic-ui-react-single/Segment'
 import { Image } from 'semantic-ui-react-single/Image'
 // router e redux
 import { Link } from 'react-router-dom'
-import Navbar from '../Header/Navbar'
+import Navbar from './Header/Navbar'
 
 const NotFound = () => {
     return (
         <Container fluid>
-            <Container style={{ backgroundColor: "#000000", height: 320 }} fluid>
-                <Navbar
-                ></Navbar>
-            </Container>
             <Container style={{ paddingTop: 10 }}>
                 <Container textAlign="center" fluid>
 

@@ -8,7 +8,7 @@ import {Segment} from "semantic-ui-react-single/Segment";
 // lodash
 import delay from 'lodash/delay'
 // mix
-import {PAGES, RESPONSIVE_RESOLUTION, SLOT_TYPES} from "../../enums/Constants";
+import {PAGES, RESPONSIVE_RESOLUTION, ROUTE, SLOT_TYPES} from "../../enums/Constants";
 import { getProducerByName, getSlotListByProducerName } from "../../firebase/get";
 import {onListFetched} from "../../utils/Callbacks";
 // Components
@@ -43,16 +43,24 @@ class ProducerPage extends Component {
     gettingPageData = () => {
         getProducerByName(this.props.match.params.producerName, 
             // callback 
-            producerDataResponse => {
-            getSlotListByProducerName(this.props.match.params.producerName, 
-                // callback 
-                slotListObject => {
-                    this.setState({
-                        currentProducer:onListFetched(producerDataResponse)[0],
-                        slotProducerList: onListFetched(slotListObject),
-                        loading: false
+            (producerDataResponse) => {
+                const producer = onListFetched(producerDataResponse)
+                if ( producer.length === 0 ){
+                    this.props.history.push(ROUTE.ERROR404)
+                } else {
+                    getSlotListByProducerName(this.props.match.params.producerName, 
+                    // callback 
+                    slotListObject => {
+                        delay( () => {smoothScrollTo('aamsBanner')}, 1500);
+                        this.setState({
+                            currentProducer:onListFetched(producerDataResponse)[0],
+                            slotProducerList: onListFetched(slotListObject),
+                            loading: false
+                        })
                     })
-            })
+                }
+
+                
         })
     }
 
@@ -62,7 +70,7 @@ class ProducerPage extends Component {
     render() {
         const { currentProducer, slotProducerList } = this.state;
         const slotLength = ( slotProducerList ) ? slotProducerList.length : 0;
-        delay( () => {smoothScrollTo('aamsBanner')}, 1500);
+        
         
         return (
             <div>

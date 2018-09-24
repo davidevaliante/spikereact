@@ -91,8 +91,8 @@ class Navbar extends Component {
                         <NavLink id='article-nav-link' to={ROUTE.ARTICLE}>Articoli</NavLink>
                     </Menu.Item>
 
-                    <Menu.Item  >
-                        <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
+                    <Menu.Item >
+                        <NavbarSearchBar style={{marginLeft: '-1rem'}} displaying={this.props.displaying} slotId={this.props.slotId} />
                     </Menu.Item>
 
                 </Menu>

@@ -7,6 +7,7 @@ import reduce from 'lodash/reduce'
 import debounce from 'lodash/debounce'
 import escapeRegExp from 'lodash/escapeRegExp'
 import { formatList } from '../../utils/Utils'
+import { ROUTE } from '../../enums/Constants'
 // router e redux
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -28,13 +29,13 @@ class NavbarSearchBar extends Component {
     handleResultSelect = (e, { result }) => {
         switch (result.type) {
             case 'slot':
-                this.props.history.push(`/slot/${result.id}`)
+                this.props.history.push(`${ROUTE.SLOTS}/${result.id}`)
                 break;
             case 'bonus':
                 window.open(result.link)
                 break;
             case 'producer':
-                this.props.history.push(`/producer/${result.title}`)
+                this.props.history.push(`${ROUTE.PRODUCERS}/${result.title}`)
                 break;
             default:
 

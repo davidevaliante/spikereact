@@ -34,15 +34,18 @@ const admin = '/admin';
 
 export const ROUTE = {
     ROOT: '/',
+    SLOTS: '/slot',
     SLOT: '/slot/:id',
     SLOT_ONLINE: '/slot-online',
     SLOT_GRATIS: '/slot-gratis',
     SLOT_BAR: '/slot-bar',
     ABOUT: '/about',
+    EXTRAS: `/article`,
     EXTRA: `/article/:id`,
+    PRODUCERS: '/producer',
     PRODUCER: `/producer/:producerName`,
     ARTICLE: '/articoli',
-    ERROR404: '*',
+    ERROR404: '/404',
 
     // admin
     ADMIN: `${admin}`,

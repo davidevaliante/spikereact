@@ -4,6 +4,7 @@ import { Dropdown } from 'semantic-ui-react-single/Dropdown'
 // mix
 import { getImageLinkFromName } from '../../utils/Utils'
 import {setProducerPage} from "../../reducers/CurrentPageReducer";
+import { ROUTE } from '../../enums/Constants'
 // router e redux
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -34,7 +35,8 @@ class ProducersDropdown extends Component {
     }
 
     dropdownChoiceHandler = (producerName) => {
-        this.props.history.push(`/producer/${producerName}`)
+        producerName = encodeURIComponent(producerName)
+        this.props.history.push(`${ROUTE.PRODUCERS}/${producerName}`)
         this.props.dispatch(setProducerPage(producerName));
     }
 

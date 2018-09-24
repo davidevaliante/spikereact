@@ -23,6 +23,9 @@ import { connect } from 'react-redux'
 import split from 'lodash/split'
 import Helmet from 'react-helmet'
 import { lowerAndCap } from '../../'
+import {ROUTE} from "../../enums/Constants";
+
+
 class SlotPage extends Component {
 
     state = {
@@ -33,6 +36,10 @@ class SlotPage extends Component {
     componentDidMount() {
         console.log('mounting')
         getSlotWithId(this.props.match.params.id, (slot) => {
+            console.log("GETTING SLOT DB",slot)
+            if( !slot ){
+                this.props.history.push(ROUTE.ERROR404)
+            }
             this.props.dispatch(slotIsLoaded())
             this.setState({
                 currentSlot: slot,
