@@ -133,10 +133,16 @@ header {
   
 }
 
-@media only screen and (max-width: 600px){
-  .header-spike-text{
-    font-size: 200%;
-  }
+@media only screen and (max-width: 805px) {
+    .header-spike-text {
+        font-size: 200%;
+        line-height: 2.7rem;
+        margin-bottom: 2.6rem;
+        letter-spacing: 0.5rem;
+    }
+    .slideRight {
+        margin-bottom: 2rem;
+    }
 }
 
 .slideRight{

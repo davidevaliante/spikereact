@@ -2,14 +2,13 @@ import React from 'react'
 // semantic
 import { Segment } from 'semantic-ui-react-single/Segment'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
-import { Dimmer } from 'semantic-ui-react-single/Dimmer'
-import { Loader } from 'semantic-ui-react-single/Loader'
 // components
 import ShortHandMenu from '../SlotPageComponents/ShortHandMenu'
 import AamsBanner from "../AamsBanner";
 // mix
 import { getImageLinkFromName } from '../../utils/Utils'
 import LazyLoad from 'react-lazyload';
+import { LoadingDimmer } from "../../utils/DimmerText";
 
 const styles = {
     overlay: {
@@ -31,11 +30,7 @@ const SlotPageHeader = ({ currentSlot, showFixedMenu, hideFixedMenu, fixmenu, lo
                 style={{ minHeight: '100vh', padding: 0 }}
                 vertical>
                 <LazyLoad height={'100vh'}>
-                    {loading ?
-                        <Dimmer active>
-                            <Loader />
-                        </Dimmer>
-                        :
+                    <LoadingDimmer active={loading}/>
                         <header
                             id='slotHeader'
                             className='fade-in-header'
@@ -52,7 +47,7 @@ const SlotPageHeader = ({ currentSlot, showFixedMenu, hideFixedMenu, fixmenu, lo
                                     </div>
                                 </div>
                             </div>
-                        </header>}
+                        </header>
                 </LazyLoad>
             </Segment>
             <AamsBanner />
