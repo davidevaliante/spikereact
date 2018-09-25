@@ -12,30 +12,29 @@ import Navbar from '../Header/Navbar'
 import PopularSlotList from './HomeBody/PopularSlotList'
 // router e redux
 import { connect } from 'react-redux';
-import { ROUTE, SLOT_TYPES } from "../../enums/Constants";
+import { ROUTE, SLOT_TYPES, PAGES } from "../../enums/Constants";
 import { setHomePage, setGratisPage, setBarPage, setAboutPage, setProducerPage, setArticlePage } from '../../reducers/CurrentPageReducer'
 // data
-import { getSlotBasedOnProducer, getAllByType } from '../../firebase/get'
-import { router } from 'sw-toolbox';
+import { getSlotsCardBasedOnTime, getAllByType } from '../../firebase/get'
 
 class HomePage extends Component {
     state = {};
 
     componentDidMount() {
-        if (this.props.match.params.name) {
-            getSlotBasedOnProducer(this.props.match.params.name)
-        }
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.displaying !== this.props.displaying) {
             switch (this.props.displaying) {
-                case 'SLOT_BAR':
-                    getAllByType('BAR')
-                    break
-                case 'SLOT_GRATIS':
-                    getAllByType('GRATIS')
-                    break
+                case PAGES.HOME:
+                    getSlotsCardBasedOnTime(12);
+                    break;
+                case PAGES.SLOT_BAR:
+                    getAllByType('BAR');
+                    break;
+                case PAGES.SLOT_GRATIS:
+                    getAllByType('GRATIS');
+                    break;
                 default:
             }
         }
