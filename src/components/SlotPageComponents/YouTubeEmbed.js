@@ -20,7 +20,7 @@ const YouTubeEmbed = (props) => {
                 <iframe
                     title='ytcontent'
                     width='300'
-                    height='150'
+                    height='168'
                     src={props.src}>
                 </iframe>
 
@@ -29,16 +29,25 @@ const YouTubeEmbed = (props) => {
                         maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
                 <iframe
                     title='ytcontent'
-                    width='750'
-                    height='325'
+                    width='420'
+                    height='236'
                     src={props.src}>
                 </iframe>
             </Responsive>
-            <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} >
+            <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM + 1}
+                        maxWidth={RESPONSIVE_RESOLUTION.LARGE}>
                 <iframe
                     title='ytcontent'
-                    width='900'
+                    width='800'
                     height='450'
+                    src={props.src}>
+                </iframe>
+            </Responsive>
+            <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE + 1}>
+                <iframe
+                    title='ytcontent'
+                    width='1195'
+                    height='672'
                     src={props.src}>
                 </iframe>
             </Responsive>

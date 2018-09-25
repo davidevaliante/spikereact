@@ -2,10 +2,8 @@ import React from 'react'
 // components
 import SlotPageSlotCard from '../Cards/BonusCard'
 // semantic
-import { Grid } from 'semantic-ui-react-single/Grid'
-import { Responsive } from 'semantic-ui-react-single/Responsive'
+import {Grid} from 'semantic-ui-react-single/Grid'
 // mix
-import { RESPONSIVE_RESOLUTION } from "../../enums/Constants";
 
 const SlotPageBonusList = (props) => {
 
@@ -16,7 +14,7 @@ const SlotPageBonusList = (props) => {
             formattedList.push(current)
         }
         return formattedList.map((bonus, index) =>
-            <Grid.Column><SlotPageSlotCard bonus={bonus} /></Grid.Column>
+            <SlotPageSlotCard bonus={bonus} />
         )
     }
 
@@ -27,7 +25,7 @@ const SlotPageBonusList = (props) => {
                 <div className='home-page-intro-outer' style={{ width: '100%' }}>
                     <div className='home-page-intro-bg' style={{ width: '100%' }}>
                         <div className='home-page-intro' style={{ width: '100%' }}>
-                            <h1>I migliori Bonus</h1>
+                            <h1>I migliori Bonus DELLA MADONNA</h1>
                             <p>Passa dalla teoria alla pratica</p>
                             <p>Utilizza questi bonus ed inizia a vincere soldi veri su siti certificati e sicuri</p>
                         </div>
@@ -35,27 +33,12 @@ const SlotPageBonusList = (props) => {
                 </div>
             </div>
 
-            <div style={{ padding: '0 2rem' }}>
-                <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>
-                    <Grid stackable columns={3}>
+            <div style={{ padding: '0 0' }}>
+                <Grid stackable columns={4} style={{ margin: '0' }}>
+                    <Grid.Row centered>
                         {bonusList()}
-                    </Grid>
-                </Responsive>
-                <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} maxWidth={RESPONSIVE_RESOLUTION.LARGE}>
-                    <Grid stackable columns={3}>
-                        {bonusList()}
-                    </Grid>
-                </Responsive>
-                <Responsive minWidth={RESPONSIVE_RESOLUTION.SMALL} maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
-                    <Grid stackable columns={2}>
-                        {bonusList()}
-                    </Grid>
-                </Responsive>
-                <Responsive maxWidth={RESPONSIVE_RESOLUTION.SMALL}>
-                    <Grid stackable columns={1}>
-                        {bonusList()}
-                    </Grid>
-                </Responsive>
+                    </Grid.Row>
+                </Grid>
             </div>
 
         </div>
