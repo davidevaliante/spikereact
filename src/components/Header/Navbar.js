@@ -28,7 +28,8 @@ import { slide as BurgerMenu } from 'react-burger-menu'
 class Navbar extends Component {
 
     state = {
-        menuOpen: false
+        menuOpen: false,
+        producerDropdownOpen: false
     }
 
     burgerStyles = {
@@ -76,7 +77,7 @@ class Navbar extends Component {
     showFixedMenu = () => this.setState({ fixed: true })
 
 
-    updateCurrentPage = (page) => {
+    updateCurrentPage = (page, producerName) => {
         this.setState({
             menuOpen: false
         })
@@ -98,7 +99,7 @@ class Navbar extends Component {
                 this.props.dispatch(setArticlePage())
                 break;
             case PAGES.PRODUCER:
-                this.props.dispatch(setProducerPage(this.props.match.params.name));
+                this.props.dispatch(setProducerPage(producerName));
                 break;
             default:
                 // document.getElementById('home-nav-link').click()
@@ -111,6 +112,7 @@ class Navbar extends Component {
     render() {
         return (
             <div>
+                {/* BURGER MENU */}
                 <Responsive maxWidth={RESPONSIVE_RESOLUTION.MEDIUM - 1}>
                     <BurgerMenu isOpen={this.state.menuOpen} styles={this.burgerStyles} >
                         <Menu
@@ -140,8 +142,9 @@ class Navbar extends Component {
 
                             <Menu.Item
                                 as="a">
-                                <ProducersDropdown />
+                                <ProducersDropdown callback={this.updateCurrentPage}/>
                             </Menu.Item>
+
                             <Menu.Item
                                 as='a'
                                 onClick={(event, data) => this.updateCurrentPage(PAGES.ARTICLE)}
@@ -155,24 +158,22 @@ class Navbar extends Component {
                         </Menu>
                     </BurgerMenu>
                 </Responsive>
+
+                {/* ORIZONTAL MENU */}
                 <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
                     <Visibility
                         once={false}
                         onBottomPassed={this.showFixedMenu}
                         onBottomPassedReverse={this.hideFixedMenu}>
                         <Menu
-                            stackable
-                            style={{ zIndex: 99, width: '100%' }}
+                            style={{ zIndex: 99, paddingRight: '12rem'}}
                             fixed='top'
-                            inverted={!this.props.fixColor && !this.state.fixed}
-                            secondary={!this.props.fixColor && !this.state.fixed}
+                            inverted={!this.state.fixed}
+                            secondary={!this.state.fixed}
                             size='large'>
-
-
                             <Menu.Item style={{ visibility: this.state.fixed ? 'visible' : 'hidden' }}>
                                 <img src={logo} alt='spike-logo' />
                             </Menu.Item>
-
                             <Menu.Item
                                 as='a'
                                 className='navbarItemOne'
@@ -196,8 +197,9 @@ class Navbar extends Component {
                             </Menu.Item>
 
                             <Menu.Item
-                                as="a">
-                                <ProducersDropdown />
+                                as="a"
+                            >
+                                <ProducersDropdown callback={this.updateCurrentPage}/>
                             </Menu.Item>
                             <Menu.Item
                                 as='a'
@@ -207,7 +209,7 @@ class Navbar extends Component {
                             </Menu.Item>
 
                             <Menu.Item borderless position='right'>
-                                <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
+                                <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId}/>
                             </Menu.Item>
                         </Menu >
                     </Visibility >

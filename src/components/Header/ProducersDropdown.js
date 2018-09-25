@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 // semantic
-import { Dropdown } from 'semantic-ui-react-single/Dropdown'
+import { Dropdown } from 'semantic-ui-react-single/Dropdown';
 // mix
-import { getImageLinkFromName } from '../../utils/Utils'
 import {setProducerPage} from "../../reducers/CurrentPageReducer";
-import { ROUTE } from '../../enums/Constants'
+import {PAGES, ROUTE} from '../../enums/Constants';
 // router e redux
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 // lodash
-import orderBy from 'lodash/orderBy'
+import orderBy from 'lodash/orderBy';
 
 class ProducersDropdown extends Component {
     state = {};
 
     formatProducerForDropdown = (list) => {
-        let formattedList = []
+        let formattedList = [];
         for (const key in list) {
-            const prod = list[key]
+            const prod = list[key];
             formattedList.push({
+                id: key,
                 text: prod.name,
                 value: prod.name,
                 // image: {
@@ -27,18 +27,19 @@ class ProducersDropdown extends Component {
                 //     size: 'mini',
                 //     src: getImageLinkFromName('producer', prod.name)
                 // },
-                id: key
+
             })
         }
         formattedList = orderBy(formattedList, ['value'], ['asc']);
         return formattedList
-    }
+    };
 
     dropdownChoiceHandler = (producerName) => {
-        producerName = encodeURIComponent(producerName)
-        this.props.history.push(`${ROUTE.PRODUCERS}/${producerName}`)
+        producerName = encodeURIComponent(producerName);
+        this.props.callback(PAGES.PRODUCER, producerName);
+        this.props.history.push(`${ROUTE.PRODUCERS}/${producerName}`);
         this.props.dispatch(setProducerPage(producerName));
-    }
+    };
 
 
     render() {
@@ -46,6 +47,8 @@ class ProducersDropdown extends Component {
             <Dropdown
                 text='Produttori'
                 scrolling
+                closeOnBlur
+                closeOnChange
                 onChange={(event, data) => this.dropdownChoiceHandler(data.value)}
                 options={this.formatProducerForDropdown(this.props.producerList)} />
         )
@@ -55,6 +58,6 @@ class ProducersDropdown extends Component {
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
     producerList: state.producerList
-})
+});
 
 export default withRouter(connect(mapStateToProps)(ProducersDropdown))

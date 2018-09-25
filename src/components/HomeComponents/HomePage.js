@@ -79,11 +79,8 @@ class HomePage extends Component {
 
         return (
             <div>
-                <div>
-                    <Responsive maxWidth={600}> <Navbar displaying='HOME' isResponsive={true} /></Responsive>
-                    <Responsive minWidth={600}> <Navbar displaying='HOME' isResponsive={false} /></Responsive>
-                    <HomePageHeader style={{ position: 'absolute', zIndex: 1 }} />
-                </div>
+                <Navbar displaying='HOME'/>
+                <HomePageHeader style={{ position: 'absolute', zIndex: 1 }} />
                 <SiteDescription />
                 <Segment vertical>
                     <PopularSlotList />
