@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
 // mix 
-import { PAGES } from '../../enums/Constants'
+import { PAGES, RESPONSIVE_RESOLUTION } from '../../enums/Constants'
 // router e redux
 import { connect } from 'react-redux'
 
@@ -38,8 +38,7 @@ class ListDescriptionBanner extends Component {
         }
         return (
             <div id='descriptionBanner' className='description-banner-container'>
-
-                <Responsive minWidth={766}>
+                <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
                     <div className='description-banner-red'>
                         <div className='white-line scale-in-hor-right'/>
                         <div>

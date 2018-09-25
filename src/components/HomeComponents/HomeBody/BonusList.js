@@ -12,6 +12,8 @@ import { connect } from 'react-redux'
 
 export const BonusList = (props) => {
 
+    const bonusNumber = (props.toShow) ? props.toShow : 4;
+
     const bonusListToColumn = bonusList => {
 
         const listOfBonus = []
@@ -22,13 +24,15 @@ export const BonusList = (props) => {
             listOfBonus.push(element)
         }
 
-        const column = slice(shuffle(listOfBonus), 0, props.maxNumber)
-        return slice(shuffle(column), 0, 4).map(bonus => <BonusCard bonus={bonus} key={bonus.id} />)
+        // const column = slice(shuffle(listOfBonus), 0, props.maxNumber)
+        return slice(shuffle(listOfBonus), 0, bonusNumber).map(bonus => <BonusCard bonus={bonus} key={bonus.id} />)
     }
 
     return (
         <Grid centered>
-            {bonusListToColumn(props.bonusList)}
+            <Grid.Row style={{ paddingBottom: '4rem' }} centered>
+                {bonusListToColumn(props.bonusList)}
+            </Grid.Row>
         </Grid>
     )
 }

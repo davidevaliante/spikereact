@@ -88,9 +88,10 @@ class HomePage extends Component {
                     <HomeBody
                         orderHandler={this.handleChange}
                         slotorder={order}
-                        handleContextRef={this.handleContextRef}
                         type={type}
-                        isSticky={contextRef} />
+                        handleContextRef={this.handleContextRef}
+                        stickyContextRef={contextRef}
+                        isActive={true} />
                 </Segment>
                 <Footer />
             </div>

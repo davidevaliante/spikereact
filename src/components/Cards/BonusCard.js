@@ -22,9 +22,9 @@ const BonusCard = (props) => {
 
     return (
 
-        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-            <div class="flipper">
-                <div class="front">
+        <div className="flip-container" ontouchstart="this.classList.toggle('hover');">
+            <div className="flipper">
+                <div className="front">
                     <Card color='red'>
                         <Card.Content>
                             <Card.Header>
@@ -39,7 +39,7 @@ const BonusCard = (props) => {
                     </Card>
                 </div>
 
-                <div class="back">
+                <div className="back">
                     <Card style={{ background: '#454545' }}>
                         <Card.Content>
                             <Button onClick={(event) => goToExternalLink()} fluid color='red'>Provalo subito</Button>

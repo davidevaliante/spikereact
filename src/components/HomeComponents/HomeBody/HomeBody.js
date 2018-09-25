@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Sticky } from 'semantic-ui-react-single/Sticky'
 import { Dropdown } from 'semantic-ui-react-single/Dropdown'
-import { Responsive } from 'semantic-ui-react-single/Responsive'
 // components
 import SlotList from './SlotList'
 import BonusList from './BonusList'
@@ -16,13 +15,11 @@ const dropdownOptions = [
     { key: 1, text: 'Rating', value: 'rating' },
     { key: 2, text: 'Data', value: 'time' },
     { key: 3, text: 'Nome', value: 'name' }
-]
+];
 
-
-const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky }) => (
-
-    <Grid style={{ marginTop: '0rem' }} celled='internally' stackable className='row-centered-spaced'>
-        <Grid.Row style={{ paddingBottom: '4rem' }}>
+const HomeBody = ({ orderHandler, slotorder, type, handleContextRef, stickyContextRef, isActive }) => (
+    <Grid style={{ marginTop: '0rem', paddingBottom: '4rem' }} celled='internally' stackable className='row-centered-spaced'>
+        <Grid.Row>
             <Grid.Column width={12} style={{ paddingLeft: '0' }}>
                 <Dropdown
                     style={{ marginBottom: '2rem', marginLeft: '2.5rem' }}
@@ -32,15 +29,14 @@ const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky })
                     selection
                     value={slotorder} />
                 <div ref={handleContextRef}>
-                    <Responsive minWidth={1200} as={SlotList} cardPerRow={3} type={type} order={slotorder} />
-                    <Responsive maxWidth={1200} as={SlotList} cardPerRow={1} type={type} order={slotorder} />
+                    <SlotList type={type} order={slotorder} />
                 </div>
             </Grid.Column>
 
             <Grid.Column
-                style={{ paddingTop: '0' }}
+                style={{ padding: '0 2rem' }}
                 width={4}>
-                <Sticky context={isSticky} offset={80}>
+                <Sticky context={stickyContextRef} active={isActive} offset={80}>
                     <BonusList maxNumber={15} />
                 </Sticky>
 
@@ -52,9 +48,10 @@ const HomeBody = ({ orderHandler, slotorder, handleContextRef, type, isSticky })
 HomeBody.propTypes = {
     orderHandler: PropTypes.func,   // cosa fare quando viene selezionato qualcosa dal menu
     slotorder: PropTypes.oneOf(['rating', 'time', 'name']),
-    updateSticky: PropTypes.func,    // update del ref per lo sticky
     type: PropTypes.oneOf([SLOT_TYPES.BAR, SLOT_TYPES.GRATIS]),
-    isSticky: PropTypes.bool
+    handleContextRef: PropTypes.func,    // update del ref per lo sticky
+    stickyContextRef: PropTypes.func,    // riferimento per sticky
+    isActive: PropTypes.bool
 }
 
 export default HomeBody
