@@ -36,7 +36,6 @@ class SlotPage extends Component {
     componentDidMount() {
         console.log('mounting')
         getSlotWithId(this.props.match.params.id, (slot) => {
-            console.log("GETTING SLOT DB", slot)
             if (!slot) {
                 this.props.history.push(ROUTE.ERROR404)
             }
@@ -135,42 +134,10 @@ class SlotPage extends Component {
                                 producerName={(currentSlot.producer && currentSlot.producer.name)} />
                         </Grid.Row>
                     </Grid>
-                    <Responsive
-                        minWidth={1200}
-                        as={SlotPageBonusList}
-                        bonusList={currentSlot.bonus}
-                        isResponsive={true} />
+                    <SlotPageBonusList bonusList={currentSlot.bonus}/>
 
-                    <Responsive
-                        maxWidth={1200}
-                        isResponsive={false}
-                        as={SlotPageBonusList}
-                        maxNumber={3}
-                        bonusList={currentSlot.bonus}>
-
-                    </Responsive>
                     {currentSlot.linkYoutube &&
-                        <div>
-                            <Responsive maxWidth={RESPONSIVE_RESOLUTION.SMALL}>
-                                <YouTubeEmbed
-                                    width='300'
-                                    height='150'
-                                    src={this.getYoutubeEmbedSource()} />
-                            </Responsive>
-                            <Responsive minWidth={RESPONSIVE_RESOLUTION.SMALL + 1} 
-                                        maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
-                                <YouTubeEmbed
-                                    width='750'
-                                    height='325'
-                                    src={this.getYoutubeEmbedSource()} />
-                            </Responsive>
-                            <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} >
-                                <YouTubeEmbed
-                                    width='900'
-                                    height='450'
-                                    src={this.getYoutubeEmbedSource()} />
-                            </Responsive>
-                        </div>
+                        <YouTubeEmbed src={this.getYoutubeEmbedSource()} />
                     }
                     <Footer />
                 </Dimmer.Dimmable>
