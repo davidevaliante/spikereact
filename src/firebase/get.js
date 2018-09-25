@@ -87,7 +87,7 @@ export const getSlotsCardBasedOnTime = (limit, callback) => {
         .then(
             list => {
                 // console.log(list)
-                store.dispatch(addSlotList(list.data))
+                store.dispatch(replaceSlotList(list.data))
             }
         ).catch(err => console.log(err)
         )
