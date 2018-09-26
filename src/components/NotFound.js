@@ -5,7 +5,6 @@ import { Segment } from 'semantic-ui-react-single/Segment'
 import { Image } from 'semantic-ui-react-single/Image'
 // router e redux
 import { Link } from 'react-router-dom'
-import Navbar from './Header/Navbar'
 
 const NotFound = () => {
     return (

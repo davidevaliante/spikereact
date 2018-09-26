@@ -4,7 +4,6 @@ import { Segment } from 'semantic-ui-react-single/Segment'
 // components
 import LazyLoad from 'react-lazyload'
 import AamsBanner from "../AamsBanner"
-import ProducersDropdown from './ProducersDropdown';
 import { connect } from 'react-redux';
 
 const styles = {

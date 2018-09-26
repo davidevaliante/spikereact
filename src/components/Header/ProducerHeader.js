@@ -2,8 +2,6 @@ import React from 'react'
 // semantic
 import { Segment } from 'semantic-ui-react-single/Segment'
 import { Visibility } from 'semantic-ui-react-single/Visibility'
-import { Dimmer } from 'semantic-ui-react-single/Dimmer'
-import { Loader } from 'semantic-ui-react-single/Loader'
 // components
 import AamsBanner from "../AamsBanner";
 // mix

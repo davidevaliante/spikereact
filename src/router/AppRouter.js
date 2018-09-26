@@ -17,14 +17,11 @@ import EditSlot from "../admin/Slots/EditSlot";
 import BonusDashboard from "../admin/Bonus/BonusDashboard"
 import AddExtraFromHtml from '../admin/Extra/AddExtraFromHtml'
 import BonusArticle from '../components/Extra/BonusArticle'
-import RichTextEditor from "../admin/Extra/RichEdit";
 import ProducerPage from "../components/ProducerComponents/ProducerPage";
-import ListArticle from "../components/Extra/ListArticle";
 import ProducerDashboard from "../admin/Producer/ProducerDashboard";
 
 
 const AppRouter = () => {
-    let currentSlotPath = ''
 
     return (
         <div className='matchParentHeight'>

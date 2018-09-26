@@ -23,6 +23,7 @@ import logo from '../../static/slot-icon.svg';
 // utils
 import { smoothScrollTo } from '../../utils/Utils';
 import { slide as BurgerMenu } from 'react-burger-menu'
+import {burgerMenuStyle} from "../../style/BurgerMenu";
 
 
 class Navbar extends Component {
@@ -30,48 +31,7 @@ class Navbar extends Component {
     state = {
         menuOpen: false,
         producerDropdownOpen: false
-    }
-
-    burgerStyles = {
-        bmBurgerButton: {
-            position: 'fixed',
-            width: '30px',
-            height: '24px',
-            left: '36px',
-            top: '36px'
-        },
-        bmBurgerBars: {
-            background: '#eb2613'
-        },
-        bmCrossButton: {
-            height: '24px',
-            width: '24px'
-        },
-        bmCross: {
-            background: '#bdc3c7'
-        },
-        bmMenu: {
-            //background: '#373a47',
-            background: '#fff',
-            paddingTop: '3rem',
-            fontSize: '1.15em'
-        },
-        bmMorphShape: {
-            fill: '#373a47'
-        },
-        bmItemList: {
-            color: '#b8b7ad',
-        },
-        bmItem: {
-
-        },
-        bmOverlay: {
-            background: 'rgba(0, 0, 0, 0.3)'
-        },
-        bmMenuWrap: {
-            width: '100%'
-        }
-    }
+    };
 
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
@@ -114,7 +74,7 @@ class Navbar extends Component {
             <div>
                 {/* BURGER MENU */}
                 <Responsive maxWidth={RESPONSIVE_RESOLUTION.MEDIUM - 1}>
-                    <BurgerMenu isOpen={this.state.menuOpen} styles={this.burgerStyles} >
+                    <BurgerMenu isOpen={this.state.menuOpen} styles={burgerMenuStyle} >
                         <Menu
                             stackable
                             size='large'>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Header} from "semantic-ui-react-single/Header";
 import {Icon} from "semantic-ui-react-single/Icon";
 import {Dimmer} from "semantic-ui-react-single/Dimmer";

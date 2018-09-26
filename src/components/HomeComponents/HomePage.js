@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 // semantic
 import { Segment } from 'semantic-ui-react-single/Segment'
-import { Responsive } from 'semantic-ui-react-single/Responsive';
 // components
 import Footer from "../Footer";
 import ListDescriptionBanner from './ListDescriptionBanner'

@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 // components
 import SlotCard from '../../Cards/SlotCard'
 // mix
 import chunk from 'lodash/chunk'
 // router e redux
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 // semantic
-import { Grid } from 'semantic-ui-react-single/Grid'
-import { Responsive } from 'semantic-ui-react-single/Responsive'
+import {Grid} from 'semantic-ui-react-single/Grid'
 
 class PopularSlotList extends Component {
     state = {}

@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// semantic
-import { Visibility } from 'semantic-ui-react-single/Visibility'
 // components
 import SlotCard from './Cards/SlotCard';
 // mix

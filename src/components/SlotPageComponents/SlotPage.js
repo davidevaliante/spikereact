@@ -22,8 +22,7 @@ import { connect } from 'react-redux'
 // mix
 import split from 'lodash/split'
 import Helmet from 'react-helmet'
-import { lowerAndCap } from '../../'
-import { ROUTE, RESPONSIVE_RESOLUTION } from "../../enums/Constants";
+import { ROUTE } from "../../enums/Constants";
 
 
 class SlotPage extends Component {

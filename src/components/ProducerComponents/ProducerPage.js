@@ -8,7 +8,7 @@ import {Segment} from "semantic-ui-react-single/Segment";
 // lodash
 import delay from 'lodash/delay'
 // mix
-import {PAGES, RESPONSIVE_RESOLUTION, ROUTE, SLOT_TYPES} from "../../enums/Constants";
+import {PAGES, RESPONSIVE_RESOLUTION, ROUTE} from "../../enums/Constants";
 import { getProducerByName, getSlotListByProducerName } from "../../firebase/get";
 import {onListFetched} from "../../utils/Callbacks";
 // Components

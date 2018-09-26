@@ -9,11 +9,6 @@ import replace from "lodash/replace"
 import forEach from "lodash/forEach"
 
 
-
-
-
-
-
 export const replaceTextTips = (text) => {
 
     const QUALCHE_STRING = text
@@ -184,7 +179,7 @@ export const doesFileExist = (urlToFile) => {
     xhr.open('HEAD', urlToFile, false);
     xhr.send();
 
-    if (xhr.status == "404") {
+    if (xhr.status === "404") {
         return false;
     } else {
         return true;
