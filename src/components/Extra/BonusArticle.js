@@ -50,7 +50,8 @@ class BonusArticle extends Component {
     }
 
     goToBonus = () => {
-        const { link } = this.state.bonus.bonus
+        const { link } = this.state.bonus
+        console.log(link)
         link && window.open(link)
     }
 
