@@ -64,7 +64,7 @@ class ProducerDashboard extends Component {
         const {producerList, active, loadingDimmer} = this.state;
 
         return (
-            <div style={{maxWidth: '1920px'}}>
+            <div>
                 <Dimmer blurring active={active} page>
                     <Header as='h2' icon inverted>
                         <Icon name='check' />
@@ -73,24 +73,24 @@ class ProducerDashboard extends Component {
                 </Dimmer>
                 <LoadingDimmer active={loadingDimmer} />
                 <AdminNavbar activeItem={ADMINPAGES.PRODUCER}/>
-                <div style={{marginTop: '5rem'}}>
+                <div style={{marginTop: '5rem', padding: '2rem'}}>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>
-                        <Grid stackable columns={4} style={{padding: '2rem'}}>
+                        <Grid stackable columns={4}>
                             {producerList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} maxWidth={RESPONSIVE_RESOLUTION.LARGE}>
-                        <Grid stackable columns={3} style={{padding: '2rem'}}>
+                        <Grid stackable columns={3}>
                             {producerList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.SMALL} maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
-                        <Grid stackable columns={2} style={{padding: '2rem'}}>
+                        <Grid stackable columns={2}>
                             {producerList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive maxWidth={RESPONSIVE_RESOLUTION.SMALL}>
-                        <Grid stackable columns={1} style={{padding: '2rem'}}>
+                        <Grid stackable columns={1}>
                             {producerList && this.renderItem()}
                         </Grid>
                     </Responsive>

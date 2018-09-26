@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react-single/Grid'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
-import { getBonusList, getSlotList } from "../../firebase/get";
+import { getBonusList } from "../../firebase/get";
 import AdminBonusCard from "./AdminBonusCard";
 import AdminNavbar from "../../admin/AdminNavbar";
 import { ADMINPAGES, RESPONSIVE_RESOLUTION } from "../../enums/Constants";
 import delay from 'lodash/delay';
-import { Header } from "semantic-ui-react-single/Header";
-import { Icon } from "semantic-ui-react-single/Icon";
-import { Dimmer } from "semantic-ui-react-single/Dimmer";
 import { LoadingDimmer, InfoDimmer } from '../../utils/DimmerText';
 
 function mapStateToProps(state) {
@@ -60,30 +57,28 @@ class BonusDashboard extends Component {
     render() {
         const { bonusList, active, loadingDimmer } = this.state
         return (
-            <div style={{ maxWidth: '1920px' }}>
-                
-                <InfoDimmer active={active} text='Bonus cancellato con successo' icon='check'/>}
+            <div>
+                <InfoDimmer active={active} text='Bonus cancellato con successo' icon='check'/>
                 <LoadingDimmer active={loadingDimmer}/>
-
                 <AdminNavbar activeItem={ADMINPAGES.BONUS} />
-                <div style={{ marginTop: '5rem' }}>
+                <div style={{marginTop: '5rem', padding: '2rem'}}>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>
-                        <Grid stackable columns={4} style={{ padding: '2rem' }}>
+                        <Grid stackable columns={4}>
                             {bonusList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} maxWidth={RESPONSIVE_RESOLUTION.LARGE}>
-                        <Grid stackable columns={3} style={{ padding: '2rem' }}>
+                        <Grid stackable columns={3}>
                             {bonusList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.SMALL} maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
-                        <Grid stackable columns={2} style={{ padding: '2rem' }}>
+                        <Grid stackable columns={2}>
                             {bonusList && this.renderItem()}
                         </Grid>
                     </Responsive>
                     <Responsive maxWidth={RESPONSIVE_RESOLUTION.SMALL}>
-                        <Grid stackable columns={1} style={{ padding: '2rem' }}>
+                        <Grid stackable columns={1}>
                             {bonusList && this.renderItem()}
                         </Grid>
                     </Responsive>

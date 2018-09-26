@@ -1,4 +1,4 @@
-import React, { Component, ReactDOM } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdminNavbar from "./AdminNavbar";
 import { ADMINPAGES } from "../enums/Constants";

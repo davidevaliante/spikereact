@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Grid} from 'semantic-ui-react-single/Grid'
 import {Responsive} from 'semantic-ui-react-single/Responsive'
-import {getProducerList, getSlotList} from "../../firebase/get";
+import {getSlotList} from "../../firebase/get";
 import AdminSlotCard from "./AdminSlotCard";
 import AdminNavbar from "../AdminNavbar";
 import {ADMINPAGES, RESPONSIVE_RESOLUTION} from "../../enums/Constants";
@@ -69,24 +69,24 @@ class SlotDashboard extends Component {
                 </Dimmer>
                 <LoadingDimmer active={loadingDimmer} />
                 <AdminNavbar activeItem={ADMINPAGES.SLOT}/>
-                <div style={{marginTop: '5rem'}}>
+                <div style={{marginTop: '5rem', padding: '2rem'}}>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.LARGE}>
-                        <Grid stackable columns={4} style={{padding: '2rem'}}>
+                        <Grid stackable columns={4}>
                             {slotList && this.renderSlot()}
                         </Grid>
                     </Responsive>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.MEDIUM} maxWidth={RESPONSIVE_RESOLUTION.LARGE}>
-                        <Grid stackable columns={3} style={{padding: '2rem'}}>
+                        <Grid stackable columns={3}>
                             {slotList && this.renderSlot()}
                         </Grid>
                     </Responsive>
                     <Responsive minWidth={RESPONSIVE_RESOLUTION.SMALL} maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
-                        <Grid stackable columns={2} style={{padding: '2rem'}}>
+                        <Grid stackable columns={2}>
                             {slotList && this.renderSlot()}
                         </Grid>
                     </Responsive>
                     <Responsive maxWidth={RESPONSIVE_RESOLUTION.SMALL}>
-                        <Grid stackable columns={1} style={{padding: '2rem'}}>
+                        <Grid stackable columns={1}>
                             {slotList && this.renderSlot()}
                         </Grid>
                     </Responsive>
