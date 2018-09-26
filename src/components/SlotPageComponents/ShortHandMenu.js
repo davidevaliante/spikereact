@@ -44,7 +44,7 @@ const ShortHandMenu = (props) => {
                                 style={buttonsStyle}
                                 inverted
                                 color='red'
-                                onClick={() => smoothScrollTo('slot-page-lists')}>
+                                onClick={() => smoothScrollTo('slot-tips-list')}>
                                 Consigli di gioco
                             </Button>
                         </List.Item>
@@ -53,7 +53,7 @@ const ShortHandMenu = (props) => {
                                 style={buttonsStyle}
                                 inverted
                                 color={'red'}
-                                onClick={() => smoothScrollTo('slot-page-lists')}>
+                                onClick={() => smoothScrollTo('slot-tec-list')}>
                                 Scheda tecnica
                             </Button>
                         </List.Item>

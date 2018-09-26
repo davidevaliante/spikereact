@@ -38,7 +38,7 @@ const TipsList = (props) => {
 
     return (
         <Grid.Column style={!props.noStyle ? { paddingTop: '5em', paddingBottom: '0rem', paddingLeft: '4rem' } : { width: '100%' }} {...props}>
-            <Header as='h3' style={{ fontSize: '2em', fontFamily: 'Raleway', marginBottom: '4rem' }}>
+            <Header id='slot-tips-list' as='h3' style={{ fontSize: '2em', fontFamily: 'Raleway', marginBottom: '4rem' }}>
                 {props.title ? props.title : 'Consigli di gioco'}
             </Header>
             {tipList()}

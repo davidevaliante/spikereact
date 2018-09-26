@@ -50,7 +50,7 @@ const TecnicalsList = (props) => {
         </ul>
     return (
         <Grid.Column style={{ paddingTop: '5em', paddingBottom: '0rem', paddingRight: '4rem' }}>
-            <Header as='h3' style={{ fontSize: '2em', fontFamily: 'Raleway', marginBottom: '4rem' }}>
+            <Header id='slot-tec-list' as='h3' style={{ fontSize: '2em', fontFamily: 'Raleway', marginBottom: '4rem' }}>
                 Scheda tecnica
             </Header>
             {tecnicalList()}
