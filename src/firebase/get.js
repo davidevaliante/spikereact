@@ -17,6 +17,14 @@ export const getGuideById = (guideId, callback) => {
         .then(value => {
             callback && callback(value.data)
         })
+        .catch(
+            fail => {
+                axios.get(`${databaseRoot}/Extra/it/${guideId}.json`)
+                    .then(value => {
+                        callback && callback(value.data)
+                    })
+            }
+        )
 };
 
 export const getPopularSlots = () => {

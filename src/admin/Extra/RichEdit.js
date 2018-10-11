@@ -50,6 +50,7 @@ class RichEdit extends Component {
                 <label for="htmlText">Trasformato in html :</label>
                 <textarea
                     id='htmlText'
+                    rows={15}
                     placeholder="Editor Source"
                     value={value.toString(format)}
                     onChange={this.onChangeSource}

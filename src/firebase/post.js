@@ -5,11 +5,13 @@ import { pushNewImage } from './firebase'
 import snakeCase from 'lodash/snakeCase'
 import now from 'lodash/now';
 
-export const submitExtraFromHtml = newExtra => {
+export const submitExtraFromHtml = (newExtra, callback) => {
     const objectToPush = newExtra;
     objectToPush['time'] = now();
     axios.post(`${databaseRoot}/Extra/it.json`, objectToPush)
-        .then(success => console.log('pushed :', success.data))
+        .then(success => {
+            callback(success)
+        })
 };
 
 export const pushNewBonuswithGuide = async (newBonus, image, guide, language, callback) => {

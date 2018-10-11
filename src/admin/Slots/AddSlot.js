@@ -321,15 +321,15 @@ class AddSlot extends Component {
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('tips')}
                                 onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tips')}
                                 control={TextArea}
-                                label='Consigli'
-                                placeholder='Consigli...' />
+                                label='Consigli (prima di ogni campo aggiungi $)'
+                                placeholder='Esempio : $primo consiglio $secondo consiglio $terzo consiglio' />
                             <Form.Field
                                 id='tecnicalsField'
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('tecnicals')}
                                 control={TextArea}
                                 onChange={(event, data) => this.state.isInCopyPasteMode ? this.formatText(event, data) : this.resetErrorOn('tecnicals')}
-                                label='Scheda Tecnica'
-                                placeholder='Scheda Tecnica...' />
+                                label='Scheda Tecnica (prima di ogni campo aggiungi @)'
+                                placeholder='Esempio : $descrizione tecnica 1 $descrizione tecnica 2 $descrizione tecnica 3' />
 
                         </Form.Group>
 

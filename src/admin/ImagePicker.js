@@ -43,7 +43,7 @@ class ImagePicker extends Component {
                 </Grid.Column>
                 <Grid.Column>
                     <img id='imagePreview'
-                        alt='preview'
+                        alt='anteprima immagine'
                         src={currentImageUrl}
                         style={{ width: '150px' }} />
                 </Grid.Column>

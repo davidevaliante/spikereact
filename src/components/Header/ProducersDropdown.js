@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 // semantic
 import { Dropdown } from 'semantic-ui-react-single/Dropdown';
 // mix
-import {setProducerPage} from "../../reducers/CurrentPageReducer";
-import {PAGES, ROUTE} from '../../enums/Constants';
+import { setProducerPage } from "../../reducers/CurrentPageReducer";
+import { PAGES, ROUTE } from '../../enums/Constants';
 // router e redux
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
