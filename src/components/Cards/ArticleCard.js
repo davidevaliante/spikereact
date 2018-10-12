@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom'
 import { Button } from 'semantic-ui-react-single/Button'
 import { deleteExtraWithId } from '../../firebase/delete'
 import { ROUTE } from '../../enums/Constants'
+import { Card } from 'semantic-ui-react-single/Card'
 
 const ArticleCard = (props) => {
 
@@ -38,28 +39,56 @@ const ArticleCard = (props) => {
         })
     }
 
+    const RenderAdmin = () => {
+        return (
+            <Item>
+                <Item.Content>
+                    <Item.Header as='a'>
+                        {formatTitle()}
+                    </Item.Header>
+                    <Item.Meta>Pubblicato il {formatDate()}</Item.Meta>
+                    <Item.Description className='extra-card-pointer' onClick={() => goTo(props.item.id)}>
+                        {formatDescription()}
+                    </Item.Description>
+                    {props.inAdmin && <Item.Extra>
+                        <Button
+                            onClick={() => handleEdit(props.item.id)}>
+                            Modifica
+                    </Button>
+                        <Button
+                            onClick={() => handleDelete(props.item.id)}>
+                            Elimina
+                    </Button>
+                    </Item.Extra>}
+                </Item.Content>
+            </Item>
+        )
+
+    }
+    const RenderHomePage = () => {
+        return (<div>
+            <div className='slot-card-shadow-animation' onClick={() => goTo(props.item.id)}>
+                <Card key={props.item.id}>
+
+                    <Card.Content >
+                        <Card.Header>{formatTitle(props.item.title)}</Card.Header>
+
+                        <Card.Description>{truncate(removeHtmlFrom(props.item.content), { 'length': 150 })}</Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+
+                    </Card.Content>
+                </Card>
+            </div>
+        </div>)
+
+    }
+
+
     return (
-        <Item>
-            <Item.Content>
-                <Item.Header as='a'>
-                    {formatTitle()}
-                </Item.Header>
-                <Item.Meta>Pubblicato il {formatDate()}</Item.Meta>
-                <Item.Description className='extra-card-pointer' onClick={() => goTo(props.item.id)}>
-                    {formatDescription()}
-                </Item.Description>
-                {props.inAdmin && <Item.Extra>
-                    <Button
-                        onClick={() => handleEdit(props.item.id)}>
-                        Modifica
-                    </Button>
-                    <Button
-                        onClick={() => handleDelete(props.item.id)}>
-                        Elimina
-                    </Button>
-                </Item.Extra>}
-            </Item.Content>
-        </Item>
+        <div>
+            {props.inAdmin === false ? RenderHomePage() : RenderAdmin()}
+        </div>
 
     )
 }

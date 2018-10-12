@@ -15,7 +15,7 @@ import { ROUTE, SLOT_TYPES, PAGES } from "../../enums/Constants";
 import { setHomePage, setGratisPage, setBarPage, setAboutPage, setProducerPage, setArticlePage } from '../../reducers/CurrentPageReducer'
 // data
 import { getSlotsCardBasedOnTime, getAllByType } from '../../firebase/get'
-
+import ArticleList from "../HomeComponents/HomeBody/ArticleList"
 class HomePage extends Component {
     state = {};
 
@@ -41,6 +41,45 @@ class HomePage extends Component {
 
     handleContextRef = contextRef => this.setState({ contextRef })
     handleChange = (e, { value }) => this.setState({ order: value })
+    articlePage = () => {
+        return (<div>
+            <Navbar displaying='HOME' />
+            <HomePageHeader style={{ position: 'absolute', zIndex: 1 }} />
+            <SiteDescription />
+            <Segment vertical>
+
+                <ArticleList>
+
+                </ArticleList>
+
+
+            </Segment>
+            <Footer />
+        </div>)
+    }
+    listSlot = () => {
+        const { contextRef, order } = this.state
+        const type = this.getType(this.props.match.path)
+        return (
+            <div>
+                <Navbar displaying='HOME' />
+                <HomePageHeader style={{ position: 'absolute', zIndex: 1 }} />
+                <SiteDescription />
+                <Segment vertical>
+                    <PopularSlotList />
+
+                    <ListDescriptionBanner />
+                    <HomeBody
+                        orderHandler={this.handleChange}
+                        slotorder={order}
+                        type={type}
+                        handleContextRef={this.handleContextRef}
+                        stickyContextRef={contextRef}
+                        isActive={true} />
+                </Segment>
+                <Footer />
+            </div>)
+    }
 
     getType(path) {
         switch (path) {
@@ -71,28 +110,15 @@ class HomePage extends Component {
         }
     }
 
+
     render() {
-        const { contextRef, order } = this.state
+
         const type = this.getType(this.props.match.path)
+        console.log(type);
 
         return (
             <div>
-                <Navbar displaying='HOME'/>
-                <HomePageHeader style={{ position: 'absolute', zIndex: 1 }} />
-                <SiteDescription />
-                <Segment vertical>
-                    <PopularSlotList />
-
-                    <ListDescriptionBanner />
-                    <HomeBody
-                        orderHandler={this.handleChange}
-                        slotorder={order}
-                        type={type}
-                        handleContextRef={this.handleContextRef}
-                        stickyContextRef={contextRef}
-                        isActive={true} />
-                </Segment>
-                <Footer />
+                {type === "ARTICLE" ? this.articlePage() : this.listSlot()}
             </div>
         )
     }
@@ -107,3 +133,6 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(HomePage)
+
+
+
