@@ -19,7 +19,8 @@ import AddExtraFromHtml from '../admin/Extra/AddExtraFromHtml'
 import BonusArticle from '../components/Extra/BonusArticle'
 import ProducerPage from "../components/ProducerComponents/ProducerPage";
 import ProducerDashboard from "../admin/Producer/ProducerDashboard";
-
+import ExtraDashBoard from '../admin/Extra/ExtraDashboard'
+import Article from '../components/Extra/Article'
 
 const AppRouter = () => {
 
@@ -43,7 +44,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.ARTICLE} component={HomePage} exact={true} page={PAGES.ARTICLE} />
                     <Route path={ROUTE.PRODUCER} component={ProducerPage} exact={true} page={PAGES.PRODUCER} />
 
-                    <Route path={ROUTE.EXTRA} component={BonusArticle} />
+                    <Route path={ROUTE.EXTRA} component={Article} />
 
                     { /* HOME filtered by producers */}
                     {/*<Route path={ROUTE.PRODUCER} component={HomePage} />*/}
@@ -53,16 +54,20 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADMINSLOT} component={SlotDashboard} />
                     <Route path={ROUTE.ADMINBONUS} component={BonusDashboard} />
                     <Route path={ROUTE.ADMINPRODUCER} component={ProducerDashboard} />
+                    <Route path={ROUTE.ADMINEXTRA} component={ExtraDashBoard} />
+
                     { /* add */}
                     <Route path={ROUTE.ADDSLOT} component={AddSlot} />
                     <Route path={ROUTE.ADDBONUS} component={AddBonus} />
                     <Route path={ROUTE.ADDPRODUCER} component={AddProducer} />
                     <Route path={ROUTE.ADDEXTRAFROMHTML} component={AddExtraFromHtml} />
+
                     <Route path={ROUTE.ADDARTICLE} render={() => <AddArticle editable={true} />} />
                     { /* edit */}
                     <Route path={ROUTE.EDITSLOT} component={EditSlot} />
                     <Route path={ROUTE.EDITBONUS} component={AddBonus} />
                     <Route path={ROUTE.EDITPRODUCER} component={AddProducer} />
+                    <Route path={ROUTE.EDITEXTRA} component={AddExtraFromHtml} />
 
                     { /* test */}
                     <Route path='/test' component={Test} />

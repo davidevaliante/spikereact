@@ -4,7 +4,10 @@ import snakeCase from "lodash/snakeCase";
 import { databaseRoot } from "./firebaseConfig";
 import { storageRef, pushNewImage } from './firebase'
 
-
+export const deleteExtraWithId = async (id, callback) => {
+    await axios.delete(`${databaseRoot}/Extra/it/${id}.json`)
+    callback && callback(id)
+}
 
 export const deleteSlotWithId = (id, callback) => {
     axios.get(`${databaseRoot}/Slots/it/${id}/name.json`)

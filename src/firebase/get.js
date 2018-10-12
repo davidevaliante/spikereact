@@ -7,6 +7,16 @@ import { updateSlotMenuList } from '../reducers/SlotsMenuReducer'
 import { addPopularSlot } from '../reducers/PopularSlotreducer'
 import map from 'lodash/map'
 
+export const getExtraById = async (id, callback) => {
+    const extra = await axios.get(`${databaseRoot}/Extra/it/${id}.json`)
+    callback && callback(extra)
+}
+
+export const getExtraList = async (callback) => {
+    const extraList = await axios.get(`${databaseRoot}/Extra/it.json?orderBy="time"`)
+    callback(extraList.data)
+}
+
 export const getProducerByName = async (producerName, callback) => {
     const producerData = await axios.get(`${databaseRoot}/Producer/it.json?orderBy="name"&equalTo="${producerName}"`)
     callback(producerData.data)

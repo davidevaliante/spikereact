@@ -9,7 +9,7 @@ import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import { Header } from 'semantic-ui-react-single/Header'
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { Checkbox } from 'semantic-ui-react-single/Checkbox'
-import AddExtraFromHtml from '../Extra/AddExtraFromHtml'
+import PastedHtml from '../Extra/PastedHtml'
 import ImagePicker from '../ImagePicker';
 import { updateBonusWithId } from '../../firebase/update'
 import { ADMINPAGES } from "../../enums/Constants";
@@ -61,8 +61,8 @@ class AddBonus extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot){
-        if (prevProps.match.params.bonusid !==this.props.match.params.bonusid) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.match.params.bonusid !== this.props.match.params.bonusid) {
             this.setState({
                 bonusToEdit: undefined,
                 isInEditMode: false,
@@ -274,8 +274,8 @@ class AddBonus extends Component {
                         </Form.Group>
                         {(!isInEditMode && guideInputisManual) && <RichEdit />}
                         {(isInEditMode && guideInputisManual) && <RichEdit defaultContent={this.state.defaultReview} />}
-                        {((!isInEditMode && !guideInputisManual) && <AddExtraFromHtml />)}
-                        {((isInEditMode && !guideInputisManual) && <AddExtraFromHtml defaultValue={this.state.currentGuideValue} />)}
+                        {((!isInEditMode && !guideInputisManual) && <PastedHtml />)}
+                        {((isInEditMode && !guideInputisManual) && <PastedHtml defaultValue={this.state.currentGuideValue} />)}
 
                         <Form.Group
                             style={{ marginTop: '2rem' }}

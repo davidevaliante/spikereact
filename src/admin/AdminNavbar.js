@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom'
-import {slide as BurgerMenu} from "react-burger-menu";
-import {Menu} from 'semantic-ui-react-single/Menu'
-import {Dropdown} from 'semantic-ui-react-single/Dropdown'
-import {Icon} from 'semantic-ui-react-single/Icon'
-import {Search} from 'semantic-ui-react-single/Search'
-import {Responsive} from "semantic-ui-react-single/Responsive";
-import {ADMINPAGES, RESPONSIVE_RESOLUTION, ROUTE} from "../enums/Constants";
-import {burgerMenuStyle} from "../style/BurgerMenu";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom'
+import { slide as BurgerMenu } from "react-burger-menu";
+import { Menu } from 'semantic-ui-react-single/Menu'
+import { Dropdown } from 'semantic-ui-react-single/Dropdown'
+import { Icon } from 'semantic-ui-react-single/Icon'
+import { Search } from 'semantic-ui-react-single/Search'
+import { Responsive } from "semantic-ui-react-single/Responsive";
+import { ADMINPAGES, RESPONSIVE_RESOLUTION, ROUTE } from "../enums/Constants";
+import { burgerMenuStyle } from "../style/BurgerMenu";
 
 class AdminNavbar extends Component {
     state = {};
@@ -16,30 +16,12 @@ class AdminNavbar extends Component {
     iconMenu = () => {
         return (
             <NavLink to={ROUTE.ADMIN}>
-                <Icon name='cogs'/>
+                <Icon name='cogs' />
             </NavLink>
         )
     };
 
-    articleMenu = () => {
-        return (
-            <Dropdown item simple text='Articoli'>
-                <Dropdown.Menu simple>
-                    <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-article')}>
-                        <NavLink id='admin-nav-add-article' to={ROUTE.ADDARTICLE}>
-                            <Icon name='add'/> Aggiungi Articolo
-                        </NavLink>
-                    </Dropdown.Item>
 
-                    <Dropdown.Item onClick={() => this.handleClick('admin-nav-article')}>
-                        <NavLink id='admin-nav-article' to='#'>
-                            <Icon name='archive'/> Gestione Articoli
-                        </NavLink>
-                    </Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-        )
-    }
 
     slotMenu = () => {
         return (
@@ -47,12 +29,12 @@ class AdminNavbar extends Component {
                 <Dropdown.Menu simple>
                     <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-slot')}>
                         <NavLink id='admin-nav-add-slot' to={ROUTE.ADDSLOT}>
-                            <Icon name='add'/> Aggiungi Slot
+                            <Icon name='add' /> Aggiungi Slot
                         </NavLink>
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => this.handleClick('admin-nav-slot')}>
                         <NavLink id='admin-nav-slot' to={ROUTE.ADMINSLOT}>
-                            <Icon name='game'/> Gestione Slot
+                            <Icon name='game' /> Gestione Slot
                         </NavLink>
                     </Dropdown.Item>
                 </Dropdown.Menu>
@@ -66,11 +48,11 @@ class AdminNavbar extends Component {
                 <Dropdown.Menu simple>
                     <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-bonus')}>
                         <NavLink id='admin-nav-add-bonus' to={ROUTE.ADDBONUS}><Icon
-                            name='add'/> Aggiungi Bonus</NavLink>
+                            name='add' /> Aggiungi Bonus</NavLink>
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => this.handleClick('admin-nav-bonus')}>
                         <NavLink id='admin-nav-bonus' to={ROUTE.ADMINBONUS}>
-                            <Icon name='plus circle'/> Gestione Bonus
+                            <Icon name='plus circle' /> Gestione Bonus
                         </NavLink>
                     </Dropdown.Item>
                 </Dropdown.Menu>
@@ -84,11 +66,11 @@ class AdminNavbar extends Component {
                 <Dropdown.Menu simple>
                     <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-producer')}>
                         <NavLink id='admin-nav-add-producer' to={ROUTE.ADDPRODUCER}><Icon
-                            name='add'/> Aggiungi Produttore</NavLink>
+                            name='add' /> Aggiungi Produttore</NavLink>
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => this.handleClick('admin-nav-producer')}>
                         <NavLink id='admin-nav-producer' to={ROUTE.ADMINPRODUCER}>
-                            <Icon name='lab'/> Gestione Produttori
+                            <Icon name='lab' /> Gestione Produttori
                         </NavLink>
                     </Dropdown.Item>
                 </Dropdown.Menu>
@@ -101,12 +83,13 @@ class AdminNavbar extends Component {
             <Dropdown item simple text='Extra'>
                 <Dropdown.Menu simple>
                     <Dropdown.Item onClick={() => this.handleClick('admin-nav-add-extra')}>
-                        <NavLink id='admin-nav-add-extra' to={ROUTE.ADDEXTRAFROMHTML}><Icon
-                            name='add'/> Aggiungi Extra da Html</NavLink>
+                        <NavLink id='admin-nav-add-extra' to={ROUTE.ADDEXTRAFROMHTML}>
+                            <Icon name='add' /> Aggiungi Articoli
+                        </NavLink>
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => this.handleClick('admin-nav-extra')}>
-                        <NavLink id='admin-nav-extra' to='#'>
-                            <Icon name='lab'/> Gestione Extra
+                        <NavLink id='admin-nav-extra' to={ROUTE.ADMINEXTRA}>
+                            <Icon name='lab' /> Gestione Articoli
                         </NavLink>
                     </Dropdown.Item>
                 </Dropdown.Menu>
@@ -121,11 +104,11 @@ class AdminNavbar extends Component {
                 size='mini'
                 category
                 noResultsMessage='TODO!!1'
-                // loading={isLoading}
-                // onResultSelect={this.handleResultSelect}
-                // onSearchChange={_.debounce(this.handleSearchChange, 400, { leading: true })}
-                // results={results}
-                // value={value} >
+            // loading={isLoading}
+            // onResultSelect={this.handleResultSelect}
+            // onSearchChange={_.debounce(this.handleSearchChange, 400, { leading: true })}
+            // results={results}
+            // value={value} >
             />
         )
     };
@@ -149,27 +132,23 @@ class AdminNavbar extends Component {
                                 {this.iconMenu()}
                             </Menu.Item>
 
-                            <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.ARTICLE}>
-                                {this.articleMenu()}
-                            </Menu.Item>
-
-                            <Menu.Item style={{padding: '0', margin: '0'}} active={activeItem === ADMINPAGES.SLOT}>
+                            <Menu.Item style={{ padding: '0', margin: '0' }} active={activeItem === ADMINPAGES.SLOT}>
                                 {this.slotMenu()}
                             </Menu.Item>
 
-                            <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.BONUS}>
+                            <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.BONUS}>
                                 {this.bonusMenu()}
                             </Menu.Item>
 
-                            <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.PRODUCER}>
+                            <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.PRODUCER}>
                                 {this.producerMenu()}
                             </Menu.Item>
 
-                            <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.EXTRA}>
+                            <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.EXTRA}>
                                 {this.extraMenu()}
                             </Menu.Item>
 
-                            <Menu.Item position='right' style={{marginRight: '4rem'}}>
+                            <Menu.Item position='right' style={{ marginRight: '4rem' }}>
                                 {this.searchItem()}
                             </Menu.Item>
 
@@ -184,27 +163,23 @@ class AdminNavbar extends Component {
                             {this.iconMenu()}
                         </Menu.Item>
 
-                        <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.ARTICLE}>
-                            {this.articleMenu()}
-                        </Menu.Item>
-
-                        <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.SLOT}>
+                        <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.SLOT}>
                             {this.slotMenu()}
                         </Menu.Item>
 
-                        <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.BONUS}>
+                        <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.BONUS}>
                             {this.bonusMenu()}
                         </Menu.Item>
 
-                        <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.PRODUCER}>
+                        <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.PRODUCER}>
                             {this.producerMenu()}
                         </Menu.Item>
 
-                        <Menu.Item style={{padding: '0rem'}} active={activeItem === ADMINPAGES.EXTRA}>
+                        <Menu.Item style={{ padding: '0rem' }} active={activeItem === ADMINPAGES.EXTRA}>
                             {this.extraMenu()}
                         </Menu.Item>
 
-                        <Menu.Item position='right' style={{marginRight: '4rem'}}>
+                        <Menu.Item position='right' style={{ marginRight: '4rem' }}>
                             {this.searchItem()}
                         </Menu.Item>
                     </Menu>

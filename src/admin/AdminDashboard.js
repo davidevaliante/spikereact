@@ -17,8 +17,6 @@ class AdminDashboard extends Component {
         return (
             <Responsive>
                 <AdminNavbar activeItem={ADMINPAGES.ADMIN} />
-                ESEMPIO SU COME UTILIZZARE NUOVO COMPONENT
-                <AddTipsList />
             </Responsive>
         );
     }

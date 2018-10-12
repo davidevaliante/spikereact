@@ -5,6 +5,12 @@ import snakeCase from 'lodash/snakeCase'
 import { pushNewImage } from './firebase'
 import { DATABASE_REFERENCE, STORAGE_FOLDERS } from '../enums/Constants'
 
+export const updateExtraWithId = async (extraId, updatedObject, callback) => {
+    const data = now()
+    const task = axios.patch(`${databaseRoot}/Extra/it/${extraId}.json`, { ...updatedObject, time: data })
+    callback && callback(task)
+}
+
 export const updateBonusWithId = async (bonusId, updatedBonus, updatedImage, updatedBonusString, callback) => {
     const data = now();
     const guideId = updatedBonus.guideId

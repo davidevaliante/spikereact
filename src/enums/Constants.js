@@ -53,6 +53,7 @@ export const ROUTE = {
     ADMINBONUS: `${admin}/bonus`,
     ADMINARTICLE: `${admin}/article`,
     ADMINPRODUCER: `${admin}/producers`,
+    ADMINEXTRA: `${admin}/extras`,
     // add
     ADDARTICLE: `${admin}/addarticle`,
     ADDSLOT: `${admin}/addslot`,
@@ -64,6 +65,7 @@ export const ROUTE = {
     EDITBONUS: `${admin}/editbonus/:bonusid`,
     EDITPRODUCER: `${admin}/producer/:id`,
     EDITPAGE: `${admin}/editpage`,
+    EDITEXTRA: `${admin}/editextra/:id`,
 };
 
 export const ADMINPAGES = {

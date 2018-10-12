@@ -1,48 +1,173 @@
 import React, { Component } from 'react'
 import { Button } from 'semantic-ui-react-single/Button'
 import { Form } from 'semantic-ui-react-single/Form'
-import { TextArea } from 'semantic-ui-react-single/TextArea'
+import { Input } from 'semantic-ui-react-single/Input'
 import { submitExtraFromHtml } from '../../firebase/post'
+import RichEdit from './RichEdit'
+import { Container } from 'semantic-ui-react-single/Container'
+import { Checkbox } from 'semantic-ui-react-single/Checkbox'
+import PastedHtml from './PastedHtml'
+import { getExtraById } from '../../firebase/get'
+import { updateExtraWithId } from '../../firebase/update'
 
 class AddExtraFromHtml extends Component {
 
     state = {
         pushedLink: "",
-        pushedId: ""
+        pushedId: "",
+        articleInputMode: "manualInput",
+        isInEditMode: false,
+        extraToEdit: {}
     }
 
-    submit = () => {
-        const rawhtml = document.getElementById('pastedHtml').value.trim()
-        if (rawhtml.length > 0) {
-            submitExtraFromHtml({ content: rawhtml }, success => {
+    componentDidMount() {
+        if (this.props.match.params.id) {
+            getExtraById(this.props.match.params.id, extra => {
                 this.setState({
-                    pushedId: success.data.name
+                    isInEditMode: true,
+                    extraToEdit: extra.data,
+                    articleInputMode: "pastedInput"
                 })
             })
         }
     }
 
+    submit = () => {
+        let rawhtml = ""
+        let title = document.getElementById('extraTitle').value.trim()
+        if (this.state.articleInputMode === "manualInput")
+            rawhtml = document.getElementById('htmlText').value.trim()
+        if (this.state.articleInputMode === "pastedInput")
+            rawhtml = document.getElementById('pastedHtml').value.trim()
+
+        if (rawhtml.length > 0 && !this.state.isInEditMode) {
+            submitExtraFromHtml({ content: rawhtml, title: title }, success => {
+                this.setState({
+                    pushedId: success.data.name
+                })
+            })
+        }
+
+        if (rawhtml.length > 0 && this.state.isInEditMode) {
+            updateExtraWithId(this.props.match.params.id, { content: rawhtml, title: title }, success => {
+                console.log(success)
+            })
+        }
+    }
+
+    handleInputMode = (e, { value }) => {
+        this.setState({ articleInputMode: value })
+    }
+
     render() {
-        const { pushedLink, pushedId } = this.state
+        const { pushedLink, pushedId, articleInputMode, isInEditMode, extraToEdit } = this.state
+        let manual
+        if (articleInputMode === "manualInput") manual = true
+        if (articleInputMode === "pastedInput") manual = false
+        console.log(this.state);
+
+        if (isInEditMode) {
+            return (
+                <div>
+                    <Form>
+                        <Container>
+                            <h2 className='extra-header'>{"Modifica Articolo articolo"}</h2>
+                            <Form.Group inline style={{ marginBottom: '2rem' }}>
+                                <Checkbox
+                                    style={{ marginRight: '3rem' }}
+                                    radio
+                                    label='Inserisci guida manualmente'
+                                    name='checkboxRadioGroup'
+                                    value='manualInput'
+                                    checked={manual}
+                                    onChange={this.handleInputMode}
+                                />
+                                <Checkbox
+                                    radio
+                                    label='Copia e incolla html'
+                                    name='checkboxRadioGroup'
+                                    value='pastedInput'
+                                    checked={!manual}
+                                    onChange={this.handleInputMode}
+                                />
+                            </Form.Group>
+                            <h3 style={{ 'textAlign': 'center' }}>Titolo (opzionale ma consigliato)</h3>
+                            <Input
+                                fluid
+                                className='extra-title-input'
+                                id='extraTitle'
+                                defaultValue={extraToEdit.title && extraToEdit.title}
+                            />
+                            <h3 style={{ 'textAlign': 'center' }}>Contenuto dell'articolo</h3>
+                            {manual && <RichEdit />}
+                            {!manual && <PastedHtml defaultValue={extraToEdit.content} />}
+
+                            <Button
+                                fluid
+                                onClick={this.submit}>
+                                Conferma
+                        </Button>
+                            {pushedId && (
+                                <div>
+                                    <h3>Id nuovo Articolo :   {pushedId}</h3>
+                                    <h3>link in produzione : localhost:3000/article/{pushedId}</h3>
+                                    <h3>link reale : https://spike-2481d.firebaseapp.com/article/{pushedId}</h3>
+                                </div>
+                            )}
+                        </Container>
+                    </Form>
+                </div>
+            )
+        }
 
         return (
             <div>
-                <textarea
-                    id='pastedHtml'
-                    rows={15}
-                    style={{ width: '100%', height: '40%' }}
-                    placeholder='Copia e incolla html qui' />
-                <Button
-                    onClick={this.submit}>
-                    Carica
-                </Button>
-                {pushedId && (
-                    <div>
-                        <h3>Id nuovo Articolo :   {pushedId}</h3>
-                        <h3>link in produzione : localhost:3000/article/{pushedId}</h3>
-                        <h3>link reale : https://spike-2481d.firebaseapp.com/article/{pushedId}</h3>
-                    </div>
-                )}
+                <Form>
+                    <Container>
+                        <h2 className='extra-header'>{"Aggiungi nuovo articolo"}</h2>
+                        <Form.Group inline style={{ marginBottom: '2rem' }}>
+                            <Checkbox
+                                style={{ marginRight: '3rem' }}
+                                radio
+                                label='Inserisci guida manualmente'
+                                name='checkboxRadioGroup'
+                                value='manualInput'
+                                checked={manual}
+                                onChange={this.handleInputMode}
+                            />
+                            <Checkbox
+                                radio
+                                label='Copia e incolla html'
+                                name='checkboxRadioGroup'
+                                value='pastedInput'
+                                checked={!manual}
+                                onChange={this.handleInputMode}
+                            />
+                        </Form.Group>
+                        <h3 style={{ 'textAlign': 'center' }}>Titolo (opzionale ma consigliato)</h3>
+                        <Input
+                            fluid
+                            className='extra-title-input'
+                            id='extraTitle'
+                        />
+                        <h3 style={{ 'textAlign': 'center' }}>Contenuto dell'articolo</h3>
+                        {manual && <RichEdit />}
+                        {!manual && <PastedHtml />}
+
+                        <Button
+                            fluid
+                            onClick={this.submit}>
+                            Conferma
+                        </Button>
+                        {pushedId && (
+                            <div>
+                                <h3>Id nuovo Articolo :   {pushedId}</h3>
+                                <h3>link in produzione : localhost:3000/article/{pushedId}</h3>
+                                <h3>link reale : https://spike-2481d.firebaseapp.com/article/{pushedId}</h3>
+                            </div>
+                        )}
+                    </Container>
+                </Form>
             </div>
         )
     }
