@@ -9,8 +9,15 @@ import { Responsive } from "semantic-ui-react-single/Responsive";
 import { ADMINPAGES, RESPONSIVE_RESOLUTION, ROUTE } from "../enums/Constants";
 import { burgerMenuStyle } from "../style/BurgerMenu";
 
+
+
+
 class AdminNavbar extends Component {
-    state = {};
+    state = {
+        redirect: {
+            path: undefined
+        }
+    };
     activeItem = ADMINPAGES.ADMIN;
 
     iconMenu = () => {
