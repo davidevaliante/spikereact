@@ -11,6 +11,7 @@ import truncate from 'lodash/truncate'
 import filter from 'lodash/filter'
 import { Item } from 'semantic-ui-react-single/Item'
 import ArticleCard from '../../../components/Cards/ArticleCard'
+import { Card } from 'semantic-ui-react'
 
 class ArticleList extends Component {
 
@@ -55,9 +56,9 @@ class ArticleList extends Component {
 
         return (
             <div>
-                <Item.Group>
+                <Card.Group>
                     {extraList && this.renderItem()}
-                </Item.Group>
+                </Card.Group>
             </div>
 
             /*  <Grid centered>
