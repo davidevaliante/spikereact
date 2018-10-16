@@ -2,7 +2,7 @@ import React from 'react'
 // components
 import SlotPageSlotCard from '../Cards/BonusCard'
 // semantic
-import {Grid} from 'semantic-ui-react-single/Grid'
+import { Grid } from 'semantic-ui-react-single/Grid'
 // mix
 
 const SlotPageBonusList = (props) => {
@@ -25,7 +25,7 @@ const SlotPageBonusList = (props) => {
                 <div className='home-page-intro-outer' style={{ width: '100%' }}>
                     <div className='home-page-intro-bg' style={{ width: '100%' }}>
                         <div className='home-page-intro' style={{ width: '100%' }}>
-                            <h1>I migliori Bonus DELLA MADONNA</h1>
+                            <h1>I migliori Bonus</h1>
                             <p>Passa dalla teoria alla pratica</p>
                             <p>Utilizza questi bonus ed inizia a vincere soldi veri su siti certificati e sicuri</p>
                         </div>

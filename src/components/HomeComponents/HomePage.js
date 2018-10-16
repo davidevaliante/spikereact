@@ -16,6 +16,9 @@ import { setHomePage, setGratisPage, setBarPage, setAboutPage, setProducerPage, 
 // data
 import { getSlotsCardBasedOnTime, getAllByType } from '../../firebase/get'
 import ArticleList from "../HomeComponents/HomeBody/ArticleList"
+import ArticleDescription from '../HomeComponents/HomeBody/ArticleDescription'
+import Article from '../Extra/Article';
+
 class HomePage extends Component {
     state = {};
 
@@ -45,8 +48,8 @@ class HomePage extends Component {
         return (<div>
             <Navbar displaying='HOME' />
             <HomePageHeader style={{ position: 'absolute', zIndex: 1 }} />
-            <SiteDescription />
-            <Segment vertical>
+            <ArticleDescription />
+            <Segment vertical style={{ 'marginTop': '6rem', 'marginBottom': '6rem' }}>
 
                 <ArticleList>
 

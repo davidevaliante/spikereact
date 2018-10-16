@@ -7,7 +7,7 @@ import dropRight from "lodash/dropRight"
 import map from "lodash/map"
 import replace from "lodash/replace"
 import forEach from "lodash/forEach"
-
+import he from 'he'
 
 export const replaceTextTips = (text) => {
 
@@ -52,7 +52,7 @@ export const removeHtmlFrom = (str) => {
         return '';
     else
         str = str.toString();
-    return str.replace(/<[^>]*>/g, '');
+    return he.decode(str.replace(/<[^>]*>/g, ''));
 }
 
 // costruisce il link ad un immagine

@@ -70,13 +70,15 @@ const ArticleCard = (props) => {
             <div className='slot-card-shadow-animation' onClick={() => goTo(props.item.id)}>
                 <Card key={props.item.id}>
 
-                    <Card.Content >
+                    <Card.Content style={{ 'height': '173px' }}>
                         <Card.Header>{formatTitle(props.item.title)}</Card.Header>
 
-                        <Card.Description>{truncate(removeHtmlFrom(props.item.content), { 'length': 150 })}</Card.Description>
+                        <Card.Description >
+                            {truncate(removeHtmlFrom(props.item.content), { 'length': 150 })}
+                        </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-
+                        Aggiornato il {formatDate()}
                     </Card.Content>
                 </Card>
             </div>

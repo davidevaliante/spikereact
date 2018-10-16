@@ -61,13 +61,6 @@ class ArticleList extends Component {
                 </Card.Group>
             </div>
 
-            /*  <Grid centered>
-                 <Grid.Row style={{ paddingBottom: '4rem' }} centered>
- 
-                 </Grid.Row>
-             </Grid>
-  */
-
         );
     }
 }

@@ -19,11 +19,11 @@ import {
 } from '../../reducers/CurrentPageReducer'
 import { connect } from 'react-redux'
 // static files
-import logo from '../../static/slot-icon.svg';
+import logo from '../../static/app_icon.svg';
 // utils
 import { smoothScrollTo } from '../../utils/Utils';
 import { slide as BurgerMenu } from 'react-burger-menu'
-import {burgerMenuStyle} from "../../style/BurgerMenu";
+import { burgerMenuStyle } from "../../style/BurgerMenu";
 
 
 class Navbar extends Component {
@@ -102,7 +102,7 @@ class Navbar extends Component {
 
                             <Menu.Item
                                 as="a">
-                                <ProducersDropdown callback={this.updateCurrentPage}/>
+                                <ProducersDropdown callback={this.updateCurrentPage} />
                             </Menu.Item>
 
                             <Menu.Item
@@ -126,7 +126,7 @@ class Navbar extends Component {
                         onBottomPassed={this.showFixedMenu}
                         onBottomPassedReverse={this.hideFixedMenu}>
                         <Menu
-                            style={{ zIndex: 99, paddingRight: '12rem'}}
+                            style={{ zIndex: 99, paddingRight: '12rem' }}
                             fixed='top'
                             inverted={!this.state.fixed}
                             secondary={!this.state.fixed}
@@ -159,7 +159,7 @@ class Navbar extends Component {
                             <Menu.Item
                                 as="a"
                             >
-                                <ProducersDropdown callback={this.updateCurrentPage}/>
+                                <ProducersDropdown callback={this.updateCurrentPage} />
                             </Menu.Item>
                             <Menu.Item
                                 as='a'
@@ -169,12 +169,12 @@ class Navbar extends Component {
                             </Menu.Item>
 
                             <Menu.Item borderless position='right'>
-                                <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId}/>
+                                <NavbarSearchBar displaying={this.props.displaying} slotId={this.props.slotId} />
                             </Menu.Item>
-                        </Menu >
-                    </Visibility >
-                </Responsive >
-            </div >
+                        </Menu>
+                    </Visibility>
+                </Responsive>
+            </div>
         )
     }
 }
