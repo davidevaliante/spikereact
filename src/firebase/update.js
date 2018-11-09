@@ -38,7 +38,7 @@ export const updateBonusWithId = async (bonusId, updatedBonus, updatedImage, upd
     }
 };
 
-export const updateSlotWithId = (slotId, updatedSlot, updatedImage, callback) => {
+export const updateSlotWithId = async (slotId, updatedSlot, updatedImage, callback) => {
     const data = now();
     axios.patch(`${databaseRoot}/Slots/it/${slotId}.json`, { ...updatedSlot, time: data })
         .then((fullfilled) => {
@@ -49,6 +49,20 @@ export const updateSlotWithId = (slotId, updatedSlot, updatedImage, callback) =>
                     `slot_${snakeCase(updatedSlot.name)}`
                 )
             }
+            const slotCard = {
+                description: updatedSlot.description,
+                name: updatedSlot.name,
+                producer: updatedSlot.producer.name,
+                rating: updatedSlot.rating,
+                time: updatedSlot.time,
+                type: updatedSlot.type
+            }
+            axios.patch(`${databaseRoot}/SlotsCard/it/${slotId}.json`, { ...slotCard, time: data })
+            const slotMenu = {
+                description: updatedSlot.description,
+                name: updatedSlot.name,
+            }
+            axios.patch(`${databaseRoot}/SlotsMenu/it/${slotId}.json`, { ...slotMenu, time: data })
             callback();
             console.log('patched');
         })

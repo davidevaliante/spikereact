@@ -29,7 +29,7 @@ const HomeBody = ({ orderHandler, slotorder, type, handleContextRef, stickyConte
                     selection
                     value={slotorder} />
                 <div ref={handleContextRef}>
-                    <SlotList type={type} order={slotorder} />
+                    <SlotList type={type} order={slotorder} cardPerRow="3" />
                 </div>
             </Grid.Column>
 

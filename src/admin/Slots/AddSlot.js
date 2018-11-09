@@ -23,6 +23,7 @@ import { SLOT_TYPES } from '../../enums/Constants.js';
 import AdminNavbar from "../AdminNavbar";
 import { ADMINPAGES } from "../../enums/Constants";
 import RichEdit from "../Extra/RichEdit";
+import upperCase from 'lodash/upperCase'
 
 
 class AddSlot extends Component {
@@ -85,7 +86,7 @@ class AddSlot extends Component {
         // resetta quali sono i field vuoti errori
         this.setState({ shouldDisplayErrors: false, emptyFields: [] });
 
-        const name = document.getElementById('nameField').value.trim();
+        const name = upperCase(document.getElementById('nameField').value.trim());
         if (!name) {
             let errorList = this.state.emptyFields;
             errorList.push('name');

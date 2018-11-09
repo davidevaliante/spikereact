@@ -23,6 +23,7 @@ import { Icon } from "semantic-ui-react-single/Icon";
 import { Dimmer } from "semantic-ui-react-single/Dimmer";
 import { Menu } from 'semantic-ui-react-single/Menu'
 import RichEdit from "../Extra/RichEdit";
+import upperCase from 'lodash/upperCase'
 
 
 class EditSlot extends React.Component {
@@ -149,15 +150,15 @@ class EditSlot extends React.Component {
     }
 
     onPopularSelected = value => {
-        if(value.value==="true"){
+        if (value.value === "true") {
             this.setState({ isPopular: true })
-        }else{
+        } else {
             this.setState({ isPopular: false })
         }
     }
 
     submitEditSlot = () => {
-        const name = document.getElementById('nameField').value.trim();
+        const name = upperCase(document.getElementById('nameField').value.trim());
         if (!name) {
             let errorList = this.state.emptyFields;
             errorList.push('name');
