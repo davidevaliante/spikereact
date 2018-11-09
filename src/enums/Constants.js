@@ -54,6 +54,7 @@ export const ROUTE = {
     ADMINARTICLE: `${admin}/article`,
     ADMINPRODUCER: `${admin}/producers`,
     ADMINEXTRA: `${admin}/extras`,
+    ADMINSLOTPREVIEW: `${admin}/preview_slot`,
     // add
     ADDARTICLE: `${admin}/addarticle`,
     ADDSLOT: `${admin}/addslot`,

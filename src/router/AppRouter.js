@@ -21,6 +21,7 @@ import ProducerPage from "../components/ProducerComponents/ProducerPage";
 import ProducerDashboard from "../admin/Producer/ProducerDashboard";
 import ExtraDashBoard from '../admin/Extra/ExtraDashboard'
 import Article from '../components/Extra/Article'
+import SlotPreview from '../admin/Slots/SlotPreview'
 
 const AppRouter = () => {
 
@@ -55,6 +56,7 @@ const AppRouter = () => {
                     <Route path={ROUTE.ADMINBONUS} component={BonusDashboard} />
                     <Route path={ROUTE.ADMINPRODUCER} component={ProducerDashboard} />
                     <Route path={ROUTE.ADMINEXTRA} component={ExtraDashBoard} />
+                    <Route path={ROUTE.ADMINSLOTPREVIEW} component={SlotPreview} />
 
                     { /* add */}
                     <Route path={ROUTE.ADDSLOT} component={AddSlot} />

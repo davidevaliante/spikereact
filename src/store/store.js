@@ -9,6 +9,7 @@ import playModeReducer from './../reducers/PlayModeReducer';
 import toUpdateReducer from './../reducers/ToUpdateReducer';
 import slotMenuReducer from './../reducers/SlotsMenuReducer'
 import popularSlotReducer from './../reducers/PopularSlotreducer'
+import slotPreviewReducer from './../reducers/SlotPreviewReducer'
 
 const reducers = combineReducers(
     {
@@ -21,7 +22,8 @@ const reducers = combineReducers(
         'isPlaying': playModeReducer,
         'toUpdate': toUpdateReducer,
         'slotMenuList': slotMenuReducer,
-        'popularSlots': popularSlotReducer
+        'popularSlots': popularSlotReducer,
+        'slotPreview': slotPreviewReducer
     }
 );
 

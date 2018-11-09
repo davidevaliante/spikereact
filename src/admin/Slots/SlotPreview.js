@@ -4,15 +4,15 @@ import { Grid } from 'semantic-ui-react-single/Grid'
 import { Dimmer } from 'semantic-ui-react-single/Dimmer'
 import { Responsive } from 'semantic-ui-react-single/Responsive'
 // components
-import TipsList from './TipsList'
-import TecnicalsList from './TecnicalsList'
-import Description from './Description'
-import PlayDimmer from './PlayDimmer'
-import SlotPageBonusList from './SlotPageBonusList'
-import Footer from "../Footer";
-import YouTubeEmbed from './YouTubeEmbed'
-import SlotPageHeader from '../Header/SlotPageHeader'
-import Navbar from '../Header/Navbar'
+import TipsList from '../../components/SlotPageComponents/TipsList'
+import TecnicalsList from '../../components/SlotPageComponents/TecnicalsList'
+import Description from '../../components/SlotPageComponents/Description'
+import PlayDimmer from '../../components/SlotPageComponents/PlayDimmer'
+import SlotPageBonusList from '../../components/SlotPageComponents/SlotPageBonusList'
+import Footer from "../../components/Footer";
+import YouTubeEmbed from '../../components/SlotPageComponents/YouTubeEmbed'
+import SlotPageHeader from '../../components/SlotPageComponents/../Header/SlotPageHeader'
+import Navbar from '../../components/SlotPageComponents/../Header/Navbar'
 // data
 import { getSlotWithId } from '../../firebase/get'
 // router e redux
@@ -25,7 +25,7 @@ import Helmet from 'react-helmet'
 import { ROUTE } from "../../enums/Constants";
 
 
-class SlotPage extends Component {
+class SlotPreview extends Component {
 
     state = {
         currentSlot: {},
@@ -33,41 +33,9 @@ class SlotPage extends Component {
     }
 
     componentDidMount() {
-        console.log('mounting')
-        getSlotWithId(this.props.match.params.id, (slot) => {
-            if (!slot) {
-                this.props.history.push(ROUTE.ERROR404)
-            }
-            this.props.dispatch(slotIsLoaded())
-            this.setState({
-                currentSlot: slot,
-                currentSlotId: this.props.match.params.id
-            })
+        this.setState({
+            currentSlot: this.props.slotPreview,
         })
-    }
-
-
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.match.params.id !== this.props.match.params.id) {
-            console.log('firebase query');
-            this.props.dispatch(slotIsLoading())
-            getSlotWithId(this.props.match.params.id, (slot) => {
-                this.props.dispatch(slotIsLoaded())
-                this.setState({
-                    currentSlot: slot,
-                    currentSlotId: this.props.match.params.id
-                })
-            })
-        }
-
-        if (prevState.currentSlot.linkYoutube) {
-            this.setState({ currentSlot: { ...this.state.currentSlot, linkYoutube: undefined } })
-        }
-    }
-
-    componentWillUnmount() {
-        this.props.dispatch(slotIsLoading())
     }
 
     getYoutubeEmbedSource = () => {
@@ -80,17 +48,6 @@ class SlotPage extends Component {
         const { isPlaying, isLoading } = this.props
         return (
             <div>
-                <Helmet>
-                    <title>{currentSlot.name}</title>
-                    <meta charSet="utf-8" />
-                    <link rel="canonical" href="http://mysite.com/example" />
-                    <meta property="og:locale" content='it' />
-                    <meta property="article:tag" content="slot" />
-                    <meta property="article:tag" content={`slot ${currentSlot.name}`} />
-                    <meta property="article:published_time" content={currentSlot.time} />
-
-                </Helmet>
-
                 <Dimmer.Dimmable dimmed={isPlaying}>
                     {window.scrollTo(0, 0)}
 
@@ -111,7 +68,6 @@ class SlotPage extends Component {
                         <SlotPageHeader
                             style={{ position: 'absolute', zIndex: 1 }}
                             displaying='SLOT'
-                            loading={isLoading}
                             currentSlot={currentSlot} />
                     </div>
 
@@ -148,7 +104,8 @@ class SlotPage extends Component {
 const mapStateToProps = (state) => ({
     dispatch: state.dispatch,
     isPlaying: state.isPlaying,
-    isLoading: state.currentSlot.isLoading
+    isLoading: state.currentSlot.isLoading,
+    slotPreview: state.slotPreview
 })
 
-export default withRouter(connect(mapStateToProps)(SlotPage))
+export default connect(mapStateToProps)(SlotPreview)

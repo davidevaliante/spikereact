@@ -11,8 +11,6 @@ import { Header } from 'semantic-ui-react-single/Header'
 import { Icon } from 'semantic-ui-react-single/Icon'
 import { FormField } from 'semantic-ui-react-single/Form'
 
-
-
 import { pushNewSlot } from '../../firebase/firebase.js'
 import SearchField from '../SearchField.js';
 import ImagePicker from '../ImagePicker.js';
@@ -24,7 +22,8 @@ import AdminNavbar from "../AdminNavbar";
 import { ADMINPAGES } from "../../enums/Constants";
 import RichEdit from "../Extra/RichEdit";
 import upperCase from 'lodash/upperCase'
-
+import { connect } from 'react-redux'
+import { updateSlotPreview } from '../../reducers/SlotPreviewReducer'
 
 class AddSlot extends Component {
 
@@ -167,6 +166,43 @@ class AddSlot extends Component {
         }
     }
 
+    preview = () => {
+        // resetta quali sono i field vuoti errori
+        this.setState({ shouldDisplayErrors: false, emptyFields: [] });
+
+        const name = upperCase(document.getElementById('nameField').value.trim());
+        const linkYoutube = document.getElementById('linkYoutube').value.trim();
+        const linkPlay = document.getElementById('linkPlay').value.trim();
+        const description = document.getElementById('htmlText').value.trim();
+        const rating = this.state.rating;
+        const tipsField = document.getElementById('tipsField').value.trim();
+        const tecnicalsField = document.getElementById('tecnicalsField').value.trim();
+        const BONUS = this.state.selectedBonus
+        const producer = this.state.selectedProducer
+
+        const newSlot = {
+            name: name,
+            producer: producer,
+            linkYoutube: linkYoutube,
+            linkPlay: linkPlay,
+            bonus: BONUS,
+            description: description,
+            rating: rating,
+            tips: tipsField,
+            tecnicals: tecnicalsField,
+            type: this.state.type,
+            isFake: this.state.isFake
+        }
+
+        const imageData = {
+            imageFile: this.state.image,
+            imageName: this.state.imageName,
+        }
+        this.props.dispatch(updateSlotPreview(newSlot))
+        window.open('preview_slot')
+
+    }
+
     formatText = (event, data) => {
         if (this.state.isInCopyPasteMode) {
             const rawList = data.value.split('\n');
@@ -256,7 +292,7 @@ class AddSlot extends Component {
                                 marginBottom: '2rem',
                                 textAlign: 'center'
                             }}>
-                            Nuova Slot
+                            Aggiungi Nuova Slot
                         </h1>
 
                         <Form.Group widths='equal'>
@@ -291,14 +327,14 @@ class AddSlot extends Component {
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkYoutube')}
                                 onChange={() => this.resetErrorOn('linkYoutube')}
                                 control={Input}
-                                label='YouTube Link'
+                                label='YouTube Video Link'
                                 placeholder='YouTube Link...' />
                             <Form.Field
                                 id='linkPlay'
                                 error={this.state.shouldDisplayErrors && this.state.emptyFields.includes('linkPlay')}
                                 onChange={() => this.resetErrorOn('linkPlay')}
                                 control={Input}
-                                label='Slot Link'
+                                label='Slot Link per giocare'
                                 placeholder='Slot Play Link...' />
 
                         </Form.Group>
@@ -309,7 +345,7 @@ class AddSlot extends Component {
                                 marginBottom: '2rem',
                                 textAlign: 'center'
                             }}>
-                            Liste
+                            Consigli e caratteristiche Tecniche
                         </h1>
 
                         <Form.Group
@@ -347,7 +383,7 @@ class AddSlot extends Component {
 
                         <Form.Field>
                             <label>Descrizione</label>
-                            <RichEdit />
+                            <RichEdit withHtmlPreview={true} />
                         </Form.Field>
 
                         <Form.Group widths='equal'>
@@ -382,18 +418,26 @@ class AddSlot extends Component {
                             </Form.Field>
                         </Form.Group>
 
+                       {/*  <Form.Field
+                            style={{ width: '100%' }}
+                            onClick={this.preview}
+                            control={Button}>
+                            Vedi Anteprima
+                        </Form.Field> */}
+
                         <Form.Field
+                            color={'blue'}
                             style={{ width: '100%' }}
                             onClick={this.submitNewSlot}
                             control={Button}>
-                            Aggiungi
+                            Conferma
                         </Form.Field>
 
-                        <Form.Field
+                        {/*  <Form.Field
                             onClick={this.fakeObject}
                             control={Button}>
                             Aggiungi Fake
-                        </Form.Field>
+                        </Form.Field> */}
                     </Form>
                 </div>
             </div>
@@ -401,6 +445,10 @@ class AddSlot extends Component {
     }
 }
 
+const mapStateToProps = (store) => ({
+    dispatch: store.dispatch
+})
 
-export default AddSlot;
+
+export default connect(mapStateToProps)(AddSlot);
 

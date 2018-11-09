@@ -1,24 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 // router e redux
-import {connect} from 'react-redux'
-import {withRouter} from "react-router-dom";
+import { connect } from 'react-redux'
+import { withRouter } from "react-router-dom";
 // semantic
-import {Responsive} from "semantic-ui-react-single/Responsive";
-import {Segment} from "semantic-ui-react-single/Segment";
+import { Responsive } from "semantic-ui-react-single/Responsive";
+import { Segment } from "semantic-ui-react-single/Segment";
 // lodash
 import delay from 'lodash/delay'
 // mix
-import {PAGES, RESPONSIVE_RESOLUTION, ROUTE} from "../../enums/Constants";
+import { PAGES, RESPONSIVE_RESOLUTION, ROUTE } from "../../enums/Constants";
 import { getProducerByName, getSlotListByProducerName } from "../../firebase/get";
-import {onListFetched} from "../../utils/Callbacks";
+import { onListFetched } from "../../utils/Callbacks";
 // Components
 import Navbar from "../Header/Navbar";
 import ProducerHeader from "../Header/ProducerHeader";
 import Description from "../SlotPageComponents/Description";
 import Footer from "../Footer";
 import FixedSlotList from '../FixedSlotList';
-import {smoothScrollTo} from "../../utils/Utils";
-
+import { smoothScrollTo } from "../../utils/Utils";
 
 class ProducerPage extends Component {
     state = {
@@ -31,7 +30,7 @@ class ProducerPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.match.params.producerName !== this.props.match.params.producerName){
+        if (prevProps.match.params.producerName !== this.props.match.params.producerName) {
             this.setState({
                 loading: true
             })
@@ -41,43 +40,47 @@ class ProducerPage extends Component {
     }
 
     gettingPageData = () => {
-        getProducerByName(this.props.match.params.producerName, 
+        console.log(`nome dal link : ${this.props.match.params.producerName}`);
+
+        getProducerByName(this.props.match.params.producerName,
             // callback 
             (producerDataResponse) => {
                 const producer = onListFetched(producerDataResponse)
-                if ( producer.length === 0 ){
+
+                if (producer.length === 0) {
                     this.props.history.push(ROUTE.ERROR404)
                 } else {
-                    getSlotListByProducerName(this.props.match.params.producerName, 
-                    // callback 
-                    slotListObject => {
-                        delay( () => {smoothScrollTo('aamsBanner')}, 1500);
-                        this.setState({
-                            currentProducer:onListFetched(producerDataResponse)[0],
-                            slotProducerList: onListFetched(slotListObject),
-                            loading: false
-                        })
-                    })
-                }
+                    getSlotListByProducerName(this.props.match.params.producerName,
+                        // callback 
+                        slotListObject => {
+                            delay(() => { smoothScrollTo('aamsBanner') }, 1500);
 
-                
-        })
+                            this.setState({
+                                currentProducer: onListFetched(producerDataResponse)[0],
+                                slotProducerList: onListFetched(slotListObject),
+                                loading: false
+                            })
+                        })
+                }
+            }
+        )
     }
 
-    handleChange = (e, {value}) => this.setState({order: value});
-    handleContextRef = contextRef => this.setState({contextRef});
+    handleChange = (e, { value }) => this.setState({ order: value });
+    handleContextRef = contextRef => this.setState({ contextRef });
 
     render() {
         const { currentProducer, slotProducerList } = this.state;
-        const slotLength = ( slotProducerList ) ? slotProducerList.length : 0;
-        
-        
+        const slotLength = (slotProducerList) ? slotProducerList.length : 0;
+        console.log(this.state);
+
+
         return (
             <div>
-                <Navbar displaying={PAGES.PRODUCER}/>
+                <Navbar displaying={PAGES.PRODUCER} />
 
                 <ProducerHeader
-                    style={{position: 'absolute', zIndex: 1}}
+                    style={{ position: 'absolute', zIndex: 1 }}
                     currentProducer={currentProducer}
                     loading={this.state.loading}
                 />
@@ -90,53 +93,53 @@ class ProducerPage extends Component {
                 />
 
                 <center>
-                    <a href={currentProducer &&currentProducer.link}>Visita la pagina del produttore</a>
+                    <a href={currentProducer && currentProducer.link}>Visita la pagina del produttore</a>
                 </center>
 
-                { !(slotLength === 0) &&
-                <div>
-                <div className='description-banner-container'>
+                {!(slotLength === 0) &&
+                    <div>
+                        <div className='description-banner-container'>
 
-                    <Responsive minWidth={766}>
-                        <div className='description-banner-red'>
-                            <div className='white-line scale-in-hor-right'/>
-                            <div>
+                            <Responsive minWidth={766}>
+                                <div className='description-banner-red'>
+                                    <div className='white-line scale-in-hor-right' />
+                                    <div>
+                                        <h2 className="tracking-in-contract"
+                                            style={{ fontFamily: 'Raleway, sans-serif' }}>&nbsp;</h2>
+                                    </div>
+                                </div>
+                            </Responsive>
+
+                            <div className='description-banner-black'>
                                 <h2 className="tracking-in-contract"
-                                    style={{ fontFamily: 'Raleway, sans-serif' }}>&nbsp;</h2>
+                                    style={{ fontFamily: 'Raleway, sans-serif' }}>Slot del produttore</h2>
+                                <div className='white-line scale-in-hor-left' />
                             </div>
                         </div>
-                    </Responsive>
 
-                    <div className='description-banner-black'>
-                        <h2 className="tracking-in-contract"
-                            style={{ fontFamily: 'Raleway, sans-serif' }}>Slot del produttore</h2>
-                        <div className='white-line scale-in-hor-left'/>
-                    </div>
-                </div>
-
-                <Segment vertical>
-                    <Responsive 
-                        minWidth={RESPONSIVE_RESOLUTION.LARGE} 
-                        as={FixedSlotList} 
-                        cardPerRow={4} 
-                        order='name'
-                        slotList={this.state.slotProducerList} />
-                    <Responsive 
-                        minWidth={RESPONSIVE_RESOLUTION.MEDIUM} 
-                        maxWidth={RESPONSIVE_RESOLUTION.LARGE} 
-                        as={FixedSlotList} 
-                        cardPerRow={2} 
-                        order='name'
-                        slotList={this.state.slotProducerList} />
-                    <Responsive 
-                        maxWidth={RESPONSIVE_RESOLUTION.MEDIUM} 
-                        as={FixedSlotList} 
-                        cardPerRow={1} 
-                        order='name'
-                        slotList={this.state.slotProducerList} />
-                </Segment>
-                </div>}
-                <Footer/>
+                        <Segment vertical>
+                            <Responsive
+                                minWidth={RESPONSIVE_RESOLUTION.LARGE}
+                                as={FixedSlotList}
+                                cardPerRow={4}
+                                order='name'
+                                slotList={this.state.slotProducerList} />
+                            <Responsive
+                                minWidth={RESPONSIVE_RESOLUTION.MEDIUM}
+                                maxWidth={RESPONSIVE_RESOLUTION.LARGE}
+                                as={FixedSlotList}
+                                cardPerRow={2}
+                                order='name'
+                                slotList={this.state.slotProducerList} />
+                            <Responsive
+                                maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}
+                                as={FixedSlotList}
+                                cardPerRow={1}
+                                order='name'
+                                slotList={this.state.slotProducerList} />
+                        </Segment>
+                    </div>}
+                <Footer />
             </div>
         );
     }
