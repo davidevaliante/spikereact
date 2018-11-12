@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 
 export const BonusList = (props) => {
 
-    const bonusNumber = (props.toShow) ? props.toShow : 4;
+    const bonusNumber = (props.maxbonusToShow) ? props.maxbonusToShow : 3;
 
     const bonusListToColumn = bonusList => {
 

@@ -71,7 +71,7 @@ class RichEdit extends Component {
                     placeholder="Inserisci testo"
                 />
 
-                {this.props.withHtmlPreview &&
+                {
                     <div>
                         <label for="htmlText">Trasformato in html :</label>
                         <textarea

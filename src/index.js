@@ -9,6 +9,7 @@ import '../src/style/sass.scss';
 import 'semantic-ui-react-single/css'
 import { onBonusListFetched, onProducerListFetched } from './utils/Callbacks'
 import { getBonusList } from './firebase/get';
+import { setTypeInMenuCard } from './firebase/update';
 import keys from 'lodash/keys'
 import { getSlotsCardBasedOnTime, getSlotsForMenu, getPopularSlots, getProducerList } from './firebase/get'
 
@@ -18,6 +19,8 @@ getSlotsForMenu()
 getPopularSlots()
 keys(store.bonusList).length === 0 && getBonusList(onBonusListFetched)
 keys(store.producerList).length === 0 && getProducerList(onProducerListFetched)
+// setTypeInMenuCard()
+
 
 // store Provider
 const jsx = (

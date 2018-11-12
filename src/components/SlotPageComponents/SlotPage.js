@@ -16,7 +16,7 @@ import Navbar from '../Header/Navbar'
 // data
 import { getSlotWithId } from '../../firebase/get'
 // router e redux
-import { slotIsLoading, slotIsLoaded } from '../../reducers/SlotPageReducer'
+import { slotIsLoading, slotIsLoaded, updateCurrentSlot } from '../../reducers/SlotPageReducer'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 // mix
@@ -39,6 +39,7 @@ class SlotPage extends Component {
                 this.props.history.push(ROUTE.ERROR404)
             }
             this.props.dispatch(slotIsLoaded())
+            this.props.dispatch(updateCurrentSlot(slot))
             this.setState({
                 currentSlot: slot,
                 currentSlotId: this.props.match.params.id
@@ -54,6 +55,8 @@ class SlotPage extends Component {
             this.props.dispatch(slotIsLoading())
             getSlotWithId(this.props.match.params.id, (slot) => {
                 this.props.dispatch(slotIsLoaded())
+                this.props.dispatch(updateCurrentSlot(slot))
+
                 this.setState({
                     currentSlot: slot,
                     currentSlotId: this.props.match.params.id

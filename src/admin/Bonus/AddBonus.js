@@ -328,11 +328,11 @@ class AddBonus extends Component {
                             {this.state.submitBtn}
                         </Form.Field>
 
-                        <Form.Field
+                        {/* <Form.Field
                             onClick={this.buildFakeSlot}
                             control={Button}>
                             Aggiungi Bonus Finto
-                        </Form.Field>
+                        </Form.Field> */}
                     </Form>
                 </div>
             </div>

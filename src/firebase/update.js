@@ -61,6 +61,7 @@ export const updateSlotWithId = async (slotId, updatedSlot, updatedImage, callba
             const slotMenu = {
                 description: updatedSlot.description,
                 name: updatedSlot.name,
+                type: updatedSlot.type
             }
             axios.patch(`${databaseRoot}/SlotsMenu/it/${slotId}.json`, { ...slotMenu, time: data })
             callback();
@@ -87,3 +88,15 @@ export const updateProducerWithId = (id, updatedProducer, updatedImage, callback
         .catch(error => console.log(error)
         )
 };
+
+
+export const setTypeInMenuCard = async () => {
+    const response = await axios.get(`${databaseRoot}/SlotsCard/it.json`)
+    const list = response.data
+    for (const key in list) {
+        const slot = list[key]
+        const oldSlotMenu = await axios.get(`${databaseRoot}/SlotsMenu/it/${key}.json`)
+        await axios.patch(`${databaseRoot}/SlotsMenu/it/${key}.json`, { ...oldSlotMenu.data, type: slot.type })
+    }
+
+}

@@ -7,6 +7,7 @@ import dropRight from "lodash/dropRight"
 import map from "lodash/map"
 import replace from "lodash/replace"
 import forEach from "lodash/forEach"
+import filter from 'lodash/filter'
 import he from 'he'
 
 export const replaceTextTips = (text) => {
@@ -104,32 +105,67 @@ export const formatList = (slotList, bonusList, producerList) => {
             "price": "$88.56"
         },
     */
+
     const truncateOptions = { length: '60', omission: '...' }
     const list = {
-        slot: {
-            name: "Slot",
+        SlotOnline: {
+            name: "Slot Online",
             results: []
         },
-        bonus: {
+        SlotBar: {
+            name: "Slot Bar",
+            results: []
+        },
+        Bonus: {
             name: "Bonus",
             results: []
         },
-        producer: {
+        Produttori: {
             name: "Produttori",
             results: []
         },
     }
 
-    const formattedSlot = []
-    for (const slot in slotList) {
-        const current = slotList[slot]
-        formattedSlot.push({
-            id: slot,
+
+    let l = []
+
+    for (const key in slotList) {
+        let x = slotList[key]
+        x['id'] = key
+        l.push(x)
+    }
+
+
+
+    const slotOnline = filter(l, (slot) => {
+        return slot.type === 'GRATIS'
+    });
+    const slotBar = filter(l, (slot) => slot.type === 'BAR');
+
+    console.log(slotOnline);
+
+
+    for (const slot in slotOnline) {
+        const current = slotOnline[slot]
+        slotOnline.push({
+            id: current.id,
             title: current.name,
             description: `${truncate(removeHtmlFrom(current.description), truncateOptions)}`,
             image: getImageLinkFromName('slot', current.name, 'small'),
             original: current,
-            type: 'slot'
+            type: 'slot-online'
+        })
+    }
+
+    for (const slot in slotBar) {
+        const current = slotBar[slot]
+        slotBar.push({
+            id: current.id,
+            title: current.name,
+            description: `${truncate(removeHtmlFrom(current.description), truncateOptions)}`,
+            image: getImageLinkFromName('slot', current.name, 'small'),
+            original: current,
+            type: 'slot-bar'
         })
     }
 
@@ -158,9 +194,12 @@ export const formatList = (slotList, bonusList, producerList) => {
             type: 'producer'
         })
     }
-    list['slot']['results'] = formattedSlot
-    list['bonus']['results'] = formattedBonus
-    list['producer']['results'] = formattedProducer
+
+
+    list['SlotOnline']['results'] = slotOnline
+    list['SlotBar']['results'] = slotBar
+    list['Bonus']['results'] = formattedBonus
+    list['Produttori']['results'] = formattedProducer
 
 
     return list

@@ -8,6 +8,8 @@ import { Responsive } from 'semantic-ui-react-single/Responsive'
 import { connect } from 'react-redux'
 import { setUserPlaying } from '../../reducers/PlayModeReducer'
 import { RESPONSIVE_RESOLUTION } from '../../enums/Constants'
+import { withRouter } from 'react-router-dom'
+
 
 const ShortHandMenu = (props) => {
 
@@ -19,16 +21,29 @@ const ShortHandMenu = (props) => {
     }
 
     const buttonsStyle = {
-        width: '165px', 
+        width: '165px',
         height: '40px',
         margin: '0 1.6rem'
     }
+
+    const playButtonMethod = () => {
+        const link = props.currentSlot.linkPlay
+        if (link.includes('spike')) {
+            const l = link.split('slot/')[1]
+            props.history.push(`/slot/${l}`)
+        } else {
+            props.dispatch(setUserPlaying())
+        }
+
+        // props.dispatch(setUserPlaying()
+    }
+
 
     return (
         <div className='shorthand-container-style'>
             <Responsive maxWidth={RESPONSIVE_RESOLUTION.MEDIUM}>
                 <div className='small-buttons-container'>
-                    <List style={{ margin: '0 auto'}}>
+                    <List style={{ margin: '0 auto' }}>
                         <List.Item>
                             <Button
                                 style={buttonsStyle}
@@ -69,7 +84,7 @@ const ShortHandMenu = (props) => {
                         onClick={() => smoothScrollTo('slot-page-description')}>
                         Descrizione
                     </Button>
-                 <Button
+                    <Button
                         style={buttonsStyle}
                         inverted
                         color='red'
@@ -87,21 +102,21 @@ const ShortHandMenu = (props) => {
             </Responsive>
 
             <div className='big-buttons-container'>
-                <Button style={{ width: '45%' }} 
-                        animated 
-                        size='huge' 
-                        color='white' 
-                        onClick={() => props.dispatch(setUserPlaying())}>
-                    <Button.Content visible>Provala Subito</Button.Content>
+                <Button style={{ width: '45%' }}
+                    animated
+                    size='huge'
+                    color='white'
+                    onClick={() => playButtonMethod()}>
+                    <Button.Content visible>{(props.currentSlot !== undefined && props.currentSlot.type === 'GRATIS') ? 'Provala Subito' : 'Vai alla versione online'}</Button.Content>
                     <Button.Content hidden>
                         <Icon name='gamepad' />
                     </Button.Content>
                 </Button>
 
-                <Button style={{ width: '45%' }} 
-                        size='huge' 
-                        color='red' 
-                        onClick={() => smoothScrollTo('slot-page-bonus')}>
+                <Button style={{ width: '45%' }}
+                    size='huge'
+                    color='red'
+                    onClick={() => smoothScrollTo('slot-page-bonus')}>
                     Bonus Offerti
                 </Button>
             </div>
@@ -110,7 +125,8 @@ const ShortHandMenu = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    dispatch: state.dispatch
+    dispatch: state.dispatch,
+    currentSlot: state.currentSlot.currentSlot
 })
 
-export default connect(mapStateToProps)(ShortHandMenu)
+export default withRouter(connect(mapStateToProps)(ShortHandMenu))

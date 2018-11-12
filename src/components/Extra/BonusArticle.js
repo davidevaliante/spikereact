@@ -26,6 +26,8 @@ class BonusArticle extends Component {
     componentDidMount() {
         if (this.props.match.params.id) {
             getGuideById(this.props.match.params.id, data => {
+                console.log(data.content);
+
                 this.setState({
                     isLoading: false,
                     content: data,

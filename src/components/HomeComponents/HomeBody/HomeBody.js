@@ -37,7 +37,7 @@ const HomeBody = ({ orderHandler, slotorder, type, handleContextRef, stickyConte
                 style={{ padding: '0 2rem' }}
                 width={4}>
                 <Sticky context={stickyContextRef} active={isActive} offset={80}>
-                    <BonusList maxNumber={15} />
+                    <BonusList maxNumber={15} maxbonusToShow={3} />
                 </Sticky>
 
             </Grid.Column>

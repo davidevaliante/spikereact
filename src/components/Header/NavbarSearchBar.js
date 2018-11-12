@@ -28,7 +28,12 @@ class NavbarSearchBar extends Component {
 
     handleResultSelect = (e, { result }) => {
         switch (result.type) {
-            case 'slot':
+            case 'slot-online':
+                this.props.history.push(`${ROUTE.SLOTS}/${result.id}`)
+                console.log(result);
+
+                break;
+            case 'slot-bar':
                 this.props.history.push(`${ROUTE.SLOTS}/${result.id}`)
                 break;
             case 'bonus':

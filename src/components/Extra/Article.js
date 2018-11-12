@@ -26,6 +26,8 @@ class Article extends Component {
     componentDidMount() {
         if (this.props.match.params.id) {
             getGuideById(this.props.match.params.id, data => {
+                console.log(data.content);
+
                 this.setState({
                     isLoading: false,
                     content: data,
@@ -99,6 +101,15 @@ class Article extends Component {
                             <Button.Content visible>Torna Indietro</Button.Content>
                             <Button.Content hidden inverted>
                                 <Icon name='arrow left' />
+                            </Button.Content>
+                        </Button>
+                    </div>
+
+                    <div className='extra-button-right'>
+                        <Button onClick={() => this.goToBonus()} size='large' animated inverted>
+                            <Button.Content visible>Vai al bonus</Button.Content>
+                            <Button.Content hidden inverted>
+                                <Icon name='arrow right' />
                             </Button.Content>
                         </Button>
                     </div>

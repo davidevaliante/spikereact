@@ -222,7 +222,7 @@ class EditSlot extends React.Component {
             tips: tipsField,
             tecnicals: tecnicalsField,
             type: type,
-            isPopular: this.state.isPopular
+            isPopular: this.state.isPopular ? this.state.isPopular : false
         }
 
         const image = this.state.image

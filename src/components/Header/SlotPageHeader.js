@@ -30,24 +30,25 @@ const SlotPageHeader = ({ currentSlot, showFixedMenu, hideFixedMenu, fixmenu, lo
                 style={{ minHeight: '100vh', padding: 0 }}
                 vertical>
                 <LazyLoad height={'100vh'}>
-                    <LoadingDimmer active={loading}/>
-                        <header
-                            id='slotHeader'
-                            className='fade-in-header'
-                            style={{ backgroundImage: `url(${getImageLinkFromName('slot', currentSlot.name, 'big')})` }}>
-                            <div
-                                style={styles.overlay}>
-                                <div className='description-alignment' >
-                                    <div className='align-center' style={{ marginTop: '10rem' }}>
-                                        <h1 className='header-slot-text'>{currentSlot.name}</h1>
-                                        <h1 className='slideRight'>{(currentSlot && currentSlot.producer) && currentSlot.producer.name}</h1>
-                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <ShortHandMenu />
-                                        </div>
+                    <LoadingDimmer active={loading} />
+                    <header
+                        id='slotHeader'
+                        className='fade-in-header'
+                        style={{ backgroundImage: `url(${getImageLinkFromName('slot', currentSlot.name, 'big')})` }}>
+                        <div
+                            style={styles.overlay}>
+                            <div className='description-alignment' >
+                                <div className='align-center' style={{ marginTop: '10rem' }}>
+                                    <h1 className='text-type'>{currentSlot.type === 'BAR' ? 'Slot Bar' : 'Slot Online'}</h1>
+                                    <h1 className='header-slot-text'>{currentSlot.name}</h1>
+                                    <h1 className='slideRight'>{(currentSlot && currentSlot.producer) && currentSlot.producer.name}</h1>
+                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <ShortHandMenu />
                                     </div>
                                 </div>
                             </div>
-                        </header>
+                        </div>
+                    </header>
                 </LazyLoad>
             </Segment>
             <AamsBanner />

@@ -3,7 +3,7 @@ const defaultState = { isLoading: true }
 const slotPageReducer = (state = defaultState, action) => {
     switch (action.type) {
         case 'UPDATE_CURRENT_SLOT':
-            return action.currentSlot
+            return { ...state, currentSlot: action.currentSlot }
 
         case 'RESET_CURRENT_SLOT':
             return {
