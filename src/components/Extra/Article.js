@@ -16,6 +16,9 @@ import Parser from 'html-react-parser'
 import truncate from 'lodash/truncate'
 // router e redux
 import { withRouter } from 'react-router-dom'
+import { getImageLinkFromName } from "../../utils/Utils";
+import { Image } from 'semantic-ui-react-single/Image'
+
 
 class Article extends Component {
 
@@ -24,6 +27,8 @@ class Article extends Component {
     }
 
     componentDidMount() {
+
+
         if (this.props.match.params.id) {
             getGuideById(this.props.match.params.id, data => {
                 this.setState({
@@ -32,8 +37,12 @@ class Article extends Component {
                     parsedContent: Parser(`${data.content}`),
                     bonus: data.bonus
                 })
+
             })
+
+
         }
+
     }
 
     showBottomButtons = () => this.setState({ showBottomButtons: true })
@@ -55,6 +64,12 @@ class Article extends Component {
         link && window.open(link)
     }
 
+    imageArticle = () => {
+        const a = getImageLinkFromName('article', this.state.content.title)
+
+        return a
+    }
+
     buttonAnimation = () => {
 
         const x = truncate(this.state.bonus.name, {
@@ -70,10 +85,12 @@ class Article extends Component {
         const { content, showBottomButtons, parsedContent, isLoading } = this.state
         const { bonus } = this.state
 
+
         if (isLoading) return (
             <div className='extra-bg'>
                 {window.scrollTo(0, 0)}
                 <Navbar fixColor={true} />
+
                 <Dimmer active>
                     <Loader />
                 </Dimmer>
@@ -115,6 +132,9 @@ class Article extends Component {
 
                 <div className='extra-content'>
                     <Container text className='extra'>
+
+                        <Image src={this.imageArticle()}></Image>
+
                         {parsedContent}
                     </Container>
                 </div>

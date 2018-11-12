@@ -74,7 +74,7 @@ const ArticleCard = (props) => {
             <div className='slot-card-shadow-animation' onClick={() => goTo(props.item.id)}>
                 <Card key={props.item.id}>
                     <Image src={getImageLinkFromName('article', props.item.title)} style={{ height: '14rem', objectFit: 'cover' }} />
-
+                 
                     <Card.Content style={{ 'height': '173px' }}>
                         <Card.Header>{formatTitle(props.item.title)}</Card.Header>
 
