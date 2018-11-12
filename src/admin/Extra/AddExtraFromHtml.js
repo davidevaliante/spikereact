@@ -9,15 +9,25 @@ import { Checkbox } from 'semantic-ui-react-single/Checkbox'
 import PastedHtml from './PastedHtml'
 import { getExtraById } from '../../firebase/get'
 import { updateExtraWithId } from '../../firebase/update'
+import ImagePicker from "../ImagePicker";
+import { getImageLinkFromName } from "../../utils/Utils";
 
 class AddExtraFromHtml extends Component {
 
+
+
+
     state = {
+        currentArticle: {},
         pushedLink: "",
         pushedId: "",
         articleInputMode: "manualInput",
         isInEditMode: false,
         extraToEdit: {}
+    }
+
+    onImageSelected = (image) => {
+        this.setState({ image: image, imageName: image.name })
     }
 
     componentDidMount() {
@@ -90,6 +100,8 @@ class AddExtraFromHtml extends Component {
                                     checked={!manual}
                                     onChange={this.handleInputMode}
                                 />
+
+
                             </Form.Group>
                             <h3 style={{ 'textAlign': 'center' }}>Titolo (opzionale ma consigliato)</h3>
                             <Input
@@ -102,11 +114,21 @@ class AddExtraFromHtml extends Component {
                             {manual && <RichEdit />}
                             {!manual && <PastedHtml defaultValue={extraToEdit.content} />}
 
+
+
+
+                            <Form.Field>
+
+                                <ImagePicker
+                                    onImageSelected={this.onImageSelected}
+                                    imagePreview={getImageLinkFromName('article', this.state.currentArticle.name, 'medium')} />
+                            </Form.Field>
                             <Button
                                 fluid
                                 onClick={this.submit}>
                                 Conferma
                         </Button>
+
                             {pushedId && (
                                 <div>
                                     <h3>Id nuovo Articolo :   {pushedId}</h3>
@@ -115,6 +137,7 @@ class AddExtraFromHtml extends Component {
                                 </div>
                             )}
                         </Container>
+
                     </Form>
                 </div>
             )
@@ -154,11 +177,22 @@ class AddExtraFromHtml extends Component {
                         {manual && <RichEdit />}
                         {!manual && <PastedHtml />}
 
+
+                        <Form.Field>
+
+                            <ImagePicker
+                                onImageSelected={this.onImageSelected}
+                                imagePreview={getImageLinkFromName('article', this.state.currentArticle.name, 'medium')} />
+                        </Form.Field>
+
                         <Button
                             fluid
                             onClick={this.submit}>
                             Conferma
                         </Button>
+
+
+
                         {pushedId && (
                             <div>
                                 <h3>Id nuovo Articolo :   {pushedId}</h3>
