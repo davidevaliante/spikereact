@@ -10,6 +10,8 @@ import { Button } from 'semantic-ui-react-single/Button'
 import { deleteExtraWithId } from '../../firebase/delete'
 import { ROUTE } from '../../enums/Constants'
 import { Card } from 'semantic-ui-react-single/Card'
+import { Image } from 'semantic-ui-react-single/Image'
+
 
 const ArticleCard = (props) => {
 
@@ -42,7 +44,9 @@ const ArticleCard = (props) => {
     const RenderAdmin = () => {
         return (
             <Item>
+                <Item.Image src='http://www.grandangoloagrigento.it/wp-content/uploads/2017/09/slot-mach.jpg' size="medium" />
                 <Item.Content>
+
                     <Item.Header as='a'>
                         {formatTitle()}
                     </Item.Header>
@@ -69,6 +73,7 @@ const ArticleCard = (props) => {
         return (<div>
             <div className='slot-card-shadow-animation' onClick={() => goTo(props.item.id)}>
                 <Card key={props.item.id}>
+                    <Image src='http://www.grandangoloagrigento.it/wp-content/uploads/2017/09/slot-mach.jpg' size="medium" />
 
                     <Card.Content style={{ 'height': '173px' }}>
                         <Card.Header>{formatTitle(props.item.title)}</Card.Header>
