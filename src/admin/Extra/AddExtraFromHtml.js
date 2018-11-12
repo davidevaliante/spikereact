@@ -11,7 +11,7 @@ import { getExtraById } from '../../firebase/get'
 import { updateExtraWithId } from '../../firebase/update'
 import ImagePicker from "../ImagePicker";
 import { getImageLinkFromName } from "../../utils/Utils";
-
+import snakeCase from 'lodash/snakeCase'
 class AddExtraFromHtml extends Component {
 
 
@@ -50,8 +50,9 @@ class AddExtraFromHtml extends Component {
         if (this.state.articleInputMode === "pastedInput")
             rawhtml = document.getElementById('pastedHtml').value.trim()
 
+
         if (rawhtml.length > 0 && !this.state.isInEditMode) {
-            const newExtra = { content: rawhtml, title: title, image: this.state.image, imageName: `${title}_article_image` }
+            const newExtra = { content: rawhtml, title: title, image: this.state.image, imageName: `${snakeCase(title)}_article_image` }
             submitExtraFromHtml(newExtra, success => {
                 this.setState({
                     pushedId: success.data.name
@@ -60,7 +61,7 @@ class AddExtraFromHtml extends Component {
         }
 
         if (rawhtml.length > 0 && this.state.isInEditMode) {
-            const editedExtra = { content: rawhtml, title: title, image: this.state.image, imageName: `${title}_article_image` }
+            const editedExtra = { content: rawhtml, title: title, image: this.state.image, imageName: `${snakeCase(title)}_article_image` }
             updateExtraWithId(this.props.match.params.id, editedExtra, success => {
                 console.log(success)
             })
@@ -117,13 +118,11 @@ class AddExtraFromHtml extends Component {
                             {!manual && <PastedHtml defaultValue={extraToEdit.content} />}
 
 
-
-
                             <Form.Field>
 
                                 <ImagePicker
                                     onImageSelected={this.onImageSelected}
-                                    imagePreview={getImageLinkFromName('article', this.state.extraToEdit.title)} />
+                                    imagePreview={getImageLinkFromName('article', snakeCase(this.state.extraToEdit.title))} />
                             </Form.Field>
                             <Button
                                 fluid
