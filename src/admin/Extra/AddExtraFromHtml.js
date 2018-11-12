@@ -36,7 +36,7 @@ class AddExtraFromHtml extends Component {
                 this.setState({
                     isInEditMode: true,
                     extraToEdit: extra.data,
-                    articleInputMode: "pastedInput"
+                    articleInputMode: "pastedInput",
                 })
             })
         }
@@ -51,7 +51,8 @@ class AddExtraFromHtml extends Component {
             rawhtml = document.getElementById('pastedHtml').value.trim()
 
         if (rawhtml.length > 0 && !this.state.isInEditMode) {
-            submitExtraFromHtml({ content: rawhtml, title: title }, success => {
+            const newExtra = { content: rawhtml, title: title, image: this.state.image, imageName: `${title}_article_image` }
+            submitExtraFromHtml(newExtra, success => {
                 this.setState({
                     pushedId: success.data.name
                 })
@@ -59,7 +60,8 @@ class AddExtraFromHtml extends Component {
         }
 
         if (rawhtml.length > 0 && this.state.isInEditMode) {
-            updateExtraWithId(this.props.match.params.id, { content: rawhtml, title: title }, success => {
+            const editedExtra = { content: rawhtml, title: title, image: this.state.image, imageName: `${title}_article_image` }
+            updateExtraWithId(this.props.match.params.id, editedExtra, success => {
                 console.log(success)
             })
         }
@@ -121,7 +123,7 @@ class AddExtraFromHtml extends Component {
 
                                 <ImagePicker
                                     onImageSelected={this.onImageSelected}
-                                    imagePreview={getImageLinkFromName('article', this.state.currentArticle.name, 'medium')} />
+                                    imagePreview={getImageLinkFromName('article', this.state.extraToEdit.title)} />
                             </Form.Field>
                             <Button
                                 fluid

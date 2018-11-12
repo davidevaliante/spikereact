@@ -7,6 +7,8 @@ import { DATABASE_REFERENCE, STORAGE_FOLDERS } from '../enums/Constants'
 
 export const updateExtraWithId = async (extraId, updatedObject, callback) => {
     const data = now()
+    await pushNewImage(updatedObject.image, 'ArticleImages', updatedObject.imageName)
+
     const task = axios.patch(`${databaseRoot}/Extra/it/${extraId}.json`, { ...updatedObject, time: data })
     callback && callback(task)
 }

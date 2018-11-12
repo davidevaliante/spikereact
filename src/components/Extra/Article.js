@@ -16,8 +16,6 @@ import Parser from 'html-react-parser'
 import truncate from 'lodash/truncate'
 // router e redux
 import { withRouter } from 'react-router-dom'
-import { Image } from 'semantic-ui-react-single/Image'
-
 
 class Article extends Component {
 
@@ -28,8 +26,6 @@ class Article extends Component {
     componentDidMount() {
         if (this.props.match.params.id) {
             getGuideById(this.props.match.params.id, data => {
-                console.log(data.content);
-
                 this.setState({
                     isLoading: false,
                     content: data,
@@ -93,13 +89,11 @@ class Article extends Component {
             <div className='extra-bg'>
                 {window.scrollTo(0, 0)}
                 <Navbar fixColor={true} />
-
                 <Visibility
                     once={false}
                     offset={500}
                     onBottomVisible={this.showBottomButtons}
                     onBottomVisibleReverse={this.hideBottomButtons}>
-
                     <div className='extra-button-left'>
                         <Button onClick={() => this.goBack()} size='large' animated inverted>
                             <Button.Content visible>Torna Indietro</Button.Content>
@@ -121,7 +115,6 @@ class Article extends Component {
 
                 <div className='extra-content'>
                     <Container text className='extra'>
-                        <Image src='http://www.grandangoloagrigento.it/wp-content/uploads/2017/09/slot-mach.jpg' size="large" />
                         {parsedContent}
                     </Container>
                 </div>

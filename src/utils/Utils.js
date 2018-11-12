@@ -62,6 +62,7 @@ export const getImageLinkFromName = (type, name, size, ) => {
     const slotFolder = 'SlotImages%2F'
     const bonusFolder = 'BonusImages%2F'
     const producerFolder = 'ProducerImages%2F'
+    const articleFolder = 'ArticleImages%2F'
     const urlEnd = '?alt=media'
 
     if (type === 'slot') {
@@ -88,6 +89,10 @@ export const getImageLinkFromName = (type, name, size, ) => {
             default:
                 return `${urlStart}${producerFolder}producer_${snakeCase(name)}${urlEnd}`
         }
+    }
+
+    if (type === 'article') {
+        return `${urlStart}${articleFolder}${snakeCase(name)}_article_image${urlEnd}`
     }
 
 }
